@@ -1,37 +1,53 @@
 import Image from "next/image";
 
+// Hero-Bild: bewusst als eigene Konstante ausgelagert, damit ein Bildwechsel
+// künftig nur eine Zeile betrifft. TEST (18.07.2026): DSCF0410 von Devin als
+// möglicher Ersatz für das Cádiz-Bild vorgeschlagen. Bildausschnitt unten ist
+// bewusst neutral (object-center) gesetzt, da eine visuelle Prüfung dieses
+// Bildes technisch nicht möglich war – siehe Chat-Antwort. Bitte nach lokaler
+// Sichtprüfung ggf. anpassen.
+const HERO_IMAGE_SRC = "/images/hero-test-dscf0410.jpg";
+const HERO_IMAGE_ALT = "Devin Hauser – Testbild für Hero-Sektion (DSCF0410)";
+
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[calc(100svh-73px)] flex-col overflow-hidden"
+      className="relative flex min-h-[calc(92svh-73px)] flex-col overflow-hidden"
     >
-      {/* Vollbild-Hintergrund, edge-to-edge. Stärkstes verfügbares Actionbild:
-          zeigt Devin bei der eigentlichen Disziplin, an seiner Trainingsbasis,
-          mit Segelnummer und Namen organisch im Bild selbst sichtbar. */}
+      {/* Vollbild-Hintergrund, edge-to-edge. object-center als bewusst
+          NEUTRALER Platzhalter-Ausschnitt (mobil und Desktop identisch) –
+          konnte für dieses spezifische Testbild nicht visuell geprüft und
+          daher nicht gezielt zugeschnitten werden. Responsive Struktur
+          (object-[..%_..%] sm:object-[..%_..%]) ist vorbereitet, sobald
+          konkrete Werte feststehen. */}
       <Image
-        src="/images/hero-iqfoil-silvaplana.jpg"
-        alt="Devin Hauser beim IQFoil-Training in Silvaplana"
+        src={HERO_IMAGE_SRC}
+        alt={HERO_IMAGE_ALT}
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[60%_45%]"
+        className="object-cover object-center filter brightness-[1.1] contrast-[1.05] saturate-[1.15]"
       />
 
-      {/* Ruhiger Verlauf statt harter Fläche: unten kräftiger für
-          Textlesbarkeit, nach oben hin fast unsichtbar, damit das Bild
-          selbst im Vordergrund bleibt. */}
+      {/* Verlauf für Textlesbarkeit: Deckkraft in der Bildmitte reduziert
+          (via-ink/55 → via-ink/30), damit Berge und Wasser besser sichtbar
+          werden. Ganz unten bleibt der Verlauf bewusst voll deckend
+          (from-ink, unverändert), damit Name/Untertitel/Buttons unabhängig
+          von der Bildhelligkeit sicher lesbar bleiben. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"
       />
 
       {/* Fluider Abstandshalter statt fixer Pixelposition: schiebt den
           Textblock auf ca. 70–75 % der sichtbaren Bildschirmhöhe, skaliert
           dabei mit jeder Bildschirmgrösse mit. Die Sektion selbst bleibt
           min-h (nicht h fix), damit auf sehr niedrigen Bildschirmen nichts
-          abgeschnitten wird, sondern der Hero im Zweifel minimal wächst. */}
-      <div aria-hidden className="relative h-[68svh] shrink-0 sm:h-[70svh] lg:h-[72svh]" />
+          abgeschnitten wird, sondern der Hero im Zweifel minimal wächst.
+          Werte proportional zur reduzierten Hero-Höhe (92svh statt 100svh)
+          mitskaliert, damit die relative Textposition gleich bleibt. */}
+      <div aria-hidden className="relative h-[63svh] shrink-0 sm:h-[65svh] lg:h-[66svh]" />
 
       <div className="relative w-full px-6 pb-16 sm:px-10 sm:pb-20 lg:px-16">
         <div className="mx-auto max-w-content">
@@ -43,11 +59,11 @@ export default function Hero() {
             IQFoil &amp; Wingfoil Racing
           </p>
 
-          {/* SUI-134 bewusst wie eine Signatur: kleiner als der Untertitel,
-              enger an ihn herangerückt, sehr weites Letter-Spacing, gedämpfte
-              Farbe – tritt in Konkurrenz zu nichts, sondern wirkt wie eine
-              Kennzeichnung am Bildrand. */}
-          <p className="mt-1.5 animate-fade-in-up font-mono text-[10px] uppercase tracking-[0.35em] text-slate/70 [animation-delay:200ms]">
+          {/* SUI-134 als schlichtes Textelement, gleiche Designsprache wie der
+              Rest des Heros (Mono-Schrift, Tracking) – bewusst ohne Rahmen/Box,
+              etwas grösser als zuvor, aber weiterhin klar unterhalb des
+              Untertitels in der Hierarchie. */}
+          <p className="mt-3 animate-fade-in-up font-mono text-base uppercase tracking-[0.3em] text-paper [animation-delay:200ms] sm:text-lg">
             SUI-134
           </p>
 
@@ -56,13 +72,13 @@ export default function Hero() {
               href="#ueber-mich"
               className="rounded-sm border border-paper/30 px-7 py-3.5 text-center font-mono text-xs uppercase tracking-widest2 text-paper backdrop-blur-sm transition-colors hover:border-paper hover:bg-paper/10"
             >
-              Explore my journey
+              About Me
             </a>
             <a
               href="#partner"
               className="rounded-sm bg-red px-7 py-3.5 text-center font-mono text-xs uppercase tracking-widest2 text-paper transition-transform hover:-translate-y-0.5"
             >
-              Partner with me
+              Let's Connect
             </a>
           </div>
         </div>
