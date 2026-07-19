@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import SportGoals from "@/components/SportGoals";
+import Goals from "@/components/Goals";
 import Highlights from "@/components/Highlights";
 import SocialMedia from "@/components/SocialMedia";
 import Sponsoring from "@/components/Sponsoring";
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <About />
       <SportGoals />
+      <Goals />
       <Highlights />
       <SocialMedia />
       <Sponsoring />

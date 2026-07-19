@@ -10,6 +10,13 @@
 
   html {
     scroll-behavior: smooth;
+    /* Einheitlicher Scroll-Offset für alle Section-Anker: verhindert, dass
+       die sticky Navigation (Header-Höhe ca. 73px) die Section-Überschrift
+       verdeckt — sowohl beim Klick auf einen Nav-Link als auch beim
+       Browser-Zurück/Direktlink-Sprung. Betrifft konsistent alle Sections
+       (Hero, About, Sport & Ziele/Disciplines, Highlights, Social Media,
+       Sponsoring, Partner, Kontakt), ohne deren Design zu ändern. */
+    scroll-padding-top: 96px;
   }
 
   body {

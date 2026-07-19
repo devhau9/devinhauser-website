@@ -32,3 +32,13 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Neu abgelegte, aber noch nicht ausgewählte/web-optimierte Bilder (Stand 19.07.2026)
+# Bewusst NICHT im Repository, bis Auswahl + Optimierung erfolgt ist.
+# Bleiben lokal auf der Festplatte erhalten, werden nur von Git ignoriert.
+public/images/DSCF0482.jpg
+public/images/DSCF0515.jpg
+public/images/DSCF0940.jpg
+public/images/DSCF0941.jpg
+public/images/SWS_Sui134.jpg
+public/images/wingfoil cremia IT.jpg
