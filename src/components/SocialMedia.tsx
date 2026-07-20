@@ -132,7 +132,7 @@ export default function SocialMedia() {
             </p>
             <Link
               href="/partner-portal"
-              className="shrink-0 rounded-sm border border-ink/15 px-6 py-3 text-center font-mono text-xs uppercase tracking-widest2 text-ink transition-colors hover:border-red hover:text-red"
+              className="shrink-0 rounded-sm bg-red px-6 py-3 text-center font-mono text-xs uppercase tracking-widest2 text-white transition-transform hover:-translate-y-0.5"
             >
               Partner Portal
             </Link>

@@ -1,10 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
+type Partner = {
+  src: string;
+  alt: string;
+  name: string;
+  href: string | null;
+  imgPadding?: string;
+  imgObjectPosition?: string;
+};
+
 // Jeder Partner mit offizieller Website. URLs recherchiert und bestätigt
-// (Stand 19.07.2026) — siehe Chat-Zusammenfassung für zwei Ausnahmen, bei
-// denen die offizielle Website nicht eindeutig bestimmt werden konnte.
-const PARTNERS = [
+// (Stand 19.07.2026, Arnold/Drei Plus ergänzt am 20.07.2026). Alle zehn
+// Partner sind aktuell vollständig verlinkt.
+const PARTNERS: Partner[] = [
   {
     src: "/logos/swiss-sailing-team.png",
     alt: "Swiss Sailing Team — offizielle Website",
@@ -12,10 +21,13 @@ const PARTNERS = [
     href: "https://www.swiss-sailing-team.ch",
   },
   {
-    src: "/logos/swiss-sailing.jpg",
+    src: "/logos/sui-sailing.png",
     alt: "Swiss Sailing — offizielle Website",
     name: "Swiss Sailing",
     href: "https://www.swiss-sailing.ch",
+    // Logo sitzt in der Bilddatei etwas höher als die anderen — minimale
+    // weitere Korrektur (Nachjustierung 21.07., 3. Feinschliff).
+    imgObjectPosition: "object-[50%_78%]",
   },
   {
     src: "/logos/sporthilfe.png",
@@ -30,19 +42,16 @@ const PARTNERS = [
     href: "https://ensis.surf",
   },
   {
-    src: "/logos/fanagus.jpg",
+    src: "/logos/fanagus-removebg-preview.png",
     alt: "fanagus ag — offizielle Website",
     name: "Fanagus",
     href: "https://www.fanagus.ch",
   },
   {
     src: "/logos/dreiplus.png",
-    alt: "Drei Plus",
+    alt: "Drei Plus — offizielle Website",
     name: "Drei Plus",
-    // [PRÜFEN] Offizielle Website nicht eindeutig bestimmbar — es gibt
-    // sowohl "dreiplus.ch" (Werbeartikel) als auch "3 Plus" (TV-Sender).
-    // Bewusst noch nicht verlinkt, siehe Zusammenfassung.
-    href: null,
+    href: "https://www.dreiplus.ch",
   },
   {
     src: "/logos/united-school-of-sports.png",
@@ -52,11 +61,9 @@ const PARTNERS = [
   },
   {
     src: "/logos/arnold.png",
-    alt: "Arnold",
+    alt: "Arnold — offizielle Website",
     name: "Arnold",
-    // [PRÜFEN] Offizielle Website nicht eindeutig bestimmbar — Firmenname
-    // zu generisch für eine sichere Zuordnung. Bewusst noch nicht verlinkt.
-    href: null,
+    href: "https://www.arnold-coag.ch",
   },
   {
     src: "/logos/pm-consulting.svg",
@@ -65,10 +72,13 @@ const PARTNERS = [
     href: "https://pmc.zuerich",
   },
   {
-    src: "/logos/kinesiologie-weideli.jpg",
+    src: "/logos/kinesiologie-weideli-removebg-preview.png",
     alt: "Kinesiologie Weideli — offizielle Website",
     name: "Kinesiologie Weideli",
     href: "https://www.kinesiologie-weideli.ch",
+    // Wirkte im Vergleich zu den anderen Logos zu klein — minimale
+    // weitere Vergrösserung (Nachjustierung 21.07., 3. Feinschliff).
+    imgPadding: "p-1",
   },
 ];
 
@@ -100,8 +110,10 @@ export default function Partners() {
                   src={partner.src}
                   alt={partner.alt}
                   fill
-                  sizes="140px"
-                  className="object-contain p-6 transition-transform duration-200 ease-out group-hover:scale-[1.04]"
+                  sizes="160px"
+                  className={`object-contain transition-transform duration-200 ease-out group-hover:scale-[1.04] ${
+                    partner.imgPadding ?? "p-4"
+                  } ${partner.imgObjectPosition ?? ""}`}
                 />
               </a>
             ) : (
@@ -114,8 +126,8 @@ export default function Partners() {
                   src={partner.src}
                   alt={partner.alt}
                   fill
-                  sizes="140px"
-                  className="object-contain p-6"
+                  sizes="160px"
+                  className="object-contain p-4"
                 />
               </div>
             )

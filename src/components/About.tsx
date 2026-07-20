@@ -26,12 +26,15 @@ export default function About() {
         <div className="mt-12 grid gap-16 lg:grid-cols-[1.1fr,0.9fr] lg:gap-20">
           {/* Text + Porträt: Text zuerst, Foto darunter (responsive) */}
           <div>
-            <p className="max-w-md text-balance leading-relaxed text-graphite">
-              I'm Devin Hauser, a Swiss IQFoil athlete competing internationally
-              at the highest level. My biggest goal is to compete at the
-              Olympic Games. Outside of training and competition, I enjoy
-              creating content and building my personal brand. I believe that
-              small improvements every day lead to big results over time.
+            <p className="max-w-lg text-balance font-body text-xl font-medium leading-snug text-ink sm:text-2xl">
+              I'm Devin Hauser, an 18-year-old Swiss IQFoil and Wingfoil
+              racing athlete chasing my dream of competing at the highest
+              level of international sailing.
+            </p>
+            <p className="mt-4 max-w-lg text-balance leading-relaxed text-graphite">
+              From World Cups and training camps to the daily work behind
+              performance, I share my journey, the challenges and the
+              moments that shape my path towards the Olympic Games.
             </p>
 
             <div className="relative mt-10 aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl">

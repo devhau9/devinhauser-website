@@ -7,6 +7,7 @@ import SocialMedia from "@/components/SocialMedia";
 import Sponsoring from "@/components/Sponsoring";
 import Partners from "@/components/Partners";
 import Contact from "@/components/Contact";
+import Newsletter from "@/components/Newsletter";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <Sponsoring />
       <Partners />
       <Contact />
+      <Newsletter />
     </main>
   );
 }
