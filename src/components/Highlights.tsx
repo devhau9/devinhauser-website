@@ -27,7 +27,7 @@ export default function Highlights() {
   return (
     <section id="highlights" className="section-pad bg-white">
       <div className="mx-auto grid max-w-content gap-16 md:grid-cols-[1.2fr,1fr] md:items-start md:gap-16 lg:gap-24">
-        <div>
+        <div className="min-w-0">
           <p className="eyebrow mb-5">Sportliche Highlights</p>
           <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
             RESULTATE
@@ -48,7 +48,7 @@ export default function Highlights() {
                 className="flex flex-col gap-2 py-6 font-mono text-sm sm:flex-row sm:items-center sm:justify-between"
               >
                 <span className="text-graphite/70">{result.year}</span>
-                <span className="flex-1 px-0 text-ink sm:px-8">
+                <span className="min-w-0 flex-1 px-0 text-ink sm:px-8">
                   {result.event}
                 </span>
                 <span className="text-red">{result.placement}</span>
@@ -67,12 +67,12 @@ export default function Highlights() {
           </div>
         </div>
 
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
+        <div className="relative aspect-[4/5] w-full min-w-0 overflow-hidden rounded-2xl">
           <Image
             src="/images/highlights-iqfoil-cadiz.jpg"
             alt="Devin Hauser bei den IQFoil International Games in Cádiz"
             fill
-            sizes="(min-width: 768px) 40vw, 100vw"
+            sizes="(min-width: 768px) 45vw, 100vw"
             className="object-cover object-[28%_48%]"
           />
         </div>

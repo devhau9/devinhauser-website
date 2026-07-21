@@ -5,6 +5,16 @@ export const metadata: Metadata = {
   title: "Partner Portal — Devin Hauser",
   description:
     "Zugang zum Partner Portal von Devin Hauser anfragen — für Sponsoren, Partner und Medienvertreter.",
+  alternates: {
+    canonical: "/partner-portal",
+  },
+  robots: {
+    // Partner-Portal-Anfrageseite bewusst von der Indexierung ausgeschlossen:
+    // kein Mehrwert für organische Google-Suche, verhindert aber nicht den
+    // Zugriff für eingeladene Partner (kein Login-Schutz, nur kein Index).
+    index: false,
+    follow: true,
+  },
 };
 
 export default function PartnerPortalPage() {

@@ -13,7 +13,7 @@ export default function SportGoals() {
             Mobile immer als Erstes erscheint. Abstand zur Überschrift bewusst
             kompakter als der Abstand zwischen den beiden Disziplin-Reihen. */}
         <div className="mt-10 grid items-center gap-10 sm:mt-12 md:grid-cols-12 md:gap-14">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:col-span-7">
+          <div className="relative aspect-[4/3] w-full min-w-0 overflow-hidden rounded-2xl md:col-span-7">
             <Image
               src="/images/iqfoil-action.jpg"
               alt="Devin Hauser beim IQFoil-Racing"
@@ -22,7 +22,7 @@ export default function SportGoals() {
               className="object-cover object-center"
             />
           </div>
-          <div className="md:col-span-5">
+          <div className="md:col-span-5 min-w-0">
             <h3 className="font-display text-3xl tracking-wide text-ink sm:text-4xl">
               IQFoil
             </h3>
@@ -37,7 +37,7 @@ export default function SportGoals() {
         {/* Wingfoil Racing — gespiegelt: Bild bleibt im DOM zuerst (Mobile),
             wird auf Desktop per order- Klassen nach rechts verschoben. */}
         <div className="mt-24 grid items-center gap-10 sm:mt-32 md:grid-cols-12 md:gap-14">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl md:order-2 md:col-span-7">
+          <div className="relative aspect-[4/3] w-full min-w-0 overflow-hidden rounded-2xl md:order-2 md:col-span-7">
             <Image
               src="/images/wingfoil-action-cremia.jpg"
               alt="Devin Hauser beim Wingfoil Racing in Cremia"
@@ -46,7 +46,7 @@ export default function SportGoals() {
               className="object-cover object-[42%_50%]"
             />
           </div>
-          <div className="md:order-1 md:col-span-5">
+          <div className="md:order-1 md:col-span-5 min-w-0">
             <h3 className="font-display text-3xl tracking-wide text-ink sm:text-4xl">
               Wingfoil Racing
             </h3>

@@ -79,17 +79,17 @@ export default function SocialMedia() {
   return (
     <section id="social-media" className="section-pad bg-mist">
       <div className="mx-auto grid max-w-content gap-16 md:grid-cols-[1fr,1.3fr] md:items-start md:gap-16 lg:gap-24">
-        <div className="relative aspect-square w-full max-w-sm overflow-hidden rounded-2xl md:max-w-none">
+        <div className="relative aspect-square w-full min-w-0 max-w-sm overflow-hidden rounded-2xl md:max-w-none">
           <Image
             src="/images/social-portrait-square.jpg"
             alt="Devin Hauser bei einer Regatta"
             fill
-            sizes="(min-width: 768px) 35vw, 90vw"
+            sizes="(min-width: 768px) 45vw, 90vw"
             className="object-cover"
           />
         </div>
 
-        <div>
+        <div className="min-w-0">
           <p className="eyebrow mb-5">Social Media &amp; Content</p>
           <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
             MEDIA &amp; CONTENT

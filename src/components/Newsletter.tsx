@@ -7,7 +7,7 @@ export default function Newsletter() {
     <section id="newsletter" className="section-pad border-t border-hairline bg-white">
       <div className="mx-auto grid max-w-content gap-16 md:grid-cols-2 md:items-center md:gap-16 lg:gap-24">
         {/* Grosses Action-Bild links. */}
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
+        <div className="relative aspect-[4/5] w-full min-w-0 overflow-hidden rounded-2xl">
           <Image
             src="/images/DSCF0482.jpg"
             alt="Devin Hauser beim IQFoil-Training"
@@ -17,7 +17,7 @@ export default function Newsletter() {
           />
         </div>
 
-        <div>
+        <div className="min-w-0">
           <p className="eyebrow mb-5">Newsletter</p>
           <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
             STAY UPDATED

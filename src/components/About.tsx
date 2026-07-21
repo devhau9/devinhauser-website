@@ -25,7 +25,7 @@ export default function About() {
 
         <div className="mt-12 grid gap-16 lg:grid-cols-[1.1fr,0.9fr] lg:gap-20">
           {/* Text + Porträt: Text zuerst, Foto darunter (responsive) */}
-          <div>
+          <div className="min-w-0">
             <p className="max-w-lg text-balance font-body text-xl font-medium leading-snug text-ink sm:text-2xl">
               I'm Devin Hauser, an 18-year-old Swiss IQFoil and Wingfoil
               racing athlete chasing my dream of competing at the highest
@@ -50,7 +50,7 @@ export default function About() {
 
           {/* Steckbrief: eigenständiger Block rechts daneben (responsive:
               darunter). Alle Werte aktuell Platzhalter. */}
-          <div>
+          <div className="min-w-0">
             <div className="card-surface p-8 sm:p-10">
               <p className="mb-6 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
                 Steckbrief

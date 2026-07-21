@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <section id="kontakt" className="section-pad bg-white">
       <div className="mx-auto grid max-w-content gap-16 md:grid-cols-[1.3fr,1fr] md:items-center md:gap-16 lg:gap-24">
-        <div>
+        <div className="min-w-0">
           <p className="eyebrow mb-5">Kontakt</p>
           <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
             LASS UNS SPRECHEN
@@ -37,12 +37,12 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="relative aspect-[3/4] w-full max-w-xs overflow-hidden rounded-2xl md:max-w-none">
+        <div className="relative aspect-[3/4] w-full min-w-0 max-w-xs overflow-hidden rounded-2xl md:max-w-none">
           <Image
             src="/images/contact-portrait-bw.jpg"
             alt="Devin Hauser, Schwarz-Weiss-Porträt"
             fill
-            sizes="(min-width: 768px) 30vw, 90vw"
+            sizes="(min-width: 768px) 45vw, 90vw"
             className="object-cover"
           />
         </div>
