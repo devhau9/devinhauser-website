@@ -1,25 +1,35 @@
 import Image from "next/image";
 
+// Resultate aus content/de/04-resultate.md übernommen ("bereits bekannt aus
+// früheren Unterlagen") — [PRÜFEN]: beide Resultate laut Notiz vor
+// öffentlicher Verwendung nochmals von Devin bestätigen lassen, bevor die
+// Seite live geht. Keine weiteren Resultate erfunden oder ergänzt.
 const RESULTS = [
   {
-    year: "20XX",
-    event: "Platzhalter-Wettkampf 1",
-    placement: "Platz [X] von [Y]",
+    year: "2025",
+    event: "IQFoil International Games, Cádiz (U19)",
+    placement: "16. von 45",
   },
   {
-    year: "20XX",
-    event: "Platzhalter-Wettkampf 2",
-    placement: "Platz [X] von [Y]",
+    year: "2023",
+    event: "Campione (U17)",
+    placement: "8. von 42",
+  },
+];
+
+// Bestätigte kommende Wettkämpfe aus content/de/04-resultate.md (kein
+// [PRÜFEN] in der Quelle — im Gegensatz zu den Resultaten oben als
+// gesichert markiert).
+const UPCOMING_EVENTS = [
+  {
+    name: "IQFoil Senior World Championship",
+    location: "Weymouth, England",
+    when: "Anfang September 2026",
   },
   {
-    year: "20XX",
-    event: "Platzhalter-Wettkampf 3",
-    placement: "Platz [X] von [Y]",
-  },
-  {
-    year: "20XX",
-    event: "Platzhalter-Wettkampf 4",
-    placement: "Platz [X] von [Y]",
+    name: "IQFoil U23 World Championship",
+    location: "Puck, Polen",
+    when: "Ende September 2026",
   },
 ];
 
@@ -33,9 +43,7 @@ export default function Highlights() {
             RESULTATE
           </h2>
           <p className="mt-5 max-w-md text-sm italic leading-relaxed text-graphite">
-            Platzhalter: Die verifizierte Resultat-Datenbank wird aus Kapitel
-            6 der Wissensdatenbank übernommen, sobald sie dort geprüft und
-            freigegeben ist.
+            Weitere internationale Resultate werden hier laufend ergänzt.
           </p>
 
           {/* Racing-Timing-Ästhetik: Ergebnisse in Mono-Schrift wie auf einer
@@ -60,10 +68,13 @@ export default function Highlights() {
             <h3 className="font-mono text-xs uppercase tracking-widest2 text-graphite/70">
               Nächste Wettkämpfe
             </h3>
-            <p className="mt-3 italic leading-relaxed text-graphite">
-              Platzhalter: nächste Regatten/Meisterschaften folgen, sobald
-              Saisonkalender bestätigt ist.
-            </p>
+            <ul className="mt-3 space-y-1.5 leading-relaxed text-graphite">
+              {UPCOMING_EVENTS.map((event) => (
+                <li key={event.name}>
+                  {event.name} — {event.location} ({event.when})
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

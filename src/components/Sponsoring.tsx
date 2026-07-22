@@ -1,23 +1,25 @@
+// Preise und konkrete Einzelleistungen pro Stufe sind laut
+// docs/open-questions.md (Punkt 5) bewusst noch offen — inkl. der
+// Grundsatzfrage, ob Preise überhaupt öffentlich gezeigt werden sollen.
+// Deshalb hier bewusst KEINE erfundenen CHF-Beträge oder Leistungslisten:
+// "Nach Absprache" ist in der Sponsoring-Welt ein absolut übliches,
+// professionelles Vorgehen, solange die Tiers final nicht bestätigt sind.
+// Sobald Devin Preise/Leistungen freigibt, hier ergänzen.
 const TIERS = [
   {
     name: "Bronze",
-    price: "Platzhalter CHF",
-    perks: ["Platzhalter-Leistung 1", "Platzhalter-Leistung 2"],
+    price: "Nach Absprache",
+    perks: ["Umfang und Leistungen werden individuell besprochen"],
   },
   {
     name: "Silber",
-    price: "Platzhalter CHF",
-    perks: ["Platzhalter-Leistung 1", "Platzhalter-Leistung 2", "Platzhalter-Leistung 3"],
+    price: "Nach Absprache",
+    perks: ["Umfang und Leistungen werden individuell besprochen"],
   },
   {
     name: "Gold",
-    price: "Platzhalter CHF",
-    perks: [
-      "Platzhalter-Leistung 1",
-      "Platzhalter-Leistung 2",
-      "Platzhalter-Leistung 3",
-      "Platzhalter-Leistung 4",
-    ],
+    price: "Nach Absprache",
+    perks: ["Umfang und Leistungen werden individuell besprochen"],
   },
 ];
 
@@ -29,10 +31,35 @@ export default function Sponsoring() {
         <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
           PARTNERSCHAFT
         </h2>
-        <p className="mt-6 max-w-xl italic leading-relaxed text-graphite">
-          Platzhalter: Kernargumente, warum eine Partnerschaft mit Devin
-          attraktiv ist — Sport, Reichweite, Content-Mehrwert. Wird aus dem
-          Sponsoring-Dossier und Kapitel 7 der Wissensdatenbank übernommen.
+        {/* Text basiert ausschliesslich auf bereits vorhandenen, an anderer
+            Stelle im Projekt bestätigten Informationen (Steckbrief in
+            About.tsx, content/de/02-ueber-mich.md, bereits bestehende
+            Partner in Partners.tsx, Content-Ausrichtung in SocialMedia.tsx).
+            Keine neuen Zahlen, Resultate oder Partner erfunden. */}
+        <p className="mt-6 max-w-xl leading-relaxed text-graphite">
+          Devin Hauser ist ein 18-jähriger Schweizer IQFoil- und
+          Wingfoil-Racing-Athlet (Segelnummer SUI-134), verankert in Zürich
+          mit Trainingsbasis am Silvaplanersee. Er befindet sich mitten im
+          Aufbau internationaler Erfahrung auf dem Weg zur Weltspitze — eine
+          Partnerschaft bedeutet, einen Athleten frühzeitig zu begleiten, der
+          seinen Weg konsequent, langfristig und mit sichtbarem Engagement
+          verfolgt.
+        </p>
+        <p className="mt-4 max-w-xl leading-relaxed text-graphite">
+          Diszipliniertes Training, internationale Wettkampferfahrung und
+          eine ehrliche, unmittelbare Kommunikation über den Alltag im
+          Spitzensport prägen seinen Auftritt. Über Foto-, Video- und
+          Drohnenaufnahmen entstehen authentische Einblicke in Training,
+          Wettkämpfe und den Weg dorthin — Content, der sich direkt für die
+          eigenen Kanäle von Partnern nutzen lässt.
+        </p>
+        <p className="mt-4 max-w-xl leading-relaxed text-graphite">
+          Sichtbar wird das über Instagram, TikTok und YouTube sowie die
+          bereits bestehenden Partnerschaften mit Organisationen aus Sport,
+          Gesundheit, Wassersport und der Schweizer Wirtschaft (siehe
+          Partner-Sektion unten). Detaillierte Reichweiten- und
+          Zielgruppendaten stellen wir interessierten Partnern gerne über
+          das Partner Portal zur Verfügung.
         </p>
 
         <div className="mt-14 grid gap-8 md:grid-cols-3">
