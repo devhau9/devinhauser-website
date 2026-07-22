@@ -16,7 +16,7 @@ import { COOKIE_CONSENT_EVENT, getStoredConsent } from "@/lib/cookie-consent";
 //
 // Measurement ID bewusst als Konstante hier zentral gepflegt (keine
 // sensiblen Daten — die ID ist ohnehin öffentlich im Browser sichtbar).
-const GA_MEASUREMENT_ID = "G-DK2QWY7Z9C";
+const GA_MEASUREMENT_ID = "G-MFEECDJCEF";
 
 export default function GoogleAnalytics() {
   const [hasConsent, setHasConsent] = useState(false);
