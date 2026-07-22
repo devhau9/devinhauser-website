@@ -2,18 +2,47 @@
 
 import { useState, type FormEvent } from "react";
 
-export default function PartnerPortalForm() {
-  const [submitted, setSubmitted] = useState(false);
+// Web3Forms: kostenloser Formular-Service ohne eigenes Backend (250
+// Einreichungen/Monat gratis, Stand 22.07.2026 laut web3forms.com). Der
+// Access Key ist bei Web3Forms bewusst kein Geheimnis, sondern dafür
+// gedacht, direkt im Frontend zu stehen — gleiche Logik wie die
+// GA4-Measurement-ID in GoogleAnalytics.tsx (öffentlich sichtbare ID, keine
+// sensiblen Daten).
+//
+// Access Key aktiv und funktionsfähig — von Devin am 22.07.2026 eingerichtet
+// und mit einer echten Testanfrage erfolgreich bestätigt (E-Mail kam an).
+const WEB3FORMS_ACCESS_KEY = "9b95458b-aa64-4bfa-8a20-b9640fc76186";
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+type SubmitState = "idle" | "loading" | "success" | "error";
+
+export default function PartnerPortalForm() {
+  const [state, setState] = useState<SubmitState>("idle");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // Bewusst kein Backend, keine Datenbank, kein externer Dienst:
-    // Die Anfrage wird aktuell nirgends gespeichert oder versendet,
-    // nur lokal im Frontend bestätigt.
-    setSubmitted(true);
+    setState("loading");
+
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    formData.append(
+      "subject",
+      `New Partner Portal request — ${formData.get("company") ?? "unknown company"}`
+    );
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+      const result = await response.json();
+      setState(result.success ? "success" : "error");
+    } catch {
+      setState("error");
+    }
   }
 
-  if (submitted) {
+  if (state === "success") {
     return (
       <div className="card-surface mt-10 p-8 sm:p-10" role="status">
         <p className="font-display text-xl tracking-wide text-ink">
@@ -28,6 +57,23 @@ export default function PartnerPortalForm() {
 
   return (
     <form onSubmit={handleSubmit} className="card-surface mt-10 p-8 sm:p-10">
+      {/* Honeypot-Feld gegen Spam-Bots — Feldname "botcheck" exakt gemäss
+          Web3Forms-API-Referenz (docs.web3forms.com/getting-started/
+          api-reference), dort als leeres Text-Feld dokumentiert (nicht als
+          Checkbox), deshalb hier bewusst type="text" statt type="checkbox":
+          so wird bei jeder echten menschlichen Absendung zuverlässig ein
+          leerer String mitgeschickt, exakt wie im offiziellen Beispiel.
+          Für Menschen und Screenreader vollständig verborgen. */}
+      <input
+        type="text"
+        name="botcheck"
+        aria-hidden="true"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        style={{ display: "none" }}
+      />
+
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label
@@ -98,11 +144,22 @@ export default function PartnerPortalForm() {
         </div>
       </div>
 
+      {state === "error" && (
+        <p className="mt-4 text-sm text-red" role="alert">
+          Something went wrong. Please try again, or write directly to{" "}
+          <a href="mailto:devinhauser9@gmail.com" className="underline">
+            devinhauser9@gmail.com
+          </a>
+          .
+        </p>
+      )}
+
       <button
         type="submit"
-        className="mt-8 rounded-sm bg-red px-7 py-3.5 font-mono text-xs uppercase tracking-widest2 text-white transition-transform hover:-translate-y-0.5"
+        disabled={state === "loading"}
+        className="mt-8 rounded-sm bg-red px-7 py-3.5 font-mono text-xs uppercase tracking-widest2 text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
       >
-        Zugang anfragen
+        {state === "loading" ? "Sending…" : "Zugang anfragen"}
       </button>
 
       <p className="mt-4 text-xs italic text-graphite/70">

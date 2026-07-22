@@ -228,14 +228,17 @@ export default function PrivacyPolicyPage() {
             <p className={BODY_TEXT}>
               The Partner Portal form asks prospective sponsors and
               partners for first name, last name, company/organisation
-              and email address. As things currently stand, this form has{" "}
-              <strong>no backend connection</strong> — submitting it only
-              shows a local confirmation message in your browser; no data
-              is stored, transmitted or saved anywhere. Once this form is
-              connected to a real inbox or storage system, this section
-              will be updated to describe what happens to submitted data,
-              how long it is kept and who at Devin Hauser&rsquo;s team can
-              access it.
+              and email address. When you submit this form, the
+              information is sent to Devin Hauser by email through{" "}
+              <strong>Web3Forms</strong>, a third-party form-processing
+              service that briefly handles the submission in order to
+              deliver it. Web3Forms retains this data only for a short
+              period, in line with their own data retention practices,
+              before deleting it. The data is used solely to review and respond to your
+              request; it is not added to any mailing list and not shared
+              with anyone beyond Devin Hauser and Web3Forms. Devin
+              personally reviews each request and decides whether to grant
+              Partner Portal access.
             </p>
           </div>
 
