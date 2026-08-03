@@ -9,17 +9,19 @@ export const metadata: Metadata = {
   },
 };
 
-// Hinweis für Devin: Alle mit [BITTE ERGÄNZEN] markierten Felder sind
-// gesetzlich nötige Pflichtangaben für ein Schweizer Impressum (Name,
-// ladungsfähige Adresse, Kontakt). Ich habe hier bewusst KEINE Adresse
-// erfunden. Bitte vor Go-Live ausfüllen und die Markierungen entfernen.
+// Hinweis für Devin: Die Impressumsadresse ist von dir am 03.08.2026
+// ausdrücklich bestätigt und exakt in der gelieferten Schreibweise
+// eingesetzt worden — nichts ergänzt, nichts abgeleitet, nichts erfunden.
+// Damit ist der zentrale offene Blocker aus dem Post-Launch-Cleanup
+// geschlossen. Telefonnummer wurde entfernt (optional, keine bestätigt),
+// Handelsregister-Feld auf "privat, nicht eingetragen" gesetzt (bestätigter
+// Status), E-Mail-Hinweis "provisorisch" entfernt.
 
 const SECTION_HEADING =
   "font-display text-2xl tracking-wide text-ink sm:text-3xl";
 const SECTION_WRAPPER =
   "mt-14 border-t border-hairline pt-10 first:mt-10 first:border-t-0 first:pt-0";
 const BODY_TEXT = "mt-4 leading-relaxed text-graphite";
-const PLACEHOLDER = "font-semibold text-red";
 
 export default function ImprintPage() {
   return (
@@ -42,13 +44,9 @@ export default function ImprintPage() {
               <br />
               Swiss IQFoil &amp; Wingfoil Racing Athlete
               <br />
-              <span className={PLACEHOLDER}>
-                [BITTE ERGÄNZEN: Strasse und Hausnummer]
-              </span>
+              Wolfackerstrasse 5
               <br />
-              <span className={PLACEHOLDER}>
-                [BITTE ERGÄNZEN: PLZ und Ort]
-              </span>
+              8107 Buchs ZH
               <br />
               Switzerland
             </p>
@@ -63,16 +61,7 @@ export default function ImprintPage() {
                 className="text-ink underline underline-offset-2 transition-colors hover:text-red"
               >
                 devinhauser9@gmail.com
-              </a>{" "}
-              <span className="text-sm italic text-graphite/70">
-                (provisional — will be replaced by a devinhauser.com
-                address once set up)
-              </span>
-              <br />
-              Phone:{" "}
-              <span className={PLACEHOLDER}>
-                [BITTE ERGÄNZEN, optional]
-              </span>
+              </a>
             </p>
           </div>
 
@@ -89,12 +78,8 @@ export default function ImprintPage() {
               Commercial Register / UID
             </h2>
             <p className={BODY_TEXT}>
-              <span className={PLACEHOLDER}>
-                [BITTE ERGÄNZEN, falls als Einzelunternehmen im
-                Handelsregister eingetragen bzw. UID-Nummer vorhanden;
-                andernfalls: &ldquo;Operated as a private individual, not
-                entered in the Swiss commercial register.&rdquo;]
-              </span>
+              Operated as a private individual, not entered in the Swiss
+              commercial register.
             </p>
           </div>
 

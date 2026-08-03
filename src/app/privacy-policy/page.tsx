@@ -3,20 +3,34 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy — Devin Hauser",
   description:
-    "Privacy Policy for devinhauser.com — how Devin Hauser collects, uses and protects visitor data, including Google Analytics, cookies, the newsletter, contact channels and the Partner Portal.",
+    "Privacy Policy for devinhauser.com — how Devin Hauser collects, uses and protects visitor data, including Google Analytics, cookies, contact channels and the Partner Portal.",
   alternates: {
     canonical: "/privacy-policy",
   },
 };
 
-// Hinweis für Devin: Rechtliche Basisangaben (Adresse etc.) sind noch mit
-// [BITTE ERGÄNZEN] markiert (siehe Imprint-Seite) und müssen dort ergänzt
-// werden, bevor diese Seite live geht. Alle technischen Angaben unten
-// (Google Analytics, Cookie-Consent, Newsletter, Partner Portal) spiegeln
-// den tatsächlichen aktuellen Stand des Codes wider, nicht einen
-// angestrebten Zielzustand. [PRÜFEN]-Markierungen kennzeichnen Angaben, die
-// von Devin bzw. den jeweiligen Anbietern bestätigt werden müssen (z. B.
-// Hosting-Provider, GA4-Aufbewahrungsdauer), bevor die Seite live geht.
+// Hinweis für Devin: Alle Angaben unten (Google Analytics, Cookie-Consent,
+// Newsletter, Contact, Partner Portal) spiegeln den tatsächlichen aktuellen
+// Stand des Codes wider — Stand 03.08.2026, nach der Konsistenzkorrektur:
+// Die Newsletter-Section ist auf der Homepage wieder sichtbar, aber als
+// reine Coming-soon-Ankündigung ohne Formular, ohne Eingabefelder, ohne
+// Subscribe-Button und ohne integrierten Anbieter — es werden also keine
+// Newsletter-Daten erhoben, gespeichert oder übermittelt, und der Abschnitt
+// unten beschreibt hier genau das; Partner Portal ist über Web3Forms live
+// und wird durchgehend so beschrieben; die Impressumsadresse ist bestätigt
+// und auf der Imprint-Seite eingesetzt.
+//
+// Ein einziger fachlicher Punkt bleibt offen und ist bewusst NICHT als
+// öffentlicher Marker sichtbar, sondern nur hier intern vermerkt: die genaue
+// GA4-Aufbewahrungsdauer wurde noch nicht mit der echten Property-Einstellung
+// abgeglichen — der Abschnitt nennt deshalb absichtlich keine Zahl. Sobald
+// später ein Newsletter-Anbieter gewählt wird, muss der Newsletter-Abschnitt
+// um dessen Namen, Serverstandort und Datenschutzerklärung ergänzt werden,
+// BEVOR Anmeldungen angenommen werden.
+//
+// Zu Web3Forms wird bewusst keine konkrete Aufbewahrungsdauer behauptet, da
+// sie nicht aus der aktuellen offiziellen Dokumentation verifiziert wurde.
+//
 // Diese Seite ersetzt keine anwaltliche Prüfung — vor Veröffentlichung
 // empfiehlt sich eine kurze Kontrolle durch eine auf Datenschutz
 // spezialisierte Fachperson (Schweiz: DSG/revDSG; EU-Besucher: DSGVO).
@@ -37,7 +51,7 @@ export default function PrivacyPolicyPage() {
             PRIVACY POLICY
           </h1>
           <p className="mt-6 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
-            Last updated: 21 July 2026
+            Last updated: 3 August 2026
           </p>
 
           <p className={BODY_TEXT}>
@@ -45,9 +59,9 @@ export default function PrivacyPolicyPage() {
             website&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) collects,
             uses and protects information about visitors. It is written to
             reflect exactly how the site currently works — not a planned
-            future state. Sections that depend on details not yet finalised
-            are marked <strong>[PRÜFEN]</strong> (&ldquo;to confirm&rdquo;)
-            and will be updated once confirmed.
+            future state. A small number of details below are not yet
+            finalised; those are noted plainly in the relevant section and
+            will be updated once confirmed.
           </p>
 
           {/* 1. Data Controller */}
@@ -55,9 +69,9 @@ export default function PrivacyPolicyPage() {
             <h2 className={SECTION_HEADING}>Who Is Responsible</h2>
             <p className={BODY_TEXT}>
               This website is operated by Devin Hauser, Swiss IQFoil &amp;
-              Wingfoil Racing Athlete, based in Zurich, Switzerland. Full
-              legal contact details (registered address) are published on
-              the{" "}
+              Wingfoil Racing Athlete, based in the Canton of Zurich,
+              Switzerland. Full legal and postal contact details are
+              published on the{" "}
               <a
                 href="/imprint"
                 className="text-ink underline underline-offset-2 transition-colors hover:text-red"
@@ -74,15 +88,10 @@ export default function PrivacyPolicyPage() {
           <div className={SECTION_WRAPPER}>
             <h2 className={SECTION_HEADING}>Hosting</h2>
             <p className={BODY_TEXT}>
-              This website is built with Next.js and is intended to be
-              hosted on Vercel Inc. (San Francisco, USA), with the domain
-              devinhauser.com registered and managed through Hosttech GmbH
-              (Switzerland).{" "}
-              <strong>
-                [PRÜFEN: aktuellen Hosting-Anbieter bei Go-Live bestätigen,
-                falls die Seite (noch) nicht produktiv auf Vercel läuft]
-              </strong>
-              . When you visit this website, your device automatically
+              This website is built with Next.js and hosted on Vercel Inc.
+              (San Francisco, USA), with the domain devinhauser.com
+              registered and managed through Hosttech GmbH (Switzerland).
+              When you visit this website, your device automatically
               sends technical information to the hosting infrastructure —
               typically your IP address, browser type and version,
               operating system, referring page, date and time of the
@@ -123,12 +132,10 @@ export default function PrivacyPolicyPage() {
                 browser&rsquo;s local storage for this site (in most
                 browsers: site settings → cookies and site data → delete
                 for devinhauser.com), which will show the banner again on
-                your next visit.{" "}
-                <strong>
-                  [PRÜFEN: ein direkter &ldquo;Cookie-Einstellungen
-                  ändern&rdquo;-Link im Footer ist als Verbesserung
-                  vorgesehen, aktuell noch nicht umgesetzt]
-                </strong>
+                your next visit. There is currently no separate
+                &ldquo;change cookie settings&rdquo; link elsewhere on the
+                site — this browser-level reset is the way to update your
+                choice today.
               </li>
             </ul>
           </div>
@@ -161,9 +168,12 @@ export default function PrivacyPolicyPage() {
               recognise returning visitors.
             </p>
             <p className={BODY_TEXT}>
-              Data retention period in the GA4 property:{" "}
-              <strong>[PRÜFEN – aktuelle GA4-Property-Einstellung bestätigen]</strong>.
-              For details on how Google processes data, see Google&rsquo;s
+              The exact data retention period configured in this GA4
+              property has not yet been separately confirmed for this
+              policy; GA4 lets property owners set event-level data
+              retention to either 2 or 14 months. This section will be
+              updated with the exact confirmed value. For details on how
+              Google processes data, see Google&rsquo;s
               own privacy policy at{" "}
               <a
                 href="https://policies.google.com/privacy"
@@ -181,28 +191,18 @@ export default function PrivacyPolicyPage() {
           <div className={SECTION_WRAPPER}>
             <h2 className={SECTION_HEADING}>Newsletter</h2>
             <p className={BODY_TEXT}>
-              The website includes a newsletter sign-up form asking for
-              first name, last name and email address. As things
-              currently stand,{" "}
-              <strong>
-                this form is not yet connected to an email service
-                provider
-              </strong>{" "}
-              — no data submitted through it is stored, transmitted or
-              processed anywhere at this time.
+              A newsletter announcement is currently displayed on the
+              website, but{" "}
+              <strong>no sign-up form is active</strong>. No newsletter
+              data is collected, stored or transmitted at this time.
             </p>
             <p className={BODY_TEXT}>
-              Once the newsletter is connected to a provider{" "}
-              <strong>
-                [PRÜFEN: konkreter Anbieter, geplant ist Kit]
-              </strong>
-              , sign-up will use a double opt-in process: you will receive
-              a confirmation email and your address will only be added to
-              the mailing list after you confirm it. You will be able to
-              unsubscribe at any time via a link in every newsletter
-              email. This section will be updated with the provider&rsquo;s
-              name, server location and a link to its own privacy policy
-              as soon as it is connected.
+              If newsletter subscriptions are introduced later, this
+              Privacy Policy will be updated before any registrations are
+              accepted — including the provider&rsquo;s name, server
+              location and a link to its own privacy policy. Any future
+              sign-up will use a double opt-in process, with an
+              unsubscribe link in every newsletter email.
             </p>
           </div>
 
@@ -231,14 +231,13 @@ export default function PrivacyPolicyPage() {
               and email address. When you submit this form, the
               information is sent to Devin Hauser by email through{" "}
               <strong>Web3Forms</strong>, a third-party form-processing
-              service that briefly handles the submission in order to
-              deliver it. Web3Forms retains this data only for a short
-              period, in line with their own data retention practices,
-              before deleting it. The data is used solely to review and respond to your
-              request; it is not added to any mailing list and not shared
-              with anyone beyond Devin Hauser and Web3Forms. Devin
-              personally reviews each request and decides whether to grant
-              Partner Portal access.
+              service. Web3Forms processes the submission for the purpose
+              of delivering it by email, in accordance with its own
+              privacy practices. The data is used solely to review and
+              respond to your request; it is not added to any mailing
+              list and not shared with anyone beyond Devin Hauser and
+              Web3Forms. Devin personally reviews each request and decides
+              whether to grant Partner Portal access.
             </p>
           </div>
 
@@ -259,9 +258,18 @@ export default function PrivacyPolicyPage() {
                 by Google Analytics 4 as described above.
               </li>
               <li>
-                Newsletter and Partner Portal form submissions are{" "}
-                <strong>not currently stored anywhere</strong> — no
-                backend is connected yet.
+                A newsletter announcement is displayed, but{" "}
+                <strong>no sign-up form is active</strong>, so{" "}
+                <strong>
+                  no newsletter data is collected, stored or transmitted
+                </strong>{" "}
+                (see &ldquo;Newsletter&rdquo; above).
+              </li>
+              <li>
+                Partner Portal requests are sent to Devin Hauser by email
+                via Web3Forms, as described above. The resulting email is
+                stored in our email account; the request is not added to
+                any mailing list.
               </li>
               <li>
                 Direct emails or Instagram messages you send us are stored
@@ -319,12 +327,19 @@ export default function PrivacyPolicyPage() {
           <div className={SECTION_WRAPPER}>
             <h2 className={SECTION_HEADING}>Data Security</h2>
             <p className={BODY_TEXT}>
-              This website is served over HTTPS, and — as described above
-              — the forms currently on the site do not transmit submitted
-              data to any backend. As soon as any form is connected to a
-              real backend or third-party service, appropriate technical
-              and organisational measures will be used to protect that
-              data, and this policy will be updated accordingly.
+              This website is served over HTTPS. Partner Portal
+              submissions are transmitted over an encrypted connection to
+              Web3Forms and delivered onward to Devin Hauser by email, as
+              described above. No newsletter form is currently active on
+              this website, so nothing is submitted through one. Emails
+              you send directly and messages you send via Instagram are
+              transmitted and stored by those respective services under
+              their own terms. Where a third-party service processes data
+              in this way, we rely on that provider&rsquo;s technical and
+              organisational security measures alongside our own care in
+              handling the resulting messages. If further forms or
+              services are connected in future, this policy will be
+              updated accordingly.
             </p>
           </div>
 
@@ -342,11 +357,13 @@ export default function PrivacyPolicyPage() {
           <div className={SECTION_WRAPPER}>
             <h2 className={SECTION_HEADING}>Changes To This Policy</h2>
             <p className={BODY_TEXT}>
-              As the website evolves — for example when the newsletter or
-              Partner Portal are connected to a live backend — this
-              Privacy Policy will be updated to reflect the actual, current
-              state of the site, and the &ldquo;Last updated&rdquo; date
-              above will change accordingly.
+              As the website evolves — for example if a newsletter
+              service is introduced, if new analytics or media services
+              are added, or if new forms or additional Partner Portal
+              functionality are connected — this Privacy Policy will be
+              updated to reflect the actual, current state of the site,
+              and the &ldquo;Last updated&rdquo; date above will change
+              accordingly.
             </p>
           </div>
 
@@ -361,11 +378,7 @@ export default function PrivacyPolicyPage() {
                 className="text-ink underline underline-offset-2 transition-colors hover:text-red"
               >
                 devinhauser9@gmail.com
-              </a>{" "}
-              <span className="text-sm italic text-graphite/70">
-                (provisional address — will be replaced by a
-                devinhauser.com address once set up)
-              </span>
+              </a>
               . Full legal contact details are on the{" "}
               <a
                 href="/imprint"

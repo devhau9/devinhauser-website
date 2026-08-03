@@ -46,10 +46,10 @@ export default function PartnerPortalForm() {
     return (
       <div className="card-surface mt-10 p-8 sm:p-10" role="status">
         <p className="font-display text-xl tracking-wide text-ink">
-          Vielen Dank.
+          Thank you.
         </p>
         <p className="mt-2 leading-relaxed text-graphite">
-          Deine Anfrage wurde erfasst und wird geprüft.
+          Your request has been received and will be reviewed.
         </p>
       </div>
     );
@@ -80,7 +80,7 @@ export default function PartnerPortalForm() {
             htmlFor="firstName"
             className="font-mono text-xs uppercase tracking-widest2 text-graphite/70"
           >
-            Vorname
+            First Name
           </label>
           <input
             id="firstName"
@@ -97,7 +97,7 @@ export default function PartnerPortalForm() {
             htmlFor="lastName"
             className="font-mono text-xs uppercase tracking-widest2 text-graphite/70"
           >
-            Nachname
+            Last Name
           </label>
           <input
             id="lastName"
@@ -114,7 +114,7 @@ export default function PartnerPortalForm() {
             htmlFor="company"
             className="font-mono text-xs uppercase tracking-widest2 text-graphite/70"
           >
-            Unternehmen / Organisation
+            Company / Organization
           </label>
           <input
             id="company"
@@ -131,7 +131,7 @@ export default function PartnerPortalForm() {
             htmlFor="email"
             className="font-mono text-xs uppercase tracking-widest2 text-graphite/70"
           >
-            E-Mail-Adresse
+            Email Address
           </label>
           <input
             id="email"
@@ -159,12 +159,12 @@ export default function PartnerPortalForm() {
         disabled={state === "loading"}
         className="mt-8 rounded-sm bg-red px-7 py-3.5 font-mono text-xs uppercase tracking-widest2 text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
       >
-        {state === "loading" ? "Sending…" : "Zugang anfragen"}
+        {state === "loading" ? "Sending…" : "Request Access"}
       </button>
 
       <p className="mt-4 text-xs italic text-graphite/70">
-        Die Anfrage wird manuell geprüft. Es erfolgt keine automatische
-        Freischaltung.
+        Every request is reviewed personally. Access is not granted
+        automatically.
       </p>
     </form>
   );

@@ -4,7 +4,7 @@ import PartnerPortalForm from "@/components/PartnerPortalForm";
 export const metadata: Metadata = {
   title: "Partner Portal — Devin Hauser",
   description:
-    "Zugang zum Partner Portal von Devin Hauser anfragen — für Sponsoren, Partner und Medienvertreter.",
+    "Request access to the Devin Hauser Partner Portal — for sponsors, partners and media representatives.",
   alternates: {
     canonical: "/partner-portal",
   },
@@ -24,14 +24,13 @@ export default function PartnerPortalPage() {
         <div className="mx-auto max-w-2xl">
           <p className="eyebrow mb-5">Partner Portal</p>
           <h1 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
-            Zugang anfragen
+            Request Partner Access
           </h1>
 
           <p className="mt-6 leading-relaxed text-graphite">
-            Das Partner Portal stellt ausgewählten Partnern und
-            Medienvertretern weiterführende Informationen, aktuelle
-            Kennzahlen und Downloads zur Verfügung. Nach Prüfung der Anfrage
-            wird der Zugang persönlich freigeschaltet.
+            The Partner Portal provides selected partners, sponsors and
+            media representatives with access to additional information,
+            current audience insights and downloadable materials.
           </p>
 
           <PartnerPortalForm />

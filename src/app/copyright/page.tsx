@@ -44,13 +44,10 @@ export default function CopyrightPage() {
             <p className={BODY_TEXT}>
               Photography and video on this site are credited to their
               respective creators where required by the terms under which
-              they were provided.{" "}
-              <span className="font-semibold text-red">
-                [BITTE ERGÄNZEN: einzelne Fotografen-/Videografen-Credits
-                nachtragen, sobald final bestätigt]
-              </span>
-              . For a full list of credits or to request a specific
-              credit, get in touch via the details on the{" "}
+              they were provided. Individual credits are added where
+              required and expanded over time as new content is published.
+              For a full list of credits or to request a specific credit,
+              get in touch via the details on the{" "}
               <a
                 href="/imprint"
                 className="text-ink underline underline-offset-2 transition-colors hover:text-red"
