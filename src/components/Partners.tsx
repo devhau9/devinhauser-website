@@ -86,9 +86,9 @@ export default function Partners() {
   return (
     <section id="partner" className="section-pad bg-mist">
       <div className="mx-auto max-w-content">
-        <p className="eyebrow mb-5">Partner</p>
+        <p className="eyebrow mb-5">Partners</p>
         <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
-          AKTUELLE PARTNER
+          PARTNERS
         </h2>
         <p className="mt-6 max-w-xl leading-relaxed text-graphite">
           Proud to work with partners who support my journey in international
@@ -135,12 +135,12 @@ export default function Partners() {
         </div>
 
         <p className="mt-12 text-sm text-graphite">
-          Sponsor oder Medienvertreter?{" "}
+          Sponsor or media?{" "}
           <Link
             href="/partner-portal"
             className="text-ink underline decoration-black/20 underline-offset-4 transition-colors hover:text-red"
           >
-            Partner Portal — Zugang anfragen
+            Request access through the Partner Portal
           </Link>
         </p>
       </div>

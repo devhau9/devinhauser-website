@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { SVGProps } from "react";
 
@@ -78,26 +77,28 @@ const CHANNELS = [
 export default function SocialMedia() {
   return (
     <section id="social-media" className="section-pad bg-mist">
-      <div className="mx-auto grid max-w-content gap-16 md:grid-cols-[1fr,1.3fr] md:items-start md:gap-16 lg:gap-24">
-        <div className="relative aspect-square w-full min-w-0 max-w-sm overflow-hidden rounded-2xl md:max-w-none">
-          <Image
-            src="/images/social-portrait-square.jpg"
-            alt="Devin Hauser bei einer Regatta"
-            fill
-            sizes="(min-width: 768px) 45vw, 90vw"
-            className="object-cover"
-          />
-        </div>
-
+      {/* Bild bewusst entfernt — aktuell kein passendes echtes Creator-/
+          Behind-the-Scenes-Foto vorhanden (das frühere grafische Rider-Poster
+          passte nicht zum cleanen Stil und nicht zur "Athlete + Creator"-
+          Aussage). Section deshalb ohne leeren Bildplatz einspaltig
+          ausgerichtet; Text und Kanäle nutzen die volle Breite. Ein echtes
+          Creator-Foto kann hier später wieder ergänzt werden. */}
+      <div className="mx-auto max-w-content">
         <div className="min-w-0">
           <p className="eyebrow mb-5">Social Media &amp; Content</p>
           <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
             MEDIA &amp; CONTENT
           </h2>
           <p className="mt-6 max-w-xl leading-relaxed text-graphite">
-            I create authentic content around international racing, training
-            and life on the water — from photography and video to drone
-            footage and behind-the-scenes stories.
+            I'm not only an athlete — I'm a creator. I document the journey
+            behind the racing myself: training, competitions, preparation and
+            everything that happens behind professional sailing.
+          </p>
+          <p className="mt-4 max-w-xl leading-relaxed text-graphite">
+            Photography, video, drone footage and behind-the-scenes
+            storytelling — I create it all. For partners, that means access to
+            high-quality content and authentic stories, not just logo
+            visibility.
           </p>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-3">

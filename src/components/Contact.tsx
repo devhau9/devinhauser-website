@@ -5,14 +5,14 @@ export default function Contact() {
     <section id="kontakt" className="section-pad bg-white">
       <div className="mx-auto grid max-w-content gap-16 md:grid-cols-[1.3fr,1fr] md:items-center md:gap-16 lg:gap-24">
         <div className="min-w-0">
-          <p className="eyebrow mb-5">Kontakt</p>
+          <p className="eyebrow mb-5">Contact</p>
           <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
-            LASS UNS SPRECHEN
+            LET&apos;S TALK
           </h2>
-          <p className="mt-6 max-w-xl italic leading-relaxed text-graphite">
-            Für Sponsoring-Anfragen, Medienanfragen oder allgemeine
-            Partnerschaften — direkt per E-Mail oder Instagram erreichbar.
-            Ein Kontaktformular folgt in einer späteren Version.
+          <p className="mt-6 max-w-xl leading-relaxed text-graphite">
+            For sponsorship, media or partnership enquiries, I&apos;m reachable
+            directly by email or on Instagram. I&apos;m always open to new
+            partnerships and stories worth telling.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -29,18 +29,12 @@ export default function Contact() {
               @devin.hauser_
             </a>
           </div>
-
-          <p className="mt-4 text-xs italic text-graphite/70">
-            Hinweis: Diese E-Mail-Adresse ist vorläufig. Sie wird durch eine
-            professionelle Adresse unter devinhauser.com ersetzt, sobald die
-            Domain eingerichtet ist.
-          </p>
         </div>
 
         <div className="relative aspect-[3/4] w-full min-w-0 max-w-xs overflow-hidden rounded-2xl md:max-w-none">
           <Image
             src="/images/contact-portrait-bw.jpg"
-            alt="Devin Hauser, Schwarz-Weiss-Porträt"
+            alt="Devin Hauser, black and white portrait"
             fill
             sizes="(min-width: 768px) 45vw, 90vw"
             className="object-cover"

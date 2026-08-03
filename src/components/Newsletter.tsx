@@ -10,7 +10,7 @@ export default function Newsletter() {
         <div className="relative aspect-[4/5] w-full min-w-0 overflow-hidden rounded-2xl">
           <Image
             src="/images/DSCF0482.jpg"
-            alt="Devin Hauser beim IQFoil-Training"
+            alt="Devin Hauser training IQFoil"
             fill
             sizes="(min-width: 768px) 45vw, 100vw"
             className="object-cover"
@@ -23,22 +23,28 @@ export default function Newsletter() {
             STAY UPDATED
           </h2>
           <p className="mt-6 max-w-md leading-relaxed text-graphite">
-            Follow my journey through World Cups, training camps and the
-            road towards the Olympic Games.
+            Follow my journey towards the Olympic Games. I share competitions,
+            training camps, behind-the-scenes moments, new content and the
+            milestones along the way — straight to your inbox.
           </p>
 
-          {/* Athleten-Community-Anmeldung statt Standard-Newsletter-Formular.
-              Noch KEINE echte Anbindung — reines Markup, aber bewusst mit
-              name-Attributen und als <form> strukturiert, damit später ein
-              Anbieter (z. B. Kit, Beehiiv, Brevo) einfach angeschlossen
-              werden kann: dafür i. d. R. nur `action`/`method` auf dem
-              <form> ergänzen und den type="button" auf type="submit"
-              ändern. onSubmit verhindert aktuell jede Übertragung, damit
-              der Button keine falsche erfolgreiche Anmeldung vortäuscht. */}
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="mt-8 max-w-md"
-          >
+          {/*
+            FRONTEND IST BEWUSST FERTIG VORBEREITET, aber noch OHNE echte
+            Anbindung — es wird bewusst KEIN Newsletter-Anbieter erfunden.
+            Der Button täuscht keine erfolgreiche Anmeldung vor (onSubmit
+            verhindert jede Übertragung).
+
+            OFFEN FÜR DIE TECHNISCHE INTEGRATION (Entscheidung: echter
+            Newsletter-Dienst, z. B. Kit / Beehiiv / Brevo):
+              1. Anbieter-Konto + Verifizierung (analog zum Web3Forms-Setup)
+              2. Formular an den Anbieter anbinden (action/method oder API/fetch)
+              3. Double-Opt-in aktivieren (DSGVO/DSG: Bestätigungs-E-Mail)
+              4. Einwilligungs-Hinweis + Link zur Datenschutzerklärung ergänzen
+              5. Erfolgs-/Fehler-Status sauber anzeigen (wie im Partner Portal)
+              6. Datenschutzerklärung um den Newsletter-Abschnitt erweitern
+            Bis dahin: type="submit" -> type="button" belassen, kein Fake-Erfolg.
+          */}
+          <form onSubmit={(e) => e.preventDefault()} className="mt-8 max-w-md">
             <div className="flex flex-col overflow-hidden rounded-sm border border-ink/15 focus-within:border-red sm:flex-row">
               <input
                 type="text"

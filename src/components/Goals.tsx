@@ -16,17 +16,25 @@ export default function Goals() {
           kompakter als eine volle Bildschirmhöhe gehalten, damit kein
           unnötig grosser leerer Bereich entsteht. */}
       <div className="relative flex min-h-[75vh] items-end bg-ink">
+        {/* Bildausschnitt bewusst leicht nach oben verschoben, damit mehr vom
+            Segel und Athleten sichtbar wird (statt object-center). Desktop und
+            Mobile getrennt positioniert. ERSTE SCHÄTZUNG — von Devin visuell auf
+            localhost zu bestätigen, da das Bild in dieser Session technisch
+            nicht sichtbar war. */}
         <Image
           src="/images/DSCF0515.jpg"
-          alt="Devin Hauser beim IQFoil-Racing"
+          alt="Devin Hauser racing IQFoil"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-[50%_35%] sm:object-[50%_42%]"
         />
+        {/* Overlay reduziert (via-ink/55 -> /40, to-ink/15 -> /5), damit Foto,
+            Segel und Athlet besser erkennbar sind. Unten bleibt from-ink voll
+            deckend, damit der Text (items-end) sicher lesbar bleibt. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/15"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/5"
         />
 
         <div className="relative w-full px-6 py-14 sm:px-10 sm:py-16 lg:px-16">
