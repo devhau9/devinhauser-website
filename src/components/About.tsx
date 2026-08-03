@@ -24,23 +24,31 @@ export default function About() {
         </h2>
 
         <div className="mt-12 grid gap-16 lg:grid-cols-[1.1fr,0.9fr] lg:gap-20">
-          {/* Text + Porträt: Text zuerst, Foto darunter (responsive) */}
+          {/* About-Text: bewusst EINE konsistente Textebene (keine grosse/fette
+              Intro-Typografie), kurz (3 knappe Absätze), persönlich, Ich-Form,
+              Englisch, kein fixes Olympia-Jahr. Athlet zuerst, Creator als
+              Differenzierungsfaktor. */}
           <div className="min-w-0">
-            <p className="max-w-lg text-balance font-body text-xl font-medium leading-snug text-ink sm:text-2xl">
-              I'm Devin Hauser, an 18-year-old Swiss IQFoil and Wingfoil
-              racing athlete chasing my dream of competing at the highest
-              level of international sailing.
+            <p className="max-w-lg leading-relaxed text-ink">
+              I&apos;m Devin Hauser, a Swiss IQFoil and Wingfoil racing athlete
+              competing internationally since 2020. I grew up on the water, and
+              racing has shaped my life ever since.
             </p>
-            <p className="mt-4 max-w-lg text-balance leading-relaxed text-graphite">
-              From World Cups and training camps to the daily work behind
-              performance, I share my journey, the challenges and the
-              moments that shape my path towards the Olympic Games.
+            <p className="mt-4 max-w-lg leading-relaxed text-ink">
+              I&apos;ve raced my way from national events into international World
+              and European Championship fleets, and I&apos;m now stepping up into
+              senior competition. Alongside the racing, I create my own photo,
+              video and drone content — documenting the journey myself.
+            </p>
+            <p className="mt-4 max-w-lg leading-relaxed text-ink">
+              My long-term goal is to represent Switzerland at the Olympic Games,
+              and every step is part of that road.
             </p>
 
             <div className="relative mt-10 aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl">
               <Image
                 src="/images/about-portrait.jpg"
-                alt="Porträt von Devin Hauser"
+                alt="Portrait of Devin Hauser"
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 className="object-cover"
@@ -48,12 +56,11 @@ export default function About() {
             </div>
           </div>
 
-          {/* Steckbrief: eigenständiger Block rechts daneben (responsive:
-              darunter). Alle Werte aktuell Platzhalter. */}
+          {/* Profile Card: rechts daneben (responsive: darunter). Werte bestätigt. */}
           <div className="min-w-0">
             <div className="card-surface p-8 sm:p-10">
               <p className="mb-6 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
-                Steckbrief
+                Profile
               </p>
               <dl className="space-y-5">
                 {STECKBRIEF.map((item) => (

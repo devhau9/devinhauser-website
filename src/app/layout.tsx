@@ -28,11 +28,34 @@ const monoFont = JetBrains_Mono({
 // SEO/Social-Metadata bewusst zentral hier gepflegt, analog zur bestehenden
 // GA_MEASUREMENT_ID-Konvention. SITE_URL nutzt die laut README registrierte
 // Domain devinhauser.com — [PRÜFEN] falls die Domain bei Go-Live doch
-// abweicht.
+// abweicht. Description bewusst natürlich formuliert (kein Keyword-Stuffing);
+// die Keywords decken die wichtigsten Personal-Brand-Suchbegriffe ab.
 const SITE_URL = "https://devinhauser.com";
-const SITE_TITLE = "Devin Hauser — Swiss IQFoil & Wingfoil Racing Athlete";
+const SITE_TITLE = "Devin Hauser | Swiss IQFoil & Wingfoil Racing Athlete";
 const SITE_DESCRIPTION =
-  "Offizielle Website von Devin Hauser, Schweizer IQFoil- und Wingfoil-Racing-Athlet. Sportliche Highlights, Ziele, Content und Sponsoring-Informationen.";
+  "Devin Hauser is a Swiss IQFoil and Wingfoil racing athlete competing internationally since 2020, on a long-term journey towards the Olympic Games — combining international racing with self-produced photo and video content.";
+
+// Confirmed social profiles (identisch zu SocialMedia.tsx / Footer.tsx) —
+// dienen als sameAs-Signale für die strukturierten Daten.
+const SOCIAL_PROFILES = [
+  "https://www.instagram.com/devin.hauser_/",
+  "https://www.tiktok.com/@devin.hauser_",
+  "https://www.youtube.com/@devin.hauser",
+];
+
+// Strukturierte Daten (schema.org Person). Nur gesicherte Angaben — Name,
+// Nationalität, Disziplinen, Website, offizielle Social-Profile. Keine
+// erfundenen Daten.
+const PERSON_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Devin Hauser",
+  jobTitle: "IQFoil & Wingfoil Racing Athlete",
+  nationality: "Swiss",
+  url: SITE_URL,
+  knowsAbout: ["IQFoil", "Wingfoil Racing", "Sailing"],
+  sameAs: SOCIAL_PROFILES,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,14 +64,12 @@ export const metadata: Metadata = {
   keywords: [
     "Devin Hauser",
     "IQFoil",
-    "Wingfoil",
-    "Wingfoil Racing",
-    "Swiss Sailing",
-    "Swiss Sailing Team",
-    "Windsurfing Athlete",
-    "Foil Racing Switzerland",
-    "Sailing Sponsorship",
-    "Swiss Watersports Athlete",
+    "Swiss IQFoil athlete",
+    "Swiss windsurfing athlete",
+    "Wingfoil racing",
+    "Swiss wingfoil athlete",
+    "SUI-134",
+    "Silvaplana",
   ],
   authors: [{ name: "Devin Hauser", url: SITE_URL }],
   creator: "Devin Hauser",
@@ -96,8 +117,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
       <body className="min-h-screen bg-ink font-body text-paper antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
+        />
         <GoogleAnalytics />
         <Navigation />
         {children}
