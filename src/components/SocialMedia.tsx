@@ -108,7 +108,7 @@ export default function SocialMedia() {
                 href={channel.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${channel.name} — ${channel.handle} (öffnet in neuem Tab)`}
+                aria-label={`${channel.name} — ${channel.handle} (opens in a new tab)`}
                 className="card-surface group block p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_1px_2px_rgba(10,14,20,0.06),0_28px_60px_-28px_rgba(10,14,20,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
               >
                 <channel.Icon className="h-7 w-7 transition-transform duration-200 ease-out group-hover:scale-110" />

@@ -7,7 +7,7 @@ import Image from "next/image";
 // Bildes technisch nicht möglich war – siehe Chat-Antwort. Bitte nach lokaler
 // Sichtprüfung ggf. anpassen.
 const HERO_IMAGE_SRC = "/images/hero-test-dscf0410.jpg";
-const HERO_IMAGE_ALT = "Devin Hauser – Testbild für Hero-Sektion (DSCF0410)";
+const HERO_IMAGE_ALT = "Devin Hauser foiling at speed on open water";
 
 export default function Hero() {
   return (

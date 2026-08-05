@@ -16,13 +16,13 @@ type Partner = {
 const PARTNERS: Partner[] = [
   {
     src: "/logos/swiss-sailing-team.png",
-    alt: "Swiss Sailing Team — offizielle Website",
+    alt: "Swiss Sailing Team logo",
     name: "Swiss Sailing Team",
     href: "https://www.swiss-sailing-team.ch",
   },
   {
     src: "/logos/sui-sailing.png",
-    alt: "Swiss Sailing — offizielle Website",
+    alt: "Swiss Sailing logo",
     name: "Swiss Sailing",
     href: "https://www.swiss-sailing.ch",
     // Logo sitzt in der Bilddatei etwas höher als die anderen — minimale
@@ -31,49 +31,49 @@ const PARTNERS: Partner[] = [
   },
   {
     src: "/logos/sporthilfe.png",
-    alt: "Stiftung Schweizer Sporthilfe — offizielle Website",
+    alt: "Stiftung Schweizer Sporthilfe logo",
     name: "Schweizer Sporthilfe",
     href: "https://sporthilfe.ch",
   },
   {
     src: "/logos/ensis.png",
-    alt: "ENSIS Watersports — offizielle Website",
+    alt: "ENSIS Watersports logo",
     name: "ENSIS",
     href: "https://ensis.surf",
   },
   {
     src: "/logos/fanagus-removebg-preview.png",
-    alt: "fanagus ag — offizielle Website",
+    alt: "fanagus ag logo",
     name: "Fanagus",
     href: "https://www.fanagus.ch",
   },
   {
     src: "/logos/dreiplus.png",
-    alt: "Drei Plus — offizielle Website",
+    alt: "Drei Plus logo",
     name: "Drei Plus",
     href: "https://www.dreiplus.ch",
   },
   {
     src: "/logos/united-school-of-sports.png",
-    alt: "United School of Sports — offizielle Website",
+    alt: "United School of Sports logo",
     name: "United School of Sports",
     href: "https://unitedschool.ch",
   },
   {
     src: "/logos/arnold.png",
-    alt: "Arnold — offizielle Website",
+    alt: "Arnold logo",
     name: "Arnold",
     href: "https://www.arnold-coag.ch",
   },
   {
     src: "/logos/pm-consulting.svg",
-    alt: "PMC Zürich — offizielle Website",
+    alt: "PMC Zürich logo",
     name: "PMC Zürich",
     href: "https://pmc.zuerich",
   },
   {
     src: "/logos/kinesiologie-weideli-removebg-preview.png",
-    alt: "Kinesiologie Weideli — offizielle Website",
+    alt: "Kinesiologie Weideli logo",
     name: "Kinesiologie Weideli",
     href: "https://www.kinesiologie-weideli.ch",
     // Wirkte im Vergleich zu den anderen Logos zu klein — minimale
@@ -103,7 +103,7 @@ export default function Partners() {
                 href={partner.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${partner.name} — offizielle Website (öffnet in neuem Tab)`}
+                aria-label={`${partner.name} — official website (opens in a new tab)`}
                 className="card-surface group relative flex h-24 items-center justify-center transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_1px_2px_rgba(10,14,20,0.06),0_28px_60px_-28px_rgba(10,14,20,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
               >
                 <Image
@@ -119,7 +119,6 @@ export default function Partners() {
             ) : (
               <div
                 key={partner.src}
-                title="Offizielle Website noch nicht bestätigt"
                 className="card-surface relative flex h-24 items-center justify-center"
               >
                 <Image

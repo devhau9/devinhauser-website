@@ -122,7 +122,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${social.name} (öffnet in neuem Tab)`}
+                  aria-label={`${social.name} (opens in a new tab)`}
                   className="transition-transform duration-200 ease-out hover:scale-110"
                 >
                   <social.Icon className="h-8 w-8" />
