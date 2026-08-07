@@ -13,7 +13,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Devin Hauser — Swiss IQFoil & Wingfoil Racing Athlete",
     short_name: "Devin Hauser",
     description:
-      "Offizielle Website von Devin Hauser, Schweizer IQFoil- und Wingfoil-Racing-Athlet.",
+      "Official website of Devin Hauser, Swiss IQFoil and Wingfoil racing athlete.",
     start_url: "/",
     display: "standalone",
     background_color: "#0A0E14",

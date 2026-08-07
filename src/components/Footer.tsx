@@ -92,7 +92,7 @@ export default function Footer() {
                 Swiss IQFoil &amp; Wingfoil Racer
               </p>
               <p className="font-body text-sm text-graphite">
-                Zurich, Switzerland
+                Buchs ZH, Switzerland
               </p>
               <p className="font-mono text-sm uppercase tracking-widest2 text-ink">
                 Road to the Olympic Games

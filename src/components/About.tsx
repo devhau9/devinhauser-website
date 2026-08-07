@@ -8,7 +8,8 @@ const STECKBRIEF = [
   { label: "Sports", value: "IQFoil, Wingfoil" },
   { label: "Height", value: "178 cm" },
   { label: "Weight", value: "87 kg" },
-  { label: "Location", value: "Zurich, Switzerland" },
+  // Praezisiert 07.08.2026 gemaess Entscheid D1 = C ("from Buchs ZH, Switzerland").
+  { label: "Location", value: "Buchs ZH, Switzerland" },
   { label: "Home Spot", value: "Silvaplana" },
   { label: "Sail Number", value: "SUI-134" },
   { label: "Club", value: "RVZS / DRCS" },

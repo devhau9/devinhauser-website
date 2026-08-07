@@ -72,9 +72,13 @@ const PARTNERS: Partner[] = [
     href: "https://pmc.zuerich",
   },
   {
+    // Schreibweise "Weidli" gemaess kanonischem Entscheid F6 = B (04.08.2026).
+    // Logo-Dateiname und Domain (weideli) bewusst unveraendert gelassen —
+    // die Domain ist der real verlinkte Auftritt; falls der Betrieb sich dort
+    // selbst "Weideli" schreibt, bitte F6 mit Devin erneut pruefen.
     src: "/logos/kinesiologie-weideli-removebg-preview.png",
-    alt: "Kinesiologie Weideli logo",
-    name: "Kinesiologie Weideli",
+    alt: "Kinesiologie Weidli logo",
+    name: "Kinesiologie Weidli",
     href: "https://www.kinesiologie-weideli.ch",
     // Wirkte im Vergleich zu den anderen Logos zu klein — minimale
     // weitere Vergrösserung (Nachjustierung 21.07., 3. Feinschliff).
