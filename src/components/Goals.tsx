@@ -21,11 +21,16 @@ export default function Goals() {
             Mobile getrennt positioniert. ERSTE SCHÄTZUNG — von Devin visuell auf
             localhost zu bestätigen, da das Bild in dieser Session technisch
             nicht sichtbar war. */}
+        {/* 10.08.2026: `priority` entfernt. Diese Sektion liegt weit unterhalb
+            des ersten Bildschirms; ein zweites priorisiertes Bild konkurriert
+            beim Seitenaufbau direkt mit dem Hero-Bild um Bandbreite und
+            verschlechtert damit genau die Kennzahl (LCP), die das Hero-Bild
+            verbessern soll. Ohne `priority` laedt Next.js das Bild lazy, sobald
+            es in die Naehe des Viewports kommt. */}
         <Image
           src="/images/DSCF0515.jpg"
-          alt="Devin Hauser racing IQFoil"
+          alt="Devin Hauser racing IQFoil at speed, sail and foil clearly visible"
           fill
-          priority
           sizes="100vw"
           className="object-cover object-[50%_35%] sm:object-[50%_42%]"
         />

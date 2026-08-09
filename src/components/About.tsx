@@ -4,7 +4,10 @@ import Image from "next/image";
 // bestätigt. Sponsors-Feld entfernt, Home durch Location + Home Spot ersetzt.
 const STECKBRIEF = [
   { label: "Nationality", value: "Swiss" },
-  { label: "Age", value: "18" },
+  // 10.08.2026: "Age: 18" ersetzt durch den Jahrgang. Eine Altersangabe wird am
+  // 16.11.2026 automatisch falsch und erzeugt jaehrlichen Pflegeaufwand; der
+  // Jahrgang stimmt dauerhaft und sagt dasselbe aus.
+  { label: "Born", value: "2007" },
   { label: "Sports", value: "IQFoil, Wingfoil" },
   { label: "Height", value: "178 cm" },
   { label: "Weight", value: "87 kg" },
