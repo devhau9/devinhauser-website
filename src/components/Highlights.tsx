@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 // Kompakte Results-Section für die Personal-Brand-Homepage: KEINE vollständige
 // Resultat-Datenbank. Ziel ist der 10–15-Sekunden-Eindruck (internationale
 // Erfahrung, mehrere WM/EM, starke Einzelresultate, nationale Podestplätze).
@@ -70,8 +68,21 @@ export default function Highlights() {
           ))}
         </div>
 
-        {/* Ausgewählte starke Resultate + ein Action-Bild. */}
-        <div className="mt-16 grid gap-12 lg:grid-cols-[1.15fr,0.85fr] lg:items-center lg:gap-16">
+        {/* Ausgewählte starke Resultate.
+            10.08.2026 — BILD ENTFERNT, RECHTEGRUND:
+            Hier stand /images/highlights-iqfoil-cadiz.jpg. Die EXIF-Daten der
+            Datei weisen sie eindeutig als Fremdmaterial aus:
+              Artist    = "SAILING ENERGY"
+              Copyright = "© Sailing Energy / iQFOiL ..."
+            Im Vault ist SailingEnergy-Material durchgehend und ausdruecklich als
+            NICHT freigegeben gefuehrt ("Gruppe A"). Ein oeffentlich
+            ausgeliefertes Bild mit fremdem Copyright-Vermerk ist ein reales
+            Rechterisiko, kein theoretisches — deshalb entfernt statt nur
+            markiert. Die Sektion laeuft jetzt einspaltig, was ihr nicht
+            schadet: die Resultatliste ist der Inhalt.
+            Wiederherstellen mit einem freigegebenen Bild ist eine
+            Einzeiler-Aenderung — siehe Morning Review. */}
+        <div className="mt-16">
           <div className="min-w-0">
             <h3 className="font-mono text-xs uppercase tracking-widest2 text-graphite/70">
               Selected Results
@@ -106,16 +117,6 @@ export default function Highlights() {
             <p className="mt-6 text-sm italic leading-relaxed text-graphite">
               A selection — the full competition history is kept internally.
             </p>
-          </div>
-
-          <div className="relative aspect-[4/5] w-full min-w-0 overflow-hidden rounded-2xl">
-            <Image
-              src="/images/highlights-iqfoil-cadiz.jpg"
-              alt="Devin Hauser racing IQFoil at the International Games in Cádiz"
-              fill
-              sizes="(min-width: 1024px) 40vw, 100vw"
-              className="object-cover object-[28%_48%]"
-            />
           </div>
         </div>
       </div>
