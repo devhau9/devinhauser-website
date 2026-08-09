@@ -1,26 +1,68 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
+import { getPublicAlbums } from "@/lib/albums";
 
-// [PRÜFEN] SITE_URL an eine gemeinsame Konstante mit layout.tsx anzugleichen
-// wäre eine spätere Aufräumarbeit (aktuell an zwei Stellen gepflegt, da
-// sitemap.ts und layout.tsx unabhängige Next.js-Einstiegspunkte sind, die
-// keine Server-Component-Werte teilen können, ohne eine gemeinsame
-// lib-Datei einzuführen — bewusst nicht angefasst, um die bestehende
-// Struktur nicht unnötig zu verändern).
-const SITE_URL = "https://devinhauser.com";
+/**
+ * Sitemap.
+ *
+ * Zwei Änderungen gegenüber der Fassung vom 03.08.2026:
+ *
+ * 1. SITE_URL kommt jetzt aus src/lib/site.ts statt aus einer lokalen Kopie —
+ *    das war der [PRÜFEN]-Punkt, der hier selbst notiert war.
+ *
+ * 2. `lastModified` ist nicht mehr `new Date()`. Ein bei jedem Build neu
+ *    gesetztes Änderungsdatum sagt Suchmaschinen bei jedem Deploy, dass sich
+ *    ALLE Seiten geändert haben — auch wenn sich nichts geändert hat. Das
+ *    entwertet das Signal. Stattdessen: ein gepflegtes Datum je Route, und bei
+ *    Alben das tatsächliche Albumdatum.
+ *
+ * /partner-portal bleibt bewusst draussen (die Seite ist per Metadata auf
+ * noindex gesetzt). /media erscheint nur, sobald mindestens ein Album
+ * existiert — eine leere Galerie im Index wäre eine Thin Page.
+ */
 
-// Statische Routenliste — bewusst einfach gehalten, da die Seite aktuell
-// aus einer festen, kleinen Anzahl Seiten besteht (One-Page-Hauptseite +
-// Legal-Seiten). /partner-portal ist absichtlich NICHT enthalten, da diese
-// Seite über robots-Metadata auf noindex gesetzt ist (siehe
-// src/app/partner-portal/page.tsx) und daher nicht in der Sitemap gelistet
-// werden soll.
-const ROUTES = ["", "/privacy-policy", "/imprint", "/copyright"];
+type Entry = {
+  path: string;
+  lastModified: string;
+  changeFrequency: "weekly" | "monthly" | "yearly";
+  priority: number;
+};
+
+const STATIC_ENTRIES: Entry[] = [
+  { path: "", lastModified: "2026-08-10", changeFrequency: "monthly", priority: 1 },
+  { path: "/iqfoil", lastModified: "2026-08-10", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/privacy-policy", lastModified: "2026-08-03", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/imprint", lastModified: "2026-08-03", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/copyright", lastModified: "2026-08-03", changeFrequency: "yearly", priority: 0.3 },
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ROUTES.map((route) => ({
-    url: `${SITE_URL}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === "" ? "weekly" : "yearly",
-    priority: route === "" ? 1 : 0.3,
+  const albums = getPublicAlbums();
+
+  const entries: MetadataRoute.Sitemap = STATIC_ENTRIES.map((entry) => ({
+    url: `${SITE_URL}${entry.path}`,
+    lastModified: new Date(entry.lastModified),
+    changeFrequency: entry.changeFrequency,
+    priority: entry.priority,
   }));
+
+  if (albums.length > 0) {
+    entries.push({
+      url: `${SITE_URL}/media`,
+      lastModified: new Date(albums[0].date),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    });
+
+    for (const album of albums) {
+      entries.push({
+        url: `${SITE_URL}/media/${album.slug}`,
+        lastModified: new Date(album.date),
+        changeFrequency: "yearly",
+        priority: 0.6,
+      });
+    }
+  }
+
+  return entries;
 }

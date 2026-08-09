@@ -1,0 +1,23 @@
+{
+  "slug": "silvaplana-2026-08-09",
+  "title": "IQFoil Training — Silvaplana",
+  "date": "2026-08-09",
+  "location": "Lake Silvaplana, Switzerland",
+  "sport": "IQFoil",
+  "description": "Afternoon session on the Maloja wind. Shot between runs.",
+  "photographer": "Devin Hauser",
+  "credit": "Photos: Devin Hauser",
+  "rights": "own",
+  "downloadAllowed": true,
+  "coverImage": "/media/silvaplana-2026-08-09/2026-08-09_silvaplana_iqfoil_001.jpg",
+  "tags": ["IQFoil", "Silvaplana"],
+  "noindex": false,
+  "images": [
+    {
+      "src": "/media/silvaplana-2026-08-09/2026-08-09_silvaplana_iqfoil_001.jpg",
+      "alt": "IQFoil rider foiling across Lake Silvaplana in afternoon wind",
+      "width": 2000,
+      "height": 1333
+    }
+  ]
+}
