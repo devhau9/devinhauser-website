@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const SITE_URL = "https://devinhauser.com";
+import { SITE_URL } from "@/lib/site";
 
 // Bewusst kein "disallow" für /partner-portal hier: Diese Seite ist bereits
 // über robots-Metadata (noindex) von der Google-Indexierung ausgeschlossen

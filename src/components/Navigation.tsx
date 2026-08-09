@@ -1,9 +1,19 @@
+// Anker sind root-relativ ("/#..."), nicht rein hash-basiert ("#...").
+// Grund: Seit es echte Unterseiten gibt (/iqfoil, /media, /imprint, ...) wuerde
+// ein reiner Hash-Link dort ins Leere zeigen — er sucht den Anker auf der
+// aktuellen Seite. "/#ueber-mich" springt von jeder Seite aus korrekt zurueck
+// auf die Startseite.
+//
+// "Gallery" hiess frueher so, zeigte aber auf die Social-Media-Sektion. Das war
+// irrefuehrend: Wer "Gallery" klickt, erwartet Bilder. Umbenannt zu "Social";
+// die echte Galerie liegt unter /media und wird verlinkt, sobald das erste
+// freigegebene Album existiert.
 const NAV_LINKS = [
-  { href: "#hero", label: "Home" },
-  { href: "#ueber-mich", label: "About" },
-  { href: "#highlights", label: "Results" },
-  { href: "#social-media", label: "Gallery" },
-  { href: "#partner", label: "Partners" },
+  { href: "/#ueber-mich", label: "About" },
+  { href: "/iqfoil", label: "IQFoil" },
+  { href: "/#highlights", label: "Results" },
+  { href: "/#social-media", label: "Social" },
+  { href: "/#partner", label: "Partners" },
 ];
 
 export default function Navigation() {
@@ -11,7 +21,7 @@ export default function Navigation() {
     <header className="sticky top-0 z-50 border-b border-ink-line bg-ink/90 backdrop-blur">
       <div className="mx-auto flex max-w-content items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
         <a
-          href="#hero"
+          href="/#hero"
           className="group flex items-baseline gap-2"
         >
           <span className="font-display text-xl tracking-widest2 text-paper">
@@ -35,7 +45,7 @@ export default function Navigation() {
         </nav>
 
         <a
-          href="#kontakt"
+          href="/#kontakt"
           className="hidden rounded-sm border border-red bg-red px-5 py-2.5 font-mono text-xs uppercase tracking-widest2 text-paper transition-colors hover:bg-transparent hover:text-red md:inline-block"
         >
           Contact
@@ -43,7 +53,7 @@ export default function Navigation() {
 
         {/* Mobile: einfacher Anker-Link statt Burger-Menü in V1, bewusst simpel gehalten */}
         <a
-          href="#kontakt"
+          href="/#kontakt"
           className="rounded-sm border border-red px-4 py-2 font-mono text-xs uppercase tracking-widest2 text-red md:hidden"
         >
           Contact
