@@ -32,6 +32,7 @@ export default function AlbumGallery({
 }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const lastFocused = useRef<HTMLElement | null>(null);
 
   const close = useCallback(() => setOpenIndex(null), []);
@@ -58,6 +59,35 @@ export default function AlbumGallery({
       if (event.key === "Escape") close();
       if (event.key === "ArrowRight") step(1);
       if (event.key === "ArrowLeft") step(-1);
+
+      // Fokusfalle. Ohne sie tabbt man aus dem geoeffneten Dialog heraus auf
+      // die Elemente DAHINTER — sichtbar verdeckt, aber weiterhin fokussierbar.
+      // Wer nur mit der Tastatur bedient, verliert damit den Dialog aus den
+      // Augen und findet den Schliessen-Knopf nicht wieder. aria-modal allein
+      // hilft nicht: Es sagt Screenreadern etwas, aendert aber nichts an der
+      // Tab-Reihenfolge des Browsers.
+      if (event.key !== "Tab") return;
+      const root = dialogRef.current;
+      if (!root) return;
+      const focusable = Array.from(
+        root.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")
+      ).filter((element) => element.offsetParent !== null);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const current = document.activeElement;
+
+      if (!event.shiftKey && current === last) {
+        event.preventDefault();
+        first.focus();
+      } else if (event.shiftKey && current === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (current instanceof Node && !root.contains(current)) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     const previousOverflow = document.body.style.overflow;
@@ -98,6 +128,7 @@ export default function AlbumGallery({
 
       {active ? (
         <div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
           aria-label={`${albumTitle} — image ${(openIndex ?? 0) + 1} of ${images.length}`}

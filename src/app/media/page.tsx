@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getPublicAlbums, formatAlbumDate } from "@/lib/albums";
-import { SITE_URL, breadcrumbJsonLd } from "@/lib/site";
+import { SITE_URL, breadcrumbJsonLd, jsonLdHtml } from "@/lib/site";
 
 const albums = getPublicAlbums();
 
@@ -17,18 +17,29 @@ const albums = getPublicAlbums();
  */
 const hasAlbums = albums.length > 0;
 
+const PAGE_TITLE = "Media — Photos from the Water";
+const PAGE_DESCRIPTION =
+  "Photo albums from training sessions, race weeks and shoots — shot by Swiss IQFoil and Wingfoil athlete Devin Hauser.";
+
 export const metadata: Metadata = {
-  title: "Media — Photos from the Water | Devin Hauser",
-  description:
-    "Photo albums from training sessions, race weeks and shoots — shot by Swiss IQFoil and Wingfoil athlete Devin Hauser.",
+  // Nur das Fragment: das Root-Layout haengt " | Devin Hauser" selbst an.
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
   alternates: { canonical: "/media" },
   robots: hasAlbums ? undefined : { index: false, follow: true },
   openGraph: {
     type: "website",
     url: `${SITE_URL}/media`,
-    title: "Media — Photos from the Water | Devin Hauser",
-    description:
-      "Photo albums from training sessions, race weeks and shoots by Devin Hauser.",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+  },
+  // Ohne eigenen twitter-Block erbt die Seite den generischen aus dem Layout.
+  // Derselbe Link saehe dann auf LinkedIn/WhatsApp (OpenGraph) anders aus als
+  // auf X/Slack/iMessage (Twitter Card) — zwei widersprechende Vorschauen.
+  twitter: {
+    card: "summary_large_image",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
   },
 };
 
@@ -38,7 +49,7 @@ export default function MediaIndexPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
+          __html: jsonLdHtml(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
               { name: "Media", path: "/media" },
@@ -48,6 +59,21 @@ export default function MediaIndexPage() {
       />
 
       <div className="mx-auto max-w-content">
+        {/* Sichtbarer Breadcrumb. Das BreadcrumbList-Markup oben darf nichts
+            behaupten, was auf der Seite nicht steht — genau davor warnt Google
+            bei strukturierten Daten. */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest2 text-graphite">
+            <li>
+              <Link href="/" className="hover:text-ink">
+                Home
+              </Link>
+            </li>
+            <li aria-hidden>/</li>
+            <li className="text-ink">Media</li>
+          </ol>
+        </nav>
+
         <p className="eyebrow mb-5">Media</p>
         <h1 className="max-w-3xl font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl lg:text-6xl">
           PHOTOS FROM THE WATER

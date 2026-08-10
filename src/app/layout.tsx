@@ -13,6 +13,7 @@ import {
   DEFAULT_OG_IMAGE,
   PERSON_JSON_LD,
   WEBSITE_JSON_LD,
+  jsonLdHtml,
 } from "@/lib/site";
 
 const displayFont = Bebas_Neue({
@@ -42,8 +43,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: SITE_TITLE,
-    // Unterseiten setzen ihren eigenen vollständigen Titel; das Template
-    // greift nur, wenn eine Seite nur ein Fragment liefert.
+    /**
+     * REGEL FÜR ALLE UNTERSEITEN: nur das Titel-FRAGMENT setzen, ohne
+     * " | Devin Hauser" und ohne " — Devin Hauser".
+     *
+     * Next.js ersetzt `%s` durch den Titel der Unterseite. Eine Seite, die
+     * ihren Markennamen selbst anhängt, erzeugt deshalb
+     * "Imprint | Devin Hauser | Devin Hauser". Das war beim Einführen dieses
+     * Templates am 10.08.2026 auf allen acht Unterseiten der Fall und ist
+     * durch keinen Build-Fehler sichtbar geworden — nur im Browser-Tab und in
+     * der Google-Ergebnisliste.
+     */
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -113,11 +123,11 @@ export default function RootLayout({
             Titel und nur einer URL indexiert. */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdHtml(PERSON_JSON_LD) }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSON_LD) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdHtml(WEBSITE_JSON_LD) }}
         />
         <GoogleAnalytics />
         <a

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PartnerPortalForm from "@/components/PartnerPortalForm";
 
 export const metadata: Metadata = {
-  title: "Partner Portal — Devin Hauser",
+  title: "Partner Portal",
   description:
     "Request access to the Devin Hauser Partner Portal — for sponsors, partners and media representatives.",
   alternates: {

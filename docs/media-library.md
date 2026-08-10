@@ -16,9 +16,10 @@ keine Datenbank. Nach dem Export der Bilder dauert ein Album rund 15 Minuten.
 5. **Bauen:** `npm run build` — muss fehlerfrei durchlaufen.
 6. **Deployen und Link teilen:** `https://devinhauser.com/media/<slug>`
 
-Ein Album erscheint automatisch auf `/media` und in der Sitemap. Solange kein
-einziges Album existiert, ist `/media` bewusst auf `noindex` und nicht verlinkt —
-das schaltet sich mit dem ersten Album von selbst um.
+Ein Album erscheint automatisch auf `/media`, in der Navigation und in der
+Sitemap. Solange kein einziges Album existiert, ist `/media` bewusst auf
+`noindex` und in keiner Navigation verlinkt — alle drei schalten sich mit dem
+ersten Album von selbst um. Es ist keine Codeänderung nötig.
 
 ---
 
@@ -30,6 +31,12 @@ das schaltet sich mit dem ersten Album von selbst um.
 | Download (`downloadSrc`, optional) | 2560 px | 90 | **nur Copyright + Contact**, kein GPS |
 
 **Immer:** GPS/Standortdaten entfernen. Kamera-Seriennummern entfernen. sRGB.
+
+> ⚠️ Dieser Schritt ist **nicht** durch Code abgesichert — anders als die
+> Rechteklassen. Er passiert im Exportdialog, oder er passiert nicht. In den
+> bereits veröffentlichten Bildern unter `public/images/` stehen heute noch
+> Kamera-Seriennummern (`BodySerialNumber`, `LensSerialNumber`); GPS-Daten
+> wurden dort keine gefunden. Siehe Morning Review.
 **Nie:** RAW veröffentlichen. Originale umbenennen oder überschreiben — es werden
 ausschliesslich Kopien exportiert.
 
@@ -71,6 +78,25 @@ Der Code erzwingt das: `canDownload()` in `src/lib/albums.ts` gibt bei
 `"licensed-use"` und `"restricted"` **immer** `false` zurück, auch wenn im JSON
 versehentlich `"downloadAllowed": true` steht. Ein Tippfehler in einer
 Inhaltsdatei kann also nie fremdes Material zum Download freigeben.
+
+### Was das Rechtemodell leistet — und was nicht
+
+Damit hier keine Sicherheit behauptet wird, die es nicht gibt:
+
+**Was der Code verhindert** — einen angebotenen Download; ein fremdes Bild als
+Sharing-Vorschau (WhatsApp, Slack, LinkedIn und X holen sich das Vorschaubild
+aktiv ab und legen eine eigene Kopie an, das ist echte Weiterverbreitung); und
+die Anmeldung der Dateien bei der Google-Bildersuche über `ImageObject`. Alle
+drei hängen an derselben Bedingung `rights === "own"`.
+
+**Was der Code nicht verhindern kann:** Jedes angezeigte Bild liegt unter einer
+öffentlichen URL — sonst wäre es nicht sichtbar. Wer „Bild speichern" wählt,
+bekommt dieselbe Datei. Eine statisch ausgelieferte Website kann das technisch
+nicht unterbinden, und keine Einstellung ändert daran etwas.
+
+**Die praktische Folge:** Für `"restricted"`-Material ist die einzige
+verlässliche Schutzmassnahme, es **nicht zu veröffentlichen**. Die Rechteklasse
+ist dafür da, ein Versehen zu verhindern — sie ist kein Zugriffsschutz.
 
 ---
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Devin Hauser",
+  title: "Privacy Policy",
   description:
     "Privacy Policy for devinhauser.com — how Devin Hauser collects, uses and protects visitor data, including Google Analytics, cookies, contact channels and the Partner Portal.",
   alternates: {

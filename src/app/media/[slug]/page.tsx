@@ -11,7 +11,13 @@ import {
   formatAlbumDate,
   rightsNotice,
 } from "@/lib/albums";
-import { SITE_URL, absoluteUrl, breadcrumbJsonLd } from "@/lib/site";
+import {
+  SITE_URL,
+  SHARE_FALLBACK_IMAGE,
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdHtml,
+} from "@/lib/site";
 
 type Params = { slug: string };
 
@@ -21,10 +27,25 @@ export function generateStaticParams(): Params[] {
 
 export function generateMetadata({ params }: { params: Params }): Metadata {
   const album = getAlbumBySlug(params.slug);
-  if (!album) return { title: "Album not found — Devin Hauser" };
+  if (!album) return { title: "Album not found" };
 
-  const title = `${album.title} — ${formatAlbumDate(album.date)} | Devin Hauser`;
+  // Nur das Fragment — das Root-Layout haengt " | Devin Hauser" selbst an.
+  const title = `${album.title} — ${formatAlbumDate(album.date)}`;
   const description = album.description;
+
+  /**
+   * SHARING-BILD IST EINE RECHTEENTSCHEIDUNG, NICHT NUR GESTALTUNG.
+   *
+   * Wird ein Link geteilt, holen Plattformen wie WhatsApp, Slack, LinkedIn
+   * oder X das Vorschaubild aktiv ab und legen eine eigene Kopie auf ihren
+   * Servern an. Das ist Weiterverbreitung an Dritte — voellig unabhaengig
+   * davon, ob auf der Seite ein Download-Knopf steht. Fuer fremdes Material
+   * (licensed-use / restricted) waere genau das der Fall, den das
+   * Rechtemodell verhindern soll. Deshalb: nur eigenes Material wird als
+   * Vorschaubild ausgeliefert, sonst das eigene Standardbild.
+   */
+  const shareImage =
+    album.rights === "own" ? album.coverImage : SHARE_FALLBACK_IMAGE;
 
   return {
     title,
@@ -36,13 +57,13 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
       url: `${SITE_URL}/media/${album.slug}`,
       title,
       description,
-      images: [{ url: album.coverImage, alt: `${album.title} — cover image` }],
+      images: [{ url: shareImage, alt: `${album.title} — cover image` }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [album.coverImage],
+      images: [shareImage],
     },
   };
 }
@@ -56,6 +77,16 @@ export default function AlbumPage({ params }: { params: Params }) {
   const downloadHrefs = album.images.map((image) => downloadHref(image));
   const anyDownloads = albumHasDownloads(album);
 
+  /**
+   * ImageObject-Markup mit `contentUrl` ist die ausdrueckliche Einladung an
+   * Google Images, die Datei zu indexieren und in den Suchergebnissen selbst
+   * auszuliefern. Fuer fremdes Material ist das das Gegenteil dessen, was das
+   * Rechtemodell will. Deshalb bekommt nur eigenes Material die Bildliste;
+   * bei allem anderen bleibt die Galerie als Sammlung beschrieben, ohne die
+   * einzelnen Dateien zum Indexieren anzubieten.
+   */
+  const listImages = album.rights === "own";
+
   const imageObjectsJsonLd = {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
@@ -64,14 +95,18 @@ export default function AlbumPage({ params }: { params: Params }) {
     datePublished: album.date,
     contentLocation: { "@type": "Place", name: album.location },
     author: { "@type": "Person", name: album.photographer },
-    image: album.images.slice(0, 12).map((image) => ({
-      "@type": "ImageObject",
-      contentUrl: absoluteUrl(image.src),
-      caption: image.caption ?? image.alt,
-      creditText: image.credit ?? album.credit,
-      width: image.width,
-      height: image.height,
-    })),
+    ...(listImages
+      ? {
+          image: album.images.slice(0, 12).map((image) => ({
+            "@type": "ImageObject",
+            contentUrl: absoluteUrl(image.src),
+            caption: image.caption ?? image.alt,
+            creditText: image.credit ?? album.credit,
+            width: image.width,
+            height: image.height,
+          })),
+        }
+      : {}),
   };
 
   return (
@@ -79,7 +114,7 @@ export default function AlbumPage({ params }: { params: Params }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
+          __html: jsonLdHtml(
             breadcrumbJsonLd([
               { name: "Home", path: "/" },
               { name: "Media", path: "/media" },
@@ -90,7 +125,7 @@ export default function AlbumPage({ params }: { params: Params }) {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(imageObjectsJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdHtml(imageObjectsJsonLd) }}
       />
 
       <div className="mx-auto max-w-content">

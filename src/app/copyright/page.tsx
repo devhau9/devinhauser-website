@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Copyright — Devin Hauser",
+  title: "Copyright",
   description:
     "Copyright and usage terms for text, images, video and logos published on devinhauser.com.",
   alternates: {

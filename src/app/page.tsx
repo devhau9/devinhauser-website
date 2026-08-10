@@ -13,7 +13,7 @@ import Contact from "@/components/Contact";
 // Es werden weiterhin keine Daten erfasst und kein Anmelde-Erfolg
 // vorgetäuscht; siehe src/components/Newsletter.tsx.
 import Newsletter from "@/components/Newsletter";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, CONTENT_UPDATED, jsonLdHtml } from "@/lib/site";
 
 // ProfilePage markiert die Startseite als die Seite ÜBER diese Person — das
 // ist genau die Beziehung, die bei einer Namenssuche zählt. Die Person selbst
@@ -26,6 +26,8 @@ const PROFILE_PAGE_JSON_LD = {
   url: SITE_URL,
   isPartOf: { "@id": `${SITE_URL}/#website` },
   mainEntity: { "@id": `${SITE_URL}/#person` },
+  dateCreated: CONTENT_UPDATED,
+  dateModified: CONTENT_UPDATED,
   inLanguage: "en",
 };
 
@@ -34,7 +36,7 @@ export default function Home() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(PROFILE_PAGE_JSON_LD) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdHtml(PROFILE_PAGE_JSON_LD) }}
       />
       <Hero />
       <About />

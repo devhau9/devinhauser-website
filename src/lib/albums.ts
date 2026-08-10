@@ -40,6 +40,37 @@ const ALBUMS_DIR = path.join(process.cwd(), "content", "albums");
 
 const RIGHTS_VALUES: RightsClass[] = ["own", "licensed-use", "restricted"];
 
+/**
+ * Prüft ein einzelnes Bild.
+ *
+ * Warum das nötig ist: `Array.isArray(a.images)` allein akzeptiert
+ * `[null, 42, "text"]`. Der erste Zugriff auf `image.src` in `downloadHref()`
+ * oder in `next/image` wirft dann eine TypeError — und zwar währenddessen die
+ * Seite statisch vorgeneriert wird. Damit bricht der GESAMTE Build, also genau
+ * das, was die Fehlerbehandlung unten verhindern soll. Ein kaputtes Album muss
+ * als kaputt erkannt und übersprungen werden, bevor es irgendwo ankommt.
+ */
+function isAlbumImage(value: unknown): value is AlbumImage {
+  if (typeof value !== "object" || value === null) return false;
+  const i = value as Partial<AlbumImage>;
+  return (
+    typeof i.src === "string" &&
+    i.src.length > 0 &&
+    typeof i.alt === "string" &&
+    typeof i.width === "number" &&
+    Number.isFinite(i.width) &&
+    typeof i.height === "number" &&
+    Number.isFinite(i.height)
+  );
+}
+
+/**
+ * Slugs werden zu URL-Segmenten und zu Ordnernamen unter /public/media.
+ * Erlaubt sind deshalb nur Kleinbuchstaben, Ziffern und Bindestriche — das
+ * schliesst Pfadanteile wie "../" und alles Kodierte von vornherein aus.
+ */
+const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
 function isAlbum(value: unknown): value is Album {
   if (typeof value !== "object" || value === null) return false;
   const a = value as Partial<Album>;
@@ -56,7 +87,10 @@ function isAlbum(value: unknown): value is Album {
     RIGHTS_VALUES.includes(a.rights as RightsClass) &&
     typeof a.downloadAllowed === "boolean" &&
     typeof a.coverImage === "string" &&
-    Array.isArray(a.images)
+    SLUG_PATTERN.test(a.slug) &&
+    Array.isArray(a.images) &&
+    a.images.length > 0 &&
+    a.images.every(isAlbumImage)
   );
 }
 
@@ -136,16 +170,29 @@ export function formatAlbumDate(iso: string): string {
   return `${Number(day)} ${months[monthIndex]} ${year}`;
 }
 
-/** Kurzer, ehrlicher Hinweistext je Rechteklasse — wird im UI angezeigt. */
+/**
+ * Kurzer, ehrlicher Hinweistext je Rechteklasse — wird im UI angezeigt.
+ *
+ * WORTWAHL IST HIER EINE EHRLICHKEITSFRAGE. Die frühere Formulierung lautete
+ * "not available for download or reuse". Das war zu viel versprochen: Jedes
+ * angezeigte Bild liegt zwangsläufig unter einer öffentlichen URL, sonst wäre
+ * es nicht sichtbar. Wer "Bild speichern" wählt, bekommt dieselbe Datei, die
+ * ein Download-Knopf geliefert hätte. Eine statisch ausgelieferte Website kann
+ * das technisch nicht verhindern — und eine Zusage, die die Technik nicht
+ * hält, ist schlechter als gar keine. Der Text bittet deshalb um etwas, statt
+ * eine Unmöglichkeit zu behaupten. Was der Code tatsächlich verhindert:
+ * angebotene Downloads, Sharing-Vorschaubilder und die Anmeldung der Dateien
+ * bei der Bildersuche.
+ */
 export function rightsNotice(album: Album): string {
   switch (album.rights) {
     case "own":
       return album.downloadAllowed
         ? "Photos by Devin Hauser. Free to download and share for personal use — please credit Devin Hauser. For commercial use, get in touch first."
-        : "Photos by Devin Hauser. Viewing only — please get in touch before using any of these images.";
+        : "Photos by Devin Hauser. Shown here for viewing — please get in touch before using any of these images.";
     case "licensed-use":
-      return "Published with the photographer's permission. Viewing only — these images are not available for download or reuse.";
+      return "Published with the photographer's permission. Please don't reuse or republish these images — ask the photographer first.";
     case "restricted":
-      return "Event media shown with permission. Viewing only — not available for download or reuse.";
+      return "Event media shown with permission. Please don't reuse or republish these images — ask the rights holder first.";
   }
 }

@@ -42,6 +42,41 @@ export function absoluteUrl(path = "/"): string {
 }
 
 /**
+ * Serialisiert strukturierte Daten sicher für ein `<script>`-Element.
+ *
+ * WARUM DAS NÖTIG IST — und warum `JSON.stringify` allein ein Fehler ist:
+ * `JSON.stringify` maskiert `<` und `>` nicht. Enthält ein Feld irgendwo die
+ * Zeichenfolge `</script`, beendet der HTML-Parser das Script-Element genau
+ * dort — der Rest landet als echtes Markup im Dokument. Bei Feldern, die aus
+ * einer Inhaltsdatei stammen (Albumtitel, Beschreibung, Bildunterschrift,
+ * Credit), ist das keine Theorie, sondern der klassische Ausbruch aus einem
+ * JSON-LD-Block. Ein versehentlich eingefügtes Stück HTML in einer Bildunter-
+ * schrift würde ausgeführt.
+ *
+ * `<` ist innerhalb eines JSON-Strings exakt dasselbe Zeichen wie `<` —
+ * die strukturierten Daten bleiben also unverändert gültig, nur der HTML-Parser
+ * sieht kein `<` mehr.
+ *
+ * Diese Funktion ist die EINZIGE erlaubte Art, JSON-LD in diese Seite zu
+ * schreiben. Kein direktes `JSON.stringify` in `dangerouslySetInnerHTML`.
+ */
+export function jsonLdHtml(data: unknown): string {
+  return JSON.stringify(data)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026");
+}
+
+/**
+ * Letzte inhaltliche Überarbeitung der redaktionellen Seiten.
+ *
+ * Bewusst eine gepflegte Konstante und NICHT `new Date()`: Ein bei jedem Build
+ * neu gesetztes Datum behauptet, der Inhalt habe sich geändert, obwohl nur neu
+ * gebaut wurde. Beim Ändern eines Textes hier mitpflegen.
+ */
+export const CONTENT_UPDATED = "2026-08-10";
+
+/**
  * schema.org Person — nur gesicherte, öffentlich belegbare Angaben.
  *
  * Bewusst NICHT enthalten: Geburtsdatum (steht nicht öffentlich auf der Seite),
@@ -79,6 +114,16 @@ export const PERSON_JSON_LD = {
   ],
   sameAs: SOCIAL_PROFILES,
 };
+
+/**
+ * Bilder, die eine Nicht-„own"-Rechteklasse haben, dürfen NICHT als
+ * Sharing-Vorschau ausgeliefert werden. Grund: Beim Teilen eines Links holen
+ * sich Plattformen wie WhatsApp, Slack, LinkedIn oder X das Bild aktiv ab und
+ * legen eine eigene Kopie auf ihren Servern an. Das ist Weiterverbreitung —
+ * unabhängig davon, ob auf der Seite ein Download-Knopf steht. Für fremdes
+ * Material wird deshalb das eigene Standardbild verwendet.
+ */
+export const SHARE_FALLBACK_IMAGE = DEFAULT_OG_IMAGE;
 
 /** schema.org WebSite — macht die Site als benannte Entität erkennbar. */
 export const WEBSITE_JSON_LD = {

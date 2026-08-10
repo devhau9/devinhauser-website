@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Imprint — Devin Hauser",
+  title: "Imprint",
   description:
     "Legal imprint / Impressum for devinhauser.com, operated by Devin Hauser, Swiss IQFoil & Wingfoil Racing Athlete.",
   alternates: {
