@@ -26,6 +26,41 @@ Branch: `seo-media-growth-2026-08-10` · Basis: `a5a12e0` auf `main`
 > Sprints, die ich ohne Rückfrage gemacht habe, weil Abwarten das Risiko
 > verlängert hätte.
 
+> ### 🔴 Nachtrag: Löschen entfernt die Datei nicht aus der Git-Historie
+>
+> Die Gegenprüfung hat gezeigt, dass meine eigene Massnahme nicht so weit
+> reicht, wie der Commit-Text es nahelegt. Ein `git rm` entfernt die Datei aus
+> dem Arbeitsverzeichnis und aus dem aktuellen Stand — **nicht** aus der
+> Historie. Die Datei ist mit einem Befehl vollständig wiederherstellbar,
+> EXIF-Vermerk inklusive:
+>
+> ```bash
+> git show ef2ae78~1:public/images/highlights-iqfoil-cadiz.jpg > wieder-da.jpg
+> ```
+>
+> Das Repository liegt öffentlich auf GitHub. Wer es klont oder geklont hat,
+> hat die Datei.
+>
+> **Reihenfolge der Massnahmen — die erste ist die wichtige:**
+>
+> 1. **Branch deployen.** Damit verschwindet das Bild von der *Website*. Das
+>    ist der Ort, an dem es tatsächlich ausgeliefert wird, und der Schritt,
+>    der die Wirkung hat.
+> 2. **Danach entscheiden**, ob die Historie bereinigt wird. Das ist ein
+>    Eingriff mit Force-Push, der jede vorhandene Kopie des Repositories
+>    ungültig macht, und deshalb ausdrücklich **nicht** über Nacht ohne
+>    Rückfrage gemacht worden:
+>    ```bash
+>    pip install git-filter-repo
+>    git filter-repo --path public/images/highlights-iqfoil-cadiz.jpg --invert-paths
+>    git push --force origin main
+>    ```
+> 3. **Oder das Repository auf privat stellen** — der einfachere Weg, wenn es
+>    ohnehin nicht öffentlich sein muss. Vercel funktioniert mit privaten
+>    Repositories genauso.
+>
+> **→ Devin-Entscheid 8.**
+
 ### Zwei weitere Bilder mit Hinweis auf Fremdherkunft — Entscheid nötig
 
 | Datei | EXIF | Status |
@@ -42,6 +77,26 @@ steht in den Metadaten kein fremder Copyright-Vermerk.
 Ebenfalls unbenutzt und trotzdem öffentlich abrufbar: `social-portrait-square.jpg`
 (1,4 MB) und `wingfoil-action-cremia.jpg` (14,1 MB, Sony ILCE-7M3). Alles in
 `public/` ist per URL erreichbar, auch wenn es nirgends eingebunden ist.
+
+### Kamera-Seriennummern in veröffentlichten Bildern
+
+In vier öffentlich abrufbaren Dateien stehen Geräte-Seriennummern in den
+EXIF-Daten: `DSCF0482.jpg`, `DSCF0515.jpg`, `hero-test-dscf0410.jpg` und
+`og-image.jpg` (`BodySerialNumber: 9CQ07246`, `LensSerialNumber: 95A01562`).
+**GPS-Daten wurden in keinem Bild gefunden** — das ist die wichtigere Prüfung,
+und sie ist sauber.
+
+Eine Seriennummer ist kein dramatisches Datenleck, aber sie verknüpft alle
+Bilder derselben Kamera über Websites hinweg. Entfernen ist verlustfrei
+möglich und dauert eine Minute — hier nicht gemacht, weil `exiftool` in dieser
+Umgebung nicht verfügbar war:
+
+```bash
+brew install exiftool
+exiftool -BodySerialNumber= -LensSerialNumber= -gps:all= -overwrite_original public/images/*.jpg
+```
+
+Das ändert nur die Web-Kopien im Repository, nie die Originale.
 
 ---
 
@@ -134,6 +189,75 @@ geprüften Varianten — von niemandem.
   beim Seitenaufbau; das untere lag weit unterhalb des ersten Bildschirms und
   verschlechterte damit genau die Kennzahl, die das Hero-Bild verbessern soll.
 - **`Highlights.tsx`** — SailingEnergy-Bild entfernt (siehe oben).
+- **`AlbumGallery.tsx`** — Fokusfalle in der Lightbox.
+- **Alle acht Unterseiten** — Titel ohne eigenes Markensuffix (siehe unten).
+
+---
+
+## Die Gegenprüfung — und was sie an mir gefunden hat
+
+Drei unabhängige Prüfungen gegen den fertigen Branch: eine auf SEO, eine auf
+Bildrechte und Privacy, eine als vier verschiedene Besucher (Sponsorin,
+Journalist, 14-Jährige, Handy im Zug). Alle drei mit dem Auftrag zu widerlegen,
+nicht zu bestätigen. Sie haben elf echte Fehler gefunden, davon fünf in Code,
+den ich in derselben Nacht geschrieben hatte. Alle sind behoben; der Commit
+`63a0e87` hält jeden einzeln fest. Die vier, die zählen:
+
+> **Der Titel wäre auf jeder Unterseite doppelt gewesen.**
+> Das neue Titel-Template hängt „| Devin Hauser" automatisch an. Alle acht
+> Unterseiten hängten es zusätzlich selbst an — „Imprint | Devin Hauser |
+> Devin Hauser", im Browser-Tab und in der Google-Ergebnisliste. Vier dieser
+> Seiten waren vorher fehlerfrei; mein Branch hätte sie kaputt gemacht. Kein
+> Build-Fehler hätte das gezeigt. Das ist die Art Fehler, die genau ein
+> Zeichen von einer Verbesserung entfernt liegt.
+
+> **Ein Albumtitel hätte Code auf der Seite ausführen können.**
+> `JSON.stringify` maskiert `<` nicht. Eine Bildunterschrift mit `</script`
+> hätte den Markup-Block beendet und den Rest als echtes HTML ins Dokument
+> gestellt. Behoben mit `jsonLdHtml()`, geprüft mit einer präparierten
+> Zeichenkette.
+
+> **Das Rechtemodell schützte den Knopf, nicht das Bild.**
+> `canDownload()` war korrekt. Aber Vorschaubild und Bildersuche-Markup
+> wurden unabhängig von der Rechteklasse gesetzt — und beim Teilen eines Links
+> legt jede Plattform eine eigene Kopie des Vorschaubilds an. Für fremdes
+> Material war das genau der Fall, den das Modell verhindern soll.
+
+> **Die Galerie wäre unauffindbar geblieben.**
+> Indexierung und Sitemap schalteten beim ersten Album automatisch um. Die
+> Navigation nicht — sie war eine feste Liste. Die ganze Media Library wäre
+> gebaut, aber nirgends verlinkt gewesen.
+
+Dazu, aus der Nutzerprüfung: **auf dem Handy gab es gar keine Navigation.** Die
+Links liegen in einem Container, der unter 768 px versteckt ist, und ein
+Burger-Menü existiert nicht. Auf einem Telefon blieb nur der Contact-Knopf —
+und `/iqfoil` war damit überhaupt nicht erreichbar. Jetzt gibt es eine zweite,
+horizontal scrollbare Zeile. Ohne JavaScript.
+
+Die Nutzerprüfung hat zusätzlich zehn Punkte gefunden, die **nicht** aus diesem
+Sprint stammen und die ich bewusst nicht angefasst habe — sie betreffen
+bestehende Entscheidungen der Seite, nicht die Suchsichtbarkeit:
+
+- Das „Partner Portal" verspricht Reichweitenzahlen und liefert ein Formular
+  mit vier Feldern und dem Hinweis, dass jede Anfrage manuell geprüft wird.
+  Eine Sponsorin mit 90 Sekunden füllt das nicht aus. **Irgendeine echte,
+  nicht erfundene Zahl gehört öffentlich auf die Seite.**
+- Die Kontaktadresse ist eine Gmail-Adresse auf einer eigenen Domain.
+- „Let's Connect" ist der auffälligste Knopf der Seite und führt zur
+  Sponsorenwand, nicht zu einem Kontaktweg.
+- Die Vokabeln „Brand Visibility", „Content & Storytelling", „Product
+  Integration", „Custom Partnerships" lesen sich wie ein Agentur-Menü. Wer
+  schnell liest, liest nur Überschriften — und die sagen gerade nicht
+  „Athlet".
+- „Die vollständige Resultatliste wird intern geführt" ist eine Sackgasse ohne
+  anklickbaren Anschluss.
+- Ankernamen sind deutsch (`#ueber-mich`, `#kontakt`) auf einer sonst
+  englischen Seite; sie werden in geteilten Links sichtbar.
+- `text-graphite/60` und `/70` liegen unter der Kontrastgrenze und stehen
+  ausgerechnet unter den Resultatzeilen und den Formularfeldern.
+- Fokusrahmen sind nur auf einem Teil der Seite definiert.
+
+Diese Liste ist der Ausgangspunkt für die nächste Runde, nicht für diese.
 
 ---
 
@@ -173,8 +297,23 @@ npm run dev
 | 5 | Navigation von einer Unterseite aus testen | `/iqfoil` → „About" |
 | 6 | Mobil durchscrollen (Gerät oder 390 px) | alles |
 | 7 | 404 prüfen | `/gibtsnicht` |
+| 8 | **Browser-Tab-Titel auf einer Unterseite** — genau einmal „Devin Hauser" | `/imprint` |
+| 9 | Handy-Navigation: zweite Zeile unter der Kopfzeile, scrollbar | 390 px |
 
-Danach: die sieben Entscheide unten, dann Merge und Deploy.
+Danach: die acht Entscheide unten, dann Merge und Deploy.
+
+**Was in dieser Umgebung nicht geprüft werden konnte:** `npm run build`,
+`npm run lint` und `tsc --noEmit` waren nicht ausführbar — die npm-Registry ist
+hier vollständig blockiert (403 auf jedes Paket, auch `typescript` und `next`).
+Ersatzweise geprüft wurde: die Rechtelogik mit 8 Zusicherungen und der Loader
+gegen 8 präparierte Album-Dateien, beides direkt gegen die echten Quelldateien
+ausgeführt; die JSON-LD-Maskierung mit 7 Zusicherungen; dazu eine statische
+Prüfung über 21 geänderte Dateien (Klammerbilanz, jeder interne Link gegen die
+tatsächlich existierenden Routen, jeder Sprunganker gegen die tatsächlich
+vergebenen IDs, jeder Bildpfad gegen die Platte, keine Client-Komponente in
+einer `node:fs`-Kette, GA4-ID und Web3Forms-Key unverändert). **Ergebnis: keine
+Befunde.** Der erste echte Build ist trotzdem Schritt eins am Morgen — eine
+statische Prüfung ersetzt keinen Compiler.
 
 ---
 
@@ -189,6 +328,7 @@ Danach: die sieben Entscheide unten, dann Merge und Deploy.
 | **5** | Erstes Album: welches Material ist **von Devin selbst** und darf heruntergeladen werden? | ein Album reicht, um `/media` scharf zu schalten |
 | **6** | Download-Bedingungen für eigene Bilder: „frei für privaten Gebrauch mit Credit, kommerziell auf Anfrage"? | ja — steht so im Code, muss aber freigegeben werden |
 | **7** | Newsletter — bleibt „coming soon"? | ja, bis zehn YouTube-Videos veröffentlicht sind |
+| **8** | **Git-Historie: das Cádiz-Bild bereinigen, Repository auf privat stellen — oder so lassen?** | zuerst deployen (das nimmt es von der Website), dann in Ruhe entscheiden |
 
 ---
 
