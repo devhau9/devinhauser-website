@@ -7,7 +7,11 @@ Status: **Version 1 live**, seit 10.08.2026 um eine Erklärseite (`/iqfoil`) und
 Media Library (`/media`) erweitert.
 
 ## Domain
-devinhauser.com — registriert bei Hosttech.
+Öffentliche Markenadresse: **https://www.devinhauser.com** (Entscheid 19.08.2026).
+`devinhauser.com` (Apex) und der stabile Produktionshost auf vercel.app leiten
+per 308 auf die www-Form weiter (siehe `next.config.mjs`). Registriert bei
+Hosttech. Preview-Deployments bleiben direkt erreichbar und sind bei Vercel
+standardmässig auf noindex.
 
 ## Lokal starten
 

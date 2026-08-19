@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Copyright",
   description:
-    "Copyright and usage terms for text, images, video and logos published on devinhauser.com.",
+    "Copyright and usage terms for text, images, video and logos published on www.devinhauser.com.",
   alternates: {
     canonical: "/copyright",
   },
@@ -30,7 +30,7 @@ export default function CopyrightPage() {
             <h2 className={SECTION_HEADING}>Ownership</h2>
             <p className={BODY_TEXT}>
               Unless otherwise noted, all text, photography, video and
-              design elements published on devinhauser.com are either the
+              design elements published on www.devinhauser.com are either the
               property of Devin Hauser or used with permission from the
               respective rights holder (e.g. photographers, videographers).
               Nothing on this site may be reproduced, distributed,

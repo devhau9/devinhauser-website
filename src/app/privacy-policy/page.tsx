@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Privacy Policy for devinhauser.com — how Devin Hauser collects, uses and protects visitor data, including Google Analytics, cookies, contact channels and the Partner Portal.",
+    "Privacy Policy for www.devinhauser.com — how Devin Hauser collects, uses and protects visitor data, including Google Analytics, cookies, contact channels and the Partner Portal.",
   alternates: {
     canonical: "/privacy-policy",
   },
@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <p className={BODY_TEXT}>
-            This Privacy Policy explains how devinhauser.com (&ldquo;this
+            This Privacy Policy explains how www.devinhauser.com (&ldquo;this
             website&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) collects,
             uses and protects information about visitors. It is written to
             reflect exactly how the site currently works — not a planned
@@ -89,7 +89,7 @@ export default function PrivacyPolicyPage() {
             <h2 className={SECTION_HEADING}>Hosting</h2>
             <p className={BODY_TEXT}>
               This website is built with Next.js and hosted on Vercel Inc.
-              (San Francisco, USA), with the domain devinhauser.com
+              (San Francisco, USA), with the domain www.devinhauser.com
               registered and managed through Hosttech GmbH (Switzerland).
               When you visit this website, your device automatically
               sends technical information to the hosting infrastructure —
@@ -131,7 +131,7 @@ export default function PrivacyPolicyPage() {
                 You can change your decision at any time by clearing your
                 browser&rsquo;s local storage for this site (in most
                 browsers: site settings → cookies and site data → delete
-                for devinhauser.com), which will show the banner again on
+                for www.devinhauser.com), which will show the banner again on
                 your next visit. There is currently no separate
                 &ldquo;change cookie settings&rdquo; link elsewhere on the
                 site — this browser-level reset is the way to update your

@@ -6,15 +6,16 @@
  * das eine spätere Aufräumarbeit sei. Diese Datei ist genau diese Aufräumarbeit:
  * eine Quelle, drei Verbraucher.
  *
- * WICHTIG — Domainform: Kanonisch ist die Nicht-www-Form `https://devinhauser.com`,
- * exakt wie bisher im Code verwendet. Das ist bewusst NICHT geändert worden:
- * Ein Wechsel auf www würde alle bestehenden Canonicals umschreiben und wäre
- * ohne Prüfung der tatsächlichen Host-Weiterleitung ein Risiko. Falls die
- * Produktion auf `www.` weiterleitet, ist der Wechsel hier eine Einzeiler-
- * Änderung — siehe Morning-Review-Punkt "Domainform".
+ * WICHTIG — Domainform: Kanonisch ist seit dem 19.08.2026 die www-Form
+ * `https://www.devinhauser.com` (Entscheid Devin, Launch-Sprint 19.08.2026).
+ * Die Apex-Domain `devinhauser.com` und der stabile vercel.app-Produktions-
+ * host leiten per 308 hierher — siehe redirects() in next.config.mjs.
+ * Voraussetzung im Vercel-Dashboard: beide Domains dem Projekt zugewiesen,
+ * `www.devinhauser.com` als Primärdomain. Preview-Deployments sind von den
+ * Redirects nicht betroffen (exakte Host-Matches, kein Wildcard).
  */
 
-export const SITE_URL = "https://devinhauser.com";
+export const SITE_URL = "https://www.devinhauser.com";
 
 export const SITE_NAME = "Devin Hauser";
 
@@ -74,7 +75,7 @@ export function jsonLdHtml(data: unknown): string {
  * neu gesetztes Datum behauptet, der Inhalt habe sich geändert, obwohl nur neu
  * gebaut wurde. Beim Ändern eines Textes hier mitpflegen.
  */
-export const CONTENT_UPDATED = "2026-08-10";
+export const CONTENT_UPDATED = "2026-08-19";
 
 /**
  * schema.org Person — nur gesicherte, öffentlich belegbare Angaben.
@@ -94,12 +95,14 @@ export const PERSON_JSON_LD = {
     "Swiss IQFoil and Wingfoil racing athlete. IQFoil is the Olympic windsurfing class.",
   nationality: { "@type": "Country", name: "Switzerland" },
   height: { "@type": "QuantitativeValue", value: 178, unitCode: "CMT" },
+  // Öffentliche Ortsangabe seit 19.08.2026 bewusst auf Stadt-/Regionsebene
+  // (Entscheid Devin: keine Wohngemeinde, keine Privatadresse auf der Website).
   homeLocation: {
     "@type": "Place",
-    name: "Buchs ZH, Switzerland",
+    name: "Zurich, Switzerland",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Buchs ZH",
+      addressLocality: "Zurich",
       addressCountry: "CH",
     },
   },

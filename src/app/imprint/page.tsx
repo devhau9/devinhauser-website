@@ -3,19 +3,26 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Imprint",
   description:
-    "Legal imprint / Impressum for devinhauser.com, operated by Devin Hauser, Swiss IQFoil & Wingfoil Racing Athlete.",
+    "Legal imprint / Impressum for www.devinhauser.com, operated by Devin Hauser, Swiss IQFoil & Wingfoil Racing Athlete.",
   alternates: {
     canonical: "/imprint",
   },
 };
 
-// Hinweis für Devin: Die Impressumsadresse ist von dir am 03.08.2026
-// ausdrücklich bestätigt und exakt in der gelieferten Schreibweise
-// eingesetzt worden — nichts ergänzt, nichts abgeleitet, nichts erfunden.
-// Damit ist der zentrale offene Blocker aus dem Post-Launch-Cleanup
-// geschlossen. Telefonnummer wurde entfernt (optional, keine bestätigt),
-// Handelsregister-Feld auf "privat, nicht eingetragen" gesetzt (bestätigter
-// Status), E-Mail-Hinweis "provisorisch" entfernt.
+// PRIVATSPHÄRE-ENTSCHEID 19.08.2026 (Devin, Launch-Sprint): Die private
+// Wohnadresse (Strasse, Hausnummer, Wohngemeinde) steht nicht mehr öffentlich
+// im Impressum. Minimale, seriöse Variante: Name, Rolle, "Zurich,
+// Switzerland", gültige E-Mail, Postadresse auf Anfrage.
+//
+// RECHTLICH ZU PRÜFEN (bewusst offen markiert, keine Rechtsberatung):
+// Art. 3 Abs. 1 lit. s UWG verlangt bei elektronischen *Angeboten von Waren,
+// Werken oder Leistungen* klare Angaben zur Identität und Kontaktadresse.
+// Ob eine persönliche Athleten-Website ohne Shop/Bestellmöglichkeit darunter
+// fällt, ist auslegungsbedürftig. Falls später ein kommerzielles Angebot
+// (z. B. Media-Services-Bestellung) auf dieser Domain läuft, braucht es
+// wieder eine ladungsfähige Adresse — dann z. B. Postfach oder
+// Geschäftsadresse statt Privatwohnung. Bis dahin gilt diese minimale
+// Variante.
 
 const SECTION_HEADING =
   "font-display text-2xl tracking-wide text-ink sm:text-3xl";
@@ -44,11 +51,11 @@ export default function ImprintPage() {
               <br />
               Swiss IQFoil &amp; Wingfoil Racing Athlete
               <br />
-              Wolfackerstrasse 5
-              <br />
-              8107 Buchs ZH
-              <br />
-              Switzerland
+              Zurich, Switzerland
+            </p>
+            <p className={BODY_TEXT}>
+              A postal address for legal correspondence is available on
+              request via the email below.
             </p>
           </div>
 
@@ -69,7 +76,7 @@ export default function ImprintPage() {
             <h2 className={SECTION_HEADING}>Responsible For Content</h2>
             <p className={BODY_TEXT}>
               Devin Hauser is solely responsible for the content published
-              on devinhauser.com.
+              on www.devinhauser.com.
             </p>
           </div>
 

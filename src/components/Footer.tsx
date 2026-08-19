@@ -67,7 +67,7 @@ const SOCIAL_LINKS = [
 ];
 
 // Vorläufige Kontakt-E-Mail — als eigene Konstante ausgelagert, damit sie
-// später durch eine professionelle Adresse unter devinhauser.com ersetzt
+// später durch eine professionelle Adresse unter www.devinhauser.com ersetzt
 // werden kann, ohne den Rest der Komponente anzufassen.
 const CONTACT_EMAIL = "devinhauser9@gmail.com";
 
@@ -92,7 +92,7 @@ export default function Footer() {
                 Swiss IQFoil &amp; Wingfoil Racer
               </p>
               <p className="font-body text-sm text-graphite">
-                Buchs ZH, Switzerland
+                Zurich, Switzerland
               </p>
               <p className="font-mono text-sm uppercase tracking-widest2 text-ink">
                 Road to the Olympic Games

@@ -11,8 +11,9 @@ const STECKBRIEF = [
   { label: "Sports", value: "IQFoil, Wingfoil" },
   { label: "Height", value: "178 cm" },
   { label: "Weight", value: "87 kg" },
-  // Praezisiert 07.08.2026 gemaess Entscheid D1 = C ("from Buchs ZH, Switzerland").
-  { label: "Location", value: "Buchs ZH, Switzerland" },
+  // Oeffentliche Ortsangabe seit 19.08.2026: Stadt-/Regionsebene statt
+  // Wohngemeinde (Entscheid Devin, Launch-Sprint — ersetzt D1 = C vom 07.08.).
+  { label: "Location", value: "Zurich, Switzerland" },
   { label: "Home Spot", value: "Silvaplana" },
   { label: "Sail Number", value: "SUI-134" },
   { label: "Club", value: "RVZS / DRCS" },
