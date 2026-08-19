@@ -1,5 +1,9 @@
 # SEO- und Media-Sprint — 10.08.2026
 
+> **Historical audit from 10.08.2026. Domain decision superseded on 19.08.2026:
+> canonical public domain is `https://www.devinhauser.com`.**
+> Alle devinhauser.com-Nennungen unten sind der damalige Stand.
+
 Branch: `seo-media-growth-2026-08-10` · Basis: `a5a12e0` auf `main`
 **Nichts wurde deployed. Nichts wurde nach `main` gemerged. Nichts wurde versendet.**
 

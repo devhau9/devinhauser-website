@@ -90,7 +90,7 @@ export default function SocialMedia() {
             MEDIA &amp; CONTENT
           </h2>
           <p className="mt-6 max-w-xl leading-relaxed text-graphite">
-            I'm not only an athlete — I'm a creator. I document the journey
+            I&apos;m not only an athlete — I&apos;m a creator. I document the journey
             behind the racing myself: training, competitions, preparation and
             everything that happens behind professional sailing.
           </p>

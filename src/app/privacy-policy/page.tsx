@@ -70,8 +70,8 @@ export default function PrivacyPolicyPage() {
             <p className={BODY_TEXT}>
               This website is operated by Devin Hauser, Swiss IQFoil &amp;
               Wingfoil Racing Athlete, based in the Canton of Zurich,
-              Switzerland. Full legal and postal contact details are
-              published on the{" "}
+              Switzerland. Contact information, including the contact email
+              address, is available on the{" "}
               <a
                 href="/imprint"
                 className="text-ink underline underline-offset-2 transition-colors hover:text-red"

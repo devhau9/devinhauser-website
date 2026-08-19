@@ -40,8 +40,7 @@ export default function ImprintPage() {
             IMPRINT
           </h1>
           <p className={BODY_TEXT}>
-            Legal notice pursuant to Swiss law (Art. 3 lit. s of the Swiss
-            Federal Act Against Unfair Competition, UWG).
+            Legal notice and contact information for this website.
           </p>
 
           <div className={SECTION_WRAPPER}>

@@ -4,7 +4,8 @@ Status: leer, wartet auf Content-Sichtung
 
 ## Benötigt
 - Kurzbiografie / Story-Text: [PRÜFEN] aus Sponsoring-Dossier übernehmen
-- Herkunft: Buchs ZH, Trainingsbasis Silvaplana
+- Herkunft (öffentliche Angabe): Zürich, Schweiz — Trainingsbasis Silvaplana
+  *(Entscheid 19.08.2026: keine Wohngemeinde öffentlich; englische Live-Site: "Zurich, Switzerland")*
 - Weg zum Leistungssport
 - Werte / Mentalität
 - Bezug zum Swiss Sailing Team

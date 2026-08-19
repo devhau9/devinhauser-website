@@ -78,7 +78,7 @@ export default function Hero() {
               href="#partner"
               className="rounded-sm bg-red px-7 py-3.5 text-center font-mono text-xs uppercase tracking-widest2 text-paper transition-transform hover:-translate-y-0.5"
             >
-              Let's Connect
+              Let&apos;s Connect
             </a>
           </div>
         </div>

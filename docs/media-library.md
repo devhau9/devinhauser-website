@@ -14,7 +14,7 @@ keine Datenbank. Nach dem Export der Bilder dauert ein Album rund 15 Minuten.
 3. **Rechte setzen** — siehe „Rechte" unten. Im Zweifel `"restricted"`.
 4. **Lokal prüfen:** `npm run dev` → `http://localhost:3000/media/<slug>`
 5. **Bauen:** `npm run build` — muss fehlerfrei durchlaufen.
-6. **Deployen und Link teilen:** `https://devinhauser.com/media/<slug>`
+6. **Deployen und Link teilen:** `https://www.devinhauser.com/media/<slug>`
 
 Ein Album erscheint automatisch auf `/media`, in der Navigation und in der
 Sitemap. Solange kein einziges Album existiert, ist `/media` bewusst auf
