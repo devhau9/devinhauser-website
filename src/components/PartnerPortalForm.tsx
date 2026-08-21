@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import type { Lang } from "@/lib/i18n";
 
 // Web3Forms: kostenloser Formular-Service ohne eigenes Backend (250
 // Einreichungen/Monat gratis, Stand 22.07.2026 laut web3forms.com). Der
@@ -15,8 +16,61 @@ const WEB3FORMS_ACCESS_KEY = "9b95458b-aa64-4bfa-8a20-b9640fc76186";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
-export default function PartnerPortalForm() {
+const COPY: Record<
+  Lang,
+  {
+    subject: (company: string) => string;
+    unknownCompany: string;
+    successTitle: string;
+    successText: string;
+    firstName: string;
+    lastName: string;
+    company: string;
+    email: string;
+    errorLead: string;
+    errorMailPrefix: string;
+    submit: string;
+    submitting: string;
+    note: string;
+  }
+> = {
+  de: {
+    subject: (company) => `Neue Anfrage Partner-Portal — ${company}`,
+    unknownCompany: "Firma unbekannt",
+    successTitle: "Danke.",
+    successText: "Ihre Anfrage ist eingegangen und wird geprüft.",
+    firstName: "Vorname",
+    lastName: "Nachname",
+    company: "Firma / Organisation",
+    email: "E-Mail-Adresse",
+    errorLead: "Da ist etwas schiefgelaufen. Bitte noch einmal versuchen — oder direkt schreiben an",
+    errorMailPrefix: "",
+    submit: "Zugang anfragen",
+    submitting: "Wird gesendet…",
+    note: "Jede Anfrage wird persönlich geprüft. Der Zugang wird nicht automatisch erteilt.",
+  },
+  en: {
+    subject: (company) => `New Partner Portal request — ${company}`,
+    unknownCompany: "unknown company",
+    successTitle: "Thank you.",
+    successText: "Your request has been received and will be reviewed.",
+    firstName: "First Name",
+    lastName: "Last Name",
+    company: "Company / Organisation",
+    email: "Email Address",
+    errorLead: "Something went wrong. Please try again, or write directly to",
+    errorMailPrefix: "",
+    submit: "Request Access",
+    submitting: "Sending…",
+    note: "Every request is reviewed personally. Access is not granted automatically.",
+  },
+};
+
+const CONTACT_EMAIL = "devinhauser9@gmail.com";
+
+export default function PartnerPortalForm({ lang }: { lang: Lang }) {
   const [state, setState] = useState<SubmitState>("idle");
+  const c = COPY[lang];
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -26,7 +80,7 @@ export default function PartnerPortalForm() {
     formData.append("access_key", WEB3FORMS_ACCESS_KEY);
     formData.append(
       "subject",
-      `New Partner Portal request — ${formData.get("company") ?? "unknown company"}`
+      c.subject(String(formData.get("company") ?? c.unknownCompany))
     );
 
     try {
@@ -46,11 +100,9 @@ export default function PartnerPortalForm() {
     return (
       <div className="card-surface mt-10 p-8 sm:p-10" role="status">
         <p className="font-display text-xl tracking-wide text-ink">
-          Thank you.
+          {c.successTitle}
         </p>
-        <p className="mt-2 leading-relaxed text-graphite">
-          Your request has been received and will be reviewed.
-        </p>
+        <p className="mt-2 leading-relaxed text-graphite">{c.successText}</p>
       </div>
     );
   }
@@ -80,7 +132,7 @@ export default function PartnerPortalForm() {
             htmlFor="firstName"
             className="font-mono text-xs uppercase tracking-widest2 text-graphite/70"
           >
-            First Name
+            {c.firstName}
           </label>
           <input
             id="firstName"
@@ -97,7 +149,7 @@ export default function PartnerPortalForm() {
             htmlFor="lastName"
             className="font-mono text-xs uppercase tracking-widest2 text-graphite/70"
           >
-            Last Name
+            {c.lastName}
           </label>
           <input
             id="lastName"
@@ -114,7 +166,7 @@ export default function PartnerPortalForm() {
             htmlFor="company"
             className="font-mono text-xs uppercase tracking-widest2 text-graphite/70"
           >
-            Company / Organization
+            {c.company}
           </label>
           <input
             id="company"
@@ -131,7 +183,7 @@ export default function PartnerPortalForm() {
             htmlFor="email"
             className="font-mono text-xs uppercase tracking-widest2 text-graphite/70"
           >
-            Email Address
+            {c.email}
           </label>
           <input
             id="email"
@@ -146,9 +198,9 @@ export default function PartnerPortalForm() {
 
       {state === "error" && (
         <p className="mt-4 text-sm text-red" role="alert">
-          Something went wrong. Please try again, or write directly to{" "}
-          <a href="mailto:devinhauser9@gmail.com" className="underline">
-            devinhauser9@gmail.com
+          {c.errorLead}{" "}
+          <a href={`mailto:${CONTACT_EMAIL}`} className="underline">
+            {CONTACT_EMAIL}
           </a>
           .
         </p>
@@ -159,13 +211,10 @@ export default function PartnerPortalForm() {
         disabled={state === "loading"}
         className="mt-8 rounded-sm bg-red px-7 py-3.5 font-mono text-xs uppercase tracking-widest2 text-white transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
       >
-        {state === "loading" ? "Sending…" : "Request Access"}
+        {state === "loading" ? c.submitting : c.submit}
       </button>
 
-      <p className="mt-4 text-xs italic text-graphite/70">
-        Every request is reviewed personally. Access is not granted
-        automatically.
-      </p>
+      <p className="mt-4 text-xs italic text-graphite/70">{c.note}</p>
     </form>
   );
 }

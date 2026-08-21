@@ -1,0 +1,19 @@
+// [NUR VERIFIKATIONS-CONTAINER] Google Fonts sind dort nicht erreichbar.
+//
+// Statt die Schriften wegzulassen (und Screenshots mit Systemschriften zu
+// erzeugen, die nichts ueber das echte Layout aussagen) werden hier dieselben
+// drei Schriften aus lokalen npm-Paketen geladen. Bebas Neue, Inter und
+// JetBrains Mono liegen als @fontsource-Pakete auf npm — der Container erreicht
+// npm, nur nicht fonts.googleapis.com.
+//
+// Wird von verify.sh temporaer an die Stelle von src/lib/fonts.ts kopiert und
+// danach wieder zurueckgetauscht. Gehoert NICHT in einen Produktions-Build:
+// Die Produktionsfassung laedt die Schriften ueber `next/font/google`, was
+// zusaetzlich Preload-Hinweise und selbst gehostete Dateien erzeugt.
+import "@fontsource/bebas-neue/400.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "./fonts.container.css";
+
+export const fontClassNames = "";

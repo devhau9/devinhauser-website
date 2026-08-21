@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { SVGProps } from "react";
+import { UI, localizedPath, type Lang } from "@/lib/i18n";
 
 // Marken-Icons: identisch zu src/components/SocialMedia.tsx übernommen,
 // damit Footer und Media-&-Content-Section exakt dieselbe Bildsprache
@@ -71,13 +72,57 @@ const SOCIAL_LINKS = [
 // werden kann, ohne den Rest der Komponente anzufassen.
 const CONTACT_EMAIL = "devinhauser9@gmail.com";
 
-const LEGAL_LINKS = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Imprint", href: "/imprint" },
-  { label: "Copyright", href: "/copyright" },
-];
+/**
+ * Rechtliche Seiten.
+ *
+ * Die PFADE bleiben in beiden Sprachen englisch (`/imprint`, `/privacy-policy`,
+ * `/copyright`) — nur mit `/en`-Praefix fuer die englische Fassung. Das ist
+ * dieselbe Entscheidung wie bei `/media`: Uebersetzte Pfadsegmente saehen
+ * huebscher aus, wuerden aber jede bestehende Verlinkung brechen und eine
+ * zweite Pfadtabelle noetig machen. In next.config.mjs liegt bereits eine
+ * 308-Weiterleitung von `/impressum` (alte .ch-Seite) auf `/imprint`.
+ */
+const LEGAL_PATHS = ["/privacy-policy", "/imprint", "/copyright"] as const;
 
-export default function Footer() {
+const COPY: Record<
+  Lang,
+  {
+    role: string;
+    location: string;
+    olympic: string;
+    contact: string;
+    follow: string;
+    legal: string;
+    legalLabels: [string, string, string];
+    rights: string;
+  }
+> = {
+  de: {
+    role: "IQFoil- und Wingfoil-Racer aus der Schweiz",
+    location: "Zürich, Schweiz",
+    olympic: "Der Weg zu den Olympischen Spielen",
+    contact: "Kontakt",
+    follow: "Meinem Weg folgen",
+    legal: "Rechtliches",
+    legalLabels: ["Datenschutz", "Impressum", "Urheberrecht"],
+    rights: "© 2026 Devin Hauser. Alle Rechte vorbehalten.",
+  },
+  en: {
+    role: "Swiss IQFoil & Wingfoil Racer",
+    location: "Zurich, Switzerland",
+    olympic: "Road to the Olympic Games",
+    contact: "Contact",
+    follow: "Follow My Journey",
+    legal: "Legal",
+    legalLabels: ["Privacy Policy", "Imprint", "Copyright"],
+    rights: "© 2026 Devin Hauser. All rights reserved.",
+  },
+};
+
+export default function Footer({ lang }: { lang: Lang }) {
+  const c = COPY[lang];
+  const t = UI[lang];
+
   return (
     <footer className="border-t border-hairline bg-mist">
       <div className="mx-auto max-w-content px-6 py-20 sm:px-10 sm:py-24 lg:px-24">
@@ -89,13 +134,11 @@ export default function Footer() {
             </p>
             <div className="mt-6 space-y-3">
               <p className="font-mono text-sm uppercase tracking-widest2 text-red">
-                Swiss IQFoil &amp; Wingfoil Racer
+                {c.role}
               </p>
-              <p className="font-body text-sm text-graphite">
-                Zurich, Switzerland
-              </p>
+              <p className="font-body text-sm text-graphite">{c.location}</p>
               <p className="font-mono text-sm uppercase tracking-widest2 text-ink">
-                Road to the Olympic Games
+                {c.olympic}
               </p>
             </div>
           </div>
@@ -103,7 +146,7 @@ export default function Footer() {
           {/* Spalte 2: Contact + Follow My Journey */}
           <div>
             <p className="font-mono text-xs uppercase tracking-widest2 text-graphite/70">
-              Contact
+              {c.contact}
             </p>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
@@ -113,7 +156,7 @@ export default function Footer() {
             </a>
 
             <p className="mt-8 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
-              Follow My Journey
+              {c.follow}
             </p>
             <div className="mt-4 flex gap-4">
               {SOCIAL_LINKS.map((social) => (
@@ -122,7 +165,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${social.name} (opens in a new tab)`}
+                  aria-label={`${social.name} (${t.newTab})`}
                   className="transition-transform duration-200 ease-out hover:scale-110"
                 >
                   <social.Icon className="h-8 w-8" />
@@ -134,16 +177,16 @@ export default function Footer() {
           {/* Spalte 3: Legal */}
           <div>
             <p className="font-mono text-xs uppercase tracking-widest2 text-graphite/70">
-              Legal
+              {c.legal}
             </p>
             <ul className="mt-3 space-y-2">
-              {LEGAL_LINKS.map((link) => (
-                <li key={link.href}>
+              {LEGAL_PATHS.map((path, index) => (
+                <li key={path}>
                   <Link
-                    href={link.href}
+                    href={localizedPath(path, lang)}
                     className="text-graphite transition-colors hover:text-red"
                   >
-                    {link.label}
+                    {c.legalLabels[index]}
                   </Link>
                 </li>
               ))}
@@ -154,7 +197,7 @@ export default function Footer() {
         {/* Copyright — ganz unten, eigene Zeile */}
         <div className="mt-14 border-t border-hairline pt-6">
           <p className="font-mono text-xs uppercase tracking-widest2 text-graphite/70">
-            © 2026 Devin Hauser. All rights reserved.
+            {c.rights}
           </p>
         </div>
       </div>

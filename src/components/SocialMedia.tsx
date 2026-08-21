@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { SVGProps } from "react";
+import { SECTION_ID, UI, localizedPath, type Lang } from "@/lib/i18n";
 
 // Marken-Icons: Iconformen unverändert aus den bisherigen, gemeinfreien
 // Simple-Icons-Pfaddaten übernommen — nur die Füllung von "currentColor"
@@ -74,32 +75,95 @@ const CHANNELS = [
   },
 ];
 
-export default function SocialMedia() {
+/**
+ * Social Media & Content.
+ *
+ * ═════════════════════════════════════════════════════════════════════════════
+ * TRENNUNG VON SOCIAL MEDIA UND GALERIE (Vorgabe 21.08.2026)
+ * ═════════════════════════════════════════════════════════════════════════════
+ * Diese Sektion hiess in der Überschrift „MEDIA & CONTENT" und war damit von
+ * der Bildergalerie unter /media sprachlich nicht zu unterscheiden. Zwei
+ * verschiedene Dinge trugen praktisch denselben Namen: hier die laufenden
+ * Kanäle, dort die kuratierten Alben. Wer „Media" las, konnte beides meinen.
+ *
+ * Jetzt ist die Zuständigkeit eindeutig:
+ *   • DIESE Sektion  = die Kanäle und die Content-Kompetenz (Social Media)
+ *   • GalleryTeaser + /media = die Bilder selbst (Galerie)
+ * Beide verlinken aufeinander, aber keine der beiden behauptet, die andere zu
+ * sein. Es gibt weiterhin nur EIN Galeriesystem — die Media Library.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * REIHENFOLGE DER AUSSAGEN
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Vorgegeben und bewusst eingehalten: IQFoil → Wingfoil Racing →
+ * Content-Kompetenz → Kooperationen. Der Sport steht zuerst, die
+ * Medienkompetenz ist der Unterschied, die Zusammenarbeit ist die Folge —
+ * nicht umgekehrt.
+ */
+
+const COPY: Record<
+  Lang,
+  {
+    eyebrow: string;
+    heading: string;
+    paragraphs: string[];
+    galleryLink: string;
+    portalText: string;
+    portalCta: string;
+  }
+> = {
+  de: {
+    eyebrow: "Social Media",
+    heading: "SOCIAL MEDIA & CONTENT",
+    paragraphs: [
+      "Zuerst der Sport: Ich fahre IQFoil, die olympische Windsurf-Klasse, und starte zusätzlich im Wingfoil Racing.",
+      "Was rund um das Racing entsteht, mache ich selbst — Fotos, Videos, Drohnenaufnahmen und die Geschichten dahinter: Training, Wettkämpfe, Vorbereitung, Reisen.",
+      "Für Partner heisst das: echte Inhalte aus dem Wettkampfalltag statt reiner Logo-Präsenz — und eine Zusammenarbeit, die zu beiden Seiten passt.",
+    ],
+    galleryLink: "Die kuratierten Bilder liegen in der Galerie",
+    portalText:
+      "Sie suchen genaue Reichweiten, Zielgruppendaten oder Content-Möglichkeiten? Die Details gibt es über das Partner-Portal.",
+    portalCta: "Partner-Portal",
+  },
+  en: {
+    eyebrow: "Social Media",
+    heading: "SOCIAL MEDIA & CONTENT",
+    paragraphs: [
+      "The sport comes first: I race IQFoil, the Olympic windsurfing class, and I also compete in Wingfoil Racing.",
+      "Everything that happens around the racing, I create myself — photography, video, drone footage and the stories behind it: training, competitions, preparation, travel.",
+      "For partners that means real content from a racing season rather than logo visibility alone — and a partnership that works for both sides.",
+    ],
+    galleryLink: "The curated photos live in the gallery",
+    portalText:
+      "Looking for detailed reach, audience insights or content opportunities? Access the details through the Partner Portal.",
+    portalCta: "Partner Portal",
+  },
+};
+
+export default function SocialMedia({ lang }: { lang: Lang }) {
+  const c = COPY[lang];
+  const t = UI[lang];
+
   return (
-    <section id="social-media" className="section-pad bg-mist">
+    <section id={SECTION_ID.social} className="section-pad bg-mist">
       {/* Bild bewusst entfernt — aktuell kein passendes echtes Creator-/
-          Behind-the-Scenes-Foto vorhanden (das frühere grafische Rider-Poster
-          passte nicht zum cleanen Stil und nicht zur "Athlete + Creator"-
-          Aussage). Section deshalb ohne leeren Bildplatz einspaltig
-          ausgerichtet; Text und Kanäle nutzen die volle Breite. Ein echtes
-          Creator-Foto kann hier später wieder ergänzt werden. */}
+          Behind-the-Scenes-Foto vorhanden. Section deshalb ohne leeren
+          Bildplatz einspaltig ausgerichtet. */}
       <div className="mx-auto max-w-content">
         <div className="min-w-0">
-          <p className="eyebrow mb-5">Social Media &amp; Content</p>
+          <p className="eyebrow mb-5">{c.eyebrow}</p>
           <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
-            MEDIA &amp; CONTENT
+            {c.heading}
           </h2>
-          <p className="mt-6 max-w-xl leading-relaxed text-graphite">
-            I&apos;m not only an athlete — I&apos;m a creator. I document the journey
-            behind the racing myself: training, competitions, preparation and
-            everything that happens behind professional sailing.
-          </p>
-          <p className="mt-4 max-w-xl leading-relaxed text-graphite">
-            Photography, video, drone footage and behind-the-scenes
-            storytelling — I create it all. For partners, that means access to
-            high-quality content and authentic stories, not just logo
-            visibility.
-          </p>
+
+          {c.paragraphs.map((text, index) => (
+            <p
+              key={text.slice(0, 24)}
+              className={`max-w-xl leading-relaxed text-graphite ${index === 0 ? "mt-6" : "mt-4"}`}
+            >
+              {text}
+            </p>
+          ))}
 
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             {CHANNELS.map((channel) => (
@@ -108,7 +172,7 @@ export default function SocialMedia() {
                 href={channel.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${channel.name} — ${channel.handle} (opens in a new tab)`}
+                aria-label={`${channel.name} — ${channel.handle} (${t.newTab})`}
                 className="card-surface group block p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_1px_2px_rgba(10,14,20,0.06),0_28px_60px_-28px_rgba(10,14,20,0.24)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
               >
                 <channel.Icon className="h-7 w-7 transition-transform duration-200 ease-out group-hover:scale-110" />
@@ -122,20 +186,25 @@ export default function SocialMedia() {
             ))}
           </div>
 
-          {/* Ruhiger Partner-Portal-Hinweis statt Follower-/Insight-Zahlen —
-              unverändert, gleiche interne Route wie in der Partner-Section. */}
-          <div className="mt-10 flex flex-col items-start gap-4 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-graphite">
-              Looking for detailed reach, audience insights or content
-              opportunities?
-              <br />
-              Access detailed information through the Partner Portal.
-            </p>
+          {/* Eindeutige Brücke zur Galerie — die Trennung wird hier auch für
+              Leserinnen und Leser sichtbar, nicht nur in der Navigation. */}
+          <p className="mt-8">
             <Link
-              href="/partner-portal"
+              href={localizedPath("/media", lang)}
+              className="font-mono text-xs uppercase tracking-widest2 text-ink underline decoration-black/20 underline-offset-[6px] transition-colors hover:text-red"
+            >
+              {c.galleryLink}
+            </Link>
+          </p>
+
+          {/* Ruhiger Partner-Portal-Hinweis statt Follower-/Insight-Zahlen. */}
+          <div className="mt-10 flex flex-col items-start gap-4 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-xl text-graphite">{c.portalText}</p>
+            <Link
+              href={localizedPath("/partner-portal", lang)}
               className="shrink-0 rounded-sm bg-red px-6 py-3 text-center font-mono text-xs uppercase tracking-widest2 text-white transition-transform hover:-translate-y-0.5"
             >
-              Partner Portal
+              {c.portalCta}
             </Link>
           </div>
         </div>

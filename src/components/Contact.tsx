@@ -1,32 +1,54 @@
 import Image from "next/image";
+import { SECTION_ID, type Lang } from "@/lib/i18n";
 
-export default function Contact() {
+const CONTACT_EMAIL = "devinhauser9@gmail.com";
+const INSTAGRAM_HANDLE = "@devin.hauser_";
+
+const COPY: Record<
+  Lang,
+  { eyebrow: string; heading: string; lead: string; portraitAlt: string }
+> = {
+  de: {
+    eyebrow: "Kontakt",
+    heading: "LASS UNS REDEN",
+    lead: "Für Sponsoring-, Medien- oder Partnerschaftsanfragen bin ich direkt per E-Mail oder auf Instagram erreichbar. Ich bin offen für neue Partnerschaften und für Geschichten, die es wert sind, erzählt zu werden.",
+    portraitAlt: "Devin Hauser, Schwarzweiss-Porträt",
+  },
+  en: {
+    eyebrow: "Contact",
+    heading: "LET'S TALK",
+    lead: "For sponsorship, media or partnership enquiries, I'm reachable directly by email or on Instagram. I'm always open to new partnerships and stories worth telling.",
+    portraitAlt: "Devin Hauser, black and white portrait",
+  },
+};
+
+export default function Contact({ lang }: { lang: Lang }) {
+  const c = COPY[lang];
+
   return (
-    <section id="kontakt" className="section-pad bg-white">
+    <section id={SECTION_ID.contact} className="section-pad bg-white">
       <div className="mx-auto grid max-w-content gap-16 md:grid-cols-[1.3fr,1fr] md:items-center md:gap-16 lg:gap-24">
         <div className="min-w-0">
-          <p className="eyebrow mb-5">Contact</p>
+          <p className="eyebrow mb-5">{c.eyebrow}</p>
           <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
-            LET&apos;S TALK
+            {c.heading}
           </h2>
-          <p className="mt-6 max-w-xl leading-relaxed text-graphite">
-            For sponsorship, media or partnership enquiries, I&apos;m reachable
-            directly by email or on Instagram. I&apos;m always open to new
-            partnerships and stories worth telling.
-          </p>
+          <p className="mt-6 max-w-xl leading-relaxed text-graphite">{c.lead}</p>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <a
-              href="mailto:devinhauser9@gmail.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="rounded-sm bg-red px-7 py-3.5 font-mono text-xs uppercase tracking-widest2 text-white transition-transform hover:-translate-y-0.5"
             >
-              devinhauser9@gmail.com
+              {CONTACT_EMAIL}
             </a>
             <a
-              href="https://instagram.com/devin.hauser_"
+              href="https://www.instagram.com/devin.hauser_/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-sm border border-ink/15 px-7 py-3.5 font-mono text-xs uppercase tracking-widest2 text-ink transition-colors hover:border-red hover:text-red"
             >
-              @devin.hauser_
+              {INSTAGRAM_HANDLE}
             </a>
           </div>
         </div>
@@ -34,7 +56,7 @@ export default function Contact() {
         <div className="relative aspect-[3/4] w-full min-w-0 max-w-xs overflow-hidden rounded-2xl md:max-w-none">
           <Image
             src="/images/contact-portrait-bw.jpg"
-            alt="Devin Hauser, black and white portrait"
+            alt={c.portraitAlt}
             fill
             sizes="(min-width: 768px) 45vw, 90vw"
             className="object-cover"

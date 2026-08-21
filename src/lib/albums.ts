@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { Album, AlbumImage, RightsClass } from "./album-types";
+import type { Lang } from "./i18n";
 
 /**
  * Media Library — Datenmodell, Rechtemodell und Laden der Alben.
@@ -158,25 +159,53 @@ export function downloadHref(image: AlbumImage): string {
   return image.downloadSrc ?? image.src;
 }
 
-/** Menschliches Datum, stabil und ohne Locale-Überraschungen. */
-export function formatAlbumDate(iso: string): string {
-  const [year, month, day] = iso.split("-");
-  const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
-  ];
-  const monthIndex = Number(month) - 1;
-  if (!year || Number.isNaN(monthIndex) || !months[monthIndex]) return iso;
-  return `${Number(day)} ${months[monthIndex]} ${year}`;
+/**
+ * Credit-Zeile eines Bildes, so wie sie ausgeliefert werden darf.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * DIE REGEL, DIE HIER ERZWUNGEN WIRD (Entscheid Devin, 20.08.2026)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Ein Fotografen-Credit darf nur stehen, wenn im Rechte-Manifest BELEGT ist,
+ * welche PERSON fotografiert hat. Im Manifest V1.1 lautet die Quelle des
+ * eigenen Bestands „Familie Hauser" — das ist keine Person, sondern ein
+ * Haushalt. Die daraus abgeleitete Zeile „Photo: Hauser" behauptet eine
+ * Urheberschaft, die nirgends belegt ist, und ist deshalb ausdruecklich
+ * untersagt. Zulaessig ist die sachliche Herkunftszeile:
+ *   „Bild: Archiv Devin Hauser" / „Image: Devin Hauser archive".
+ *
+ * Warum das im CODE steht und nicht nur in einer Anleitung: Die Credit-Zeile
+ * kommt aus einer JSON-Inhaltsdatei. Ein Album, das jemand spaeter in zwei
+ * Minuten anlegt, wuerde die Regel sonst genau dann verletzen, wenn niemand
+ * mehr an sie denkt. Hier wird der verbotene Wortlaut abgefangen und durch die
+ * korrekte Herkunftszeile ersetzt — dieselbe Logik wie bei `canDownload()`:
+ * ein Tippfehler in einer Inhaltsdatei darf keine Rechtsaussage erzeugen.
+ *
+ * Ein VOLLSTAENDIGER Personenname bleibt selbstverstaendlich erlaubt und
+ * unveraendert — „Photo: Tobias Meier", „Photo: Marc Weiler",
+ * „Photo: Devin Hauser".
+ */
+const UNDOCUMENTED_CREDIT = /^photo\s*[:\-–]?\s*hauser\.?$/i;
+
+const ARCHIVE_LINE: Record<Lang, string> = {
+  de: "Bild: Archiv Devin Hauser",
+  en: "Image: Devin Hauser archive",
+};
+
+export function displayCredit(raw: string, lang: Lang): string {
+  const value = raw.trim();
+  if (value.length === 0 || UNDOCUMENTED_CREDIT.test(value)) {
+    return ARCHIVE_LINE[lang];
+  }
+  return value;
 }
 
 /**
  * Kurzer, ehrlicher Hinweistext je Rechteklasse — wird im UI angezeigt.
  *
  * WORTWAHL IST HIER EINE EHRLICHKEITSFRAGE. Die frühere Formulierung lautete
- * "not available for download or reuse". Das war zu viel versprochen: Jedes
+ * „not available for download or reuse". Das war zu viel versprochen: Jedes
  * angezeigte Bild liegt zwangsläufig unter einer öffentlichen URL, sonst wäre
- * es nicht sichtbar. Wer "Bild speichern" wählt, bekommt dieselbe Datei, die
+ * es nicht sichtbar. Wer „Bild speichern" wählt, bekommt dieselbe Datei, die
  * ein Download-Knopf geliefert hätte. Eine statisch ausgelieferte Website kann
  * das technisch nicht verhindern — und eine Zusage, die die Technik nicht
  * hält, ist schlechter als gar keine. Der Text bittet deshalb um etwas, statt
@@ -184,15 +213,31 @@ export function formatAlbumDate(iso: string): string {
  * angebotene Downloads, Sharing-Vorschaubilder und die Anmeldung der Dateien
  * bei der Bildersuche.
  */
-export function rightsNotice(album: Album): string {
-  switch (album.rights) {
-    case "own":
-      return album.downloadAllowed
-        ? "Photos by Devin Hauser. Free to download and share for personal use — please credit Devin Hauser. For commercial use, get in touch first."
-        : "Photos by Devin Hauser. Shown here for viewing — please get in touch before using any of these images.";
-    case "licensed-use":
-      return "Published with the photographer's permission. Please don't reuse or republish these images — ask the photographer first.";
-    case "restricted":
-      return "Event media shown with permission. Please don't reuse or republish these images — ask the rights holder first.";
+const RIGHTS_NOTICE: Record<Lang, Record<RightsClass | "own-nodownload", string>> = {
+  de: {
+    own: "Fotos von Devin Hauser. Für den privaten Gebrauch frei zum Herunterladen und Teilen — bitte Devin Hauser nennen. Für kommerzielle Nutzung vorher kurz melden.",
+    "own-nodownload":
+      "Fotos aus dem Archiv von Devin Hauser. Hier zum Anschauen gezeigt — bitte vor jeder Verwendung kurz anfragen.",
+    "licensed-use":
+      "Veröffentlicht mit Erlaubnis des Fotografen. Bitte diese Bilder nicht weiterverwenden oder erneut veröffentlichen — dafür zuerst den Fotografen fragen.",
+    restricted:
+      "Eventmaterial, gezeigt mit Erlaubnis. Bitte diese Bilder nicht weiterverwenden oder erneut veröffentlichen — dafür zuerst den Rechteinhaber fragen.",
+  },
+  en: {
+    own: "Photos by Devin Hauser. Free to download and share for personal use — please credit Devin Hauser. For commercial use, get in touch first.",
+    "own-nodownload":
+      "Photos from Devin Hauser's archive. Shown here for viewing — please get in touch before using any of these images.",
+    "licensed-use":
+      "Published with the photographer's permission. Please don't reuse or republish these images — ask the photographer first.",
+    restricted:
+      "Event media shown with permission. Please don't reuse or republish these images — ask the rights holder first.",
+  },
+};
+
+export function rightsNotice(album: Album, lang: Lang): string {
+  const table = RIGHTS_NOTICE[lang];
+  if (album.rights === "own") {
+    return album.downloadAllowed ? table.own : table["own-nodownload"];
   }
+  return table[album.rights];
 }

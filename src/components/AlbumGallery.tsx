@@ -3,6 +3,42 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { AlbumImage } from "@/lib/album-types";
+import type { Lang } from "@/lib/i18n";
+
+const COPY: Record<
+  Lang,
+  {
+    openImage: (index: number, total: number, alt: string) => string;
+    dialogLabel: (title: string, index: number, total: number) => string;
+    download: string;
+    close: string;
+    prev: string;
+    next: string;
+    prevLabel: string;
+    nextLabel: string;
+  }
+> = {
+  de: {
+    openImage: (index, total, alt) => `Bild ${index} von ${total} öffnen: ${alt}`,
+    dialogLabel: (title, index, total) => `${title} — Bild ${index} von ${total}`,
+    download: "Herunterladen",
+    close: "Schliessen",
+    prev: "Zurück",
+    next: "Weiter",
+    prevLabel: "Vorheriges Bild",
+    nextLabel: "Nächstes Bild",
+  },
+  en: {
+    openImage: (index, total, alt) => `Open image ${index} of ${total}: ${alt}`,
+    dialogLabel: (title, index, total) => `${title} — image ${index} of ${total}`,
+    download: "Download",
+    close: "Close",
+    prev: "Prev",
+    next: "Next",
+    prevLabel: "Previous image",
+    nextLabel: "Next image",
+  },
+};
 
 type Props = {
   images: AlbumImage[];
@@ -10,7 +46,14 @@ type Props = {
   downloadFlags: boolean[];
   downloadHrefs: string[];
   albumTitle: string;
-  albumCredit: string;
+  /**
+   * Fertige Credit-Zeile je Bild — serverseitig durch `displayCredit()`
+   * gelaufen. Der Client bekommt keine Rohdaten aus der JSON-Datei zu sehen
+   * und trifft damit auch keine Rechteaussage: Ob „Photo: Tobias Meier" oder
+   * „Bild: Archiv Devin Hauser" dort steht, ist bereits entschieden.
+   */
+  imageCredits: string[];
+  lang: Lang;
 };
 
 /**
@@ -28,8 +71,10 @@ export default function AlbumGallery({
   downloadFlags,
   downloadHrefs,
   albumTitle,
-  albumCredit,
+  imageCredits,
+  lang,
 }: Props) {
+  const c = COPY[lang];
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -111,7 +156,7 @@ export default function AlbumGallery({
               type="button"
               onClick={() => setOpenIndex(index)}
               className="group relative block aspect-square w-full overflow-hidden rounded-lg bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
-              aria-label={`Open image ${index + 1} of ${images.length}: ${image.alt}`}
+              aria-label={c.openImage(index + 1, images.length, image.alt)}
             >
               <Image
                 src={image.src}
@@ -131,7 +176,7 @@ export default function AlbumGallery({
           ref={dialogRef}
           role="dialog"
           aria-modal="true"
-          aria-label={`${albumTitle} — image ${(openIndex ?? 0) + 1} of ${images.length}`}
+          aria-label={c.dialogLabel(albumTitle, (openIndex ?? 0) + 1, images.length)}
           className="fixed inset-0 z-[100] flex flex-col bg-ink/95 backdrop-blur-sm"
         >
           <div className="flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
@@ -145,7 +190,7 @@ export default function AlbumGallery({
                   download
                   className="rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10"
                 >
-                  Download
+                  {c.download}
                 </a>
               ) : null}
               <button
@@ -154,7 +199,7 @@ export default function AlbumGallery({
                 onClick={close}
                 className="rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10"
               >
-                Close
+                {c.close}
               </button>
             </div>
           </div>
@@ -175,23 +220,23 @@ export default function AlbumGallery({
               type="button"
               onClick={() => step(-1)}
               className="rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10"
-              aria-label="Previous image"
+              aria-label={c.prevLabel}
             >
-              Prev
+              {c.prev}
             </button>
             <p className="min-w-0 flex-1 text-center text-xs text-paper/70">
               {active.caption ? <span className="block">{active.caption}</span> : null}
               <span className="block font-mono uppercase tracking-widest2">
-                {active.credit ?? albumCredit}
+                {imageCredits[openIndex ?? 0]}
               </span>
             </p>
             <button
               type="button"
               onClick={() => step(1)}
               className="rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10"
-              aria-label="Next image"
+              aria-label={c.nextLabel}
             >
-              Next
+              {c.next}
             </button>
           </div>
         </div>
