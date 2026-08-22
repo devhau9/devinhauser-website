@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AlbumGallery from "@/components/AlbumGallery";
 import {
+  albumAuthorJsonLd,
   albumHasDownloads,
   canDownload,
   displayCredit,
@@ -35,6 +36,8 @@ const COPY: Record<
     gallery: string;
     noDownload: string;
     outro: string;
+    outroForeign: string;
+    reviewNotice: string;
     aboutCta: string;
     workCta: string;
   }
@@ -45,6 +48,10 @@ const COPY: Record<
     noDownload: "Für dieses Album wird kein Download angeboten",
     outro:
       "Ich bin Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz. Fotos und Videos mache ich grösstenteils selbst — rund um Wettkämpfe und Training.",
+    outroForeign:
+      "Ich bin Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz. Die Aufnahmen in diesem Album sind nicht von mir — wer fotografiert hat, steht oben beim Album.",
+    reviewNotice:
+      "Review-Ansicht: Dieses Album ist noch nicht freigegeben. Es wird nicht indexiert und steht nicht in der Sitemap.",
     aboutCta: "Über mich",
     workCta: "Zusammenarbeiten",
   },
@@ -54,6 +61,10 @@ const COPY: Record<
     noDownload: "Download not available for this album",
     outro:
       "I'm Devin Hauser, a Swiss IQFoil and Wingfoil racing athlete. I shoot photo and video myself, mostly around racing and training.",
+    outroForeign:
+      "I'm Devin Hauser, a Swiss IQFoil and Wingfoil racing athlete. The photos in this album are not mine — the photographer is credited above.",
+    reviewNotice:
+      "Review view: this album is not released yet. It is not indexed and is not in the sitemap.",
     aboutCta: "About me",
     workCta: "Work with me",
   },
@@ -122,6 +133,12 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
   // Ein einziges Fremdbild im Album genuegt, um die Liste wegzulassen.
   const listImages = rightsClassesInAlbum(album).every((r) => r === "own");
 
+  // Urheber nur, wenn das Album ausdruecklich sagt, ob `photographer` eine
+  // Person oder eine Organisation ist. Vorher stand hier fest "Person" — bei
+  // "Sailing Energy" eine maschinenlesbare Falschangabe. Siehe
+  // `albumAuthorJsonLd()`.
+  const author = albumAuthorJsonLd(album);
+
   const imageObjectsJsonLd = {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
@@ -130,7 +147,7 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
     datePublished: album.date,
     inLanguage: lang,
     contentLocation: { "@type": "Place", name: album.location },
-    author: { "@type": "Person", name: album.photographer },
+    ...(author ? { author } : {}),
     ...(listImages
       ? {
           image: album.images.slice(0, 12).map((image, index) => ({
@@ -186,6 +203,16 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
           </ol>
         </nav>
 
+        {/* Ein `noindex`-Album ist ueber seine URL erreichbar, auch ohne dass
+            es irgendwo verlinkt waere. Wer hier landet, soll sofort sehen,
+            dass es sich um einen Review-Stand handelt und nicht um eine
+            veroeffentlichte Seite. */}
+        {album.noindex ? (
+          <p className="mb-6 max-w-2xl border-l-2 border-ink/20 pl-5 font-mono text-xs uppercase leading-relaxed tracking-widest2 text-graphite">
+            {c.reviewNotice}
+          </p>
+        ) : null}
+
         <h1 className="max-w-3xl font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
           {localized(album.title, lang).toUpperCase()}
         </h1>
@@ -220,7 +247,14 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
         />
 
         <div className="mt-16 border-t border-hairline pt-10">
-          <p className="max-w-xl leading-relaxed text-graphite">{c.outro}</p>
+          {/* „Fotos mache ich groesstenteils selbst" darf nicht unter einem
+              Album stehen, das vollstaendig von einer Agentur oder einem
+              fremden Fotografen stammt — das liest sich als Selbstzuschreibung
+              genau dort, wo der Credit das Gegenteil sagt. `listImages` ist
+              wahr, wenn JEDES Bild eigenes Material ist. */}
+          <p className="max-w-xl leading-relaxed text-graphite">
+            {listImages ? c.outro : c.outroForeign}
+          </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:gap-4">
             <Link
               href={sectionHref(lang, SECTION_ID.about)}

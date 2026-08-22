@@ -1,0 +1,16 @@
+{
+  // Eigene Konfiguration, weil `node --test` die Dateiendung im Importpfad
+  // VERLANGT ("../src/lib/albums.ts"), TypeScript sie im Anwendungscode aber
+  // verbietet. Statt die Regel projektweit zu lockern — und damit im
+  // Anwendungscode einen Importstil zu erlauben, den der Next-Build nicht
+  // aufloest — gilt die Ausnahme nur hier.
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  // Das geerbte `exclude` der Wurzelkonfiguration nennt "tests" — von hier aus
+  // gelesen waere das genau dieser Ordner. Deshalb hier ausdruecklich leeren.
+  "exclude": [],
+  "include": ["**/*.ts"]
+}

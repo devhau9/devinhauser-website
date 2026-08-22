@@ -11,6 +11,30 @@
 export type RightsClass = "own" | "licensed-use" | "restricted";
 
 /**
+ * Ob der Urheber eine natuerliche Person oder eine Organisation ist.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * WARUM DAS EIN EIGENES FELD IST UND KEINE HEURISTIK
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Im JSON-LD eines Albums stand bisher fest `{"@type": "Person"}` fuer
+ * `photographer`. Bei `silvaplana-2025` steht dort „Sailing Energy" — eine
+ * Agentur. Die Seite hat also einer Organisation eine Personen-Identitaet
+ * zugeschrieben, und zwar in maschinenlesbarer Form.
+ *
+ * Aus dem NAMEN laesst sich das nicht ableiten. „Sailing Energy" sieht nach
+ * Firma aus, „Marc Weiler Photography & Film" enthaelt einen Personennamen und
+ * ist trotzdem ein Betrieb, und ein Einzelfotograf kann unter seinem
+ * buergerlichen Namen firmieren. Jede Namensregel waere geraten — und ein
+ * geratener `@type` ist schlechter als gar keine Angabe, weil strukturierte
+ * Daten als Tatsachenbehauptung gelesen werden.
+ *
+ * Deshalb: ein ausdrueckliches Feld. Fehlt es, wird `author` weggelassen
+ * (siehe `albumAuthorJsonLd()` in `albums.ts`). Weglassen ist erlaubt und
+ * ehrlich; falsch typisieren ist es nicht.
+ */
+export type PhotographerKind = "person" | "organization";
+
+/**
  * Ein redaktioneller Text in beiden Sprachen.
  *
  * DE und EN teilen sich denselben BILDBESTAND — es gibt keine zweite Kopie
@@ -93,6 +117,13 @@ export type Album = {
   description: LocalizedText;
   /** Wer hat fotografiert. Bei eigenen Bildern: "Devin Hauser". */
   photographer: string;
+  /**
+   * Ob `photographer` eine Person oder eine Organisation ist.
+   *
+   * Optional, aber ohne Angabe erscheint im JSON-LD KEIN `author`. Das ist
+   * Absicht: siehe `PhotographerKind`.
+   */
+  photographerKind?: PhotographerKind;
   /** Wie der Credit anzuzeigen ist, z. B. "Photo: Devin Hauser". */
   credit: string;
   rights: RightsClass;

@@ -216,7 +216,16 @@ export default function AlbumGallery({
             />
           </div>
 
-          <div className="flex items-center justify-between gap-4 px-4 py-4 sm:px-6">
+          {/* Auf dem Telefon steht die Bildunterschrift auf einer EIGENEN Zeile
+              ueber den Pfeilen (`order-first w-full`), auf groesseren Schirmen
+              wie bisher zwischen ihnen. Vorher teilten sich drei Elemente die
+              375-px-Zeile, und die Credit-Zeile brach mitten im Namen des
+              Rechteinhabers um: „© SAILING / ENERGY". Ein Credit, der den
+              Namen zerlegt, erfuellt seinen Zweck nicht.
+
+              Die DOM-Reihenfolge bleibt Zurueck → Text → Weiter, damit sich an
+              Tab-Reihenfolge und Vorlesereihenfolge nichts aendert. */}
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 px-4 py-4 sm:flex-nowrap sm:px-6">
             <button
               type="button"
               onClick={() => step(-1)}
@@ -225,7 +234,7 @@ export default function AlbumGallery({
             >
               {c.prev}
             </button>
-            <p className="min-w-0 flex-1 text-center text-xs text-paper/70">
+            <p className="order-first w-full text-center text-xs text-paper/70 sm:order-none sm:w-auto sm:min-w-0 sm:flex-1">
               {active.caption ? (
                 <span className="block">{active.caption[lang]}</span>
               ) : null}

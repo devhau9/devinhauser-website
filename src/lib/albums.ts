@@ -4,6 +4,7 @@ import type {
   Album,
   AlbumImage,
   LocalizedText,
+  PhotographerKind,
   RightsClass,
 } from "./album-types";
 import type { Lang } from "./i18n";
@@ -29,9 +30,15 @@ import type { Lang } from "./i18n";
  *                   Devin ist NICHT dasselbe wie das Recht, die Datei an
  *                   beliebige Dritte weiterzugeben. Anzeigen ja, Download nein.
  *
- *   "restricted"    Event-, Klassen- oder Agenturmaterial (z. B. SailingEnergy).
- *                   Weder Download noch Veröffentlichung ohne ausdrückliche,
- *                   schriftlich vorliegende Freigabe.
+ *   "restricted"    Event-, Klassen- oder Agenturmaterial ohne vorliegende
+ *                   Freigabe. Weder Download noch Veröffentlichung.
+ *
+ * Die Einstufung von Agenturmaterial als "restricted" ist die Vorsichtsregel
+ * für den Fall FEHLENDER Information, keine Feststellung über eine konkrete
+ * Datei. Liegt eine schriftliche Freigabe des Rechteinhabers vor, gehört das
+ * Material nach "licensed-use" — so steht Sailing-Energy-Material in
+ * `silvaplana-2025` (Freigabe vom 22.08.2026). Der Unterschied ist genau ein
+ * Hinweissatz im Frontend; `canDownload()` liefert in beiden Fällen `false`.
  *
  * Die Funktion `canDownload()` erzwingt das im Code. Selbst wenn in einer
  * JSON-Datei versehentlich `"downloadAllowed": true` bei einem Album der Klasse
@@ -40,7 +47,7 @@ import type { Lang } from "./i18n";
  * fremdes Material zum Download angeboten wird.
  */
 
-export type { Album, AlbumImage, LocalizedText, RightsClass };
+export type { Album, AlbumImage, LocalizedText, PhotographerKind, RightsClass };
 
 /** Zweisprachigen Text in der gewuenschten Sprache lesen. */
 export function localized(text: LocalizedText, lang: Lang): string {
@@ -50,6 +57,8 @@ export function localized(text: LocalizedText, lang: Lang): string {
 const ALBUMS_DIR = path.join(process.cwd(), "content", "albums");
 
 const RIGHTS_VALUES: RightsClass[] = ["own", "licensed-use", "restricted"];
+
+const PHOTOGRAPHER_KINDS: PhotographerKind[] = ["person", "organization"];
 
 /** Beide Sprachen vorhanden und nicht leer. */
 function isLocalizedText(value: unknown): value is LocalizedText {
@@ -151,8 +160,11 @@ const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
  * Rückgabe `null` heisst gültig. Alles andere ist die Fehlermeldung, die im
  * Build erscheint. Ein boolescher Rückgabewert war hier zu wenig: „Schema
  * unvollständig" hilft niemandem, der um 23 Uhr ein Album nachträgt.
+ *
+ * Exportiert, damit die Regeln prüfbar sind, ohne dafür Album-Dateien auf die
+ * Platte zu schreiben — siehe `tests/albums.test.ts`.
  */
-function albumProblem(value: unknown): string | null {
+export function albumProblem(value: unknown): string | null {
   if (typeof value !== "object" || value === null) return "kein Objekt";
   const a = value as Partial<Album>;
 
@@ -167,6 +179,16 @@ function albumProblem(value: unknown): string | null {
   if (typeof a.location !== "string") return "`location` fehlt";
   if (typeof a.sport !== "string") return "`sport` fehlt";
   if (typeof a.photographer !== "string") return "`photographer` fehlt";
+  if (
+    a.photographerKind !== undefined &&
+    !PHOTOGRAPHER_KINDS.includes(a.photographerKind)
+  ) {
+    // Bewusst eine Ablehnung und keine stille Korrektur: Ein Tippfehler wie
+    // "Person" oder "org" wuerde sonst dazu fuehren, dass das Album zwar
+    // erscheint, im JSON-LD aber ohne Urheber dasteht — ein Fehler, den
+    // niemand bemerkt, weil die Seite normal aussieht.
+    return "`photographerKind` muss person | organization sein (oder ganz fehlen)";
+  }
   if (typeof a.credit !== "string") return "`credit` fehlt";
   if (typeof a.rights !== "string" || !RIGHTS_VALUES.includes(a.rights)) {
     return "`rights` muss own | licensed-use | restricted sein";
@@ -213,7 +235,20 @@ function albumProblem(value: unknown): string | null {
 export function getAllAlbums(): Album[] {
   let files: string[] = [];
   try {
-    files = fs.readdirSync(ALBUMS_DIR).filter((f) => f.endsWith(".json"));
+    files = fs
+      .readdirSync(ALBUMS_DIR)
+      // Punktdateien ausschliessen. Konkreter Anlass: Das Repository liegt auf
+      // einem exFAT-Volume, und macOS legt dort neben jeder geschriebenen
+      // Datei einen AppleDouble-Sidecar `._<name>` für die erweiterten
+      // Attribute an. `._silvaplana-2025.json` endet auf ".json" und landete
+      // deshalb im Loader, wo es bei JSON.parse scheiterte — mit einer
+      // Warnung pro Album und Build. Das ist nicht bloss Lärm: Wer sich
+      // daran gewöhnt, dass `[albums]`-Meldungen normal sind, übersieht die
+      // Meldung, die ein tatsächlich kaputtes Album ankündigt.
+      //
+      // Ein Album, dessen Name mit einem Punkt beginnt, gibt es nicht — der
+      // Slug muss ohnehin mit [a-z0-9] anfangen.
+      .filter((f) => !f.startsWith(".") && f.endsWith(".json"));
   } catch {
     // Ordner existiert noch nicht — das ist ein gültiger Zustand (keine Alben).
     return [];
@@ -239,9 +274,94 @@ export function getAllAlbums(): Album[] {
   return albums.sort((a, b) => b.date.localeCompare(a.date));
 }
 
-/** Alben, die öffentlich gelistet und indexiert werden dürfen. */
+/**
+ * Alben, die öffentlich gelistet und indexiert werden dürfen.
+ *
+ * Massgeblich für Sitemap und für die Frage, ob /media selbst indexiert wird.
+ * `noindex`-Alben sind hier NIE enthalten — auch nicht in der Vorschau.
+ */
 export function getPublicAlbums(): Album[] {
   return getAllAlbums().filter((album) => !album.noindex);
+}
+
+/**
+ * Lokale Review-Vorschau: zeigt auch `noindex`-Alben in den Listenansichten.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * WARUM ES DIESEN SCHALTER GIBT
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Ein Album mit `noindex: true` ist fertig gebaut, aber noch nicht freigegeben
+ * — bei silvaplana-2025 und cremia-2026 fehlt Devins Textfreigabe. Seine
+ * Detailseite existiert (`generateStaticParams()` nutzt `getAllAlbums()`),
+ * aber die Galerie-Übersicht zeigte den Leerzustand: „Die ersten Alben
+ * entstehen gerade". Damit liess sich die fertige Galerie lokal nicht
+ * ansehen und nicht beurteilen.
+ *
+ * Die Übersicht deshalb dauerhaft auf `getAllAlbums()` umzustellen wäre der
+ * falsche Weg: Beim nächsten Deploy stünden nicht freigegebene Alben
+ * öffentlich auf der Startseite. Genau das soll `noindex` verhindern.
+ *
+ * Also ein ausdrücklicher, standardmässig AUSGESCHALTETER Schalter. Ohne
+ * `GALLERY_PREVIEW=1` verhält sich die Website exakt wie vorher — ein
+ * versehentlicher Produktionsbuild kann nichts veröffentlichen, weil er den
+ * Schalter nicht gesetzt hat. Mit dem Schalter sieht Devin lokal die
+ * vollständige Galerie, sichtbar als Review gekennzeichnet.
+ *
+ * Was der Schalter NICHT tut: Er ändert weder `robots`-Angaben noch die
+ * Sitemap. Ein Vorschaualbum bleibt in jedem Fall `noindex`.
+ */
+export function galleryPreviewEnabled(): boolean {
+  return process.env.GALLERY_PREVIEW === "1";
+}
+
+/**
+ * Alben für die Listenansichten (Galerie-Übersicht, Startseiten-Teaser).
+ *
+ * Ohne Vorschaumodus identisch mit `getPublicAlbums()`.
+ */
+export function getListedAlbums(): Album[] {
+  return galleryPreviewEnabled() ? getAllAlbums() : getPublicAlbums();
+}
+
+/**
+ * Die `author`-Angabe für das JSON-LD eines Albums — oder `null`.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * DER FEHLER, DEN DIESE FUNKTION BEHEBT (gefunden 23.08.2026)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * `AlbumView.tsx` schrieb fest `author: { "@type": "Person", name:
+ * album.photographer }`. Für silvaplana-2025 steht in `photographer` der Wert
+ * „Sailing Energy" — eine Bildagentur. Die Seite hat also maschinenlesbar
+ * behauptet, eine Organisation sei eine natürliche Person.
+ *
+ * Strukturierte Daten sind eine Tatsachenbehauptung gegenüber Suchmaschinen,
+ * kein Gestaltungsdetail. Deshalb wird hier nicht geraten:
+ *
+ *   `photographerKind: "person"`        → Person
+ *   `photographerKind: "organization"`  → Organization
+ *   Feld fehlt / Name leer              → gar kein `author`
+ *
+ * Der letzte Fall ist der wichtige. Es gibt keine Namensheuristik — weder
+ * „enthält zwei Wörter" noch „endet auf AG/GmbH". Wer keine belegte Zuordnung
+ * hat, macht keine Aussage. Ein fehlender `author` ist gültiges schema.org;
+ * ein falscher ist eine Falschangabe.
+ */
+export type AlbumAuthorJsonLd = {
+  "@type": "Person" | "Organization";
+  name: string;
+};
+
+export function albumAuthorJsonLd(album: Album): AlbumAuthorJsonLd | null {
+  const name = album.photographer.trim();
+  if (name.length === 0) return null;
+  switch (album.photographerKind) {
+    case "person":
+      return { "@type": "Person", name };
+    case "organization":
+      return { "@type": "Organization", name };
+    default:
+      return null;
+  }
 }
 
 export function getAlbumBySlug(slug: string): Album | undefined {

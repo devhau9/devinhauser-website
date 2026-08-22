@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getPublicAlbums, localized } from "@/lib/albums";
+import { getListedAlbums, localized } from "@/lib/albums";
 import {
   SECTION_ID,
   UI,
@@ -53,6 +53,8 @@ const COPY: Record<
     emptyLabel: string;
     emptyText: string;
     emptyCta: string;
+    reviewBadge: string;
+    reviewNotice: string;
     photoCount: (count: number) => string;
     coverAlt: (title: string) => string;
   }
@@ -69,6 +71,9 @@ const COPY: Record<
     emptyText:
       "Sobald das erste Album freigegeben ist, erscheint es hier. Wer mit mir auf dem Wasser war und Bilder sucht, meldet sich am besten direkt — den Link zum Album gibt es, sobald es steht.",
     emptyCta: "Kontakt aufnehmen",
+    reviewBadge: "Review",
+    reviewNotice:
+      "Als Review sichtbar: Die so gekennzeichneten Alben sind noch nicht freigegeben. Sie werden nicht indexiert und stehen nicht in der Sitemap.",
     photoCount: (count) => (count === 1 ? "1 Bild" : `${count} Bilder`),
     coverAlt: (title) => `${title} — Titelbild des Albums`,
   },
@@ -84,15 +89,21 @@ const COPY: Record<
     emptyText:
       "As soon as the first album is cleared it will appear here. If you were on the water with me and are looking for photos, just get in touch — I'll send you the link as soon as the album is up.",
     emptyCta: "Get in touch",
+    reviewBadge: "Review",
+    reviewNotice:
+      "Visible for review: the albums marked this way are not released yet. They are not indexed and are not in the sitemap.",
     photoCount: (count) => (count === 1 ? "1 photo" : `${count} photos`),
     coverAlt: (title) => `${title} — album cover image`,
   },
 };
 
 export default function MediaIndexView({ lang }: { lang: Lang }) {
-  const albums = getPublicAlbums();
+  // `getListedAlbums()` ist ohne den Vorschauschalter identisch mit
+  // `getPublicAlbums()`. Siehe `galleryPreviewEnabled()` in src/lib/albums.ts.
+  const albums = getListedAlbums();
   const c = COPY[lang];
   const t = UI[lang];
+  const hasReviewAlbums = albums.some((album) => album.noindex === true);
 
   return (
     <main className="section-pad !pt-24 sm:!pt-28 md:!pt-40 lg:!pt-48 bg-white">
@@ -137,6 +148,15 @@ export default function MediaIndexView({ lang }: { lang: Lang }) {
           {c.rights}
         </p>
 
+        {/* Ehrlichkeit vor Vollstaendigkeit: Wenn die Uebersicht ein noch nicht
+            freigegebenes Album zeigt, sagt sie das auch. Sonst sieht eine
+            lokale Vorschau exakt aus wie eine Veroeffentlichung. */}
+        {hasReviewAlbums ? (
+          <p className="mt-4 max-w-2xl border-l-2 border-ink/20 pl-5 text-sm leading-relaxed text-graphite">
+            {c.reviewNotice}
+          </p>
+        ) : null}
+
         {albums.length > 0 ? (
           <ul className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {albums.map((album) => (
@@ -154,9 +174,16 @@ export default function MediaIndexView({ lang }: { lang: Lang }) {
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />
                   </div>
-                  <h2 className="mt-5 font-display text-2xl tracking-wide text-ink">
-                    {localized(album.title, lang)}
-                  </h2>
+                  <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <h2 className="font-display text-2xl tracking-wide text-ink">
+                      {localized(album.title, lang)}
+                    </h2>
+                    {album.noindex ? (
+                      <span className="rounded-sm border border-ink/20 px-2 py-0.5 font-mono text-[11px] uppercase tracking-widest2 text-graphite">
+                        {c.reviewBadge}
+                      </span>
+                    ) : null}
+                  </div>
                   <p className="mt-2 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
                     {formatDate(album.date, lang)} · {album.location} · {album.sport}
                   </p>

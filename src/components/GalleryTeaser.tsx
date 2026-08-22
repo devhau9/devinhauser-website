@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getPublicAlbums, localized } from "@/lib/albums";
+import { getListedAlbums, localized } from "@/lib/albums";
 import { SECTION_ID, formatDate, localizedPath, type Lang } from "@/lib/i18n";
 
 /**
@@ -41,6 +41,7 @@ const COPY: Record<
     cta: string;
     emptyTitle: string;
     emptyText: string;
+    reviewBadge: string;
     photoCount: (count: number) => string;
     coverAlt: (title: string) => string;
   }
@@ -55,6 +56,7 @@ const COPY: Record<
     emptyTitle: "Die ersten Alben entstehen gerade",
     emptyText:
       "Sobald das erste Album freigegeben ist, erscheint es hier und in der Galerie. Wer mit mir auf dem Wasser war und Bilder sucht, meldet sich am besten direkt.",
+    reviewBadge: "Review",
     photoCount: (count) => (count === 1 ? "1 Bild" : `${count} Bilder`),
     coverAlt: (title) => `${title} — Titelbild des Albums`,
   },
@@ -68,6 +70,7 @@ const COPY: Record<
     emptyTitle: "The first albums are being prepared",
     emptyText:
       "As soon as the first album is cleared it will appear here and in the gallery. If you were on the water with me and are looking for photos, just get in touch.",
+    reviewBadge: "Review",
     photoCount: (count) => (count === 1 ? "1 photo" : `${count} photos`),
     coverAlt: (title) => `${title} — album cover image`,
   },
@@ -75,7 +78,8 @@ const COPY: Record<
 
 export default function GalleryTeaser({ lang }: { lang: Lang }) {
   const c = COPY[lang];
-  const albums = getPublicAlbums().slice(0, 3);
+  // Ohne Vorschauschalter identisch mit `getPublicAlbums()`.
+  const albums = getListedAlbums().slice(0, 3);
 
   return (
     <section
@@ -106,9 +110,16 @@ export default function GalleryTeaser({ lang }: { lang: Lang }) {
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />
                   </div>
-                  <h3 className="mt-5 font-display text-2xl tracking-wide text-ink">
-                    {localized(album.title, lang)}
-                  </h3>
+                  <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <h3 className="font-display text-2xl tracking-wide text-ink">
+                      {localized(album.title, lang)}
+                    </h3>
+                    {album.noindex ? (
+                      <span className="rounded-sm border border-ink/20 px-2 py-0.5 font-mono text-[11px] uppercase tracking-widest2 text-graphite">
+                        {c.reviewBadge}
+                      </span>
+                    ) : null}
+                  </div>
                   <p className="mt-2 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
                     {formatDate(album.date, lang)} · {album.location} · {album.sport}
                   </p>
