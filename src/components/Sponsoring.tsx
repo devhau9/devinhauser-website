@@ -46,7 +46,7 @@ const COPY: Record<
       },
       {
         title: "Produktintegration",
-        text: "Produkte im echten Einsatz — im Training, im Wettkampf und im Alltag.",
+        text: "Produkte im Training, im Wettkampf und im Alltag.",
       },
       {
         title: "Längerfristig",
@@ -77,7 +77,7 @@ const COPY: Record<
       },
       {
         title: "Product Integration",
-        text: "Natural product integration through training, racing and everyday use.",
+        text: "Products in training, racing and everyday use.",
       },
       {
         title: "Longer Term",

@@ -30,12 +30,12 @@ const COPY: Record<
     heading: "DISZIPLINEN",
     iqfoil: {
       title: "IQFoil Racing",
-      text: "IQFoil ist meine Hauptdisziplin und die olympische Windsurf-Klasse. Ich starte international in der Elite-Kategorie und verbinde dabei Speed, Taktik und körperliche Leistung auf dem Weg an die Spitze des Sports.",
+      text: "IQFoil ist meine Hauptdisziplin und die olympische Windsurf-Klasse. Ich starte international in der Elite-Kategorie. Es geht um Speed, Taktik und Kondition.",
       alt: "Devin Hauser beim IQFoil-Racing",
     },
     wingfoil: {
       title: "Wingfoil Racing",
-      text: "Wingfoil begleitet mich seit Jahren und gibt mir eine zweite Art zu racen, mich weiterzuentwickeln und mich auf dem Foil zu fordern. Neben IQFoil starte ich damit international und arbeite daran, ein kompletter Foil-Athlet zu werden.",
+      text: "Wingfoil fahre ich seit Jahren. Es ist eine zweite Art zu racen und hält mich auf dem Foil in Übung. Neben IQFoil starte ich damit international.",
       alt: "Devin Hauser beim Wingfoil Racing mit dem ENSIS-Wing in Cremia",
     },
   },
@@ -44,12 +44,12 @@ const COPY: Record<
     heading: "DISCIPLINES",
     iqfoil: {
       title: "IQFoil Racing",
-      text: "IQFoil is my main competitive discipline and the Olympic windsurfing class. I compete internationally in the senior fleet, combining speed, tactics and physical performance as I work towards the highest level of the sport.",
+      text: "IQFoil is my main competitive discipline and the Olympic windsurfing class. I compete internationally in the senior fleet. It comes down to speed, tactics and fitness.",
       alt: "Devin Hauser racing IQFoil",
     },
     wingfoil: {
       title: "Wingfoil Racing",
-      text: "I've been wingfoiling for years. It gives me a second way to race and keeps me pushing on the foil. Alongside IQFoil I compete internationally in it and keep developing as a complete foil athlete.",
+      text: "I've been wingfoiling for years. It is a second way to race and keeps me sharp on the foil. Alongside IQFoil I compete in it internationally.",
       alt: "Devin Hauser wingfoil racing with the ENSIS wing in Cremia",
     },
   },
