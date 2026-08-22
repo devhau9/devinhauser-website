@@ -113,7 +113,7 @@ const SOURCES = [
 export default function IqfoilDe() {
   return (
     <main>
-      <article className="section-pad bg-white">
+      <article className="section-pad !pt-24 sm:!pt-28 md:!pt-40 lg:!pt-48 bg-white">
         <div className="mx-auto max-w-content">
           <nav aria-label="Brotkrumennavigation" className="mb-8">
             <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
@@ -352,8 +352,8 @@ export default function IqfoilDe() {
           <section className="mt-16 border-t border-hairline pt-12">
             <h2 className={H2}>Racing in der Höhe — Silvaplana</h2>
             <p className={P}>
-              Mein Heimrevier ist der Silvaplanersee im Engadin, auf rund 1 800 m
-              über Meer. Die regionale Tourismusorganisation beschreibt den
+              Im Sommer trainiere ich auf dem Silvaplanersee im Engadin, auf rund
+              1 800 m über Meer. Die regionale Tourismusorganisation beschreibt den
               Malojawind dort mit 3 bis 6 Beaufort, also rund 12 bis 49 km/h — am
               unteren Ende eine stetige Brise, am oberen ein richtig kräftiger
               Wind. Dieselbe Quelle nennt Silvaplana den bekanntesten
@@ -396,10 +396,9 @@ export default function IqfoilDe() {
               Weg, auf dem ich bin, und ich nenne dazu bewusst keine Jahreszahl.
             </p>
             <p className={P}>
-              Neben dem Racing mache und schneide ich meine Foto-, Video- und
-              Drohnenaufnahmen selbst. Deshalb ist das meiste, was auf dieser
-              Seite zu sehen ist, aus dem Sport heraus gefilmt und nicht vom
-              Strand aus.
+              Neben dem Racing fotografiere, filme und schneide ich selbst. Deshalb
+              ist das meiste, was auf dieser Seite zu sehen ist, aus dem Sport
+              heraus aufgenommen und nicht vom Strand aus.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
               <Link

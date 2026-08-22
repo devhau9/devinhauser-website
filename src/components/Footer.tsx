@@ -112,7 +112,7 @@ const COPY: Record<
     location: "Zurich, Switzerland",
     olympic: "Road to the Olympic Games",
     contact: "Contact",
-    follow: "Follow My Journey",
+    follow: "Follow the Racing",
     legal: "Legal",
     legalLabels: ["Privacy Policy", "Imprint", "Copyright"],
     rights: "© 2026 Devin Hauser. All rights reserved.",
@@ -143,7 +143,7 @@ export default function Footer({ lang }: { lang: Lang }) {
             </div>
           </div>
 
-          {/* Spalte 2: Contact + Follow My Journey */}
+          {/* Spalte 2: Contact + Kanaele */}
           <div>
             <p className="font-mono text-xs uppercase tracking-widest2 text-graphite/70">
               {c.contact}

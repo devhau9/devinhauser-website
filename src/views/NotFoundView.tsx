@@ -31,7 +31,7 @@ export default function NotFoundView({ lang }: { lang: Lang }) {
   ];
 
   return (
-    <main className="section-pad bg-white">
+    <main className="section-pad !pt-24 sm:!pt-28 md:!pt-40 lg:!pt-48 bg-white">
       <div className="mx-auto max-w-content">
         <p className="eyebrow mb-5">{c.eyebrow}</p>
         <h1 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">

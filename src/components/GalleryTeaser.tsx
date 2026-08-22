@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getPublicAlbums } from "@/lib/albums";
+import { getPublicAlbums, localized } from "@/lib/albums";
 import { SECTION_ID, formatDate, localizedPath, type Lang } from "@/lib/i18n";
 
 /**
@@ -100,14 +100,14 @@ export default function GalleryTeaser({ lang }: { lang: Lang }) {
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-mist">
                     <Image
                       src={album.coverImage}
-                      alt={c.coverAlt(album.title)}
+                      alt={c.coverAlt(localized(album.title, lang))}
                       fill
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />
                   </div>
                   <h3 className="mt-5 font-display text-2xl tracking-wide text-ink">
-                    {album.title}
+                    {localized(album.title, lang)}
                   </h3>
                   <p className="mt-2 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
                     {formatDate(album.date, lang)} · {album.location} · {album.sport}

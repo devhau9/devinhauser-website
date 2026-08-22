@@ -36,8 +36,8 @@ export const SITE_TITLE: Record<Lang, string> = {
 };
 
 export const SITE_DESCRIPTION: Record<Lang, string> = {
-  de: "Devin Hauser ist IQFoil- und Wingfoil-Racer aus der Schweiz, seit 2020 international im Einsatz und auf dem langen Weg zu den Olympischen Spielen — internationales Racing verbunden mit selbst produzierten Foto- und Videoinhalten.",
-  en: "Devin Hauser is a Swiss IQFoil and Wingfoil racing athlete competing internationally since 2020, on a long-term journey towards the Olympic Games — combining international racing with self-produced photo and video content.",
+  de: "Devin Hauser ist IQFoil- und Wingfoil-Racer aus der Schweiz. Seit mehreren Jahren fährt er internationale Regatten, mit dem langfristigen Ziel, die Schweiz an den Olympischen Spielen zu vertreten.",
+  en: "Devin Hauser is a Swiss IQFoil and Wingfoil racing athlete. He has been racing internationally for several years, working towards the long-term goal of representing Switzerland at the Olympic Games.",
 };
 
 /** Schluesselwoerter je Sprache — bewusst kurz und ohne Wiederholungen. */

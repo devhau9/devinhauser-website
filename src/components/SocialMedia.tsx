@@ -117,12 +117,12 @@ const COPY: Record<
     heading: "SOCIAL MEDIA & CONTENT",
     paragraphs: [
       "Zuerst der Sport: Ich fahre IQFoil, die olympische Windsurf-Klasse, und starte zusätzlich im Wingfoil Racing.",
-      "Was rund um das Racing entsteht, mache ich selbst — Fotos, Videos, Drohnenaufnahmen und die Geschichten dahinter: Training, Wettkämpfe, Vorbereitung, Reisen.",
-      "Für Partner heisst das: echte Inhalte aus dem Wettkampfalltag statt reiner Logo-Präsenz — und eine Zusammenarbeit, die zu beiden Seiten passt.",
+      "Einen grossen Teil der Fotos und Videos mache ich selbst — an Regatten, im Training und auf den Fahrten dazwischen. Dazu kommen ausgewählte Aufnahmen von Fotografinnen, Fotografen und Organisationen; wer das Bild gemacht hat, steht beim Bild.",
+      "Für Partner entstehen daraus Bilder und Videos von den Regatten und aus dem Training.",
     ],
     galleryLink: "Die kuratierten Bilder liegen in der Galerie",
     portalText:
-      "Sie suchen genaue Reichweiten, Zielgruppendaten oder Content-Möglichkeiten? Die Details gibt es über das Partner-Portal.",
+      "Sie überlegen eine Zusammenarbeit? Der Einstieg läuft über das Partner-Portal.",
     portalCta: "Partner-Portal",
   },
   en: {
@@ -130,12 +130,12 @@ const COPY: Record<
     heading: "SOCIAL MEDIA & CONTENT",
     paragraphs: [
       "The sport comes first: I race IQFoil, the Olympic windsurfing class, and I also compete in Wingfoil Racing.",
-      "Everything that happens around the racing, I create myself — photography, video, drone footage and the stories behind it: training, competitions, preparation, travel.",
-      "For partners that means real content from a racing season rather than logo visibility alone — and a partnership that works for both sides.",
+      "I shoot a large part of the photos and video myself — at regattas, in training and on the drives in between. Alongside that, the site uses selected images from photographers and organisations; whoever took the picture is credited with it.",
+      "For partners, that turns into photos and video from the regattas and from training.",
     ],
     galleryLink: "The curated photos live in the gallery",
     portalText:
-      "Looking for detailed reach, audience insights or content opportunities? Access the details through the Partner Portal.",
+      "Thinking about working together? The Partner Portal is the way in.",
     portalCta: "Partner Portal",
   },
 };

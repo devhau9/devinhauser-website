@@ -11,5 +11,4 @@ Status: leer, wartet auf Content-Sichtung
   8. Platz von 42 – Campione 2023 (U17) [PRÜFEN]
   16. Platz von 45 – Cádiz 2025 (U19) [PRÜFEN]
 - Kommende wichtige Wettkämpfe:
-  IQFoil Senior World Championship, Weymouth (England), Anfang September 2026
   IQFoil U23 World Championship, Puck (Polen), Ende September 2026

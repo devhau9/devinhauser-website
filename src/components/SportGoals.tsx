@@ -49,7 +49,7 @@ const COPY: Record<
     },
     wingfoil: {
       title: "Wingfoil Racing",
-      text: "Wingfoil has been part of my journey for years and gives me a different way to race, progress and push myself on the foil. Alongside IQFoil, I compete internationally and continue developing as a complete foil athlete.",
+      text: "I've been wingfoiling for years. It gives me a second way to race and keeps me pushing on the foil. Alongside IQFoil I compete internationally in it and keep developing as a complete foil athlete.",
       alt: "Devin Hauser wingfoil racing with the ENSIS wing in Cremia",
     },
   },

@@ -52,7 +52,8 @@ type Props = {
    * und trifft damit auch keine Rechteaussage: Ob „Photo: Tobias Meier" oder
    * „Bild: Archiv Devin Hauser" dort steht, ist bereits entschieden.
    */
-  imageCredits: string[];
+  /** `null` = fuer dieses Bild darf keine Credit-Zeile stehen. */
+  imageCredits: (string | null)[];
   lang: Lang;
 };
 
@@ -156,11 +157,11 @@ export default function AlbumGallery({
               type="button"
               onClick={() => setOpenIndex(index)}
               className="group relative block aspect-square w-full overflow-hidden rounded-lg bg-mist focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
-              aria-label={c.openImage(index + 1, images.length, image.alt)}
+              aria-label={c.openImage(index + 1, images.length, image.alt[lang])}
             >
               <Image
                 src={image.src}
-                alt={image.alt}
+                alt={image.alt[lang]}
                 fill
                 loading={index < 4 ? "eager" : "lazy"}
                 sizes="(min-width: 1024px) 22vw, (min-width: 640px) 30vw, 45vw"
@@ -207,7 +208,7 @@ export default function AlbumGallery({
           <div className="relative flex-1">
             <Image
               src={active.src}
-              alt={active.alt}
+              alt={active.alt[lang]}
               fill
               sizes="100vw"
               className="object-contain"
@@ -225,9 +226,11 @@ export default function AlbumGallery({
               {c.prev}
             </button>
             <p className="min-w-0 flex-1 text-center text-xs text-paper/70">
-              {active.caption ? <span className="block">{active.caption}</span> : null}
+              {active.caption ? (
+                <span className="block">{active.caption[lang]}</span>
+              ) : null}
               <span className="block font-mono uppercase tracking-widest2">
-                {imageCredits[openIndex ?? 0]}
+                {imageCredits[openIndex ?? 0] ?? ""}
               </span>
             </p>
             <button

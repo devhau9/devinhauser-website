@@ -42,7 +42,33 @@ type Props = {
  * bekannt — der Browser sendet ihn nie mit —, deshalb passiert das im
  * Klick-Handler. Ohne Javascript bleibt der Link trotzdem korrekt, nur ohne
  * Sprungmarke: eine echte progressive Verbesserung, kein Javascript-Zwang.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * TRAGFLAECHE AUF DEM TELEFON (21.08.2026)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Gemessen wurde am 21.08.2026 eine tatsaechliche Trefferflaeche von 16 x 20px
+ * je Sprache — zwei Buchstaben ohne jede Polsterung. Das ist mit dem Daumen
+ * kaum zu treffen und lag unter jeder gaengigen Empfehlung.
+ *
+ * Die Loesung aendert NICHT das Aussehen: `DE | EN` bleibt genau so klein und
+ * unaufdringlich wie vorher. Vergroessert wird allein der unsichtbare Kasten
+ * um die Beschriftung — unter 640px auf mindestens 44 x 44px, darueber faellt
+ * er per `sm:` auf das bisherige Mass zurueck, damit der Kopf am Desktop
+ * unveraendert bleibt. Weil beide Sprachen denselben Kasten bekommen, bleiben
+ * aktive Sprache und Fokusring exakt mittig und gleich gross.
+ *
+ * Das `-my-[14px]` ist der Grund, weshalb der Kopf dabei NICHT hoeher wird:
+ * 44px Kasten minus zweimal 14px negativer Aussenabstand ergeben wieder die
+ * 16px, die die Zeile vorher belegt hat. Ohne diesen Ausgleich waere der
+ * Sprachumschalter das hoechste Element der Kopfzeile geworden und haette sie
+ * von 71px auf 77px wachsen lassen — was zwei fest notierte 73px-Annahmen
+ * (die Mindesthoehe des Heros und den Scroll-Versatz der Anker) verstimmt
+ * haette. Die Trefferflaeche ragt jetzt unsichtbar in die Polsterung der
+ * Kopfzeile hinein, genau wofuer diese Polsterung da ist.
  */
+const SWITCH_BOX =
+  "inline-flex min-h-[44px] min-w-[44px] items-center justify-center " +
+  "-my-[14px] sm:my-0 sm:min-h-0 sm:min-w-0";
 export default function LanguageSwitch({ lang, className = "", onNavigate }: Props) {
   const pathname = usePathname() ?? "/";
   const { canonicalPath } = splitLangPath(pathname);
@@ -68,7 +94,7 @@ export default function LanguageSwitch({ lang, className = "", onNavigate }: Pro
               <span
                 aria-current="true"
                 aria-label={t.currentLanguage(LANG_NAME[code])}
-                className="text-paper"
+                className={`${SWITCH_BOX} text-paper`}
               >
                 {LANG_LABEL[code]}
               </span>
@@ -85,7 +111,7 @@ export default function LanguageSwitch({ lang, className = "", onNavigate }: Pro
                   event.preventDefault();
                   window.location.assign(`${href}${hash}`);
                 }}
-                className="rounded-sm text-slate-light transition-colors hover:text-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
+                className={`${SWITCH_BOX} rounded-sm text-slate-light transition-colors hover:text-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red sm:focus-visible:outline-offset-4`}
               >
                 {LANG_LABEL[code]}
               </Link>

@@ -36,7 +36,7 @@ const LIST = "mt-4 space-y-2 leading-relaxed text-graphite";
 export default function PrivacyDe() {
   return (
     <main className="bg-white">
-      <section className="section-pad !pb-32 !pt-40 sm:!pt-48">
+      <section className="section-pad !pb-32 !pt-24 sm:!pt-48">
         <div className="mx-auto max-w-2xl">
           <p className="eyebrow mb-5">Rechtliches</p>
           {/* Weiches Trennzeichen im Titel: "DATENSCHUTZERKLÄRUNG" ist ein

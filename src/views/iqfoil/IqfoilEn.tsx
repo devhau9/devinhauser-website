@@ -101,7 +101,7 @@ const SOURCES = [
 export default function IqfoilEn() {
   return (
     <main>
-      <article className="section-pad bg-white">
+      <article className="section-pad !pt-24 sm:!pt-28 md:!pt-40 lg:!pt-48 bg-white">
         <div className="mx-auto max-w-content">
           <nav aria-label="Breadcrumb" className="mb-8">
             <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
@@ -328,7 +328,7 @@ export default function IqfoilEn() {
           <section className="mt-16 border-t border-hairline pt-12">
             <h2 className={H2}>Racing at altitude — Silvaplana</h2>
             <p className={P}>
-              My home spot is Lake Silvaplana in the Engadin, at around 1 800 m
+              In summer I train on Lake Silvaplana in the Engadin, at around 1 800 m
               above sea level. The regional tourism board describes the Maloja
               wind there as blowing at 3 to 6 Beaufort, which is roughly 12 to
               49 km/h — a steady breeze at the bottom of that range, a properly
@@ -371,9 +371,9 @@ export default function IqfoilEn() {
               a year on it.
             </p>
             <p className={P}>
-              Alongside the racing I shoot and edit my own photo, video and drone
-              content, which is why most of what you see on this site was filmed
-              from inside the sport rather than from the beach.
+              Alongside the racing I shoot and edit my own photo and video, which is
+              why most of what you see on this site was taken from inside the
+              sport rather than from the beach.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
               <Link

@@ -57,8 +57,14 @@ const COPY: Record<
  * Medienlinks. Die Trennung laeuft deshalb ueber drei Mittel gleichzeitig:
  *   • eigene ZEILE unter den Hauptknoepfen, mit sichtbarem Abstand
  *   • andere DARSTELLUNG — Textlinks mit feiner Unterlinie statt Flaechen
- *   • kleinere SCHRIFT und gedaempfte Farbe
+ *   • gedaempfte FARBE statt Papierweiss
  * Der rote Knopf bleibt der einzige gefuellte Knopf im Bild.
+ *
+ * NACHTRAG 21.08.2026: Die Schriftgroesse war urspruenglich das vierte Mittel
+ * (11px gegen 12px der Knoepfe). Auf dem Telefon war das zu klein zum Lesen,
+ * deshalb stehen beide Ebenen jetzt auf 12px. Die Rangfolge tragen die drei
+ * verbleibenden Mittel weiterhin deutlich genug — ein Unterschied von einem
+ * Pixel hat sie ohnehin nie hergestellt.
  */
 export default function Hero({ lang }: { lang: Lang }) {
   const c = COPY[lang];
@@ -90,10 +96,23 @@ export default function Hero({ lang }: { lang: Lang }) {
           Fassung vom 19.08. leicht reduziert (63 → 58 svh), weil unter den
           Hauptknöpfen jetzt eine zweite, flache Zeile steht: ohne diese
           Korrektur wüchse der Hero auf kleinen Geräten über die Bildhöhe
-          hinaus und der Bildausschnitt verschöbe sich. */}
-      <div aria-hidden className="relative h-[58svh] shrink-0 sm:h-[60svh] lg:h-[61svh]" />
+          hinaus und der Bildausschnitt verschöbe sich.
 
-      <div className="relative w-full px-6 pb-16 sm:px-10 sm:pb-20 lg:px-16">
+          Die Höhe steckt seit dem 21.08.2026 in `.hero-spacer` (globals.css),
+          weil sie zusätzlich das Cookie-Banner berücksichtigen muss: Solange
+          das Banner steht, rückt der Text um dessen Höhe nach oben, damit die
+          beiden Knöpfe nicht darunter verschwinden. Was hier oben wegfällt,
+          kommt unten über `.hero-content-pad` wieder dazu — die Höhe des
+          Abschnitts und damit der Bildausschnitt bleiben unverändert. Ohne
+          Banner sind es unverändert 58/60/61 svh. */}
+      <div aria-hidden className="hero-spacer relative shrink-0" />
+
+      {/* `hero-content-pad` ersetzt das frühere `pb-16 sm:pb-20`. Es ist
+          derselbe Abstand — plus genau der Betrag, den `.hero-spacer` oben
+          wegnimmt, solange das Cookie-Banner steht. Dadurch bleibt die Höhe
+          des Hero-Abschnitts konstant und mit ihr der Bildausschnitt.
+          Begründung ausführlich in globals.css. */}
+      <div className="hero-content-pad relative w-full px-6 sm:px-10 lg:px-16">
         <div className="mx-auto max-w-content">
           <h1 className="animate-fade-in-up font-display text-[16vw] leading-[0.88] tracking-wide text-paper sm:text-7xl lg:text-8xl">
             DEVIN HAUSER
@@ -123,20 +142,20 @@ export default function Hero({ lang }: { lang: Lang }) {
             </Link>
           </div>
 
-          {/* Ebene 2 — bewusst flach: Textlinks, keine Flächen, kleinere Schrift. */}
+          {/* Ebene 2 — bewusst flach: Textlinks, keine Flächen, gedämpfte Farbe. */}
           <nav
             aria-label={c.secondaryLabel}
             className="mt-6 flex animate-fade-in-up flex-wrap items-center gap-x-7 gap-y-3 [animation-delay:360ms]"
           >
             <Link
               href={sectionHref(lang, SECTION_ID.social)}
-              className="rounded-sm font-mono text-[11px] uppercase tracking-widest2 text-slate-light underline decoration-slate-light/40 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
+              className="rounded-sm font-mono text-xs uppercase tracking-widest2 text-slate-light underline decoration-slate-light/40 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
             >
               {c.social}
             </Link>
             <Link
               href={localizedPath("/media", lang)}
-              className="rounded-sm font-mono text-[11px] uppercase tracking-widest2 text-slate-light underline decoration-slate-light/40 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
+              className="rounded-sm font-mono text-xs uppercase tracking-widest2 text-slate-light underline decoration-slate-light/40 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
             >
               {c.gallery}
             </Link>

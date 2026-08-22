@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getPublicAlbums } from "@/lib/albums";
+import { getPublicAlbums, localized } from "@/lib/albums";
 import {
   SECTION_ID,
   UI,
@@ -38,7 +38,7 @@ export const MEDIA_TITLE: Record<Lang, string> = {
 
 export const MEDIA_DESCRIPTION: Record<Lang, string> = {
   de: "Fotoalben von Trainingstagen, Regattawochen und Shootings — aufgenommen rund um Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz.",
-  en: "Photo albums from training sessions, race weeks and shoots — shot by Swiss IQFoil and Wingfoil athlete Devin Hauser.",
+  en: "Photo albums from training sessions, race weeks and shoots, from around Swiss IQFoil and Wingfoil athlete Devin Hauser.",
 };
 
 const COPY: Record<
@@ -62,7 +62,7 @@ const COPY: Record<
     crumb: "Galerie",
     eyebrow: "Galerie",
     heading: "BILDER VOM WASSER",
-    lead: "Alben von Trainingstagen, Regattawochen und Shootings. Das meiste entsteht zwischen den Sessions — Kamera, Drohne und alles dazwischen mache ich selbst.",
+    lead: "Alben von Trainingstagen, Regattawochen und Shootings. Vieles davon entsteht zwischen den Sessions, mit der Kamera.",
     rights:
       "Diese Galerie ist keine öffentliche Pressebild-Datenbank. Die Bilder werden zum Anschauen gezeigt und nicht zum freien Herunterladen angeboten. Wo die Urheberschaft belegt ist, steht der Fotograf beim Bild; wo sie es nicht ist, steht die sachliche Herkunftszeile. Für eine konkrete Nutzung bitte kurz anfragen.",
     emptyLabel: "Die ersten Alben entstehen gerade",
@@ -77,7 +77,7 @@ const COPY: Record<
     crumb: "Gallery",
     eyebrow: "Gallery",
     heading: "PHOTOS FROM THE WATER",
-    lead: "Albums from training days, race weeks and shoots. I shoot most of this myself — camera, drone and all — in between sessions.",
+    lead: "Albums from training days, race weeks and shoots. A lot of it comes together between sessions, with a camera.",
     rights:
       "This gallery is not a public press image library. Photos are shown for viewing and are not offered as free downloads. Where authorship is documented, the photographer is credited with the image; where it is not, a factual source line is shown instead. For a specific use, please get in touch first.",
     emptyLabel: "The first albums are being prepared",
@@ -95,7 +95,7 @@ export default function MediaIndexView({ lang }: { lang: Lang }) {
   const t = UI[lang];
 
   return (
-    <main className="section-pad bg-white">
+    <main className="section-pad !pt-24 sm:!pt-28 md:!pt-40 lg:!pt-48 bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -148,14 +148,14 @@ export default function MediaIndexView({ lang }: { lang: Lang }) {
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-mist">
                     <Image
                       src={album.coverImage}
-                      alt={c.coverAlt(album.title)}
+                      alt={c.coverAlt(localized(album.title, lang))}
                       fill
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />
                   </div>
                   <h2 className="mt-5 font-display text-2xl tracking-wide text-ink">
-                    {album.title}
+                    {localized(album.title, lang)}
                   </h2>
                   <p className="mt-2 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
                     {formatDate(album.date, lang)} · {album.location} · {album.sport}

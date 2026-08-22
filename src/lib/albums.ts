@@ -1,6 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { Album, AlbumImage, RightsClass } from "./album-types";
+import type {
+  Album,
+  AlbumImage,
+  LocalizedText,
+  RightsClass,
+} from "./album-types";
 import type { Lang } from "./i18n";
 
 /**
@@ -35,11 +40,73 @@ import type { Lang } from "./i18n";
  * fremdes Material zum Download angeboten wird.
  */
 
-export type { Album, AlbumImage, RightsClass };
+export type { Album, AlbumImage, LocalizedText, RightsClass };
+
+/** Zweisprachigen Text in der gewuenschten Sprache lesen. */
+export function localized(text: LocalizedText, lang: Lang): string {
+  return text[lang];
+}
 
 const ALBUMS_DIR = path.join(process.cwd(), "content", "albums");
 
 const RIGHTS_VALUES: RightsClass[] = ["own", "licensed-use", "restricted"];
+
+/** Beide Sprachen vorhanden und nicht leer. */
+function isLocalizedText(value: unknown): value is LocalizedText {
+  if (typeof value !== "object" || value === null) return false;
+  const t = value as Partial<LocalizedText>;
+  return (
+    typeof t.de === "string" &&
+    t.de.trim().length > 0 &&
+    typeof t.en === "string" &&
+    t.en.trim().length > 0
+  );
+}
+
+/**
+ * Wie streng eine Rechteklasse ist. Höher = strenger.
+ *
+ * Damit wird „einschränken" zu einem Vergleich statt zu einer Fallunter-
+ * scheidung: Ein Bild darf seine Klasse nur auf einen Wert setzen, der
+ * mindestens so streng ist wie die des Albums.
+ */
+const RIGHTS_RANK: Record<RightsClass, number> = {
+  own: 0,
+  "licensed-use": 1,
+  restricted: 2,
+};
+
+/**
+ * Hauptschalter für öffentliche Downloads.
+ *
+ * V1 der Galerie zeigt nur an. Ein Presse-/Downloadbereich soll später
+ * getrennt vom normalen Galeriesystem entstehen — nicht über dieses Flag,
+ * sondern über einen eigenen, geschützten Weg. Bis dahin bleibt es `false`.
+ */
+const DOWNLOADS_ENABLED = false;
+
+/**
+ * Die tatsächlich geltende Rechteklasse eines Bildes.
+ *
+ * Ohne eigene Angabe gilt die des Albums. Mit eigener Angabe gilt die
+ * STRENGERE der beiden — selbst wenn eine Inhaltsdatei etwas anderes
+ * behauptet. Der Loader weist solche Dateien zwar ohnehin ab; diese Funktion
+ * ist die zweite Sicherung, damit eine gelockerte Klasse auch dann nicht
+ * durchkommt, wenn sie auf einem anderen Weg hier ankommt.
+ */
+export function effectiveRights(album: Album, image?: AlbumImage): RightsClass {
+  const own = image?.rights;
+  if (!own) return album.rights;
+  return RIGHTS_RANK[own] >= RIGHTS_RANK[album.rights] ? own : album.rights;
+}
+
+/**
+ * Der Credit, der für ein Bild gilt — Bildangabe vor Albumangabe.
+ * Rohwert, ohne Anzeigelogik.
+ */
+function rawCredit(album: Album, image?: AlbumImage): string {
+  return (image?.credit ?? album.credit ?? "").trim();
+}
 
 /**
  * Prüft ein einzelnes Bild.
@@ -54,10 +121,16 @@ const RIGHTS_VALUES: RightsClass[] = ["own", "licensed-use", "restricted"];
 function isAlbumImage(value: unknown): value is AlbumImage {
   if (typeof value !== "object" || value === null) return false;
   const i = value as Partial<AlbumImage>;
+  if (i.rights !== undefined && !RIGHTS_VALUES.includes(i.rights)) return false;
+  if (i.caption !== undefined && !isLocalizedText(i.caption)) return false;
+  if (i.credit !== undefined && typeof i.credit !== "string") return false;
+  if (i.photographer !== undefined && typeof i.photographer !== "string") {
+    return false;
+  }
   return (
     typeof i.src === "string" &&
     i.src.length > 0 &&
-    typeof i.alt === "string" &&
+    isLocalizedText(i.alt) &&
     typeof i.width === "number" &&
     Number.isFinite(i.width) &&
     typeof i.height === "number" &&
@@ -72,27 +145,64 @@ function isAlbumImage(value: unknown): value is AlbumImage {
  */
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-function isAlbum(value: unknown): value is Album {
-  if (typeof value !== "object" || value === null) return false;
+/**
+ * Prüft ein Album und nennt bei Ablehnung den GENAUEN Grund.
+ *
+ * Rückgabe `null` heisst gültig. Alles andere ist die Fehlermeldung, die im
+ * Build erscheint. Ein boolescher Rückgabewert war hier zu wenig: „Schema
+ * unvollständig" hilft niemandem, der um 23 Uhr ein Album nachträgt.
+ */
+function albumProblem(value: unknown): string | null {
+  if (typeof value !== "object" || value === null) return "kein Objekt";
   const a = value as Partial<Album>;
-  return (
-    typeof a.slug === "string" &&
-    typeof a.title === "string" &&
-    typeof a.date === "string" &&
-    typeof a.location === "string" &&
-    typeof a.sport === "string" &&
-    typeof a.description === "string" &&
-    typeof a.photographer === "string" &&
-    typeof a.credit === "string" &&
-    typeof a.rights === "string" &&
-    RIGHTS_VALUES.includes(a.rights as RightsClass) &&
-    typeof a.downloadAllowed === "boolean" &&
-    typeof a.coverImage === "string" &&
-    SLUG_PATTERN.test(a.slug) &&
-    Array.isArray(a.images) &&
-    a.images.length > 0 &&
-    a.images.every(isAlbumImage)
-  );
+
+  if (typeof a.slug !== "string" || !SLUG_PATTERN.test(a.slug)) {
+    return "`slug` fehlt oder enthält unerlaubte Zeichen (nur a–z, 0–9, -)";
+  }
+  if (!isLocalizedText(a.title)) return "`title` braucht { de, en }, beide nicht leer";
+  if (!isLocalizedText(a.description)) {
+    return "`description` braucht { de, en }, beide nicht leer";
+  }
+  if (typeof a.date !== "string") return "`date` fehlt";
+  if (typeof a.location !== "string") return "`location` fehlt";
+  if (typeof a.sport !== "string") return "`sport` fehlt";
+  if (typeof a.photographer !== "string") return "`photographer` fehlt";
+  if (typeof a.credit !== "string") return "`credit` fehlt";
+  if (typeof a.rights !== "string" || !RIGHTS_VALUES.includes(a.rights)) {
+    return "`rights` muss own | licensed-use | restricted sein";
+  }
+  if (typeof a.downloadAllowed !== "boolean") return "`downloadAllowed` fehlt";
+  if (typeof a.coverImage !== "string") return "`coverImage` fehlt";
+  if (!Array.isArray(a.images) || a.images.length === 0) {
+    return "`images` fehlt oder ist leer";
+  }
+
+  for (let n = 0; n < a.images.length; n += 1) {
+    const image = a.images[n];
+    if (!isAlbumImage(image)) {
+      return `Bild ${n + 1}: Pflichtfelder fehlen oder haben den falschen Typ (src, alt {de,en}, width, height)`;
+    }
+
+    // Regel 1 — ein Bild darf die Album-Rechteklasse nur VERSCHÄRFEN.
+    if (image.rights && RIGHTS_RANK[image.rights] < RIGHTS_RANK[a.rights]) {
+      return `Bild ${n + 1} (${image.src}): rights "${image.rights}" ist lockerer als das Album ("${a.rights}"). Ein Bild darf nur einschränken.`;
+    }
+
+    // Regel 2 — alles ausser eigenem Material braucht einen Credit.
+    const effective = image.rights ?? a.rights;
+    const credit = (image.credit ?? a.credit).trim();
+    if (effective !== "own" && credit.length === 0) {
+      return `Bild ${n + 1} (${image.src}): Rechteklasse "${effective}" ohne Credit. Fremdmaterial braucht einen nicht-leeren Credit — sonst würde es fälschlich Devin zugeschrieben.`;
+    }
+  }
+
+  // Dieselbe Credit-Regel auf Albumebene, damit ein Fremdalbum gar nicht erst
+  // ohne Credit existieren kann.
+  if (a.rights !== "own" && a.credit.trim().length === 0) {
+    return `Album-Rechteklasse "${a.rights}" ohne \`credit\`. Fremdmaterial braucht einen nicht-leeren Credit.`;
+  }
+
+  return null;
 }
 
 /**
@@ -114,11 +224,12 @@ export function getAllAlbums(): Album[] {
     try {
       const raw = fs.readFileSync(path.join(ALBUMS_DIR, file), "utf8");
       const parsed: unknown = JSON.parse(raw);
-      if (!isAlbum(parsed)) {
-        console.warn(`[albums] Übersprungen (Schema unvollständig): ${file}`);
+      const problem = albumProblem(parsed);
+      if (problem !== null) {
+        console.error(`[albums] ABGELEHNT — ${file}: ${problem}`);
         continue;
       }
-      albums.push(parsed);
+      albums.push(parsed as Album);
     } catch (error) {
       console.warn(`[albums] Übersprungen (nicht lesbar): ${file}`, error);
     }
@@ -144,7 +255,19 @@ export function getAlbumBySlug(slug: string): Album | undefined {
  * einschränken, aber niemals erweitern.
  */
 export function canDownload(album: Album, image?: AlbumImage): boolean {
-  if (album.rights !== "own") return false;
+  // ───────────────────────────────────────────────────────────────────────────
+  // V1 IST EINE REINE ANZEIGE-GALERIE (Entscheid 22.08.2026)
+  // ───────────────────────────────────────────────────────────────────────────
+  // Solange kein Presse-/Downloadbereich existiert, wird KEIN Download
+  // angeboten — auch nicht für eigenes Material. Diese eine Zeile ist die
+  // Sperre. Sie steht bewusst ganz oben und vor jeder anderen Prüfung, damit
+  // keine Inhaltsdatei und keine spätere Ergänzung sie umgehen kann.
+  //
+  // Zum Aktivieren später: diese Zeile entfernen. Dann greift wieder die
+  // vollständige Regel darunter — und die hat sich nicht geändert.
+  if (!DOWNLOADS_ENABLED) return false;
+
+  if (effectiveRights(album, image) !== "own") return false;
   if (!album.downloadAllowed) return false;
   if (image && image.downloadAllowed === false) return false;
   return true;
@@ -200,6 +323,35 @@ export function displayCredit(raw: string, lang: Lang): string {
 }
 
 /**
+ * Credit eines einzelnen Bildes, rechtebewusst.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * DER FEHLER, DEN DIESE FUNKTION VERHINDERT (gefunden 22.08.2026)
+ * ─────────────────────────────────────────────────────────────────────────────
+ * `displayCredit()` allein ersetzt einen leeren Credit durch „Bild: Archiv
+ * Devin Hauser" — unabhängig von der Rechteklasse. Bei eigenem Material ist
+ * das genau richtig. Bei einem Bild der Klasse "licensed-use" oder
+ * "restricted" wäre es eine FALSCHE URHEBERZUSCHREIBUNG: Die Aufnahme eines
+ * fremden Fotografen bekäme Devins Archivzeile.
+ *
+ * Der Loader lässt so ein Album gar nicht erst durch (siehe `albumProblem`).
+ * Diese Funktion ist die zweite Sicherung an der Anzeigestelle: Für alles
+ * ausser eigenem Material gibt es die Archivzeile nie, sondern nur einen
+ * echten Credit — oder gar keinen.
+ */
+export function imageCredit(
+  album: Album,
+  image: AlbumImage,
+  lang: Lang
+): string | null {
+  const credit = rawCredit(album, image);
+  if (effectiveRights(album, image) === "own") {
+    return displayCredit(credit, lang);
+  }
+  return credit.length > 0 ? credit : null;
+}
+
+/**
  * Kurzer, ehrlicher Hinweistext je Rechteklasse — wird im UI angezeigt.
  *
  * WORTWAHL IST HIER EINE EHRLICHKEITSFRAGE. Die frühere Formulierung lautete
@@ -234,10 +386,28 @@ const RIGHTS_NOTICE: Record<Lang, Record<RightsClass | "own-nodownload", string>
   },
 };
 
-export function rightsNotice(album: Album, lang: Lang): string {
+export function rightsNotice(album: Album, lang: Lang, image?: AlbumImage): string {
   const table = RIGHTS_NOTICE[lang];
-  if (album.rights === "own") {
-    return album.downloadAllowed ? table.own : table["own-nodownload"];
+  const effective = effectiveRights(album, image);
+  if (effective === "own") {
+    return canDownload(album, image) ? table.own : table["own-nodownload"];
   }
-  return table[album.rights];
+  return table[effective];
+}
+
+/**
+ * Welche Rechteklassen kommen in diesem Album tatsächlich vor?
+ *
+ * Ein gemischtes Eventalbum — eigene Bilder plus einzelne Aufnahmen eines
+ * Eventfotografen — braucht mehr als einen Hinweistext. Diese Funktion liefert
+ * die vorkommenden Klassen in der Reihenfolge von locker nach streng, damit
+ * die Oberfläche je Klasse genau einen Hinweis zeigen kann statt einen
+ * pauschalen, der für die Hälfte der Bilder falsch wäre.
+ */
+export function rightsClassesInAlbum(album: Album): RightsClass[] {
+  const found = new Set<RightsClass>();
+  for (const image of album.images) {
+    found.add(effectiveRights(album, image));
+  }
+  return [...found].sort((a, b) => RIGHTS_RANK[a] - RIGHTS_RANK[b]);
 }

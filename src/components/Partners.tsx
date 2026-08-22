@@ -112,7 +112,7 @@ const COPY: Record<
   en: {
     eyebrow: "Partners",
     heading: "PARTNERS",
-    lead: "Proud to work with partners, organisations and supporters who back my journey in international racing.",
+    lead: "I work with partners, organisations and supporters who help make international racing possible.",
     officialSite: "official website",
     footerQuestion: "Sponsor or media?",
     footerLink: "Request access through the Partner Portal",

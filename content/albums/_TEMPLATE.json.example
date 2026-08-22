@@ -1,23 +1,49 @@
 {
   "slug": "silvaplana-2026-08-09",
-  "title": "IQFoil Training — Silvaplana",
   "date": "2026-08-09",
-  "location": "Lake Silvaplana, Switzerland",
+  "title": {
+    "de": "IQFoil Training — Silvaplana",
+    "en": "IQFoil Training — Silvaplana"
+  },
+  "description": {
+    "de": "Nachmittagssession im Malojawind. Zwischen den Läufen fotografiert.",
+    "en": "Afternoon session on the Maloja wind. Shot between runs."
+  },
+  "location": "Silvaplanersee, Schweiz",
   "sport": "IQFoil",
-  "description": "Afternoon session on the Maloja wind. Shot between runs.",
   "photographer": "Devin Hauser",
-  "credit": "Photos: Devin Hauser",
+  "credit": "Fotos: Devin Hauser",
   "rights": "own",
-  "downloadAllowed": true,
-  "coverImage": "/media/silvaplana-2026-08-09/2026-08-09_silvaplana_iqfoil_001.jpg",
+  "downloadAllowed": false,
+  "coverImage": "/media/silvaplana-2026-08-09/001.jpg",
   "tags": ["IQFoil", "Silvaplana"],
+  "featured": false,
   "noindex": false,
   "images": [
     {
-      "src": "/media/silvaplana-2026-08-09/2026-08-09_silvaplana_iqfoil_001.jpg",
-      "alt": "IQFoil rider foiling across Lake Silvaplana in afternoon wind",
+      "src": "/media/silvaplana-2026-08-09/001.jpg",
+      "alt": {
+        "de": "Devin Hauser foilt bei Nachmittagswind über den Silvaplanersee",
+        "en": "Devin Hauser foiling across Lake Silvaplana in afternoon wind"
+      },
       "width": 2000,
       "height": 1333
+    },
+    {
+      "src": "/media/silvaplana-2026-08-09/002.jpg",
+      "alt": {
+        "de": "Devin Hauser an der Wendemarke, Segelnummer SUI-134 sichtbar",
+        "en": "Devin Hauser at the turning mark, sail number SUI-134 visible"
+      },
+      "caption": {
+        "de": "Zweiter Lauf, kurz vor der Luvtonne.",
+        "en": "Second race, just before the windward mark."
+      },
+      "width": 2000,
+      "height": 1333,
+      "photographer": "Tobias Meier",
+      "credit": "Photo: Tobias Meier",
+      "rights": "licensed-use"
     }
   ]
 }

@@ -8,4 +8,4 @@ Status: leer, wartet auf Content-Sichtung
 - Trainingsalltag (Silvaplana, Camps)
 - Ziele 2026: [PRÜFEN]
 - Ziele 2027: [PRÜFEN]
-- Langfristiges Ziel: LA 2028 (Olympia) — Zwischenziele Medaillen EM/WM [PRÜFEN] genaue Formulierung
+- Langfristiges Ziel: Olympische Spiele, ohne festes Jahr (Fact Freeze 22.08.2026, Punkt 4.6 — jede Jahreszahl ist gesperrt)

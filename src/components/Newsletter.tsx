@@ -28,14 +28,14 @@ const COPY: Record<
 > = {
   de: {
     eyebrow: "Newsletter",
-    heading: "DEM WEG FOLGEN",
+    heading: "UPDATES VOM WASSER",
     lead: "Wettkampf-Updates, Trainingslager, Geschichten hinter den Kulissen und wichtige Meilensteine.",
     badge: "Newsletter startet bald",
     imageAlt: "Devin Hauser beim IQFoil-Training",
   },
   en: {
     eyebrow: "Newsletter",
-    heading: "FOLLOW THE JOURNEY",
+    heading: "UPDATES FROM THE WATER",
     lead: "Competition updates, training camps, behind-the-scenes stories and important milestones.",
     badge: "Newsletter launching soon",
     imageAlt: "Devin Hauser training IQFoil",
@@ -75,7 +75,19 @@ export default function Newsletter({ lang }: { lang: Lang }) {
               className="h-1.5 w-1.5 shrink-0 rounded-full bg-red"
               aria-hidden="true"
             />
-            <span className="min-w-0 font-mono text-[0.7rem] uppercase leading-relaxed tracking-widest2 text-graphite sm:text-xs">
+            {/* 21.08.2026: vorher `text-[0.7rem]` (11,2px) unter 640px. Der
+                Hinweis trägt eine Information — nämlich dass der Newsletter
+                noch nicht läuft — und muss deshalb auch auf dem Telefon
+                lesbar sein. Jetzt durchgehend 12px.
+
+                `leading-relaxed` ist bewusst ENTFERNT und nicht durch
+                `leading-4` ergänzt: Tailwind gibt `.leading-4` vor
+                `.leading-relaxed` aus, ein Nebeneinander hätte also weiterhin
+                1.625 ergeben. Die alte Fassung kam ab 640px über `sm:text-xs`
+                auf eine Zeilenhöhe von 16px; genau die stellt `leading-4`
+                wieder her — ab 640px bleibt die Zeilenhöhe damit exakt wie
+                vorher, statt auf 19,5px zu wachsen. */}
+            <span className="min-w-0 font-mono text-xs uppercase leading-4 tracking-widest2 text-graphite">
               {c.badge}
             </span>
           </div>

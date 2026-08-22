@@ -83,8 +83,16 @@ const OLYMPIC_VARIANTS = {
   },
 } as const;
 
-/** Umschalter für den A/B-Vergleich. "A" = bestehendes Bild, "B" = credit-sicher. */
-const OLYMPIC_VARIANT: keyof typeof OLYMPIC_VARIANTS = "A";
+/**
+ * Umschalter für den A/B-Vergleich. "A" = bestehendes Bild, "B" = credit-sicher.
+ *
+ * ENTSCHEID DEVIN 22.08.2026: Variante B. Gewünscht ist eine Darstellung, in
+ * der das Bild vollständig und kontrolliert sichtbar ist. B zeigt den Athleten
+ * frei fliegend auf dem Foil, mit lesbarer Segelnummer und Namenszug, vor dem
+ * Schweizer Heimrevier Silvaplana — und liegt als bereits web-optimierte Datei
+ * (2560 px, 635 KB) vor.
+ */
+const OLYMPIC_VARIANT: keyof typeof OLYMPIC_VARIANTS = "B";
 
 const COPY: Record<
   Lang,
@@ -102,7 +110,7 @@ const COPY: Record<
     eyebrow: "Der Weg zu den",
     heading: "OLYMPISCHEN SPIELEN",
     lead: "Mein Ziel ist es, die Schweiz an den Olympischen Spielen zu vertreten.",
-    body: "Jedes Training, jeder Wettkampf und jede Herausforderung gehört zu diesem Weg — hin zum höchsten Niveau des internationalen Segelsports.",
+    body: "Dazwischen liegen die internationalen Regatten und die Trainingsblöcke auf dem Silvaplanersee.",
     timeline: [
       { period: "2026", text: "Internationale Erfahrung sammeln" },
       { period: "2027", text: "Mich mit den Besten der Welt messen" },
@@ -113,7 +121,7 @@ const COPY: Record<
     eyebrow: "Road to the",
     heading: "OLYMPIC GAMES",
     lead: "My goal is to represent Switzerland at the Olympic Games.",
-    body: "Every training session, competition and challenge is part of the journey towards the highest level of international sailing.",
+    body: "Between here and there are the international regattas and the training blocks on Lake Silvaplana.",
     timeline: [
       { period: "2026", text: "Building international experience" },
       { period: "2027", text: "Competing among the world's best" },

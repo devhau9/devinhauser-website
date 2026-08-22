@@ -145,7 +145,7 @@ export default function ImprintView({ lang }: { lang: Lang }) {
 
   return (
     <main className="bg-white">
-      <section className="section-pad !pb-32 !pt-40 sm:!pt-48">
+      <section className="section-pad !pb-32 !pt-24 sm:!pt-48">
         <div className="mx-auto max-w-2xl">
           <p className="eyebrow mb-5">{c.eyebrow}</p>
           <h1 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">

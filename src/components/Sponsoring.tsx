@@ -30,9 +30,9 @@ const COPY: Record<
     eyebrow: "Partnerschaft",
     heading: "PARTNERSCHAFT",
     paragraphs: [
-      "Ich suche Partner, die an den Weg glauben — nicht nur an das Endergebnis.",
+      "Internationales Racing kostet Material, Anreisen und Trainingszeit. Dafür suche ich Partner.",
       "Ich starte international im IQFoil und im Wingfoil Racing und zeige die Arbeit dahinter über Fotos, Videos und Social Media.",
-      "Gemeinsam lässt sich eine Zusammenarbeit bauen, die zu beiden Seiten passt — von Markenpräsenz und Produktintegration bis zu echten Inhalten und langfristigem Storytelling.",
+      "Wie eine Zusammenarbeit konkret aussieht, bespreche ich am liebsten direkt. Eine kurze Nachricht genügt.",
     ],
     opportunities: "Möglichkeiten einer Zusammenarbeit",
     capabilities: [
@@ -41,16 +41,16 @@ const COPY: Record<
         text: "Präsenz auf meiner Website, im Wettkampfumfeld und auf meinen Social-Media-Kanälen.",
       },
       {
-        title: "Content & Storytelling",
-        text: "Fotos, Videos, Drohnenaufnahmen und echte Geschichten hinter den Kulissen.",
+        title: "Bilder & Videos",
+        text: "Aufnahmen von Regatten und Trainingstagen.",
       },
       {
         title: "Produktintegration",
         text: "Produkte im echten Einsatz — im Training, im Wettkampf und im Alltag.",
       },
       {
-        title: "Individuelle Partnerschaften",
-        text: "Langfristige Kampagnen, Events und Aktivierungen rund um gemeinsame Ziele.",
+        title: "Längerfristig",
+        text: "Auf Wunsch eine Zusammenarbeit über eine ganze Saison statt über ein einzelnes Event.",
       },
     ],
     ctaPrimary: "Partner werden",
@@ -61,9 +61,9 @@ const COPY: Record<
     eyebrow: "Partnership",
     heading: "PARTNERSHIP",
     paragraphs: [
-      "I'm looking for partners who believe in the journey — not just the final result.",
+      "Racing internationally costs equipment, travel and training time. That is what I'm looking for partners for.",
       "I compete internationally in IQFoil and Wingfoil and share the work behind it through photography, video and social media.",
-      "Together, we can build a partnership that fits both sides — from brand visibility and product integration to authentic content and long-term storytelling.",
+      "What a partnership actually looks like is something I'd rather work out directly. A short message is enough.",
     ],
     opportunities: "Partnership Opportunities",
     capabilities: [
@@ -72,16 +72,16 @@ const COPY: Record<
         text: "Presence across my website, racing environment and social channels.",
       },
       {
-        title: "Content & Storytelling",
-        text: "Photography, video, drone footage and authentic behind-the-scenes stories.",
+        title: "Photo & Video",
+        text: "Footage from regattas and training days.",
       },
       {
         title: "Product Integration",
         text: "Natural product integration through training, racing and everyday use.",
       },
       {
-        title: "Custom Partnerships",
-        text: "Long-term campaigns, events and activations built around shared goals.",
+        title: "Longer Term",
+        text: "If it suits both sides, working across a full season rather than a single event.",
       },
     ],
     ctaPrimary: "Become a Partner",

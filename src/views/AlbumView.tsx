@@ -5,6 +5,9 @@ import {
   canDownload,
   displayCredit,
   downloadHref,
+  imageCredit,
+  localized,
+  rightsClassesInAlbum,
   rightsNotice,
 } from "@/lib/albums";
 import type { Album } from "@/lib/album-types";
@@ -41,7 +44,7 @@ const COPY: Record<
     gallery: "Galerie",
     noDownload: "Für dieses Album wird kein Download angeboten",
     outro:
-      "Ich bin Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz. Fotos, Videos und Drohnenaufnahmen mache ich grösstenteils selbst — rund um Wettkämpfe und Training.",
+      "Ich bin Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz. Fotos und Videos mache ich grösstenteils selbst — rund um Wettkämpfe und Training.",
     aboutCta: "Über mich",
     workCta: "Zusammenarbeiten",
   },
@@ -50,7 +53,7 @@ const COPY: Record<
     gallery: "Gallery",
     noDownload: "Download not available for this album",
     outro:
-      "I'm Devin Hauser, a Swiss IQFoil and Wingfoil racing athlete. I shoot photo, video and drone content myself, mostly around racing and training.",
+      "I'm Devin Hauser, a Swiss IQFoil and Wingfoil racing athlete. I shoot photo and video myself, mostly around racing and training.",
     aboutCta: "About me",
     workCta: "Work with me",
   },
@@ -69,7 +72,7 @@ const COPY: Record<
  * eigene Standardbild.
  */
 export function albumMetadata(album: Album, lang: Lang): Metadata {
-  const title = `${album.title} — ${formatDate(album.date, lang)}`;
+  const title = `${localized(album.title, lang)} — ${formatDate(album.date, lang)}`;
   const shareImage =
     album.rights === "own" ? album.coverImage : SHARE_FALLBACK_IMAGE;
 
@@ -77,9 +80,9 @@ export function albumMetadata(album: Album, lang: Lang): Metadata {
     lang,
     path: `/media/${album.slug}`,
     title,
-    description: album.description,
+    description: localized(album.description, lang),
     image: shareImage,
-    imageAlt: album.title,
+    imageAlt: localized(album.title, lang),
     type: "article",
     noindex: album.noindex === true,
   });
@@ -108,19 +111,22 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
 
   const downloadFlags = album.images.map((image) => canDownload(album, image));
   const downloadHrefs = album.images.map((image) => downloadHref(image));
+  // Rechtebewusst: Fremdmaterial bekommt NIE die Archivzeile als Notnagel.
   const imageCredits = album.images.map((image) =>
-    displayCredit(image.credit ?? album.credit, lang)
+    imageCredit(album, image, lang)
   );
   const anyDownloads = albumHasDownloads(album);
   const albumCredit = displayCredit(album.credit, lang);
 
-  const listImages = album.rights === "own";
+  // Bildliste fuer Google Images nur, wenn JEDES Bild eigenes Material ist.
+  // Ein einziges Fremdbild im Album genuegt, um die Liste wegzulassen.
+  const listImages = rightsClassesInAlbum(album).every((r) => r === "own");
 
   const imageObjectsJsonLd = {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
-    name: album.title,
-    description: album.description,
+    name: localized(album.title, lang),
+    description: localized(album.description, lang),
     datePublished: album.date,
     inLanguage: lang,
     contentLocation: { "@type": "Place", name: album.location },
@@ -130,8 +136,8 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
           image: album.images.slice(0, 12).map((image, index) => ({
             "@type": "ImageObject",
             contentUrl: absoluteUrl(image.src),
-            caption: image.caption ?? image.alt,
-            creditText: imageCredits[index],
+            caption: localized(image.caption ?? image.alt, lang),
+            creditText: imageCredits[index] ?? undefined,
             width: image.width,
             height: image.height,
           })),
@@ -140,7 +146,7 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
   };
 
   return (
-    <main className="section-pad bg-white">
+    <main className="section-pad !pt-24 sm:!pt-28 md:!pt-40 lg:!pt-48 bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -149,7 +155,7 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
               { name: c.home, path: localizedPath("/", lang) },
               { name: c.gallery, path: localizedPath("/media", lang) },
               {
-                name: album.title,
+                name: localized(album.title, lang),
                 path: localizedPath(`/media/${album.slug}`, lang),
               },
             ])
@@ -176,18 +182,18 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
               </Link>
             </li>
             <li aria-hidden>/</li>
-            <li className="text-ink">{album.title}</li>
+            <li className="text-ink">{localized(album.title, lang)}</li>
           </ol>
         </nav>
 
         <h1 className="max-w-3xl font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
-          {album.title.toUpperCase()}
+          {localized(album.title, lang).toUpperCase()}
         </h1>
         <p className="mt-4 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
           {formatDate(album.date, lang)} · {album.location} · {album.sport}
         </p>
         <p className="mt-6 max-w-xl leading-relaxed text-graphite">
-          {album.description}
+          {localized(album.description, lang)}
         </p>
 
         <div className="card-surface mt-8 p-6 sm:p-7">
@@ -208,7 +214,7 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
           images={album.images}
           downloadFlags={downloadFlags}
           downloadHrefs={downloadHrefs}
-          albumTitle={album.title}
+          albumTitle={localized(album.title, lang)}
           imageCredits={imageCredits}
           lang={lang}
         />

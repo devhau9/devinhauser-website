@@ -22,6 +22,15 @@
   body {
     background-color: #ffffff;
     color: #0a0e14;
+
+    /* Platz für das Cookie-Banner reservieren, solange es steht.
+       `--cookie-banner-h` wird von CookieConsent.tsx gesetzt und nach der
+       Entscheidung wieder entfernt — ohne Banner ist der Wert 0px und dieser
+       Innenabstand damit wirkungslos. Ohne ihn läge der untere Rand der
+       Fusszeile dauerhaft unter dem Banner und wäre nicht erreichbar.
+       Der zusätzliche Streifen ist nie sichtbar: Das Banner ist deckend und
+       genau so hoch wie der Abstand, den es erzeugt. */
+    padding-bottom: var(--cookie-banner-h, 0px);
   }
 }
 
@@ -32,6 +41,63 @@
 
   .section-pad {
     @apply px-6 py-28 sm:px-10 md:py-40 lg:px-20 lg:py-48;
+  }
+
+  /*
+   * ───────────────────────────────────────────────────────────────────────────
+   * HERO UND COOKIE-BANNER — ZWEI KLASSEN, DIE SICH GEGENSEITIG AUFHEBEN
+   * ───────────────────────────────────────────────────────────────────────────
+   *
+   * `.hero-spacer` steht ÜBER dem Hero-Text, `.hero-content-pad` DARUNTER.
+   * Solange das Cookie-Banner sichtbar ist, nimmt der Abstandshalter oben
+   * genau so viel weg, wie der Innenabstand unten dazubekommt:
+   *
+   *     Höhe des Hero = (58svh − X) + Textblock + (4rem + X)
+   *                   =  58svh      + Textblock +  4rem      ← X kürzt sich weg
+   *
+   * Das ist der ganze Trick, und er ist der Grund, weshalb es zwei Klassen
+   * statt einer sind. Ein blosses Verkleinern des Abstandshalters hätte den
+   * Hero-Abschnitt selbst schrumpfen lassen — und weil das Hero-Bild mit
+   * `fill` an genau diesem Abschnitt hängt, hätte sich damit der BILDAUSSCHNITT
+   * geändert: Erstbesucher hätten einen anderen Bildausschnitt gesehen als
+   * alle anderen, und beim Klick auf „Akzeptieren" wäre die ganze Seite
+   * darunter gesprungen. Bei gleichbleibender Abschnittshöhe passiert beides
+   * nicht: Das Bild behält seinen genehmigten Ausschnitt, alles unterhalb des
+   * Heros bleibt an Ort und Stelle, und es bewegt sich nur der Textblock
+   * innerhalb des Bildes.
+   *
+   * Ohne Banner ist `--cookie-banner-offset` nicht gesetzt, der Wert ist 0px
+   * und beide Klassen ergeben exakt die bisherigen Masse (58/60/61 svh oben,
+   * 4rem bzw. 5rem unten).
+   *
+   * `max()` ist die Notbremse für sehr flache Fenster: Dort kann der Text
+   * nicht weit genug nach oben, der Abstandshalter bleibt bei 16svh stehen
+   * und die beiden Werte kürzen sich nicht mehr vollständig weg. Auf solchen
+   * Geräten liegt die flache zweite Zeile („Social Media" / „Galerie ansehen")
+   * weiterhin hinter dem Banner — die beiden Hauptknöpfe stehen frei.
+   */
+  .hero-spacer {
+    height: max(16svh, calc(58svh - var(--cookie-banner-offset, 0px)));
+  }
+
+  .hero-content-pad {
+    padding-bottom: calc(4rem + var(--cookie-banner-offset, 0px));
+  }
+
+  @media (min-width: 640px) {
+    .hero-spacer {
+      height: max(18svh, calc(60svh - var(--cookie-banner-offset, 0px)));
+    }
+
+    .hero-content-pad {
+      padding-bottom: calc(5rem + var(--cookie-banner-offset, 0px));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-spacer {
+      height: max(18svh, calc(61svh - var(--cookie-banner-offset, 0px)));
+    }
   }
 
   .eyebrow {
