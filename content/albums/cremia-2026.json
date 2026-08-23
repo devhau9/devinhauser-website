@@ -37,8 +37,8 @@
       "width": 2000,
       "height": 1333,
       "caption": {
-        "de": "ENSIS Demo Days",
-        "en": "ENSIS Demo Days"
+        "de": "ENSIS Demo Days am Comersee",
+        "en": "ENSIS Demo Days on Lake Como"
       },
       "photographer": "Tobias Meier",
       "credit": "Photo: Tobias Meier",
@@ -271,6 +271,23 @@
       "alt": {
         "de": "Aufnahme knapp über der Wasseroberfläche, Dorf und Bergflanke im Hintergrund",
         "en": "Shot just above the water surface, village and mountainside behind"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Comersee",
+        "en": "Lake Como"
+      },
+      "photographer": "Tobias Meier",
+      "credit": "Photo: Tobias Meier",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/cremia-2026/2026-06-27_cremia_wingfoil_016.jpg",
+      "alt": {
+        "de": "Zwei Wingfoiler in Fahrt, Ufer und Berge im Hintergrund",
+        "en": "Two wingfoilers under way with the shoreline and mountains behind"
       },
       "width": 2000,
       "height": 1333,

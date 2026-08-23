@@ -20,6 +20,7 @@
  */
 
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, test } from "node:test";
@@ -464,11 +465,29 @@ describe("Ausgelieferte Alben", () => {
     for (const slug of geladen) assert.ok(!slug.startsWith("."), slug);
   });
 
-  test("beide Review-Alben werden geladen", () => {
-    assert.deepEqual(
-      albums.map((a) => a.slug).sort(),
-      ["cremia-2026", "silvaplana-2025"]
+  test("alle sechs Review-Alben werden geladen, mit exakter Bildzahl", () => {
+    const erwartet: Record<string, number> = {
+      "silvaplana-2025": 15,
+      "cremia-2026": 16,
+      "embrun-2024": 6,
+      "brest-2025": 5,
+      "arzachena-2025": 6,
+      "cadiz-2026": 5,
+    };
+    assert.deepEqual(albums.map((a) => a.slug).sort(), Object.keys(erwartet).sort());
+    for (const album of albums) {
+      assert.equal(album.images.length, erwartet[album.slug], album.slug);
+    }
+    assert.equal(
+      albums.reduce((n, a) => n + a.images.length, 0),
+      53,
+      "53 Bilder insgesamt"
     );
+  });
+
+  test("Sortierung: neueste zuerst", () => {
+    const daten = albums.map((a) => a.date);
+    assert.deepEqual(daten, [...daten].sort().reverse());
   });
 
   test("jede referenzierte Bilddatei existiert und ist nicht leer", () => {
@@ -535,15 +554,128 @@ describe("Ausgelieferte Alben", () => {
     }
   });
 
-  test("die Urheberangabe ist für beide Alben ausdrücklich typisiert", () => {
+  test("die Urheberangabe ist für alle sechs Alben ausdrücklich typisiert", () => {
+    // Fünf Sailing-Energy-Alben sind eine Agentur, cremia-2026 ist eine Person.
     const erwartet: Record<string, "Person" | "Organization"> = {
       "silvaplana-2025": "Organization",
+      "embrun-2024": "Organization",
+      "brest-2025": "Organization",
+      "arzachena-2025": "Organization",
+      "cadiz-2026": "Organization",
       "cremia-2026": "Person",
     };
     for (const album of albums) {
       const author = albumAuthorJsonLd(album);
       assert.ok(author, `${album.slug}: kein Author`);
       assert.equal(author["@type"], erwartet[album.slug], `${album.slug}`);
+    }
+    const personen = albums.filter(
+      (a) => albumAuthorJsonLd(a)?.["@type"] === "Person"
+    );
+    assert.equal(personen.length, 1, "genau ein Album nennt eine Person");
+  });
+
+  test("die vier Sailing-Energy-Wortlaute bleiben verschieden", () => {
+    // Der Wortlaut stammt je Datei aus `photoshop:Credit`. Wenn zwei Alben
+    // denselben Text zeigen, wurde irgendwo vereinheitlicht — genau das ist
+    // untersagt.
+    const erwartet: Record<string, string> = {
+      "silvaplana-2025": "© Sailing Energy",
+      "cadiz-2026": "© Sailing Energy",
+      "brest-2025": "Sailing Energy",
+      "arzachena-2025": "Sailing Energy",
+      "embrun-2024": "© Sailing Energy / iQfoil Class",
+      "cremia-2026": "Photo: Tobias Meier",
+    };
+    for (const album of albums) {
+      assert.equal(album.credit, erwartet[album.slug], `${album.slug} Album-Credit`);
+      for (const img of album.images) {
+        // Der Wortlaut steht zusätzlich am Bild, damit eine spätere Änderung
+        // am Album-Credit die Einzelbilder nicht still überschreibt.
+        assert.equal(
+          imageCredit(album, img, "de"),
+          erwartet[album.slug],
+          `${album.slug} ${img.src}`
+        );
+      }
+    }
+    const wortlaute = new Set(
+      albums.map((a) => a.credit).filter((c) => c.includes("Sailing Energy"))
+    );
+    assert.equal(wortlaute.size, 3, "drei verschiedene Sailing-Energy-Wortlaute");
+  });
+
+  test("SHA-256 jeder Bilddatei stimmt mit dem Manifest", () => {
+    const zeilen = fs
+      .readFileSync(path.join(process.cwd(), "tests/asset-sha256.csv"), "utf8")
+      .trim()
+      .split("\n")
+      .slice(1);
+    assert.equal(zeilen.length, 53, "Manifest deckt 53 Dateien ab");
+    const manifest = new Map(
+      zeilen.map((z) => z.trim().split(",") as [string, string])
+    );
+    for (const album of albums) {
+      for (const img of album.images) {
+        const erwartet = manifest.get(img.src);
+        assert.ok(erwartet, `nicht im Manifest: ${img.src}`);
+        const ist = crypto
+          .createHash("sha256")
+          .update(fs.readFileSync(path.join(process.cwd(), "public", img.src)))
+          .digest("hex");
+        assert.equal(ist, erwartet, `SHA weicht ab: ${img.src}`);
+      }
+    }
+  });
+
+  test("keine Waisen unter public/media", () => {
+    // Jede Datei im Medienordner muss von einem Album referenziert werden.
+    // Eine Waise waere ein Ueberbleibsel einer aelteren Lieferung — sie liegt
+    // oeffentlich unter ihrer URL, ohne dass eine Rechteangabe sie begleitet.
+    const referenziert = new Set(albums.flatMap((a) => a.images.map((i) => i.src)));
+    const wurzel = path.join(process.cwd(), "public/media");
+    for (const slug of fs.readdirSync(wurzel)) {
+      const ordner = path.join(wurzel, slug);
+      if (!fs.statSync(ordner).isDirectory()) continue;
+      for (const datei of fs.readdirSync(ordner)) {
+        if (datei.startsWith(".")) continue;
+        assert.ok(
+          referenziert.has(`/media/${slug}/${datei}`),
+          `Waise: /media/${slug}/${datei}`
+        );
+      }
+    }
+  });
+
+  test("keine offenen PENDING-/UNKNOWN-/REQUIRED-Marker in den Alben", () => {
+    const verdaechtig =
+      /\b(PENDING|UNKNOWN|REQUIRED|TBD|TODO|NICHT BELEGT|DEVIN BESTÄTIGEN|HIER EINTRAGEN)\b/i;
+    for (const album of albums) {
+      const roh = fs.readFileSync(
+        path.join(process.cwd(), `content/albums/${album.slug}.json`),
+        "utf8"
+      );
+      const treffer = roh.match(verdaechtig);
+      assert.equal(treffer, null, `${album.slug}: Marker ${treffer?.[0]}`);
+    }
+  });
+
+  test("keine Testfixtures in content/albums oder public/media", () => {
+    // Album-Dateien sind ausschliesslich die sechs echten plus die Vorlage und
+    // die README. Ein liegengebliebenes Testalbum wuerde mitgebaut.
+    const erlaubt = new Set([
+      "README.md",
+      "_TEMPLATE.json.example",
+      ...albums.map((a) => `${a.slug}.json`),
+    ]);
+    for (const datei of fs.readdirSync(path.join(process.cwd(), "content/albums"))) {
+      if (datei.startsWith(".")) continue;
+      assert.ok(erlaubt.has(datei), `unerwartete Datei: content/albums/${datei}`);
+    }
+    const slugs = new Set(albums.map((a) => a.slug));
+    for (const eintrag of fs.readdirSync(path.join(process.cwd(), "public/media"))) {
+      if (eintrag.startsWith(".") || eintrag === ".gitkeep") continue;
+      assert.ok(slugs.has(eintrag), `unerwarteter Ordner: public/media/${eintrag}`);
     }
   });
 });

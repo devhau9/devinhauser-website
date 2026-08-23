@@ -1,0 +1,111 @@
+{
+  "slug": "brest-2025",
+  "date": "2025-07-26",
+  "title": {
+    "de": "iQFOiL Youth & Junior Worlds Brest 2025",
+    "en": "iQFOiL Youth & Junior Worlds Brest 2025"
+  },
+  "description": {
+    "de": "iQFOiL Youth & Junior Worlds in Brest, 26. bis 30. Juli 2025. 149 Fahrer in der U19 — das grösste Feld, in dem ich bisher gestartet bin. Am Ende Platz 37. Fotografiert hat Sailing Energy.",
+    "en": "iQFOiL Youth & Junior Worlds in Brest, 26 to 30 July 2025. 149 sailors in the U19 fleet — the biggest field I have raced in so far. It finished 37th. Photos by Sailing Energy."
+  },
+  "location": "Brest, Bretagne, Frankreich",
+  "sport": "IQFoil",
+  "photographer": "Sailing Energy",
+  "photographerKind": "organization",
+  "credit": "Sailing Energy",
+  "rights": "licensed-use",
+  "downloadAllowed": false,
+  "coverImage": "/media/brest-2025/2025-07-26_brest_iqfoil_001.jpg",
+  "tags": [
+    "IQFoil",
+    "Brest",
+    "Frankreich",
+    "Sailing Energy",
+    "2025"
+  ],
+  "featured": false,
+  "noindex": true,
+  "images": [
+    {
+      "src": "/media/brest-2025/2025-07-26_brest_iqfoil_001.jpg",
+      "alt": {
+        "de": "Devin Hauser am Trapez, Schweizerkreuz am Helm und Namenszug D. HAUSER am Segel",
+        "en": "Devin Hauser hiking out, Swiss cross on the helmet and the name D. HAUSER on the sail"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Weltmeisterschaft Brest 2025",
+        "en": "World Championship Brest 2025"
+      },
+      "credit": "Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/brest-2025/2025-07-26_brest_iqfoil_002.jpg",
+      "alt": {
+        "de": "Devin Hauser an der orangen Wendemarke, Segelnummer SUI 134 sichtbar",
+        "en": "Devin Hauser at the orange turning mark, sail number SUI 134 visible"
+      },
+      "width": 2000,
+      "height": 1334,
+      "caption": {
+        "de": "Weltmeisterschaft Brest 2025",
+        "en": "World Championship Brest 2025"
+      },
+      "credit": "Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/brest-2025/2025-07-26_brest_iqfoil_003.jpg",
+      "alt": {
+        "de": "Fahrer am Trapez, dahinter das Segel AUS 605",
+        "en": "Sailor hiking out with the sail AUS 605 behind"
+      },
+      "width": 2000,
+      "height": 1332,
+      "caption": {
+        "de": "Weltmeisterschaft Brest 2025",
+        "en": "World Championship Brest 2025"
+      },
+      "credit": "Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/brest-2025/2025-07-26_brest_iqfoil_004.jpg",
+      "alt": {
+        "de": "Dichtes Feld mit Segeln aus mehreren Nationen, SUI 134 in der Mitte",
+        "en": "Tight fleet with sails from several nations, SUI 134 in the middle"
+      },
+      "width": 2000,
+      "height": 1334,
+      "caption": {
+        "de": "Weltmeisterschaft Brest 2025",
+        "en": "World Championship Brest 2025"
+      },
+      "credit": "Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/brest-2025/2025-07-26_brest_iqfoil_005.jpg",
+      "alt": {
+        "de": "Feld auf dem Wasser vor Brest, SUI 134 zwischen den anderen Segeln",
+        "en": "Fleet on the water off Brest, SUI 134 among the other sails"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Weltmeisterschaft Brest 2025",
+        "en": "World Championship Brest 2025"
+      },
+      "credit": "Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    }
+  ]
+}

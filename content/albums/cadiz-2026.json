@@ -1,0 +1,111 @@
+{
+  "slug": "cadiz-2026",
+  "date": "2026-03-10",
+  "title": {
+    "de": "iQFOiL Games Cádiz 2026",
+    "en": "iQFOiL Games Cádiz 2026"
+  },
+  "description": {
+    "de": "iQFOiL Games in Cádiz, 10. März 2026. Frühe Saisonregatta an der spanischen Atlantikküste, Stadtkulisse direkt hinter der Bahn. Fotografiert hat Sailing Energy.",
+    "en": "iQFOiL Games in Cádiz, 10 March 2026. An early-season regatta on the Spanish Atlantic coast, with the city right behind the race course. Photos by Sailing Energy."
+  },
+  "location": "Cádiz, Spanien",
+  "sport": "IQFoil",
+  "photographer": "Sailing Energy",
+  "photographerKind": "organization",
+  "credit": "© Sailing Energy",
+  "rights": "licensed-use",
+  "downloadAllowed": false,
+  "coverImage": "/media/cadiz-2026/2026-03-10_cadiz_iqfoil_001.jpg",
+  "tags": [
+    "IQFoil",
+    "Cádiz",
+    "Spanien",
+    "Sailing Energy",
+    "2026"
+  ],
+  "featured": false,
+  "noindex": true,
+  "images": [
+    {
+      "src": "/media/cadiz-2026/2026-03-10_cadiz_iqfoil_001.jpg",
+      "alt": {
+        "de": "Devin Hauser am Trapez vor der Skyline von Cádiz, Namenszug am Segel",
+        "en": "Devin Hauser hiking out in front of the Cádiz skyline, his name on the sail"
+      },
+      "width": 2000,
+      "height": 1377,
+      "caption": {
+        "de": "iQFOiL Games Cádiz 2026",
+        "en": "iQFOiL Games Cádiz 2026"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/cadiz-2026/2026-03-10_cadiz_iqfoil_002.jpg",
+      "alt": {
+        "de": "Devin Hauser und ein zweiter Fahrer nebeneinander, SUI 134 sichtbar",
+        "en": "Devin Hauser and a second sailor side by side, SUI 134 visible"
+      },
+      "width": 2000,
+      "height": 1414,
+      "caption": {
+        "de": "iQFOiL Games Cádiz 2026",
+        "en": "iQFOiL Games Cádiz 2026"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/cadiz-2026/2026-03-10_cadiz_iqfoil_003.jpg",
+      "alt": {
+        "de": "Startlinie in Cádiz, Feld dicht am Startschiff",
+        "en": "Start line in Cádiz, fleet tight to the committee boat"
+      },
+      "width": 2000,
+      "height": 1184,
+      "caption": {
+        "de": "iQFOiL Games Cádiz 2026",
+        "en": "iQFOiL Games Cádiz 2026"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/cadiz-2026/2026-03-10_cadiz_iqfoil_004.jpg",
+      "alt": {
+        "de": "Feld auf Raumkurs, Segel mehrerer Nationen nebeneinander",
+        "en": "Fleet on a reach, sails of several nations side by side"
+      },
+      "width": 2000,
+      "height": 1166,
+      "caption": {
+        "de": "iQFOiL Games Cádiz 2026",
+        "en": "iQFOiL Games Cádiz 2026"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/cadiz-2026/2026-03-10_cadiz_iqfoil_005.jpg",
+      "alt": {
+        "de": "Fahrer an der roten Wendemarke, Stadt im Hintergrund",
+        "en": "Sailor at the red turning mark with the city behind"
+      },
+      "width": 2000,
+      "height": 1428,
+      "caption": {
+        "de": "iQFOiL Games Cádiz 2026",
+        "en": "iQFOiL Games Cádiz 2026"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    }
+  ]
+}
