@@ -189,7 +189,7 @@ export default function AlbumGallery({
                 <a
                   href={downloadHrefs[openIndex ?? 0]}
                   download
-                  className="rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10"
+                  className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
                 >
                   {c.download}
                 </a>
@@ -198,7 +198,7 @@ export default function AlbumGallery({
                 ref={closeButtonRef}
                 type="button"
                 onClick={close}
-                className="rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10"
+                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
               >
                 {c.close}
               </button>
@@ -229,7 +229,7 @@ export default function AlbumGallery({
             <button
               type="button"
               onClick={() => step(-1)}
-              className="rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10"
+                  className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
               aria-label={c.prevLabel}
             >
               {c.prev}
@@ -245,7 +245,7 @@ export default function AlbumGallery({
             <button
               type="button"
               onClick={() => step(1)}
-              className="rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10"
+                  className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-sm border border-paper/30 px-4 py-2 font-mono text-[11px] uppercase tracking-widest2 text-paper transition-colors hover:border-paper hover:bg-paper/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
               aria-label={c.nextLabel}
             >
               {c.next}
