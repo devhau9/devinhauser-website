@@ -1,0 +1,79 @@
+{
+  "slug": "silvaplana-worlds-2024",
+  "date": "2024-08-20",
+  "title": {
+    "de": "iQFOiL U23 Worlds Silvaplana 2024",
+    "en": "iQFOiL U23 Worlds Silvaplana 2024"
+  },
+  "description": {
+    "de": "iQFOiL U23 Worlds auf dem Silvaplanersee, 20. bis 22. August 2024. Aufnahmen von der Bahn und aus dem Feld — wer auf diesen Bildern fährt, ist nicht durchgehend belegt, deshalb bleiben die Bildunterschriften bei den Segelnummern. Fotografiert hat Sailing Energy.",
+    "en": "iQFOiL U23 Worlds on Lake Silvaplana, 20 to 22 August 2024. Shots from the course and the fleet — who is sailing in these frames is not documented throughout, so the captions stay with the sail numbers. Photos by Sailing Energy."
+  },
+  "location": "Silvaplanersee, Graubünden, Schweiz",
+  "sport": "IQFoil",
+  "photographer": "Sailing Energy",
+  "photographerKind": "organization",
+  "credit": "© Sailing Energy",
+  "rights": "licensed-use",
+  "downloadAllowed": false,
+  "coverImage": "/media/silvaplana-worlds-2024/2024-08-20_silvaplana_iqfoil_001.jpg",
+  "tags": [
+    "IQFoil",
+    "Silvaplana",
+    "Graubünden",
+    "Sailing Energy",
+    "2024"
+  ],
+  "featured": false,
+  "noindex": false,
+  "images": [
+    {
+      "src": "/media/silvaplana-worlds-2024/2024-08-20_silvaplana_iqfoil_001.jpg",
+      "alt": {
+        "de": "SUI 255 und MEX 246 foilen nebeneinander auf dem Silvaplanersee",
+        "en": "SUI 255 and MEX 246 foiling side by side on Lake Silvaplana"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Zwei Fahrer auf der Bahn",
+        "en": "Two sailors on the course"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/silvaplana-worlds-2024/2024-08-20_silvaplana_iqfoil_002.jpg",
+      "alt": {
+        "de": "Mitzieher an der orangen Wendemarke, Hintergrund verwischt",
+        "en": "Panning shot at the orange turning mark with a blurred background"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "An der Wendemarke",
+        "en": "At the turning mark"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/silvaplana-worlds-2024/2024-08-20_silvaplana_iqfoil_003.jpg",
+      "alt": {
+        "de": "Mitzieher: zwei Fahrer dicht nebeneinander, Ufer verwischt",
+        "en": "Panning shot: two sailors close together, the shoreline blurred"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Tempo auf dem Silvaplanersee",
+        "en": "Speed on Lake Silvaplana"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    }
+  ]
+}

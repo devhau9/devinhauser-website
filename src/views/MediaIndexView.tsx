@@ -126,7 +126,7 @@ export default function MediaIndexView({ lang }: { lang: Lang }) {
         <nav aria-label={t.breadcrumbLabel} className="mb-8">
           <ol className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest2 text-graphite">
             <li>
-              <Link href={localizedPath("/", lang)} className="hover:text-ink">
+              <Link href={localizedPath("/", lang)} className="-my-2 inline-flex min-h-[44px] items-center py-2 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red">
                 {c.home}
               </Link>
             </li>

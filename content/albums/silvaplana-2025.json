@@ -25,7 +25,7 @@
     "2025"
   ],
   "featured": false,
-  "noindex": true,
+  "noindex": false,
   "images": [
     {
       "src": "/media/silvaplana-2025/2025-08-19_silvaplana_iqfoil_001.jpg",

@@ -166,7 +166,7 @@ export default function Footer({ lang }: { lang: Lang }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${social.name} (${t.newTab})`}
-                  className="transition-transform duration-200 ease-out hover:scale-110"
+                  className="-m-2 inline-flex min-h-[44px] min-w-[44px] items-center justify-center transition-transform duration-200 ease-out hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
                 >
                   <social.Icon className="h-8 w-8" />
                 </a>

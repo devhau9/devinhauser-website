@@ -10,7 +10,7 @@
     "en": "Two days at the ENSIS Demo Days in Cremia on Lake Como, 27 and 28 June 2026. No scoring and no start list — testing gear, switching between wing foil and windsurf foil. Photos by Tobias Meier."
   },
   "location": "Cremia, Comersee, Italien",
-  "sport": "Wingfoil",
+  "sport": "Wingfoil & Windsurf-Foil",
   "photographer": "Tobias Meier",
   "photographerKind": "person",
   "credit": "Photo: Tobias Meier",
@@ -26,13 +26,13 @@
     "2026"
   ],
   "featured": false,
-  "noindex": true,
+  "noindex": false,
   "images": [
     {
       "src": "/media/cremia-2026/2026-06-27_cremia_wingfoil_001.jpg",
       "alt": {
-        "de": "Fahrer zieht den Wing tief in die Kurve, Gischt am Board",
-        "en": "Rider pulling the wing low through a turn with spray off the board"
+        "de": "Fahrer mit ENSIS-Wing dicht über dem Wasser, Board am Foil",
+        "en": "Rider with an ENSIS wing low over the water, the board up on the foil"
       },
       "width": 2000,
       "height": 1333,
@@ -133,8 +133,8 @@
     {
       "src": "/media/cremia-2026/2026-06-27_cremia_wingfoil_007.jpg",
       "alt": {
-        "de": "Wingfoiling, zweite Perspektive auf denselben Kurs",
-        "en": "Wingfoiling, second perspective on the same run"
+        "de": "Wingfoiling mit blau-schwarzem ENSIS-Wing, Ufer und Häuser im Hintergrund",
+        "en": "Wingfoiling with a blue and black ENSIS wing, shoreline and houses behind"
       },
       "width": 2000,
       "height": 1333,

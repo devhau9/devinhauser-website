@@ -1,0 +1,79 @@
+{
+  "slug": "sa-rapita-2024",
+  "date": "2024-10-28",
+  "title": {
+    "de": "iQFOiL Youth & Junior Worlds Sa Ràpita 2024",
+    "en": "iQFOiL Youth & Junior Worlds Sa Ràpita 2024"
+  },
+  "description": {
+    "de": "iQFOiL Youth & Junior Worlds in Sa Ràpita auf Mallorca, 28. bis 31. Oktober 2024. Spätherbst im Mittelmeer, langes Feld auf der Bahn. Fotografiert hat Sailing Energy für die iQFOiL Class.",
+    "en": "iQFOiL Youth & Junior Worlds in Sa Ràpita, Mallorca, 28 to 31 October 2024. Late autumn in the Mediterranean with a long fleet on the course. Photos by Sailing Energy for the iQFOiL Class."
+  },
+  "location": "Sa Ràpita, Mallorca, Spanien",
+  "sport": "IQFoil",
+  "photographer": "Sailing Energy",
+  "photographerKind": "organization",
+  "credit": "© Sailing Energy / Iqfoil Class",
+  "rights": "licensed-use",
+  "downloadAllowed": false,
+  "coverImage": "/media/sa-rapita-2024/2024-10-28_sa-rapita_iqfoil_001.jpg",
+  "tags": [
+    "IQFoil",
+    "Sa Ràpita",
+    "Mallorca",
+    "Sailing Energy",
+    "2024"
+  ],
+  "featured": false,
+  "noindex": false,
+  "images": [
+    {
+      "src": "/media/sa-rapita-2024/2024-10-28_sa-rapita_iqfoil_001.jpg",
+      "alt": {
+        "de": "Devin Hauser vorn, dahinter LAT 30, EST 22 und weitere Segel",
+        "en": "Devin Hauser in front with LAT 30, EST 22 and more sails behind"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Feld auf der Bahn",
+        "en": "Fleet on the course"
+      },
+      "credit": "© Sailing Energy / Iqfoil Class",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/sa-rapita-2024/2024-10-28_sa-rapita_iqfoil_002.jpg",
+      "alt": {
+        "de": "Devin Hauser dicht an der Kamera, dahinter ein Begleitboot",
+        "en": "Devin Hauser close to the camera with a coach boat behind"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Nahe Action",
+        "en": "Close action"
+      },
+      "credit": "© Sailing Energy / Iqfoil Class",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/sa-rapita-2024/2024-10-28_sa-rapita_iqfoil_003.jpg",
+      "alt": {
+        "de": "Devin Hauser am Trapez, Namenszug D. HAUSER am Segel",
+        "en": "Devin Hauser hiking out, the name D. HAUSER on the sail"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Auf der Bahn",
+        "en": "On the course"
+      },
+      "credit": "© Sailing Energy / Iqfoil Class",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "slug": "swissfoiling-2023",
+  "date": "2023-05-06",
+  "title": {
+    "de": "SwissFoiling Wingfoil 2023",
+    "en": "SwissFoiling Wingfoil 2023"
+  },
+  "description": {
+    "de": "SwissFoiling-Wettkampftag am 6. Mai 2023 auf einem Schweizer See. Wing, Sprünge und Windsurf-Foil im selben Revier. Fotografiert hat Marc Weiler.",
+    "en": "A SwissFoiling competition day on 6 May 2023 on a Swiss lake. Wing, jumps and windsurf foiling in the same spot. Photos by Marc Weiler."
+  },
+  "location": "Schweiz",
+  "sport": "Wingfoil",
+  "photographer": "Marc Weiler",
+  "photographerKind": "person",
+  "credit": "Photo: Marc Weiler",
+  "rights": "licensed-use",
+  "downloadAllowed": false,
+  "coverImage": "/media/swissfoiling-2023/2023-05-06_swissfoiling_wingfoil_001.jpg",
+  "tags": [
+    "Wingfoil",
+    "SwissFoiling",
+    "Schweiz",
+    "2023"
+  ],
+  "featured": false,
+  "noindex": false,
+  "images": [
+    {
+      "src": "/media/swissfoiling-2023/2023-05-06_swissfoiling_wingfoil_001.jpg",
+      "alt": {
+        "de": "Sprung mit dem Wing, Startnummer 25, dahinter die steile Felsküste",
+        "en": "A jump with the wing, bib number 25, the steep rocky shore behind"
+      },
+      "width": 2000,
+      "height": 1334,
+      "caption": {
+        "de": "Sprung im Wettkampf",
+        "en": "A jump in competition"
+      },
+      "credit": "Photo: Marc Weiler",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/swissfoiling-2023/2023-05-06_swissfoiling_wingfoil_002.jpg",
+      "alt": {
+        "de": "Hoher Sprung mit dem Wing, darunter ein Windsurfer und ein zweiter Wingfoiler",
+        "en": "A high jump with the wing, a windsurfer and a second wingfoiler below"
+      },
+      "width": 2000,
+      "height": 1334,
+      "caption": {
+        "de": "Über dem Feld",
+        "en": "Above the fleet"
+      },
+      "credit": "Photo: Marc Weiler",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    }
+  ]
+}

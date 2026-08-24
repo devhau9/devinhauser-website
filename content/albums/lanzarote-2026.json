@@ -1,0 +1,79 @@
+{
+  "slug": "lanzarote-2026",
+  "date": "2026-02-07",
+  "title": {
+    "de": "Lanzarote International Regatta 2026",
+    "en": "Lanzarote International Regatta 2026"
+  },
+  "description": {
+    "de": "Lanzarote International Regatta, 7. bis 9. Februar 2026. Frühe Saisonregatta vor der Marina Rubicón, offener Atlantik. Fotografiert hat Sailing Energy.",
+    "en": "Lanzarote International Regatta, 7 to 9 February 2026. An early-season regatta off Marina Rubicón on the open Atlantic. Photos by Sailing Energy."
+  },
+  "location": "Lanzarote, Spanien",
+  "sport": "IQFoil",
+  "photographer": "Sailing Energy",
+  "photographerKind": "organization",
+  "credit": "© Sailing Energy",
+  "rights": "licensed-use",
+  "downloadAllowed": false,
+  "coverImage": "/media/lanzarote-2026/2026-02-07_lanzarote_iqfoil_001.jpg",
+  "tags": [
+    "IQFoil",
+    "Lanzarote",
+    "Spanien",
+    "Sailing Energy",
+    "2026"
+  ],
+  "featured": false,
+  "noindex": false,
+  "images": [
+    {
+      "src": "/media/lanzarote-2026/2026-02-07_lanzarote_iqfoil_001.jpg",
+      "alt": {
+        "de": "Devin Hauser foilt frei über dem Wasser, Helm mit Schweizerkreuz",
+        "en": "Devin Hauser foiling clear of the water, Swiss cross on the helmet"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Auf der Bahn",
+        "en": "On the course"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/lanzarote-2026/2026-02-07_lanzarote_iqfoil_002.jpg",
+      "alt": {
+        "de": "SUI 134 und CRO 30 foilen nebeneinander",
+        "en": "SUI 134 and CRO 30 foiling side by side"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Zwei Fahrer auf der Bahn",
+        "en": "Two sailors on the course"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/lanzarote-2026/2026-02-07_lanzarote_iqfoil_003.jpg",
+      "alt": {
+        "de": "Drei Fahrer auf der Bahn: ITA 888, SUI 134 und GER 9, rechts ein Leuchtturm",
+        "en": "Three sailors on the course: ITA 888, SUI 134 and GER 9, a lighthouse on the right"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Feld vor Lanzarote",
+        "en": "Fleet off Lanzarote"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    }
+  ]
+}

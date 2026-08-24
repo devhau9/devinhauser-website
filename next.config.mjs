@@ -26,6 +26,14 @@ const nextConfig = {
   // die Quelldateien in /public bleiben unverändert.
   images: {
     formats: ["image/avif", "image/webp"],
+
+    // Die Webexporte in public/media sind 2000 px lang. Ohne diese Begrenzung
+    // fordert die Lightbox mit `sizes="100vw"` auf einem 1440-px-Schirm mit
+    // doppelter Pixeldichte die Stufe 3840 an. Next rechnet nichts hoch — es
+    // liefert dieselben 2000 px — legt aber einen zweiten Cache-Eintrag an,
+    // der nie schaerfer sein kann als der erste. Die Liste endet deshalb bei
+    // 2048, der ersten Stufe oberhalb der Quellaufloesung.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
   },
 
   // Kein X-Powered-By-Header. Kein Sicherheitsgewinn im engeren Sinn, aber

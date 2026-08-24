@@ -25,7 +25,7 @@
     "2026"
   ],
   "featured": false,
-  "noindex": true,
+  "noindex": false,
   "images": [
     {
       "src": "/media/cadiz-2026/2026-03-10_cadiz_iqfoil_001.jpg",

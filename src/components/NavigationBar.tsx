@@ -106,7 +106,13 @@ export default function NavigationBar({ lang, links, homeHref }: Props) {
   return (
     <header className="sticky top-0 z-50 border-b border-ink-line bg-ink/90 backdrop-blur">
       <div className="mx-auto flex max-w-content items-center justify-between gap-4 px-6 py-4 sm:px-10 lg:px-16">
-        <Link href={homeHref} className="group flex shrink-0 items-baseline gap-2">
+        {/* Trefferflaeche 44 px, Layout unveraendert: der Innenabstand wird
+            durch denselben negativen Aussenabstand wieder aufgehoben. Die
+            Grundlinie der beiden Woerter bleibt genau dort, wo sie war. */}
+        <Link
+          href={homeHref}
+          className="group -my-2 flex min-h-[44px] min-w-[44px] shrink-0 items-baseline gap-2 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
+        >
           <span className="font-display text-xl tracking-widest2 text-paper">DH</span>
           <span className="hidden max-w-0 overflow-hidden whitespace-nowrap font-mono text-xs uppercase tracking-widest2 text-slate-light opacity-0 transition-all duration-300 ease-out group-hover:max-w-[10rem] group-hover:opacity-100 xl:inline-block">
             Devin Hauser
@@ -155,7 +161,7 @@ export default function NavigationBar({ lang, links, homeHref }: Props) {
             aria-expanded={open}
             aria-controls={panelId}
             aria-label={open ? t.closeMenu : t.openMenu}
-            className={`${LINK_BASE} flex items-center gap-2 rounded-sm border border-ink-line px-4 py-2.5 text-paper hover:border-paper lg:hidden`}
+            className={`${LINK_BASE} -my-[3px] flex min-h-[44px] items-center gap-2 rounded-sm border border-ink-line px-4 py-2.5 text-paper hover:border-paper lg:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper`}
           >
             <span aria-hidden className="flex w-4 flex-col gap-[3px]">
               <span className="h-px w-full bg-paper" />

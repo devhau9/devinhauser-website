@@ -2,12 +2,12 @@
   "slug": "embrun-2024",
   "date": "2024-07-05",
   "title": {
-    "de": "iQFOiL Youth Europeans Embrun 2024",
-    "en": "iQFOiL Youth Europeans Embrun 2024"
+    "de": "iQFOiL Youth & Junior Europeans Embrun 2024",
+    "en": "iQFOiL Youth & Junior Europeans Embrun 2024"
   },
   "description": {
-    "de": "iQFOiL Youth Europeans in Embrun, 5. bis 10. Juli 2024. Erste Europameisterschaft auf diesem Niveau, Stausee in den französischen Alpen, viel Wind am Nachmittag. Fotografiert hat Sailing Energy für die iQFOiL Class.",
-    "en": "iQFOiL Youth Europeans in Embrun, 5 to 10 July 2024. First European Championship at this level, a reservoir in the French Alps, plenty of wind in the afternoons. Photos by Sailing Energy for the iQFOiL Class."
+    "de": "iQFOiL Youth & Junior Europeans in Embrun, 5. bis 10. Juli 2024. Erste Europameisterschaft auf diesem Niveau, Stausee in den französischen Alpen, viel Wind am Nachmittag. Fotografiert hat Sailing Energy für die iQFOiL Class.",
+    "en": "iQFOiL Youth & Junior Europeans in Embrun, 5 to 10 July 2024. First European Championship at this level, a reservoir in the French Alps, plenty of wind in the afternoons. Photos by Sailing Energy for the iQFOiL Class."
   },
   "location": "Embrun, Hautes-Alpes, Frankreich",
   "sport": "IQFoil",
@@ -25,7 +25,7 @@
     "2024"
   ],
   "featured": false,
-  "noindex": true,
+  "noindex": false,
   "images": [
     {
       "src": "/media/embrun-2024/2024-07-05_embrun_iqfoil_001.jpg",

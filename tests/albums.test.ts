@@ -465,14 +465,21 @@ describe("Ausgelieferte Alben", () => {
     for (const slug of geladen) assert.ok(!slug.startsWith("."), slug);
   });
 
-  test("alle sechs Review-Alben werden geladen, mit exakter Bildzahl", () => {
+  test("alle dreizehn Eventalben werden geladen, mit exakter Bildzahl", () => {
     const erwartet: Record<string, number> = {
-      "silvaplana-2025": 15,
       "cremia-2026": 16,
-      "embrun-2024": 6,
-      "brest-2025": 5,
-      "arzachena-2025": 6,
       "cadiz-2026": 5,
+      "lanzarote-2026": 3,
+      "arzachena-2025": 6,
+      "portimao-2025": 2,
+      "silvaplana-2025": 15,
+      "brest-2025": 5,
+      "cadiz-2025": 3,
+      "sa-rapita-2024": 3,
+      "silvaplana-worlds-2024": 3,
+      "embrun-2024": 6,
+      "swiss-sm-pumpfoil-2023": 7,
+      "swissfoiling-2023": 2,
     };
     assert.deepEqual(albums.map((a) => a.slug).sort(), Object.keys(erwartet).sort());
     for (const album of albums) {
@@ -480,8 +487,8 @@ describe("Ausgelieferte Alben", () => {
     }
     assert.equal(
       albums.reduce((n, a) => n + a.images.length, 0),
-      53,
-      "53 Bilder insgesamt"
+      76,
+      "76 Bilder insgesamt"
     );
   });
 
@@ -535,11 +542,20 @@ describe("Ausgelieferte Alben", () => {
     }
   });
 
-  test("beide Alben stehen auf noindex und erlauben keinen Download", () => {
+  test("die Galerie ist freigegeben und erlaubt trotzdem keinen Download", () => {
+    // Seit der Freigabe steht `noindex` ueberall auf false. Die Downloadsperre
+    // haengt NICHT daran: sie kommt aus `DOWNLOADS_ENABLED` und aus
+    // `downloadAllowed` an Album und Bild. Beide bleiben unabhaengig davon zu.
     for (const album of albums) {
-      assert.equal(album.noindex, true, `${album.slug}`);
+      assert.equal(album.noindex ?? false, false, `${album.slug} ist noch noindex`);
       assert.equal(album.downloadAllowed, false, `${album.slug}`);
+      assert.equal(albumHasDownloads(album), false, `${album.slug}`);
     }
+    assert.equal(
+      getPublicAlbums().length,
+      albums.length,
+      "jedes Album muss oeffentlich gelistet sein"
+    );
   });
 
   test("`featured` ist gesetzt und bleibt ohne Dateikopie", () => {
@@ -548,21 +564,29 @@ describe("Ausgelieferte Alben", () => {
     for (const album of albums) {
       assert.equal(typeof album.featured, "boolean", `${album.slug}`);
     }
-    const featured = albums.filter((a) => a.featured === true);
-    for (const album of featured) {
-      assert.equal(album.noindex, true, "ein featured-Album wäre öffentlich");
-    }
+    // Kein Album darf sein Bildmaterial ein zweites Mal unter einem
+    // Best-of-Slug ablegen. Geprueft ueber die Dateipfade, nicht ueber das Flag.
+    const alleSrc = albums.flatMap((a) => a.images.map((i) => i.src));
+    assert.equal(new Set(alleSrc).size, alleSrc.length, "doppelt abgelegte Datei");
   });
 
-  test("die Urheberangabe ist für alle sechs Alben ausdrücklich typisiert", () => {
-    // Fünf Sailing-Energy-Alben sind eine Agentur, cremia-2026 ist eine Person.
+  test("die Urheberangabe ist für alle Alben ausdrücklich typisiert", () => {
+    // Zehn Sailing-Energy-Alben sind eine Agentur; Tobias Meier, Lukas Pitsch
+    // und Marc Weiler sind natuerliche Personen.
     const erwartet: Record<string, "Person" | "Organization"> = {
       "silvaplana-2025": "Organization",
+      "silvaplana-worlds-2024": "Organization",
       "embrun-2024": "Organization",
       "brest-2025": "Organization",
       "arzachena-2025": "Organization",
       "cadiz-2026": "Organization",
+      "cadiz-2025": "Organization",
+      "lanzarote-2026": "Organization",
+      "portimao-2025": "Organization",
+      "sa-rapita-2024": "Organization",
       "cremia-2026": "Person",
+      "swiss-sm-pumpfoil-2023": "Person",
+      "swissfoiling-2023": "Person",
     };
     for (const album of albums) {
       const author = albumAuthorJsonLd(album);
@@ -572,20 +596,27 @@ describe("Ausgelieferte Alben", () => {
     const personen = albums.filter(
       (a) => albumAuthorJsonLd(a)?.["@type"] === "Person"
     );
-    assert.equal(personen.length, 1, "genau ein Album nennt eine Person");
+    assert.equal(personen.length, 3, "drei Alben nennen eine natuerliche Person");
   });
 
-  test("die vier Sailing-Energy-Wortlaute bleiben verschieden", () => {
+  test("die Credit-Wortlaute bleiben verschieden", () => {
     // Der Wortlaut stammt je Datei aus `photoshop:Credit`. Wenn zwei Alben
     // denselben Text zeigen, wurde irgendwo vereinheitlicht — genau das ist
     // untersagt.
     const erwartet: Record<string, string> = {
       "silvaplana-2025": "© Sailing Energy",
+      "silvaplana-worlds-2024": "© Sailing Energy",
       "cadiz-2026": "© Sailing Energy",
+      "cadiz-2025": "© Sailing Energy",
+      "lanzarote-2026": "© Sailing Energy",
       "brest-2025": "Sailing Energy",
       "arzachena-2025": "Sailing Energy",
+      "portimao-2025": "Sailing Energy",
       "embrun-2024": "© Sailing Energy / iQfoil Class",
+      "sa-rapita-2024": "© Sailing Energy / Iqfoil Class",
       "cremia-2026": "Photo: Tobias Meier",
+      "swiss-sm-pumpfoil-2023": "Photo: Lukas Pitsch",
+      "swissfoiling-2023": "Photo: Marc Weiler",
     };
     for (const album of albums) {
       assert.equal(album.credit, erwartet[album.slug], `${album.slug} Album-Credit`);
@@ -602,7 +633,12 @@ describe("Ausgelieferte Alben", () => {
     const wortlaute = new Set(
       albums.map((a) => a.credit).filter((c) => c.includes("Sailing Energy"))
     );
-    assert.equal(wortlaute.size, 3, "drei verschiedene Sailing-Energy-Wortlaute");
+    assert.equal(wortlaute.size, 4, "vier verschiedene Sailing-Energy-Wortlaute");
+    // `iQfoil Class` und `Iqfoil Class` unterscheiden sich nur in einem
+    // Buchstaben. Genau solche Paare verschwinden bei einer Vereinheitlichung
+    // zuerst, deshalb werden sie hier einzeln festgehalten.
+    assert.ok(wortlaute.has("© Sailing Energy / iQfoil Class"));
+    assert.ok(wortlaute.has("© Sailing Energy / Iqfoil Class"));
   });
 
   test("SHA-256 jeder Bilddatei stimmt mit dem Manifest", () => {
@@ -611,7 +647,7 @@ describe("Ausgelieferte Alben", () => {
       .trim()
       .split("\n")
       .slice(1);
-    assert.equal(zeilen.length, 53, "Manifest deckt 53 Dateien ab");
+    assert.equal(zeilen.length, 76, "Manifest deckt 76 Dateien ab");
     const manifest = new Map(
       zeilen.map((z) => z.trim().split(",") as [string, string])
     );
@@ -661,8 +697,8 @@ describe("Ausgelieferte Alben", () => {
   });
 
   test("keine Testfixtures in content/albums oder public/media", () => {
-    // Album-Dateien sind ausschliesslich die sechs echten plus die Vorlage und
-    // die README. Ein liegengebliebenes Testalbum wuerde mitgebaut.
+    // Album-Dateien sind ausschliesslich die dreizehn echten plus die Vorlage
+    // und die README. Ein liegengebliebenes Testalbum wuerde mitgebaut.
     const erlaubt = new Set([
       "README.md",
       "_TEMPLATE.json.example",

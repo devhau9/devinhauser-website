@@ -1,0 +1,143 @@
+{
+  "slug": "swiss-sm-pumpfoil-2023",
+  "date": "2023-08-18",
+  "title": {
+    "de": "Swiss Windsurfing Schweizermeisterschaft Pumpfoil 2023",
+    "en": "Swiss Windsurfing National Championship Pumpfoil 2023"
+  },
+  "description": {
+    "de": "Pumpfoil an der Schweizermeisterschaft von Swiss Windsurfing auf dem Silvaplanersee, 18. August 2023. Ohne Segel und ohne Wing — der Antrieb kommt allein aus dem Pumpen mit dem Körper. Fotografiert hat Lukas Pitsch.",
+    "en": "Pump foiling at the Swiss Windsurfing national championship on Lake Silvaplana, 18 August 2023. No sail and no wing — the drive comes purely from pumping with the body. Photos by Lukas Pitsch."
+  },
+  "location": "Silvaplanersee, Graubünden, Schweiz",
+  "sport": "Pumpfoil",
+  "photographer": "Lukas Pitsch",
+  "photographerKind": "person",
+  "credit": "Photo: Lukas Pitsch",
+  "rights": "licensed-use",
+  "downloadAllowed": false,
+  "coverImage": "/media/swiss-sm-pumpfoil-2023/2023-08-18_silvaplana_pumpfoil_001.jpg",
+  "tags": [
+    "Pumpfoil",
+    "Silvaplana",
+    "Graubünden",
+    "Swiss Windsurfing",
+    "2023"
+  ],
+  "featured": false,
+  "noindex": false,
+  "images": [
+    {
+      "src": "/media/swiss-sm-pumpfoil-2023/2023-08-18_silvaplana_pumpfoil_001.jpg",
+      "alt": {
+        "de": "Fahrer pumpt das Foilboard über den Silvaplanersee, dahinter Wingfoiler",
+        "en": "Rider pumping the foil board across Lake Silvaplana with wingfoilers behind"
+      },
+      "width": 2000,
+      "height": 1331,
+      "caption": {
+        "de": "Pumpfoil auf dem Silvaplanersee",
+        "en": "Pump foiling on Lake Silvaplana"
+      },
+      "credit": "Photo: Lukas Pitsch",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/swiss-sm-pumpfoil-2023/2023-08-18_silvaplana_pumpfoil_002.jpg",
+      "alt": {
+        "de": "Fahrer balanciert frei über dem Wasser, Wald am gegenüberliegenden Ufer",
+        "en": "Rider balanced clear of the water, forest on the far shore"
+      },
+      "width": 2000,
+      "height": 1331,
+      "caption": {
+        "de": "Ruhig über dem Wasser",
+        "en": "Steady above the water"
+      },
+      "credit": "Photo: Lukas Pitsch",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/swiss-sm-pumpfoil-2023/2023-08-18_silvaplana_pumpfoil_003.jpg",
+      "alt": {
+        "de": "Sprung mit dem Foilboard, Bergkette und Wolken dahinter",
+        "en": "A jump on the foil board with the mountain range and clouds behind"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Sprung vor der Bergkette",
+        "en": "A jump against the mountains"
+      },
+      "credit": "Photo: Lukas Pitsch",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/swiss-sm-pumpfoil-2023/2023-08-18_silvaplana_pumpfoil_004.jpg",
+      "alt": {
+        "de": "Hochformat: Sprung mit Griff ans Board über türkisem Wasser",
+        "en": "Vertical format: a jump with a board grab over turquoise water"
+      },
+      "width": 1333,
+      "height": 2000,
+      "caption": {
+        "de": "Griff ans Board",
+        "en": "Board grab"
+      },
+      "credit": "Photo: Lukas Pitsch",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/swiss-sm-pumpfoil-2023/2023-08-18_silvaplana_pumpfoil_005.jpg",
+      "alt": {
+        "de": "Fahrer geht tief in die Knie, das Foil schneidet durch die Oberfläche",
+        "en": "Rider crouching low as the foil cuts through the surface"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Tief über dem Wasser",
+        "en": "Low over the water"
+      },
+      "credit": "Photo: Lukas Pitsch",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/swiss-sm-pumpfoil-2023/2023-08-18_silvaplana_pumpfoil_006.jpg",
+      "alt": {
+        "de": "Hochformat: Sprung, halb über und halb unter der Wasseroberfläche fotografiert",
+        "en": "Vertical format: a jump shot half above and half below the surface"
+      },
+      "width": 1333,
+      "height": 2000,
+      "caption": {
+        "de": "Halb über, halb unter Wasser",
+        "en": "Half above, half below"
+      },
+      "credit": "Photo: Lukas Pitsch",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/swiss-sm-pumpfoil-2023/2023-08-18_silvaplana_pumpfoil_007.jpg",
+      "alt": {
+        "de": "Hochformat: Sprung über dem See, dahinter die Berge des Engadins",
+        "en": "Vertical format: a jump over the lake with the Engadin mountains behind"
+      },
+      "width": 1333,
+      "height": 2000,
+      "caption": {
+        "de": "Über dem Silvaplanersee",
+        "en": "Above Lake Silvaplana"
+      },
+      "credit": "Photo: Lukas Pitsch",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    }
+  ]
+}

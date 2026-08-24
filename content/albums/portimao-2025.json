@@ -1,0 +1,63 @@
+{
+  "slug": "portimao-2025",
+  "date": "2025-09-11",
+  "title": {
+    "de": "iQFOiL Youth & U23 Worlds Portimão 2025",
+    "en": "iQFOiL Youth & U23 Worlds Portimão 2025"
+  },
+  "description": {
+    "de": "iQFOiL Youth & U23 Worlds in Portimão, 11. September 2025. Grosses Feld an der portugiesischen Atlantikküste. In der Männerwertung wurde es Platz 69 von 95. Fotografiert hat Sailing Energy.",
+    "en": "iQFOiL Youth & U23 Worlds in Portimão, 11 September 2025. A large fleet on the Portuguese Atlantic coast. In the men's standings it came out 69th of 95. Photos by Sailing Energy."
+  },
+  "location": "Portimão, Portugal",
+  "sport": "IQFoil",
+  "photographer": "Sailing Energy",
+  "photographerKind": "organization",
+  "credit": "Sailing Energy",
+  "rights": "licensed-use",
+  "downloadAllowed": false,
+  "coverImage": "/media/portimao-2025/2025-09-11_portimao_iqfoil_001.jpg",
+  "tags": [
+    "IQFoil",
+    "Portimão",
+    "Portugal",
+    "Sailing Energy",
+    "2025"
+  ],
+  "featured": false,
+  "noindex": false,
+  "images": [
+    {
+      "src": "/media/portimao-2025/2025-09-11_portimao_iqfoil_001.jpg",
+      "alt": {
+        "de": "Devin Hauser an der gelben Tonne, rechts daneben NED 343",
+        "en": "Devin Hauser at the yellow mark with NED 343 alongside"
+      },
+      "width": 2000,
+      "height": 1334,
+      "caption": {
+        "de": "An der Tonne",
+        "en": "At the mark"
+      },
+      "credit": "Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/portimao-2025/2025-09-11_portimao_iqfoil_002.jpg",
+      "alt": {
+        "de": "Weite Aufnahme des Feldes vor Portimão, dazwischen die Begleitboote",
+        "en": "Wide shot of the fleet off Portimão with the coach boats between them"
+      },
+      "width": 2000,
+      "height": 1500,
+      "caption": {
+        "de": "Das ganze Feld",
+        "en": "The whole fleet"
+      },
+      "credit": "Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    }
+  ]
+}
