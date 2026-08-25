@@ -24,7 +24,6 @@ zuerst; die Startseite zeigt die drei neuesten.
 | `sa-rapita-2024` | 3 | 2024-10-28 | `© Sailing Energy / Iqfoil Class` |
 | `silvaplana-worlds-2024` | 3 | 2024-08-20 | `© Sailing Energy` |
 | `embrun-2024` | 6 | 2024-07-05 | `© Sailing Energy / iQfoil Class` |
-| `swiss-sm-pumpfoil-2023` | 7 | 2023-08-18 | `Photo: Lukas Pitsch` |
 | `swissfoiling-2023` | 2 | 2023-05-06 | `Photo: Marc Weiler` |
 
 **Die sieben Creditformen sind kein Fehler.** Jede stammt aus dem Feld

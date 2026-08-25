@@ -478,7 +478,6 @@ describe("Ausgelieferte Alben", () => {
       "sa-rapita-2024": 3,
       "silvaplana-worlds-2024": 3,
       "embrun-2024": 6,
-      "swiss-sm-pumpfoil-2023": 7,
       "swissfoiling-2023": 2,
     };
     assert.deepEqual(albums.map((a) => a.slug).sort(), Object.keys(erwartet).sort());
@@ -585,7 +584,6 @@ describe("Ausgelieferte Alben", () => {
       "portimao-2025": "Organization",
       "sa-rapita-2024": "Organization",
       "cremia-2026": "Person",
-      "swiss-sm-pumpfoil-2023": "Person",
       "swissfoiling-2023": "Person",
     };
     for (const album of albums) {
@@ -615,7 +613,6 @@ describe("Ausgelieferte Alben", () => {
       "embrun-2024": "© Sailing Energy / iQfoil Class",
       "sa-rapita-2024": "© Sailing Energy / Iqfoil Class",
       "cremia-2026": "Photo: Tobias Meier",
-      "swiss-sm-pumpfoil-2023": "Photo: Lukas Pitsch",
       "swissfoiling-2023": "Photo: Marc Weiler",
     };
     for (const album of albums) {
