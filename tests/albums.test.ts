@@ -465,7 +465,7 @@ describe("Ausgelieferte Alben", () => {
     for (const slug of geladen) assert.ok(!slug.startsWith("."), slug);
   });
 
-  test("alle dreizehn Eventalben werden geladen, mit exakter Bildzahl", () => {
+  test("alle zwoelf Eventalben werden geladen, mit exakter Bildzahl", () => {
     const erwartet: Record<string, number> = {
       "cremia-2026": 16,
       "cadiz-2026": 5,
@@ -486,8 +486,8 @@ describe("Ausgelieferte Alben", () => {
     }
     assert.equal(
       albums.reduce((n, a) => n + a.images.length, 0),
-      76,
-      "76 Bilder insgesamt"
+      69,
+      "69 Bilder insgesamt"
     );
   });
 
@@ -570,8 +570,8 @@ describe("Ausgelieferte Alben", () => {
   });
 
   test("die Urheberangabe ist für alle Alben ausdrücklich typisiert", () => {
-    // Zehn Sailing-Energy-Alben sind eine Agentur; Tobias Meier, Lukas Pitsch
-    // und Marc Weiler sind natuerliche Personen.
+    // Zehn Sailing-Energy-Alben sind eine Agentur; Tobias Meier und
+    // Marc Weiler sind natuerliche Personen.
     const erwartet: Record<string, "Person" | "Organization"> = {
       "silvaplana-2025": "Organization",
       "silvaplana-worlds-2024": "Organization",
@@ -594,7 +594,7 @@ describe("Ausgelieferte Alben", () => {
     const personen = albums.filter(
       (a) => albumAuthorJsonLd(a)?.["@type"] === "Person"
     );
-    assert.equal(personen.length, 3, "drei Alben nennen eine natuerliche Person");
+    assert.equal(personen.length, 2, "zwei Alben nennen eine natuerliche Person");
   });
 
   test("die Credit-Wortlaute bleiben verschieden", () => {
@@ -644,7 +644,7 @@ describe("Ausgelieferte Alben", () => {
       .trim()
       .split("\n")
       .slice(1);
-    assert.equal(zeilen.length, 76, "Manifest deckt 76 Dateien ab");
+    assert.equal(zeilen.length, 69, "Manifest deckt 69 Dateien ab");
     const manifest = new Map(
       zeilen.map((z) => z.trim().split(",") as [string, string])
     );

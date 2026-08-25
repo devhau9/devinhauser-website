@@ -159,7 +159,7 @@ export default function MediaIndexView({ lang }: { lang: Lang }) {
 
         {albums.length > 0 ? (
           <ul className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {albums.map((album) => (
+            {albums.map((album, index) => (
               <li key={album.slug} className="min-w-0">
                 <Link
                   href={localizedPath(`/media/${album.slug}`, lang)}
@@ -170,6 +170,15 @@ export default function MediaIndexView({ lang }: { lang: Lang }) {
                       src={album.coverImage}
                       alt={c.coverAlt(localized(album.title, lang))}
                       fill
+                      // Die erste Kartenreihe nicht verzoegern. Das Raster ist
+                      // einspaltig, ab 640 px zweispaltig, ab 1024 px
+                      // dreispaltig — die ersten drei Titelbilder sind also je
+                      // nach Breite die erste sichtbare Reihe und damit der
+                      // LCP-Kandidat dieser Seite. Ein `loading="lazy"` genau
+                      // dort verschiebt den Ladebeginn hinter das Layout und
+                      // kostet messbar LCP. Alles danach bleibt lazy — dieselbe
+                      // Schwelle wie bei den Albumbildern in AlbumGallery.
+                      loading={index < 3 ? "eager" : "lazy"}
                       sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />

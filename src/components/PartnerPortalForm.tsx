@@ -74,6 +74,14 @@ export default function PartnerPortalForm({ lang }: { lang: Lang }) {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    // Wiedereintritt sperren. Der Knopf ist waehrend `loading` zwar deaktiviert,
+    // aber das ist Darstellung: Ein zweites Submit-Ereignis kann trotzdem
+    // ankommen — Enter im Eingabefeld, ein zweiter Klick im selben Tick, ein
+    // Autofill-Helfer. Zwei Anfragen bedeuten zwei Mails, und beim
+    // Web3Forms-Ratelimit unter Umstaenden eine 429 auf die zweite: Der
+    // Absender saehe einen Fehler, obwohl die Anfrage laengst angekommen ist.
+    if (state === "loading") return;
     setState("loading");
 
     const formData = new FormData(event.currentTarget);
@@ -82,17 +90,50 @@ export default function PartnerPortalForm({ lang }: { lang: Lang }) {
       "subject",
       c.subject(String(formData.get("company") ?? c.unknownCompany))
     );
+    // Antwortadresse ausdruecklich setzen, statt darauf zu vertrauen, dass
+    // Web3Forms das Feld `email` von selbst als Reply-To uebernimmt. Ohne das
+    // muesste die Adresse vor jeder Antwort von Hand aus der Mail kopiert
+    // werden — bei einer Sponsorenwelle genau der Schritt, der vergessen wird.
+    const email = formData.get("email");
+    if (typeof email === "string" && email.length > 0) {
+      formData.append("replyto", email);
+    }
+
+    // Zeitlimit. Ohne das bleibt das Formular bei einer haengenden Verbindung
+    // dauerhaft in `loading`: Knopf deaktiviert, keine Fehlermeldung, kein
+    // Hinweis auf die Ausweichadresse. Genau der Zustand, in dem eine Anfrage
+    // verloren geht, ohne dass es jemand merkt.
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: formData,
+        signal: controller.signal,
       });
-      const result = await response.json();
-      setState(result.success ? "success" : "error");
+      const result: unknown = await response.json();
+
+      // BEIDE Bedingungen. `result.success` allein genuegt nicht: Der Wert
+      // stammt aus einer fremden Antwort, und der Erfolgszustand ist hier eine
+      // Zusage an den Absender, dass seine Anfrage angekommen ist. Web3Forms
+      // antwortet dokumentiert mit 200 und {"success": true} im Erfolgsfall,
+      // mit 400 und {"success": false} bei Fehlern und mit 429 beim Ratelimit.
+      // Bei den letzten beiden darf niemals „Danke" erscheinen.
+      const bestaetigt =
+        response.ok &&
+        typeof result === "object" &&
+        result !== null &&
+        (result as { success?: unknown }).success === true;
+
+      setState(bestaetigt ? "success" : "error");
     } catch {
+      // Netzfehler, Abbruch durch das Zeitlimit oder eine Antwort, die kein
+      // JSON ist — etwa die Fehlerseite eines Zwischenservers.
       setState("error");
+    } finally {
+      clearTimeout(timeout);
     }
   }
 
