@@ -266,6 +266,54 @@
       "credit": "© Sailing Energy",
       "rights": "licensed-use",
       "downloadAllowed": false
+    },
+    {
+      "src": "/media/silvaplana-2025/2025-08-19_silvaplana_iqfoil_016.jpg",
+      "alt": {
+        "de": "Devin Hauser blickt über die Schulter zurück, Namenszug D. HAUSER am Segel, Board auf dem Foil über türkisem Wasser",
+        "en": "Devin Hauser looking back over his shoulder, the name D. HAUSER on the sail, the board up on the foil over turquoise water"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Nahe Action",
+        "en": "Close action"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/silvaplana-2025/2025-08-19_silvaplana_iqfoil_017.jpg",
+      "alt": {
+        "de": "Drei Fahrer foilen in einer Linie: AUT 53, SUI 5 und SUI 134, dahinter das Dorf und wolkenverhangene Berge",
+        "en": "Three sailors foiling in line: AUT 53, SUI 5 and SUI 134, with the village and cloud-covered mountains behind"
+      },
+      "width": 2000,
+      "height": 1333,
+      "caption": {
+        "de": "Auf der Bahn",
+        "en": "On the course"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/silvaplana-2025/2025-08-19_silvaplana_iqfoil_018.jpg",
+      "alt": {
+        "de": "Hochformat: SVK 2 und SUI 134 foilen nebeneinander, am Ufer Chalets und zwei Kites über der Wiese",
+        "en": "Vertical format: SVK 2 and SUI 134 foiling side by side, chalets on the shore and two kites above the meadow"
+      },
+      "width": 1333,
+      "height": 2000,
+      "caption": {
+        "de": "Duell auf der Bahn",
+        "en": "Duel on the course"
+      },
+      "credit": "© Sailing Energy",
+      "rights": "licensed-use",
+      "downloadAllowed": false
     }
   ]
 }
