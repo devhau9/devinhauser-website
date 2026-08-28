@@ -3,6 +3,7 @@ import IqfoilView from "@/views/IqfoilView";
 import {
   IQFOIL_EN_TITLE as TITLE,
   IQFOIL_EN_DESCRIPTION as DESCRIPTION,
+  FAQ_EN,
 } from "@/views/iqfoil/IqfoilEn";
 import { pageMetadata } from "@/lib/metadata";
 import { CONTENT_UPDATED, SITE_URL, absoluteUrl, jsonLdHtml } from "@/lib/site";
@@ -18,10 +19,12 @@ export const metadata: Metadata = pageMetadata({
   type: "article",
 });
 
-// Bewusst KEIN FAQPage-Structured-Data: Google zeigt FAQ-Rich-Results seit 2023
-// praktisch nur noch fuer Behoerden- und Gesundheitsseiten. Das Markup hier
-// einzubauen braechte keinen Nutzen und waere reine Optimierung fuer die
-// Maschine. Der FAQ-Abschnitt existiert fuer Leserinnen und Leser.
+// FAQPage-Structured-Data, seit 29.08.2026 — die fruehere Begruendung dagegen
+// ist ueberholt. Ausgeliefert werden ausschliesslich die Fragen, die auf der
+// Seite WORTGLEICH sichtbar sind und in der Quelle als strukturiert markiert
+// sind. Die Frage nach der Geschwindigkeit steht bewusst NICHT im Markup:
+// Ihre Antwort nennt keine Zahl, taugt also nicht als Snippet — und eine Zahl
+// waere unbelegt.
 const ARTICLE_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -44,12 +47,28 @@ const ARTICLE_JSON_LD = {
   ],
 };
 
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_EN
+    .filter((item) => item.structured)
+    .map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+};
+
 export default function Page() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdHtml(ARTICLE_JSON_LD) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdHtml(FAQ_JSON_LD) }}
       />
       <IqfoilView lang={LANG} />
     </>
