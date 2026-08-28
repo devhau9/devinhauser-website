@@ -93,6 +93,8 @@ const COPY: Record<
     eyebrow: string;
     heading: string;
     lead: string;
+    thanks: string;
+    openTo: string;
     officialSite: string;
     footerQuestion: string;
     footerLink: string;
@@ -101,10 +103,16 @@ const COPY: Record<
   de: {
     eyebrow: "Partner",
     heading: "PARTNER",
-    // Kanonische Sprachregel aus dem Vault: „Partner, Organisationen und
-    // Unterstützer" — nie „Sponsoren", und keine Zahl behaupten. Auf dieser
-    // Seite werden Logos gezeigt, keine Vertragsverhältnisse beschrieben.
+    // Kanonische Sprachregel aus dem Vault: die BESTEHENDEN Logos heissen
+    // „Partner, Organisationen und Unterstützer" — nie „Sponsoren", und es
+    // wird keine Zahl behauptet. Auf dieser Seite werden Logos gezeigt, keine
+    // Vertragsverhältnisse beschrieben.
+    // `openTo` spricht dagegen von künftigen Sponsoren — das ist eine Aussage
+    // über die eigene Offenheit, keine Behauptung über die gezeigten Logos,
+    // und steht deshalb nicht im Widerspruch zur Regel.
     lead: "Ich arbeite mit Partnern, Organisationen und Unterstützern zusammen, die meinen Weg im internationalen Racing mittragen.",
+    thanks: "Ein grosses Dankeschön an alle, die mich auf und neben dem Wasser unterstützen.",
+    openTo: "Ich bin offen für neue Sponsoren, Unterstützer und langfristige Partnerschaften.",
     officialSite: "offizielle Website",
     footerQuestion: "Sponsor oder Medien?",
     footerLink: "Zugang über das Partner-Portal anfragen",
@@ -112,7 +120,9 @@ const COPY: Record<
   en: {
     eyebrow: "Partners",
     heading: "PARTNERS",
-    lead: "I work with partners, organisations and supporters who help make international racing possible.",
+    lead: "I work with partners, organisations and supporters who contribute to my journey in international racing.",
+    thanks: "A big thank you to everyone who supports me on and off the water.",
+    openTo: "I am open to new sponsors, supporters and long-term partnerships.",
     officialSite: "official website",
     footerQuestion: "Sponsor or media?",
     footerLink: "Request access through the Partner Portal",
@@ -131,6 +141,8 @@ export default function Partners({ lang }: { lang: Lang }) {
           {c.heading}
         </h2>
         <p className="mt-6 max-w-xl leading-relaxed text-graphite">{c.lead}</p>
+        <p className="mt-3 max-w-xl leading-relaxed text-graphite">{c.thanks}</p>
+        <p className="mt-3 max-w-xl leading-relaxed text-graphite">{c.openTo}</p>
 
         <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-5">
           {PARTNERS.map((partner) =>

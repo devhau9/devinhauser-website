@@ -16,6 +16,7 @@ import Contact from "@/components/Contact";
 import Newsletter from "@/components/Newsletter";
 import { SITE_URL, CONTENT_UPDATED, jsonLdHtml } from "@/lib/site";
 import { localizedPath, type Lang } from "@/lib/i18n";
+import { brandText } from "@/components/BrandText";
 
 const BRIDGE: Record<
   Lang,
@@ -23,13 +24,13 @@ const BRIDGE: Record<
 > = {
   de: {
     eyebrow: "Neu im Sport?",
-    text: "IQFoil ist die olympische Windsurf-Klasse — ein Board, das auf einem Hydrofoil über dem Wasser fliegt. Ich habe die Erklärung geschrieben, die ich mir am Anfang selbst gewünscht hätte: Material, Rennformate, Geschwindigkeiten und wie es sich tatsächlich anfühlt.",
-    cta: "Was ist IQFoil?",
+    text: "iQFOiL ist die olympische Windsurfklasse. Gefahren wird mit einem Board, einem Segel und einem Foil. Das Foil funktioniert unter Wasser ähnlich wie der Flügel eines Flugzeugs: Mit genügend Geschwindigkeit hebt es das Board aus dem Wasser.",
+    cta: "Was ist iQFOiL?",
   },
   en: {
     eyebrow: "New to the sport?",
-    text: "IQFoil is the Olympic windsurfing class — a board that flies above the water on a hydrofoil. I wrote the explanation I wish I'd found when I started: the equipment, the race formats, the speeds, and what it actually feels like.",
-    cta: "What is IQFoil?",
+    text: "iQFOiL is the Olympic windsurfing class. Athletes race with a board, a sail and a hydrofoil. The foil works underwater in a similar way to an aircraft wing: once enough speed is generated, it lifts the board above the water.",
+    cta: "What is iQFOiL?",
   },
 };
 
@@ -79,7 +80,7 @@ export default function HomeView({ lang }: { lang: Lang }) {
 
       {/* Brücke von der Athletenseite in die Erklärseite. Bewusst genau EIN
           klarer Einstieg statt Keyword-Links im Fliesstext: Wer auf der
-          Startseite „IQFoil" liest und nicht weiss, was das ist, bekommt hier
+          Startseite „iQFOiL" liest und nicht weiss, was das ist, bekommt hier
           die Antwort — und Suchmaschinen bekommen einen sauberen internen Link
           auf die einzige informationsgetriebene Seite der Site. */}
       <section className="border-b border-hairline bg-mist px-6 py-14 sm:px-10 lg:px-16">
@@ -92,7 +93,7 @@ export default function HomeView({ lang }: { lang: Lang }) {
             href={localizedPath("/iqfoil", lang)}
             className="shrink-0 rounded-sm border border-ink px-7 py-3.5 text-center font-mono text-xs uppercase tracking-widest2 text-ink transition-colors hover:bg-ink hover:text-paper"
           >
-            {b.cta}
+            {brandText(b.cta)}
           </Link>
         </div>
       </section>

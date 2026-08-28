@@ -68,8 +68,8 @@ const OLYMPIC_VARIANTS = {
     /** 6138 x 4092 = exakt 3:2 */
     frame: "aspect-[3/2]",
     alt: {
-      de: "Devin Hauser auf dem IQFoil-Board: rotes Segel mit Schweizerkreuz und der Segelnummer SUI-134, Board und Foil über dem Wasser",
-      en: "Devin Hauser on the IQFoil board: red sail with the Swiss cross and sail number SUI-134, board and foil above the water",
+      de: "Devin Hauser auf dem iQFOiL-Board: rotes Segel mit Schweizerkreuz und der Segelnummer SUI-134, Board und Foil über dem Wasser",
+      en: "Devin Hauser on the iQFOiL board: red sail with the Swiss cross and sail number SUI-134, board and foil above the water",
     },
   },
   B: {
@@ -77,8 +77,8 @@ const OLYMPIC_VARIANTS = {
     /** 2560 x 1439 ≈ 16:9 */
     frame: "aspect-[16/9]",
     alt: {
-      de: "Devin Hauser foilt auf dem Silvaplanersee, rotes IQFoil-Segel mit Schweizerkreuz und Segelnummer SUI-134 vor Bergkulisse",
-      en: "Devin Hauser foiling on Lake Silvaplana, red IQFoil sail with the Swiss cross and sail number SUI-134 against the mountains",
+      de: "Devin Hauser foilt auf dem Silvaplanersee, rotes iQFOiL-Segel mit Schweizerkreuz und Segelnummer SUI-134 vor Bergkulisse",
+      en: "Devin Hauser foiling on Lake Silvaplana, red iQFOiL sail with the Swiss cross and sail number SUI-134 against the mountains",
     },
   },
 } as const;
@@ -109,8 +109,8 @@ const COPY: Record<
     // Qualifikation, Kaderzugehörigkeit oder Teilnahme.
     eyebrow: "Der Weg zu den",
     heading: "OLYMPISCHEN SPIELEN",
-    lead: "Mein Ziel ist es, die Schweiz an den Olympischen Spielen zu vertreten.",
-    body: "Dazwischen liegen die internationalen Regatten und die Trainingsblöcke auf dem Silvaplanersee.",
+    lead: "Mein grösstes sportliches Ziel ist es, die Schweiz an den Olympischen Spielen zu vertreten.",
+    body: "Der Weg dorthin führt über internationale Resultate, kontinuierliche Entwicklung, die nationale Selektion und einen der wenigen olympischen Quotenplätze. Jeder Trainingsblock und jede Regatta ist ein weiterer Schritt auf diesem Weg.",
     timeline: [
       { period: "2026", text: "Internationale Erfahrung sammeln" },
       { period: "2027", text: "Mich mit den Besten der Welt messen" },
@@ -120,8 +120,8 @@ const COPY: Record<
   en: {
     eyebrow: "Road to the",
     heading: "OLYMPIC GAMES",
-    lead: "My goal is to represent Switzerland at the Olympic Games.",
-    body: "Between here and there are the international regattas and the training blocks on Lake Silvaplana.",
+    lead: "My biggest sporting goal is to represent Switzerland at the Olympic Games.",
+    body: "The journey requires strong international results, continuous development, national selection and one of the limited Olympic quota places. Every training block and every regatta is another step along that road.",
     timeline: [
       { period: "2026", text: "Building international experience" },
       { period: "2027", text: "Competing among the world's best" },

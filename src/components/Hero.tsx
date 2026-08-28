@@ -15,6 +15,7 @@ const COPY: Record<
   {
     imageAlt: string;
     subtitle: string;
+    location: string;
     about: string;
     connect: string;
     social: string;
@@ -24,7 +25,8 @@ const COPY: Record<
 > = {
   de: {
     imageAlt: "Devin Hauser foilt mit Tempo über offenes Wasser",
-    subtitle: "IQFoil & Wingfoil Racing",
+    subtitle: "SWISS iQFOiL- UND WINGFOIL-RACER",
+    location: "Zürich, Schweiz",
     about: "Über mich",
     connect: "Kontakt aufnehmen",
     social: "Social Media",
@@ -33,7 +35,8 @@ const COPY: Record<
   },
   en: {
     imageAlt: "Devin Hauser foiling at speed on open water",
-    subtitle: "IQFoil & Wingfoil Racing",
+    subtitle: "SWISS iQFOiL & WINGFOIL RACER",
+    location: "Zurich, Switzerland",
     about: "About Me",
     connect: "Let's Connect",
     social: "Social Media",
@@ -118,12 +121,20 @@ export default function Hero({ lang }: { lang: Lang }) {
             DEVIN HAUSER
           </h1>
 
-          <p className="mt-4 animate-fade-in-up font-body text-lg text-slate-light [animation-delay:120ms] sm:text-xl">
+          {/* KEIN `uppercase` auf dieser Zeile: der Text steht bereits in
+              Versalien, und die CSS-Grossschreibung wuerde aus „iQFOiL" ein
+              „IQFOIL" machen — die Markenschreibweise ist aber verbindlich.
+              `text-balance` verhindert, dass auf schmalen Geraeten ein
+              einzelnes Wort allein auf der zweiten Zeile steht. */}
+          <p className="mt-4 animate-fade-in-up text-balance font-mono text-sm tracking-[0.18em] text-paper [animation-delay:120ms] sm:text-base sm:tracking-[0.24em]">
             {c.subtitle}
           </p>
 
-          <p className="mt-3 animate-fade-in-up font-mono text-base uppercase tracking-[0.3em] text-paper [animation-delay:200ms] sm:text-lg">
-            SUI-134
+          {/* Segelnummer und Standort teilen sich eine Zeile: beides sind kurze
+              Kennzahlen, und drei einzelne Zeilen unter dem Namen wuerden den
+              Hero auf dem Telefon nach unten schieben. */}
+          <p className="mt-3 animate-fade-in-up font-mono text-xs uppercase tracking-[0.3em] text-slate-light [animation-delay:200ms] sm:text-sm">
+            SUI-134 · {c.location}
           </p>
 
           {/* Ebene 1 — die beiden Hauptknöpfe, unverändert in Gewicht und Rolle. */}

@@ -95,7 +95,7 @@ const CHANNELS = [
  * ─────────────────────────────────────────────────────────────────────────────
  * REIHENFOLGE DER AUSSAGEN
  * ─────────────────────────────────────────────────────────────────────────────
- * Vorgegeben und bewusst eingehalten: IQFoil → Wingfoil Racing →
+ * Vorgegeben und bewusst eingehalten: iQFOiL → Wingfoil Racing →
  * Content-Kompetenz → Kooperationen. Der Sport steht zuerst, die
  * Medienkompetenz ist der Unterschied, die Zusammenarbeit ist die Folge —
  * nicht umgekehrt.
@@ -116,9 +116,10 @@ const COPY: Record<
     eyebrow: "Social Media",
     heading: "SOCIAL MEDIA & CONTENT",
     paragraphs: [
-      "Zuerst der Sport: Ich fahre IQFoil, die olympische Windsurf-Klasse, und starte zusätzlich im Wingfoil Racing.",
-      "Einen grossen Teil der Fotos und Videos mache ich selbst — an Regatten, im Training und auf den Fahrten dazwischen. Dazu kommen ausgewählte Aufnahmen von Fotografinnen, Fotografen und Organisationen; wer das Bild gemacht hat, steht beim Bild.",
-      "Für Partner entstehen daraus Bilder und Videos von den Regatten und aus dem Training.",
+      "Der Sport steht an erster Stelle: Ich fahre iQFOiL, die olympische Windsurfklasse, und starte zusätzlich im Wingfoil Racing.",
+      "Viele Fotos und Videos entstehen direkt aus meinem Alltag im Leistungssport – im Training, während Regattawochen und auf den Reisen dazwischen. Einen Teil davon produziere und bearbeite ich selbst. Dazu kommen ausgewählte Aufnahmen von Fotografinnen, Fotografen und Organisationen. Der jeweilige Credit steht direkt beim Bild.",
+      "Neben dem Sport gehören Fotografie, Filmen, Video-Editing, Shootings, Webdesign und der Einsatz moderner KI-Werkzeuge zu meinen grössten Interessen. Dadurch kann ich Partnern nicht nur Sichtbarkeit, sondern auch authentische Bilder, Videos und Geschichten aus dem internationalen Sportumfeld bieten.",
+      "Welche Inhalte für einen Partner entstehen, wird immer gemeinsam und passend zur Zusammenarbeit festgelegt.",
     ],
     galleryLink: "Die kuratierten Bilder liegen in der Galerie",
     portalText:
@@ -129,9 +130,10 @@ const COPY: Record<
     eyebrow: "Social Media",
     heading: "SOCIAL MEDIA & CONTENT",
     paragraphs: [
-      "The sport comes first: I race IQFoil, the Olympic windsurfing class, and I also compete in Wingfoil Racing.",
-      "I shoot a large part of the photos and video myself — at regattas, in training and on the drives in between. Alongside that, the site uses selected images from photographers and organisations; whoever took the picture is credited with it.",
-      "For partners, that turns into photos and video from the regattas and from training.",
+      "Sport comes first: I race in iQFOiL, the Olympic windsurfing class, and also compete in Wingfoil Racing.",
+      "Many of my photos and videos come directly from life as an athlete \u2013 during training, regatta weeks and the journeys in between. I produce and edit part of this content myself. I also use selected work from photographers and organisations, with the relevant credit shown alongside each image.",
+      "Beyond sport, photography, filmmaking, video editing, shoots, web design and modern AI tools are some of my biggest interests. This allows me to offer partners more than visibility: authentic photos, videos and stories from an international sporting environment.",
+      "The exact content created for a partner is always agreed together and adapted to the partnership.",
     ],
     galleryLink: "The curated photos live in the gallery",
     portalText:

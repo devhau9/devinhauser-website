@@ -38,7 +38,7 @@ const ARTICLE_JSON_LD = {
   dateModified: CONTENT_UPDATED,
   inLanguage: LANG,
   about: [
-    { "@type": "Thing", name: "IQFoil" },
+    { "@type": "Thing", name: "iQFOiL" },
     { "@type": "Thing", name: "Olympic windsurfing" },
     { "@type": "Thing", name: "Hydrofoiling" },
   ],

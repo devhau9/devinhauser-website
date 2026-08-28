@@ -37,8 +37,8 @@ export const MEDIA_TITLE: Record<Lang, string> = {
 };
 
 export const MEDIA_DESCRIPTION: Record<Lang, string> = {
-  de: "Fotoalben von Trainingstagen, Regattawochen und Shootings — aufgenommen rund um Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz.",
-  en: "Photo albums from training sessions, race weeks and shoots, from around Swiss IQFoil and Wingfoil athlete Devin Hauser.",
+  de: "Fotoalben von Trainingstagen, Regattawochen und Shootings — aufgenommen rund um Devin Hauser, iQFOiL- und Wingfoil-Racer aus der Schweiz.",
+  en: "Photo albums from training sessions, race weeks and shoots, from around Swiss iQFOiL and Wingfoil athlete Devin Hauser.",
 };
 
 const COPY: Record<

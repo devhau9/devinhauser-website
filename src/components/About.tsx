@@ -32,18 +32,19 @@ const COPY: Record<
     eyebrow: "Über mich",
     heading: "ÜBER MICH",
     paragraphs: [
-      "Ich bin Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz. Seit mehreren Jahren fahre ich internationale Regatten. Ich bin auf dem Wasser aufgewachsen, und das Racing prägt mein Leben seither.",
-      "Von nationalen Regatten habe ich mich in internationale WM- und EM-Felder gefahren und steige jetzt in die Elite-Kategorie auf. Neben dem Racing fotografiere und filme ich selbst. Was dabei entsteht, zeigt vor allem die Tage zwischen den Läufen: Material, Anreise, Trainingsblöcke.",
-      "Mein langfristiges Ziel ist es, die Schweiz an den Olympischen Spielen zu vertreten. Bis dahin zählt jede internationale Regatta, die ich fahre.",
+      "Ich bin Devin Hauser, iQFOiL- und Wingfoil-Racer aus der Schweiz. Mit sieben Jahren stand ich zum ersten Mal auf einem Windsurfbrett. Seitdem zieht es mich so oft wie möglich aufs Wasser. Ob iQFOiL, Wingfoil, Windsurfen, Pumpfoil, Kitesurfen oder Parawing: Ich probiere alles aus, was fliegt, gleitet und mich schneller macht.",
+      "Angefangen habe ich bei nationalen Nachwuchsregatten. Danach kamen die ersten internationalen Wettkämpfe, Europa- und Weltmeisterschaften. Nach zwei Jahren in der U17 und zwei Jahren in der U19 starte ich inzwischen international in der U23- und Senior-Kategorie.",
+      "Neben dem Sport interessiere ich mich für Fotografie, Film, Video-Editing, Shootings, Webdesign und künstliche Intelligenz. Ich baue meine Personal Brand Schritt für Schritt auf und möchte zeigen, wie viel Arbeit hinter dem internationalen Leistungssport steckt.",
+      "Mein langfristiges Ziel ist es, die Schweiz an den Olympischen Spielen zu vertreten. Dafür trainiere ich jeden Tag hart, gebe mein Bestes und glaube daran, dass ich dieses Ziel erreichen kann.",
     ],
     portraitAlt: "Porträt von Devin Hauser",
     profile: "Steckbrief",
     facts: [
       { label: "Nationalität", value: "Schweiz" },
       { label: "Jahrgang", value: "2007" },
-      { label: "Sportarten", value: "IQFoil, Wingfoil" },
+      { label: "Sportarten", value: "iQFOiL, Wingfoil" },
       { label: "Grösse", value: "178 cm" },
-      { label: "Gewicht", value: "rund 87 kg" },
+      { label: "Gewicht", value: "87 kg" },
       { label: "Standort", value: "Zürich, Schweiz" },
       { label: "Training im Sommer", value: "Silvaplanersee" },
       { label: "Segelnummer", value: "SUI-134" },
@@ -54,18 +55,19 @@ const COPY: Record<
     eyebrow: "About",
     heading: "ABOUT ME",
     paragraphs: [
-      "I'm Devin Hauser, a Swiss IQFoil and Wingfoil racing athlete. I have been racing internationally for several years. I grew up on the water, and racing has shaped my life ever since.",
-      "I've raced my way from national events into international World and European Championship fleets, and I'm now stepping up into senior competition. Alongside racing I shoot photo and video myself. Most of what comes out of it shows the days between the races: gear, travel, training blocks.",
-      "My long-term goal is to represent Switzerland at the Olympic Games. Until then, every international regatta counts.",
+      "I\u2019m Devin Hauser, an iQFOiL and Wingfoil racer from Switzerland. I first stepped onto a windsurf board at the age of seven. Since then, I have wanted to spend as much time on the water as possible. Whether it is iQFOiL, Wingfoil, windsurfing, pump foiling, kitesurfing or parawinging, I enjoy everything that flies, glides and helps me become faster.",
+      "I started in national youth regattas before progressing to international competitions, European Championships and World Championships. After two years in U17 and two years in U19, I now compete internationally in the U23 and senior fleets.",
+      "Away from racing, I am interested in photography, filmmaking, video editing, shoots, web design and artificial intelligence. I am building my personal brand step by step and want to show the work behind international high-performance sport.",
+      "My long-term goal is to represent Switzerland at the Olympic Games. I train hard every day, give my best and believe that I can achieve this goal.",
     ],
     portraitAlt: "Portrait of Devin Hauser",
     profile: "Profile",
     facts: [
       { label: "Nationality", value: "Swiss" },
       { label: "Born", value: "2007" },
-      { label: "Sports", value: "IQFoil, Wingfoil" },
+      { label: "Sports", value: "iQFOiL, Wingfoil" },
       { label: "Height", value: "178 cm" },
-      { label: "Weight", value: "approx. 87 kg" },
+      { label: "Weight", value: "87 kg" },
       { label: "Location", value: "Zurich, Switzerland" },
       { label: "Summer training", value: "Lake Silvaplana" },
       { label: "Sail Number", value: "SUI-134" },
@@ -90,7 +92,7 @@ export default function About({ lang }: { lang: Lang }) {
 
         <div className="mt-12 grid gap-16 lg:grid-cols-[1.1fr,0.9fr] lg:gap-20">
           {/* Bewusst EINE konsistente Textebene (keine grosse Intro-Typografie),
-              drei knappe Absätze, Ich-Form, Athlet zuerst, kein fixes
+              vier knappe Absätze, Ich-Form, Athlet zuerst, kein fixes
               Olympia-Jahr. */}
           <div className="min-w-0">
             {c.paragraphs.map((text, index) => (

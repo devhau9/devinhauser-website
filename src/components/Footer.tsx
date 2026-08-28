@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { SVGProps } from "react";
 import { UI, localizedPath, type Lang } from "@/lib/i18n";
+import { brandText } from "@/components/BrandText";
 
 // Marken-Icons: identisch zu src/components/SocialMedia.tsx übernommen,
 // damit Footer und Media-&-Content-Section exakt dieselbe Bildsprache
@@ -98,7 +99,7 @@ const COPY: Record<
   }
 > = {
   de: {
-    role: "IQFoil- und Wingfoil-Racer aus der Schweiz",
+    role: "iQFOiL- und Wingfoil-Racer aus der Schweiz",
     location: "Zürich, Schweiz",
     olympic: "Der Weg zu den Olympischen Spielen",
     contact: "Kontakt",
@@ -108,7 +109,7 @@ const COPY: Record<
     rights: "© 2026 Devin Hauser. Alle Rechte vorbehalten.",
   },
   en: {
-    role: "Swiss IQFoil & Wingfoil Racer",
+    role: "Swiss iQFOiL & Wingfoil Racer",
     location: "Zurich, Switzerland",
     olympic: "Road to the Olympic Games",
     contact: "Contact",
@@ -134,7 +135,7 @@ export default function Footer({ lang }: { lang: Lang }) {
             </p>
             <div className="mt-6 space-y-3">
               <p className="font-mono text-sm uppercase tracking-widest2 text-red">
-                {c.role}
+                {brandText(c.role)}
               </p>
               <p className="font-body text-sm text-graphite">{c.location}</p>
               <p className="font-mono text-sm uppercase tracking-widest2 text-ink">

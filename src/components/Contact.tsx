@@ -11,13 +11,13 @@ const COPY: Record<
   de: {
     eyebrow: "Kontakt",
     heading: "LASS UNS REDEN",
-    lead: "Für Sponsoring-, Medien- oder Partnerschaftsanfragen bin ich per E-Mail oder auf Instagram erreichbar. Eine kurze Nachricht mit dem Anliegen genügt.",
+    lead: "Für Sponsoring-, Medien- oder Partnerschaftsanfragen bin ich per E-Mail oder auf Instagram erreichbar. Ich freue mich über jede ernst gemeinte Anfrage und ein persönliches Gespräch.",
     portraitAlt: "Devin Hauser, Schwarzweiss-Porträt",
   },
   en: {
     eyebrow: "Contact",
     heading: "LET'S TALK",
-    lead: "For sponsorship, media or partnership enquiries, email or Instagram both reach me. A short message saying what it is about is enough.",
+    lead: "For sponsorship, media or partnership enquiries, you can reach me by email or on Instagram. I welcome every serious enquiry and the opportunity for a personal conversation.",
     portraitAlt: "Devin Hauser, black and white portrait",
   },
 };

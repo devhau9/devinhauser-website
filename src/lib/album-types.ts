@@ -112,7 +112,7 @@ export type Album = {
   date: string;
   title: LocalizedText;
   location: string;
-  /** z. B. "IQFoil", "Wingfoil", "Drone" */
+  /** z. B. "iQFOiL", "Wingfoil", "Drone" */
   sport: string;
   description: LocalizedText;
   /** Wer hat fotografiert. Bei eigenen Bildern: "Devin Hauser". */

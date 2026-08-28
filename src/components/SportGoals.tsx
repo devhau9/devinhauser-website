@@ -2,10 +2,10 @@ import Image from "next/image";
 import { SECTION_ID, type Lang } from "@/lib/i18n";
 
 /**
- * Disziplinen — IQFoil zuerst, Wingfoil Racing danach.
+ * Disziplinen — iQFOiL zuerst, Wingfoil Racing danach.
  *
  * Die Reihenfolge ist eine Positionierungsentscheidung, keine Gestaltungsfrage:
- * IQFoil ist die Hauptdisziplin und die olympische Klasse. Sie steht deshalb in
+ * iQFOiL ist die Hauptdisziplin und die olympische Klasse. Sie steht deshalb in
  * dieser Sektion, in der Navigation, im Hero-Untertitel und in allen Texten vor
  * Wingfoil.
  *
@@ -21,21 +21,28 @@ const COPY: Record<
   {
     eyebrow: string;
     heading: string;
-    iqfoil: { title: string; text: string; alt: string };
-    wingfoil: { title: string; text: string; alt: string };
+    iqfoil: { title: string; paragraphs: string[]; alt: string };
+    wingfoil: { title: string; paragraphs: string[]; alt: string };
   }
 > = {
   de: {
     eyebrow: "Disziplinen",
     heading: "DISZIPLINEN",
     iqfoil: {
-      title: "IQFoil Racing",
-      text: "IQFoil ist meine Hauptdisziplin und die olympische Windsurf-Klasse. Ich starte international in der Elite-Kategorie. Es geht um Speed, Taktik und Kondition.",
-      alt: "Devin Hauser beim IQFoil-Racing",
+      title: "iQFOiL Racing",
+      paragraphs: [
+        "iQFOiL ist die olympische Windsurfklasse. Bei Paris 2024 feierte die Klasse ihr olympisches Debüt und löste das RS:X als olympische Windsurf-Ausrüstung ab.",
+        "Ich starte inzwischen international in der U23- und Senior-Kategorie.",
+        "iQFOiL ist eine One-Design-Klasse mit standardisiertem Material. Dadurch stehen das richtige Setup, das Tuning, der Speed sowie die Leistung des Fahrers besonders im Mittelpunkt. Gute Starts, saubere Manöver, Taktik, Strategie, Fitness und mentale Stärke können über ein Rennen entscheiden.",
+      ],
+      alt: "Devin Hauser beim iQFOiL-Racing",
     },
     wingfoil: {
       title: "Wingfoil Racing",
-      text: "Wingfoil fahre ich seit Jahren. Es ist eine zweite Art zu racen und hält mich auf dem Foil in Übung. Neben IQFoil starte ich damit international.",
+      paragraphs: [
+        "Ich habe früh mit dem Wingfoilen begonnen und war bereits in den ersten Jahren der internationalen Wingfoil-Regatten dabei. Das Material und das Fahrgefühl unterscheiden sich vom iQFOiL, das Grundprinzip im Racing ist aber ähnlich: Ein festgelegter Kurs wird so schnell und taktisch klug wie möglich absolviert.",
+        "Wingfoil Racing ist für mich auch eine wertvolle Ergänzung zum iQFOiL-Training. Starts, Speed, Manöver, Taktik und Entscheidungen unter Druck spielen in beiden Disziplinen eine wichtige Rolle. Wenn es mein Trainings- und Regattaplan erlaubt, fahre ich deshalb gerne ausgewählte Wingfoil-Racing-Events.",
+      ],
       alt: "Devin Hauser beim Wingfoil Racing mit dem ENSIS-Wing in Cremia",
     },
   },
@@ -43,13 +50,20 @@ const COPY: Record<
     eyebrow: "Disciplines",
     heading: "DISCIPLINES",
     iqfoil: {
-      title: "IQFoil Racing",
-      text: "IQFoil is my main competitive discipline and the Olympic windsurfing class. I compete internationally in the senior fleet. It comes down to speed, tactics and fitness.",
-      alt: "Devin Hauser racing IQFoil",
+      title: "iQFOiL Racing",
+      paragraphs: [
+        "iQFOiL is the Olympic windsurfing class. The equipment made its Olympic debut at Paris 2024, replacing the RS:X as the Olympic windsurfing equipment.",
+        "I now compete internationally in the U23 and senior fleets.",
+        "iQFOiL is a one-design class with standardised equipment. This puts a strong focus on setup, tuning, speed and the performance of the athlete. Starts, manoeuvres, tactics, strategy, fitness and mental strength can all decide a race.",
+      ],
+      alt: "Devin Hauser racing iQFOiL",
     },
     wingfoil: {
       title: "Wingfoil Racing",
-      text: "I've been wingfoiling for years. It is a second way to race and keeps me sharp on the foil. Alongside IQFoil I compete in it internationally.",
+      paragraphs: [
+        "I started wingfoiling early and was already racing during the first years of international Wingfoil competition. The equipment and feeling are different from iQFOiL, but the basic racing principle is similar: complete a set course as quickly and tactically as possible.",
+        "Wingfoil Racing is also a valuable addition to my iQFOiL training. Starts, speed, manoeuvres, tactics and decision-making under pressure are important in both disciplines. Whenever my training and racing schedule allows, I enjoy competing in selected Wingfoil Racing events.",
+      ],
       alt: "Devin Hauser wingfoil racing with the ENSIS wing in Cremia",
     },
   },
@@ -66,45 +80,55 @@ export default function SportGoals({ lang }: { lang: Lang }) {
           {c.heading}
         </h2>
 
-        {/* IQFoil — Bild links, Text rechts. */}
+        {/* iQFOiL — Bild links, Text rechts. */}
         <div className="mt-10 grid items-center gap-10 sm:mt-12 md:grid-cols-12 md:gap-14">
-          <div className="relative aspect-[4/3] w-full min-w-0 overflow-hidden rounded-2xl md:col-span-7">
+          <div className="relative aspect-[4/3] w-full min-w-0 overflow-hidden rounded-2xl md:col-span-6">
             <Image
               src="/images/iqfoil-action.jpg"
               alt={c.iqfoil.alt}
               fill
-              sizes="(min-width: 768px) 58vw, 100vw"
+              sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover object-center"
             />
           </div>
-          <div className="min-w-0 md:col-span-5">
+          <div className="min-w-0 md:col-span-6">
             <h3 className="font-display text-3xl tracking-wide text-ink sm:text-4xl">
               {c.iqfoil.title}
             </h3>
-            <p className="mt-5 max-w-sm leading-relaxed text-graphite">
-              {c.iqfoil.text}
-            </p>
+            {c.iqfoil.paragraphs.map((text, index) => (
+              <p
+                key={text.slice(0, 24)}
+                className={`max-w-md leading-relaxed text-graphite ${index === 0 ? "mt-5" : "mt-4"}`}
+              >
+                {text}
+              </p>
+            ))}
           </div>
         </div>
 
         {/* Wingfoil Racing — gespiegelt (Bild rechts auf Desktop). */}
         <div className="mt-24 grid items-center gap-10 sm:mt-32 md:grid-cols-12 md:gap-14">
-          <div className="relative aspect-[4/3] w-full min-w-0 overflow-hidden rounded-2xl md:order-2 md:col-span-7">
+          <div className="relative aspect-[4/3] w-full min-w-0 overflow-hidden rounded-2xl md:order-2 md:col-span-6">
             <Image
               src="/images/wingfoil-cremia-ensis.jpg"
               alt={c.wingfoil.alt}
               fill
-              sizes="(min-width: 768px) 58vw, 100vw"
+              sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover object-center"
             />
           </div>
-          <div className="min-w-0 md:order-1 md:col-span-5">
+          <div className="min-w-0 md:order-1 md:col-span-6">
             <h3 className="font-display text-3xl tracking-wide text-ink sm:text-4xl">
               {c.wingfoil.title}
             </h3>
-            <p className="mt-5 max-w-sm leading-relaxed text-graphite">
-              {c.wingfoil.text}
-            </p>
+            {c.wingfoil.paragraphs.map((text, index) => (
+              <p
+                key={text.slice(0, 24)}
+                className={`max-w-md leading-relaxed text-graphite ${index === 0 ? "mt-5" : "mt-4"}`}
+              >
+                {text}
+              </p>
+            ))}
           </div>
         </div>
       </div>

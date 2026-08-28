@@ -4,7 +4,7 @@ import { SOCIAL_PROFILES } from "@/lib/site";
 import { localizedPath } from "@/lib/i18n";
 
 /**
- * IQFoil-Pillar-Page — ENGLISCHE FASSUNG.
+ * iQFOiL-Pillar-Page — ENGLISCHE FASSUNG.
  *
  * Warum diese Seite existiert: Die Startseite ist eine One-Page-Athletenseite.
  * Für informationsgetriebene Suchen ("what is iqfoil", "iqfoil equipment",
@@ -29,9 +29,9 @@ import { localizedPath } from "@/lib/i18n";
  */
 
 export const IQFOIL_EN_TITLE =
-  "What Is IQFoil? Olympic Windsurfing Explained by a Swiss Racer";
+  "What Is iQFOiL? Olympic Windsurfing Explained by a Swiss Racer";
 export const IQFOIL_EN_DESCRIPTION =
-  "IQFoil is the Olympic windsurfing class — a board that flies above the water on a hydrofoil. Swiss racer Devin Hauser explains the equipment, the race formats, the speeds and what it actually feels like.";
+  "iQFOiL is the Olympic windsurfing class — a board that flies above the water on a hydrofoil. Swiss racer Devin Hauser explains the equipment, the race formats, the speeds and what it actually feels like.";
 
 const H2 = "font-display text-3xl tracking-wide text-ink sm:text-4xl";
 const P = "mt-5 max-w-2xl leading-relaxed text-graphite";
@@ -50,11 +50,11 @@ function Source({ children }: { children: React.ReactNode }) {
 
 const FAQ = [
   {
-    q: "Is IQFoil an Olympic class?",
+    q: "Is iQFOiL an Olympic class?",
     a: "Yes. According to the RYA, iQFOiL was introduced by World Sailing as the new Olympic windsurfing equipment for the Paris 2024 cycle, replacing the RS:X class that had been used up to Tokyo 2020.",
   },
   {
-    q: "How fast does an IQFoil go?",
+    q: "How fast does an iQFOiL go?",
     a: "Starboard, the class board manufacturer, describes the package as working from 5 to 35 knots of wind (roughly 9 to 65 km/h). Board speed depends on wind, water and rider — my own personal top speed on the equipment is 32.3 knots, which is roughly 60 km/h.",
   },
   {
@@ -62,19 +62,19 @@ const FAQ = [
     a: "One board, one foil, one sail per rider — the same for everyone in the fleet. Starboard lists the class board as 220 × 95 cm with 196 litres of volume, and the class foil with a 900 front wing, a 255 tail wing and a 95 cm foil mast. Men race an 8 m² sail, women a 7.3 m² sail.",
   },
   {
-    q: "How does an IQFoil race work?",
+    q: "How does an iQFOiL race work?",
     a: "The class runs three disciplines in the opening series — Course Racing, Sprint Slalom and Marathon — and then a Medal Series for the titles. The RYA describes race days with as many as six races and a knockout Medal Series for the top ten riders in each fleet.",
   },
   {
-    q: "How is IQFoil different from normal windsurfing?",
+    q: "How is iQFOiL different from normal windsurfing?",
     a: "The hull leaves the water. On a classic windsurf board you are planing — skimming along on top of the water — and fighting drag; on a foil the board lifts clear and rides on a wing under the water. It is quieter, faster in light wind, and it fails differently — when it goes wrong you come down, you do not just slow down.",
   },
   {
-    q: "Is IQFoil hard to learn?",
+    q: "Is iQFOiL hard to learn?",
     a: "Getting up on the foil is not the hard part — most windsurfers manage that in a few sessions. Staying at the right height, gybing (turning downwind through the wind) without touching down, and doing all of it in a fleet at racing speed is what takes years.",
   },
   {
-    q: "What wind range does IQFoil race in?",
+    q: "What wind range does iQFOiL race in?",
     a: "US Sailing describes course racing as taking place in more than 12 knots (about 22 km/h), sprint slalom between roughly 6 and 15 knots (about 11 to 28 km/h), and the marathon as a double-points distance race.",
   },
 ];
@@ -114,7 +114,7 @@ export default function IqfoilEn() {
                 </Link>
               </li>
               <li aria-hidden>/</li>
-              <li className="text-ink">IQFoil</li>
+              <li className="text-ink">iQFOiL</li>
             </ol>
           </nav>
 
@@ -123,7 +123,7 @@ export default function IqfoilEn() {
             WHAT IS IQFOIL?
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink">
-            IQFoil is the Olympic windsurfing class. The board does not sail on
+            iQFOiL is the Olympic windsurfing class. The board does not sail on
             the water — it flies above it, carried by a wing under the surface.
             I race it, so this page is the version I wish I&apos;d found when I
             started.
@@ -145,7 +145,7 @@ export default function IqfoilEn() {
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-mist">
               <Image
                 src="/images/DSCF0515.jpg"
-                alt="An IQFoil board lifted clear of the water on its hydrofoil, only the foil mast still in the surface"
+                alt="An iQFOiL board lifted clear of the water on its hydrofoil, only the foil mast still in the surface"
                 fill
                 sizes="(min-width: 1440px) 1440px, 100vw"
                 className="object-cover object-[50%_40%]"
@@ -162,7 +162,7 @@ export default function IqfoilEn() {
           <section className="mt-16 border-t border-hairline pt-12">
             <h2 className={H2}>A one-design Olympic class</h2>
             <p className={P}>
-              IQFoil is windsurfing on a hydrofoil, and it is a strict one-design
+              iQFOiL is windsurfing on a hydrofoil, and it is a strict one-design
               class: every racer in the fleet uses the same board, the same foil
               and the same sail. The class puts it plainly — the aim is to make
               racing as fair as possible, which is why the equipment is
@@ -365,8 +365,8 @@ export default function IqfoilEn() {
             <h2 className={H2}>Why I race it</h2>
             <p className={P}>
               I started windsurfing in 2014, moved onto a foil in 2019 and into
-              IQFoil in 2021. I race internationally and I am now competing in the
-              senior fleet. My long-term goal is to represent Switzerland at the
+              iQFOiL in 2021. I now compete internationally in the U23 and
+              senior fleets. My long-term goal is to represent Switzerland at the
               Olympic Games — that is the road I am on, and I am not going to put
               a year on it.
             </p>

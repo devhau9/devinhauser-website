@@ -3,7 +3,7 @@ import IqfoilEn from "@/views/iqfoil/IqfoilEn";
 import type { Lang } from "@/lib/i18n";
 
 /**
- * IQFoil-Pillar-Page — Sprachweiche.
+ * iQFOiL-Pillar-Page — Sprachweiche.
  *
  * WARUM ZWEI DATEIEN UND KEIN WÖRTERBUCH: Alle übrigen Bausteine dieser Site
  * (Hero, About, Partners …) halten ihre Texte in einem `Record<Lang, …>` — das

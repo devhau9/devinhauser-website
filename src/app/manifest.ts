@@ -15,10 +15,10 @@ export default function manifest(): MetadataRoute.Manifest {
     // `dir` sagen das ausdruecklich, statt es dem Geraet zu ueberlassen.
     lang: "de",
     dir: "ltr",
-    name: "Devin Hauser — IQFoil- und Wingfoil-Racer aus der Schweiz",
+    name: "Devin Hauser — iQFOiL- und Wingfoil-Racer aus der Schweiz",
     short_name: "Devin Hauser",
     description:
-      "Offizielle Website von Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz.",
+      "Offizielle Website von Devin Hauser, iQFOiL- und Wingfoil-Racer aus der Schweiz.",
     start_url: "/",
     display: "standalone",
     background_color: "#0A0E14",

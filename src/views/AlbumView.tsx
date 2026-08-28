@@ -47,9 +47,9 @@ const COPY: Record<
     gallery: "Galerie",
     noDownload: "Für dieses Album wird kein Download angeboten",
     outro:
-      "Ich bin Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz. Fotos und Videos mache ich grösstenteils selbst — rund um Wettkämpfe und Training.",
+      "Ich bin Devin Hauser, iQFOiL- und Wingfoil-Racer aus der Schweiz. Fotos und Videos mache ich grösstenteils selbst — rund um Wettkämpfe und Training.",
     outroForeign:
-      "Ich bin Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz. Die Aufnahmen in diesem Album sind nicht von mir — wer fotografiert hat, steht oben beim Album.",
+      "Ich bin Devin Hauser, iQFOiL- und Wingfoil-Racer aus der Schweiz. Die Aufnahmen in diesem Album sind nicht von mir — wer fotografiert hat, steht oben beim Album.",
     reviewNotice:
       "Review-Ansicht: Dieses Album ist noch nicht freigegeben. Es wird nicht indexiert und steht nicht in der Sitemap.",
     aboutCta: "Über mich",
@@ -60,9 +60,9 @@ const COPY: Record<
     gallery: "Gallery",
     noDownload: "Download not available for this album",
     outro:
-      "I'm Devin Hauser, a Swiss IQFoil and Wingfoil racing athlete. I shoot photo and video myself, mostly around racing and training.",
+      "I'm Devin Hauser, a Swiss iQFOiL and Wingfoil racing athlete. I shoot photo and video myself, mostly around racing and training.",
     outroForeign:
-      "I'm Devin Hauser, a Swiss IQFoil and Wingfoil racing athlete. The photos in this album are not mine — the photographer is credited above.",
+      "I'm Devin Hauser, a Swiss iQFOiL and Wingfoil racing athlete. The photos in this album are not mine — the photographer is credited above.",
     reviewNotice:
       "Review view: this album is not released yet. It is not indexed and is not in the sitemap.",
     aboutCta: "About me",

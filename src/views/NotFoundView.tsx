@@ -9,13 +9,13 @@ const COPY: Record<
     eyebrow: "404",
     heading: "SEITE NICHT GEFUNDEN",
     text: "Diese Seite gibt es nicht — sie wurde vielleicht verschoben, oder der Link ist veraltet. Hier geht es weiter.",
-    links: ["Startseite", "Was ist IQFoil", "Ergebnisse", "Galerie", "Kontakt"],
+    links: ["Startseite", "Was ist iQFOiL", "Ergebnisse", "Galerie", "Kontakt"],
   },
   en: {
     eyebrow: "404",
     heading: "PAGE NOT FOUND",
     text: "That page doesn’t exist — it may have been moved or the link may be out of date. Here is where to go instead.",
-    links: ["Home", "What is IQFoil", "Results", "Gallery", "Contact"],
+    links: ["Home", "What is iQFOiL", "Results", "Gallery", "Contact"],
   },
 };
 

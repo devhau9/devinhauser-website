@@ -30,63 +30,61 @@ const COPY: Record<
     eyebrow: "Partnerschaft",
     heading: "PARTNERSCHAFT",
     paragraphs: [
-      "Internationales Racing kostet Material, Anreisen und Trainingszeit. Dafür suche ich Partner.",
-      "Ich starte international im IQFoil und im Wingfoil Racing und zeige die Arbeit dahinter über Fotos, Videos und Social Media.",
-      "Wie eine Zusammenarbeit konkret aussieht, bespreche ich am liebsten direkt. Eine kurze Nachricht genügt.",
+      "International an der Spitze mitzufahren, erfordert nicht nur viel Training und Zeit, sondern auch eine starke finanzielle und organisatorische Grundlage. Zu den grössten Ausgaben gehören Material, Reisen, Startgebühren, Unterkünfte, Logistik sowie Coaching und Motorboot.",
+      "Dafür suche ich Partner, die meinen Weg im internationalen iQFOiL und Wingfoil Racing mittragen möchten. Was eine Zusammenarbeit konkret beinhaltet, bespreche ich am liebsten persönlich.",
     ],
-    opportunities: "Möglichkeiten einer Zusammenarbeit",
+    opportunities: "Wie eine Zusammenarbeit aussehen kann",
     capabilities: [
       {
         title: "Markenpräsenz",
-        text: "Präsenz auf meiner Website, im Wettkampfumfeld und auf meinen Social-Media-Kanälen.",
+        text: "Je nach Vereinbarung kann eine Marke auf meiner Website, meinem Fahrzeug, in ausgewählten Social-Media-Inhalten und im internationalen Regattaumfeld sichtbar werden.",
       },
       {
-        title: "Bilder & Videos",
-        text: "Aufnahmen von Regatten und Trainingstagen.",
+        title: "Bilder und Videos",
+        text: "Fotos, Videos und Edits aus Trainingslagern, Wettkämpfen, Shootings und gemeinsamen Projekten.",
       },
       {
         title: "Produktintegration",
-        text: "Produkte im Training, im Wettkampf und im Alltag.",
+        text: "Produkte können authentisch in meinen Trainings-, Wettkampf-, Recovery- und Reisealltag integriert werden, sofern sie zu mir und meinem Sport passen.",
       },
       {
-        title: "Längerfristig",
-        text: "Auf Wunsch eine Zusammenarbeit über eine ganze Saison statt über ein einzelnes Event.",
+        title: "Langfristige Zusammenarbeit",
+        text: "Auf Wunsch kann eine Partnerschaft über eine ganze Saison oder mehrere Saisons aufgebaut werden – statt nur für ein einzelnes Event.",
       },
     ],
     ctaPrimary: "Partner werden",
     ctaSecondary: "Partnerunterlagen anfragen",
-    note: "Konkrete Möglichkeiten und die vollständige Übersicht bespreche ich persönlich — der Einstieg läuft über das Partner-Portal.",
+    note: "Der konkrete Umfang wird gemeinsam festgelegt und auf die Ziele beider Seiten abgestimmt. Der Einstieg läuft über das Partner-Portal.",
   },
   en: {
     eyebrow: "Partnership",
     heading: "PARTNERSHIP",
     paragraphs: [
-      "Racing internationally costs equipment, travel and training time. That is what I'm looking for partners for.",
-      "I compete internationally in IQFoil and Wingfoil and share the work behind it through photography, video and social media.",
-      "What a partnership actually looks like is something I'd rather work out directly. A short message is enough.",
+      "Competing at the highest international level requires more than training and time. It also requires a strong financial and organisational foundation. The main costs include equipment, travel, entry fees, accommodation, logistics, coaching and motorboat support.",
+      "I am looking for partners who want to support my journey in international iQFOiL and Wingfoil Racing. I prefer to discuss the exact shape of a partnership personally.",
     ],
-    opportunities: "Partnership Opportunities",
+    opportunities: "What a partnership can include",
     capabilities: [
       {
-        title: "Brand Visibility",
-        text: "Presence across my website, racing environment and social channels.",
+        title: "Brand Presence",
+        text: "Depending on the agreement, a brand can be featured on my website, my vehicle, selected social media content and within the international racing environment.",
       },
       {
-        title: "Photo & Video",
-        text: "Footage from regattas and training days.",
+        title: "Photos and Videos",
+        text: "Photos, videos and edits from training camps, competitions, shoots and joint projects.",
       },
       {
         title: "Product Integration",
-        text: "Products in training, racing and everyday use.",
+        text: "Products can be integrated authentically into my training, racing, recovery and travel routine when they fit me and my sport.",
       },
       {
-        title: "Longer Term",
-        text: "If it suits both sides, working across a full season rather than a single event.",
+        title: "Long-Term Collaboration",
+        text: "A partnership can be built across a full season or several seasons, rather than around a single event.",
       },
     ],
     ctaPrimary: "Become a Partner",
     ctaSecondary: "Request Partnership Deck",
-    note: "Concrete partnership options and a full overview are shared personally through the Partner Portal.",
+    note: "The exact scope is agreed together and aligned with the goals of both sides. The Partner Portal is the way in.",
   },
 };
 
@@ -113,7 +111,9 @@ export default function Sponsoring({ lang }: { lang: Lang }) {
           </p>
         ))}
 
-        <h3 className="mt-16 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
+        {/* `text-balance`: ohne die Ausgleichsregel bricht die Zeile auf 375 px
+            so um, dass das letzte Wort allein steht. */}
+        <h3 className="mt-16 text-balance font-mono text-xs uppercase tracking-widest2 text-graphite/70">
           {c.opportunities}
         </h3>
 

@@ -29,16 +29,16 @@ const COPY: Record<
   de: {
     eyebrow: "Newsletter",
     heading: "UPDATES VOM WASSER",
-    lead: "Wettkampf-Updates, Trainingslager, Geschichten hinter den Kulissen und wichtige Meilensteine.",
-    badge: "Newsletter startet bald",
-    imageAlt: "Devin Hauser beim IQFoil-Training",
+    lead: "Wettkampfrückblicke, Trainingslager, Einblicke hinter die Kulissen und wichtige Meilensteine.",
+    badge: "Coming soon.",
+    imageAlt: "Devin Hauser beim iQFOiL-Training",
   },
   en: {
     eyebrow: "Newsletter",
     heading: "UPDATES FROM THE WATER",
-    lead: "Competition updates, training camps, behind-the-scenes stories and important milestones.",
-    badge: "Newsletter launching soon",
-    imageAlt: "Devin Hauser training IQFoil",
+    lead: "Race recaps, training camps, behind-the-scenes stories and important milestones.",
+    badge: "Coming soon.",
+    imageAlt: "Devin Hauser training iQFOiL",
   },
 };
 

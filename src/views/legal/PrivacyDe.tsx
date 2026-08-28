@@ -66,7 +66,7 @@ export default function PrivacyDe() {
           <div className={SECTION_WRAPPER}>
             <h2 className={SECTION_HEADING}>Wer ist verantwortlich</h2>
             <p className={BODY_TEXT}>
-              Diese Website wird betrieben von Devin Hauser, IQFoil- und
+              Diese Website wird betrieben von Devin Hauser, iQFOiL- und
               Wingfoil-Racing-Athlet aus der Schweiz, ansässig im Kanton
               Zürich, Schweiz. Die Kontaktangaben, einschliesslich der
               Kontakt-E-Mail-Adresse, finden Sie im{" "}

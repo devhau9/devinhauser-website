@@ -67,7 +67,7 @@ export default function PrivacyEn() {
           <div className={SECTION_WRAPPER}>
             <h2 className={SECTION_HEADING}>Who Is Responsible</h2>
             <p className={BODY_TEXT}>
-              This website is operated by Devin Hauser, Swiss IQFoil &amp;
+              This website is operated by Devin Hauser, Swiss iQFOiL &amp;
               Wingfoil Racing Athlete, based in the Canton of Zurich,
               Switzerland. Contact information, including the contact email
               address, is available on the{" "}

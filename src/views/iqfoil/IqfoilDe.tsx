@@ -4,7 +4,7 @@ import { SOCIAL_PROFILES } from "@/lib/site";
 import { localizedPath } from "@/lib/i18n";
 
 /**
- * IQFoil-Pillar-Page — DEUTSCHE FASSUNG (Standardsprache, ohne Pfadpraefix).
+ * iQFOiL-Pillar-Page — DEUTSCHE FASSUNG (Standardsprache, ohne Pfadpraefix).
  *
  * Warum diese Seite existiert: Die Startseite ist eine One-Page-Athletenseite.
  * Für informationsgetriebene Suchen ("was ist iqfoil", "iqfoil material",
@@ -24,7 +24,7 @@ import { localizedPath } from "@/lib/i18n";
  * Der FAQ-Abschnitt existiert für Leser.
  *
  * SCHREIBWEISE: Schweizer Hochdeutsch, durchgehend „ss", nie das Eszett. Die
- * Fachbegriffe der Klasse bleiben englisch und werden NICHT übersetzt — IQFoil,
+ * Fachbegriffe der Klasse bleiben englisch und werden NICHT übersetzt — iQFOiL,
  * Foil, Board, Rig, Fin, Course Racing, Sprint Slalom, Marathon, Medal Series,
  * Opening Series, World Sailing. Übersetzt würden sie in der Szene niemanden
  * mehr finden, der danach sucht.
@@ -39,9 +39,9 @@ import { localizedPath } from "@/lib/i18n";
 // er existiert. Nur das Fragment — das Root-Layout hängt " | Devin Hauser" über
 // `title.template` an.
 export const IQFOIL_DE_TITLE =
-  "Was ist IQFoil? Die olympische Windsurf-Klasse aus Schweizer Sicht";
+  "Was ist iQFOiL? Die olympische Windsurf-Klasse aus Schweizer Sicht";
 export const IQFOIL_DE_DESCRIPTION =
-  "IQFoil ist die olympische Windsurf-Klasse — ein Board, das auf einem Hydrofoil über dem Wasser fliegt. Der Schweizer Racer Devin Hauser erklärt Material, Rennformate, Geschwindigkeiten und wie es sich tatsächlich anfühlt.";
+  "iQFOiL ist die olympische Windsurf-Klasse — ein Board, das auf einem Hydrofoil über dem Wasser fliegt. Der Schweizer Racer Devin Hauser erklärt Material, Rennformate, Geschwindigkeiten und wie es sich tatsächlich anfühlt.";
 
 const H2 = "font-display text-3xl tracking-wide text-ink sm:text-4xl";
 const P = "mt-5 max-w-2xl leading-relaxed text-graphite";
@@ -60,11 +60,11 @@ function Source({ children }: { children: React.ReactNode }) {
 
 const FAQ = [
   {
-    q: "Ist IQFoil eine olympische Klasse?",
+    q: "Ist iQFOiL eine olympische Klasse?",
     a: "Ja. Gemäss der RYA wurde iQFOiL von World Sailing als neues olympisches Windsurf-Material für den Zyklus Paris 2024 eingeführt und ersetzte die RS:X-Klasse, die bis Tokio 2020 gefahren wurde.",
   },
   {
-    q: "Wie schnell ist ein IQFoil?",
+    q: "Wie schnell ist ein iQFOiL?",
     a: "Starboard, der Hersteller des Klassenboards, gibt an, dass das Paket von 5 bis 35 Knoten Wind funktioniert (rund 9 bis 65 km/h). Die Geschwindigkeit des Boards hängt von Wind, Wasser und Fahrer ab — meine persönliche Höchstgeschwindigkeit auf diesem Material liegt bei 32,3 Knoten, also rund 60 km/h.",
   },
   {
@@ -72,19 +72,19 @@ const FAQ = [
     a: "Ein Board, ein Foil, ein Segel pro Person — für alle im Feld dasselbe. Starboard gibt das Klassenboard mit 220 × 95 cm und 196 Litern Volumen an, das Klassen-Foil mit einem 900er-Frontflügel, einem 255er-Heckflügel und einem 95 cm langen Foil-Mast. Männer fahren ein 8-m²-Segel, Frauen ein 7,3-m²-Segel.",
   },
   {
-    q: "Wie läuft eine IQFoil-Regatta ab?",
+    q: "Wie läuft eine iQFOiL-Regatta ab?",
     a: "Die Klasse fährt in der Opening Series drei Disziplinen — Course Racing, Sprint Slalom und Marathon — und danach eine Medal Series um die Titel. Die RYA beschreibt Regattatage mit bis zu sechs Wettfahrten und eine Medal Series im K.-o.-System für die zehn Besten jedes Feldes.",
   },
   {
-    q: "Was unterscheidet IQFoil vom normalen Windsurfen?",
+    q: "Was unterscheidet iQFOiL vom normalen Windsurfen?",
     a: "Der Rumpf verlässt das Wasser. Auf einem klassischen Windsurfboard gleitet man — man rauscht über die Wasseroberfläche — und kämpft gegen den Widerstand; auf dem Foil hebt das Board ab und fährt auf einem Flügel unter Wasser. Es ist leiser, bei wenig Wind schneller, und es scheitert anders: Wenn etwas schiefgeht, stürzt man ab, statt einfach langsamer zu werden.",
   },
   {
-    q: "Ist IQFoil schwer zu lernen?",
+    q: "Ist iQFOiL schwer zu lernen?",
     a: "Aufs Foil zu kommen ist nicht der schwierige Teil — die meisten Windsurfer schaffen das in wenigen Sessions. Die richtige Höhe zu halten, zu halsen (also mit dem Heck durch den Wind zu drehen) ohne aufzusetzen und das alles im Feld bei Renngeschwindigkeit zu tun: Das dauert Jahre.",
   },
   {
-    q: "Bei welchem Wind wird IQFoil gefahren?",
+    q: "Bei welchem Wind wird iQFOiL gefahren?",
     a: "US Sailing beschreibt Course Racing als Wettfahrten bei mehr als 12 Knoten (rund 22 km/h), Sprint Slalom bei etwa 6 bis 15 Knoten (rund 11 bis 28 km/h) und den Marathon als Langstreckenrennen mit doppelter Punktewertung.",
   },
 ];
@@ -126,7 +126,7 @@ export default function IqfoilDe() {
                 </Link>
               </li>
               <li aria-hidden>/</li>
-              <li className="text-ink">IQFoil</li>
+              <li className="text-ink">iQFOiL</li>
             </ol>
           </nav>
 
@@ -135,7 +135,7 @@ export default function IqfoilDe() {
             WAS IST IQFOIL?
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink">
-            IQFoil ist die olympische Windsurf-Klasse. Das Board fährt nicht auf
+            iQFOiL ist die olympische Windsurf-Klasse. Das Board fährt nicht auf
             dem Wasser — es fliegt darüber, getragen von einem Flügel unter der
             Oberfläche. Ich fahre diese Klasse, und deshalb ist diese Seite die
             Fassung, die ich mir am Anfang selbst gewünscht hätte.
@@ -158,7 +158,7 @@ export default function IqfoilDe() {
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-mist">
               <Image
                 src="/images/DSCF0515.jpg"
-                alt="Ein IQFoil-Board, das auf seinem Hydrofoil vollständig aus dem Wasser gehoben ist — nur der Foil-Mast steckt noch in der Oberfläche"
+                alt="Ein iQFOiL-Board, das auf seinem Hydrofoil vollständig aus dem Wasser gehoben ist — nur der Foil-Mast steckt noch in der Oberfläche"
                 fill
                 sizes="(min-width: 1440px) 1440px, 100vw"
                 className="object-cover object-[50%_40%]"
@@ -176,7 +176,7 @@ export default function IqfoilDe() {
           <section className="mt-16 border-t border-hairline pt-12">
             <h2 className={H2}>Eine olympische One-Design-Klasse</h2>
             <p className={P}>
-              IQFoil ist Windsurfen auf einem Hydrofoil, und es ist eine strikte
+              iQFOiL ist Windsurfen auf einem Hydrofoil, und es ist eine strikte
               One-Design-Klasse: Alle im Feld fahren dasselbe Board, dasselbe
               Foil und dasselbe Segel. Die Klasse sagt es unmissverständlich —
               das Ziel ist ein möglichst faires Racing, und genau deshalb ist das
@@ -390,8 +390,9 @@ export default function IqfoilDe() {
             <h2 className={H2}>Warum ich diese Klasse fahre</h2>
             <p className={P}>
               Ich habe 2014 mit Windsurfen angefangen, bin 2019 aufs Foil
-              gewechselt und 2021 ins IQFoil. Ich starte international und fahre
-              inzwischen in der Elite-Kategorie. Mein langfristiges Ziel ist es,
+              gewechselt und 2021 ins iQFOiL. Ich starte inzwischen
+              international in der U23- und Senior-Kategorie. Mein
+              langfristiges Ziel ist es,
               die Schweiz an den Olympischen Spielen zu vertreten — das ist der
               Weg, auf dem ich bin, und ich nenne dazu bewusst keine Jahreszahl.
             </p>

@@ -37,6 +37,7 @@ const COPY: Record<
     eyebrow: string;
     heading: string;
     lead: string;
+    leadSecond: string;
     rights: string;
     cta: string;
     emptyTitle: string;
@@ -49,7 +50,9 @@ const COPY: Record<
   de: {
     eyebrow: "Galerie",
     heading: "GALERIE",
-    lead: "Bilder vom Wasser: Trainingstage, Regattawochen und Shootings. Hier liegen die Fotos — die laufende Geschichte dazu läuft über Social Media.",
+    lead: "Momente aus Wettkämpfen, Trainingslagern und Shootings. In der Galerie sind die Bilder gesammelt – die laufende Geschichte dahinter teile ich über Social Media.",
+    leadSecond:
+      "Die einzelnen Alben zeigen verschiedene Regatten, Trainingscamps und Projekte auf und neben dem Wasser.",
     rights:
       "Die Galerie ist keine öffentliche Pressebild-Datenbank. Die Bilder werden zum Anschauen gezeigt und nicht zum freien Herunterladen angeboten. Wo die Urheberschaft belegt ist, steht der Fotograf beim Bild. Für eine konkrete Nutzung bitte kurz anfragen.",
     cta: "Zur Galerie",
@@ -63,7 +66,9 @@ const COPY: Record<
   en: {
     eyebrow: "Gallery",
     heading: "GALLERY",
-    lead: "Photos from the water: training days, race weeks and shoots. The pictures live here — the running story behind them is on social media.",
+    lead: "Moments from competitions, training camps and shoots. The gallery brings the images together, while the ongoing story is shared through social media.",
+    leadSecond:
+      "The individual albums cover different regattas, training camps and projects on and off the water.",
     rights:
       "The gallery is not a public press image library. Photos are shown for viewing and are not offered as free downloads. Where authorship is documented, the photographer is credited with the image. For a specific use, please get in touch first.",
     cta: "Open the gallery",
@@ -92,6 +97,9 @@ export default function GalleryTeaser({ lang }: { lang: Lang }) {
           {c.heading}
         </h2>
         <p className="mt-6 max-w-xl leading-relaxed text-graphite">{c.lead}</p>
+        <p className="mt-3 max-w-xl text-balance leading-relaxed text-graphite">
+          {c.leadSecond}
+        </p>
 
         {albums.length > 0 ? (
           <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -140,7 +148,7 @@ export default function GalleryTeaser({ lang }: { lang: Lang }) {
         )}
 
         <div className="mt-10 flex flex-col items-start gap-6 border-t border-hairline pt-8 lg:flex-row lg:items-center lg:justify-between">
-          <p className="max-w-2xl text-sm leading-relaxed text-graphite">
+          <p className="max-w-2xl text-balance text-sm leading-relaxed text-graphite">
             {c.rights}
           </p>
           <Link

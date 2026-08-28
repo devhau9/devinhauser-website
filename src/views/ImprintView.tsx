@@ -36,8 +36,8 @@ export const IMPRINT_TITLE: Record<Lang, string> = {
 };
 
 export const IMPRINT_DESCRIPTION: Record<Lang, string> = {
-  de: "Impressum für www.devinhauser.com, betrieben von Devin Hauser, IQFoil- und Wingfoil-Racer aus der Schweiz.",
-  en: "Legal imprint / Impressum for www.devinhauser.com, operated by Devin Hauser, Swiss IQFoil & Wingfoil Racing Athlete.",
+  de: "Impressum für www.devinhauser.com, betrieben von Devin Hauser, iQFOiL- und Wingfoil-Racer aus der Schweiz.",
+  en: "Legal imprint / Impressum for www.devinhauser.com, operated by Devin Hauser, Swiss iQFOiL & Wingfoil Racing Athlete.",
 };
 
 const COPY: Record<
@@ -75,7 +75,7 @@ const COPY: Record<
     heading: "IMPRESSUM",
     lead: "Rechtliche Hinweise und Kontaktangaben zu dieser Website.",
     operator: "Betreiber der Website",
-    role: "IQFoil- und Wingfoil-Racer aus der Schweiz",
+    role: "iQFOiL- und Wingfoil-Racer aus der Schweiz",
     location: "Zürich, Schweiz",
     postal:
       "Eine Postadresse für rechtliche Korrespondenz wird auf Anfrage über die untenstehende E-Mail-Adresse bekanntgegeben.",
@@ -109,7 +109,7 @@ const COPY: Record<
     heading: "IMPRINT",
     lead: "Legal notice and contact information for this website.",
     operator: "Website Operator",
-    role: "Swiss IQFoil & Wingfoil Racing Athlete",
+    role: "Swiss iQFOiL & Wingfoil Racing Athlete",
     location: "Zurich, Switzerland",
     postal:
       "A postal address for legal correspondence is available on request via the email below.",

@@ -35,8 +35,8 @@
  * ─────────────────────────────────────────────────────────────────────────────
  * Schweizer Hochdeutsch. KEIN Eszett — durchgehend "ss" (Grosse, Strasse,
  * heisst, gemaess). Fachbegriffe der Klasse bleiben englisch und werden nicht
- * uebersetzt: IQFoil, Wingfoil, Foil, Racing, Slalom, Marathon, Course Racing.
- * "IQFoil" wird konsequent VOR "Wingfoil" genannt — es ist die Hauptdisziplin.
+ * uebersetzt: iQFOiL, Wingfoil, Foil, Racing, Slalom, Marathon, Course Racing.
+ * "iQFOiL" wird konsequent VOR "Wingfoil" genannt — es ist die Hauptdisziplin.
  */
 
 export type Lang = "de" | "en";

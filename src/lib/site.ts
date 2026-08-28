@@ -26,26 +26,26 @@ export const SITE_NAME = "Devin Hauser";
  *
  * Beide Fassungen sind eigenstaendig formuliert, nicht Wort fuer Wort
  * uebersetzt: Ein deutscher Seitentitel, der wie eine Uebersetzung klingt,
- * verliert genau die Suchbegriffe, wegen derer er existiert. „IQFoil" und
+ * verliert genau die Suchbegriffe, wegen derer er existiert. „iQFOiL" und
  * „Wingfoil Racing" bleiben in beiden Sprachen unveraendert — es sind
  * Klassenbezeichnungen, keine uebersetzbaren Woerter.
  */
 export const SITE_TITLE: Record<Lang, string> = {
-  de: "Devin Hauser | IQFoil- und Wingfoil-Racer aus der Schweiz",
-  en: "Devin Hauser | Swiss IQFoil & Wingfoil Racing Athlete",
+  de: "Devin Hauser | Swiss iQFOiL- und Wingfoil-Racer",
+  en: "Devin Hauser | Swiss iQFOiL & Wingfoil Racer",
 };
 
 export const SITE_DESCRIPTION: Record<Lang, string> = {
-  de: "Devin Hauser ist IQFoil- und Wingfoil-Racer aus der Schweiz. Seit mehreren Jahren fährt er internationale Regatten, mit dem langfristigen Ziel, die Schweiz an den Olympischen Spielen zu vertreten.",
-  en: "Devin Hauser is a Swiss IQFoil and Wingfoil racing athlete. He has been racing internationally for several years, working towards the long-term goal of representing Switzerland at the Olympic Games.",
+  de: "Devin Hauser ist iQFOiL- und Wingfoil-Racer aus der Schweiz. Er startet international in der U23- und Senior-Kategorie, mit dem langfristigen Ziel, die Schweiz an den Olympischen Spielen zu vertreten.",
+  en: "Devin Hauser is an iQFOiL and Wingfoil racer from Switzerland. He competes internationally in the U23 and senior fleets, working towards the long-term goal of representing Switzerland at the Olympic Games.",
 };
 
 /** Schluesselwoerter je Sprache — bewusst kurz und ohne Wiederholungen. */
 export const SITE_KEYWORDS: Record<Lang, string[]> = {
   de: [
     "Devin Hauser",
-    "IQFoil",
-    "IQFoil Schweiz",
+    "iQFOiL",
+    "iQFOiL Schweiz",
     "Windsurfen Schweiz",
     "Wingfoil Racing",
     "Schweizer Windsurfer",
@@ -54,8 +54,8 @@ export const SITE_KEYWORDS: Record<Lang, string[]> = {
   ],
   en: [
     "Devin Hauser",
-    "IQFoil",
-    "Swiss IQFoil athlete",
+    "iQFOiL",
+    "Swiss iQFOiL athlete",
     "Swiss windsurfing athlete",
     "Wingfoil racing",
     "Swiss wingfoil athlete",
@@ -126,13 +126,13 @@ export const CONTENT_UPDATED = "2026-08-19";
  * behauptet, was auf der Seite selbst nicht belegt ist.
  */
 const PERSON_DESCRIPTION: Record<Lang, string> = {
-  de: "IQFoil- und Wingfoil-Racer aus der Schweiz. IQFoil ist die olympische Windsurf-Klasse.",
-  en: "Swiss IQFoil and Wingfoil racing athlete. IQFoil is the Olympic windsurfing class.",
+  de: "iQFOiL- und Wingfoil-Racer aus der Schweiz. iQFOiL ist die olympische Windsurfklasse.",
+  en: "iQFOiL and Wingfoil racer from Switzerland. iQFOiL is the Olympic windsurfing class.",
 };
 
 const PERSON_JOB_TITLE: Record<Lang, string> = {
-  de: "IQFoil- und Wingfoil-Racer",
-  en: "IQFoil & Wingfoil Racing Athlete",
+  de: "iQFOiL- und Wingfoil-Racer",
+  en: "iQFOiL & Wingfoil Racer",
 };
 
 /**
@@ -172,7 +172,7 @@ export function personJsonLd(lang: Lang) {
   url: absoluteUrl(localizedPath("/", lang)),
   image: absoluteUrl("/images/about-portrait.jpg"),
   knowsAbout: [
-    "IQFoil",
+    "iQFOiL",
     "Wingfoil Racing",
     "Windsurfing",
     "Sailing",
