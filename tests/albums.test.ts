@@ -465,19 +465,21 @@ describe("Ausgelieferte Alben", () => {
     for (const slug of geladen) assert.ok(!slug.startsWith("."), slug);
   });
 
-  test("alle zwoelf Eventalben werden geladen, mit exakter Bildzahl", () => {
+  test("alle vierzehn Eventalben werden geladen, mit exakter Bildzahl", () => {
     const erwartet: Record<string, number> = {
       "cremia-2026": 16,
-      "cadiz-2026": 5,
-      "lanzarote-2026": 3,
-      "arzachena-2025": 6,
-      "portimao-2025": 2,
-      "silvaplana-2025": 15,
-      "brest-2025": 5,
+      "portimao-2026": 18,
+      "cadiz-2026": 18,
+      "lanzarote-2026": 16,
+      "sferracavallo-2025": 15,
+      "arzachena-2025": 18,
+      "portimao-2025": 15,
+      "silvaplana-2025": 18,
+      "brest-2025": 15,
       "cadiz-2025": 3,
-      "sa-rapita-2024": 3,
-      "silvaplana-worlds-2024": 3,
-      "embrun-2024": 6,
+      "sa-rapita-2024": 14,
+      "silvaplana-worlds-2024": 17,
+      "embrun-2024": 20,
       "swissfoiling-2023": 2,
     };
     assert.deepEqual(albums.map((a) => a.slug).sort(), Object.keys(erwartet).sort());
@@ -486,8 +488,8 @@ describe("Ausgelieferte Alben", () => {
     }
     assert.equal(
       albums.reduce((n, a) => n + a.images.length, 0),
-      69,
-      "69 Bilder insgesamt"
+      205,
+      "205 Bilder insgesamt"
     );
   });
 
@@ -570,9 +572,11 @@ describe("Ausgelieferte Alben", () => {
   });
 
   test("die Urheberangabe ist für alle Alben ausdrücklich typisiert", () => {
-    // Zehn Sailing-Energy-Alben sind eine Agentur; Tobias Meier und
+    // Zwoelf Sailing-Energy-Alben sind eine Agentur; Tobias Meier und
     // Marc Weiler sind natuerliche Personen.
     const erwartet: Record<string, "Person" | "Organization"> = {
+      "portimao-2026": "Organization",
+      "sferracavallo-2025": "Organization",
       "silvaplana-2025": "Organization",
       "silvaplana-worlds-2024": "Organization",
       "embrun-2024": "Organization",
@@ -602,6 +606,8 @@ describe("Ausgelieferte Alben", () => {
     // denselben Text zeigen, wurde irgendwo vereinheitlicht — genau das ist
     // untersagt.
     const erwartet: Record<string, string> = {
+      "portimao-2026": "Sailing Energy",
+      "sferracavallo-2025": "Sailing Energy",
       "silvaplana-2025": "© Sailing Energy",
       "silvaplana-worlds-2024": "© Sailing Energy",
       "cadiz-2026": "© Sailing Energy",
@@ -644,7 +650,7 @@ describe("Ausgelieferte Alben", () => {
       .trim()
       .split("\n")
       .slice(1);
-    assert.equal(zeilen.length, 69, "Manifest deckt 69 Dateien ab");
+    assert.equal(zeilen.length, 205, "Manifest deckt 205 Dateien ab");
     const manifest = new Map(
       zeilen.map((z) => z.trim().split(",") as [string, string])
     );
