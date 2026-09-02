@@ -1,4 +1,5 @@
 import { SECTION_ID, type Lang } from "@/lib/i18n";
+import { brandText } from "@/components/BrandText";
 
 // Kompakte Ergebnis-Sektion für die Personal-Brand-Startseite: KEINE
 // vollständige Resultat-Datenbank. Ziel ist der 10–15-Sekunden-Eindruck
@@ -45,6 +46,24 @@ import { SECTION_ID, type Lang } from "@/lib/i18n";
 // acht waechst, ist Devins Entscheidung A2 aus "11 Devin Quick Decisions.md"
 // — nicht die des Codes.
 //
+// ─────────────────────────────────────────────────────────────────────────────
+// ERGAENZUNG 02.09.2026 — SCHWEIZERMEISTERSCHAFT SILVAPLANA 2026
+// ─────────────────────────────────────────────────────────────────────────────
+// Zwei Zeilen neu, beide direkt in der offiziellen Ergebnisquelle geprueft
+// (manage2sail, Event 2d6d3d67-4c05-4f02-8f42-e6786f26ba34, "SM / SC Windsurf
+// 2026", Endstand veroeffentlicht 01.09.2026 18:03):
+//   Wertung "iQFOiL"   27 Gemeldete, SUI 134 auf Rang 2
+//   Wertung "Overall"  45 Gemeldete, SUI 134 auf Rang 3
+// Swiss Sailing bestaetigt in der Verbandsmeldung "Devin Hauser (SUI 134)" auf
+// Rang 3 der Overall-Wertung. Kein bestehendes Resultat wurde entfernt.
+//
+// KEIN TITEL: "Vize-Schweizermeister" steht hier bewusst NICHT. Swiss Sailing
+// nennt als Schweizermeister Loic Huguenin (SUI 91) und als Zweiten Justas
+// Katkus (SUI 60); Devin ist Dritter. Die manage2sail-Wertung "iQFOiL" ist
+// zudem eine GEMISCHTE Materialwertung — Inversin, Liebig, Favre, Grosso und
+// Coldebella stehen darin — und damit nicht die Titelwertung "iQFOiL Herren".
+// Rang 2 ist also ein belegter Rang, aber kein belegter Titel.
+//
 // ÜBERSETZUNG: Es wurde ausschliesslich die Beschriftung übersetzt. Zahlen,
 // Platzierungen, Orte, Jahre und Kategorien sind unverändert aus der
 // Masterliste übernommen — es kommt kein einziges neues oder gerundetes
@@ -72,6 +91,8 @@ const COPY: Record<
     intro: "SEIT MEHREREN JAHREN FAHRE ICH INTERNATIONALE REGATTEN",
     selectedHeading: "Ausgewählte Resultate",
     results: [
+      { placement: "2.", suffix: "von 27", event: "Schweizermeisterschaft Silvaplana 2026", context: "iQFOiL" },
+      { placement: "3.", suffix: "von 45", event: "Schweizermeisterschaft Silvaplana 2026", context: "Overall" },
       { placement: "5.", suffix: "von 13", event: "iQFOiL International Games", context: "Silvaplana 2025 · Senior" },
       { placement: "8.", suffix: "von 42", event: "iQFOiL International Games", context: "Campione 2023 · U17" },
       { placement: "16.", suffix: "von 45", event: "iQFOiL International Games", context: "Cádiz 2025 · U19" },
@@ -85,6 +106,8 @@ const COPY: Record<
     intro: "I HAVE BEEN COMPETING INTERNATIONALLY FOR SEVERAL YEARS",
     selectedHeading: "Selected Results",
     results: [
+      { placement: "2nd", suffix: "of 27", event: "Swiss Championship Silvaplana 2026", context: "iQFOiL" },
+      { placement: "3rd", suffix: "of 45", event: "Swiss Championship Silvaplana 2026", context: "Overall" },
       { placement: "5th", suffix: "of 13", event: "iQFOiL International Games", context: "Silvaplana 2025 · Senior" },
       { placement: "8th", suffix: "of 42", event: "iQFOiL International Games", context: "Campione 2023 · U17" },
       { placement: "16th", suffix: "of 45", event: "iQFOiL International Games", context: "Cádiz 2025 · U19" },
@@ -150,8 +173,12 @@ export default function Highlights({ lang }: { lang: Lang }) {
                     <span className="block font-body text-base text-ink">
                       {r.event}
                     </span>
+                    {/* `brandText`: Die Kontextzeile steht per CSS in
+                        Versalien. Aus „iQFOiL" wuerde dabei „IQFOIL" — die
+                        Schreibweise der Klasse ist aber verbindlich, deshalb
+                        wird nur dieser eine Token davon ausgenommen. */}
                     <span className="mt-0.5 block font-mono text-xs uppercase tracking-widest2 text-graphite/60">
-                      {r.context}
+                      {brandText(r.context)}
                     </span>
                   </span>
                 </div>
