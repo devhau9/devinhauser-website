@@ -157,10 +157,18 @@ export default function Goals({ lang }: { lang: Lang }) {
           </div>
 
           <div className="min-w-0 lg:order-1">
-            <p className="font-mono text-xs uppercase tracking-widest2 text-red">
+            {/* Einleitungszeile eine Stufe groesser als die uebrigen Eyebrows
+                (14/16px statt 12px) und in mittlerer Staerke: Gegen eine 48-
+                bis 72px-Ueberschrift verschwand sie sonst. Tracking bewusst
+                von 0.25em auf 0.2em zurueckgenommen — bei 16px zog die weitere
+                Sperrung „DER WEG ZU DEN" ueber die halbe Spalte und brach auf
+                schmalen Geraeten unguenstig um. Der Abstand zur Ueberschrift
+                waechst mit (mt-2 -> mt-3), damit die beiden Zeilen nicht
+                zusammenkleben. */}
+            <p className="font-mono text-sm font-medium uppercase tracking-[0.2em] text-red sm:text-base">
               {c.eyebrow}
             </p>
-            <h2 className="mt-2 font-display text-5xl leading-[0.9] tracking-wide text-paper sm:text-6xl lg:text-7xl">
+            <h2 className="mt-3 font-display text-5xl leading-[0.9] tracking-wide text-paper sm:text-6xl lg:text-7xl">
               {c.heading}
             </h2>
             <p className="mt-6 max-w-lg text-balance leading-relaxed text-slate-light">

@@ -27,7 +27,7 @@ const COPY: Record<
   }
 > = {
   de: {
-    eyebrow: "Partnerschaft",
+    eyebrow: "Zusammenarbeit",
     heading: "PARTNERSCHAFT",
     paragraphs: [
       "International an der Spitze mitzufahren, erfordert nicht nur viel Training und Zeit, sondern auch eine starke finanzielle und organisatorische Grundlage. Zu den grössten Ausgaben gehören Material, Reisen, Startgebühren, Unterkünfte, Logistik sowie Coaching und Motorboot.",
@@ -57,7 +57,7 @@ const COPY: Record<
     note: "Der konkrete Umfang wird gemeinsam festgelegt und auf die Ziele beider Seiten abgestimmt. Der Einstieg läuft über das Partner-Portal.",
   },
   en: {
-    eyebrow: "Partnership",
+    eyebrow: "Collaboration",
     heading: "PARTNERSHIP",
     paragraphs: [
       "Competing at the highest international level requires more than training and time. It also requires a strong financial and organisational foundation. The main costs include equipment, travel, entry fees, accommodation, logistics, coaching and motorboat support.",

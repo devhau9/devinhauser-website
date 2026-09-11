@@ -101,7 +101,7 @@ const COPY: Record<
   }
 > = {
   de: {
-    eyebrow: "Partner",
+    eyebrow: "Netzwerk",
     heading: "PARTNER",
     // Kanonische Sprachregel aus dem Vault: die BESTEHENDEN Logos heissen
     // „Partner, Organisationen und Unterstützer" — nie „Sponsoren", und es
@@ -118,7 +118,7 @@ const COPY: Record<
     footerLink: "Zugang über das Partner-Portal anfragen",
   },
   en: {
-    eyebrow: "Partners",
+    eyebrow: "Network",
     heading: "PARTNERS",
     lead: "I work with partners, organisations and supporters who contribute to my journey in international racing.",
     thanks: "A big thank you to everyone who supports me on and off the water.",

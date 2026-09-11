@@ -113,7 +113,7 @@ const COPY: Record<
   }
 > = {
   de: {
-    eyebrow: "Social Media",
+    eyebrow: "Medien",
     heading: "SOCIAL MEDIA & CONTENT",
     paragraphs: [
       "Der Sport steht an erster Stelle: Ich fahre iQFOiL, die olympische Windsurfklasse, und starte zusätzlich im Wingfoil Racing.",
@@ -127,7 +127,7 @@ const COPY: Record<
     portalCta: "Partner-Portal",
   },
   en: {
-    eyebrow: "Social Media",
+    eyebrow: "Media",
     heading: "SOCIAL MEDIA & CONTENT",
     paragraphs: [
       "Sport comes first: I race in iQFOiL, the Olympic windsurfing class, and also compete in Wingfoil Racing.",

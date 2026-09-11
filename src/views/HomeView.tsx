@@ -23,14 +23,14 @@ const BRIDGE: Record<
   { eyebrow: string; text: string; cta: string }
 > = {
   de: {
-    eyebrow: "Neu im Sport?",
+    eyebrow: "Was ist iQFOiL?",
     text: "iQFOiL ist die olympische Windsurfklasse. Gefahren wird mit einem Board, einem Segel und einem Foil. Das Foil funktioniert unter Wasser ähnlich wie der Flügel eines Flugzeugs: Mit genügend Geschwindigkeit hebt es das Board aus dem Wasser.",
-    cta: "Was ist iQFOiL?",
+    cta: "Mehr über iQFOiL",
   },
   en: {
-    eyebrow: "New to the sport?",
+    eyebrow: "What is iQFOiL?",
     text: "iQFOiL is the Olympic windsurfing class. Athletes race with a board, a sail and a hydrofoil. The foil works underwater in a similar way to an aircraft wing: once enough speed is generated, it lifts the board above the water.",
-    cta: "What is iQFOiL?",
+    cta: "Learn more about iQFOiL",
   },
 };
 
@@ -86,12 +86,12 @@ export default function HomeView({ lang }: { lang: Lang }) {
       <section className="border-b border-hairline bg-mist px-6 py-14 sm:px-10 lg:px-16">
         <div className="mx-auto flex max-w-content flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="min-w-0">
-            <p className="eyebrow mb-3">{b.eyebrow}</p>
+            <p className="eyebrow mb-3">{brandText(b.eyebrow)}</p>
             <p className="max-w-xl leading-relaxed text-ink">{b.text}</p>
           </div>
           <Link
             href={localizedPath("/iqfoil", lang)}
-            className="shrink-0 rounded-sm border border-ink px-7 py-3.5 text-center font-mono text-xs uppercase tracking-widest2 text-ink transition-colors hover:bg-ink hover:text-paper"
+            className="shrink-0 rounded-sm bg-red px-7 py-3.5 text-center font-mono text-xs uppercase tracking-widest2 text-white transition-transform hover:-translate-y-0.5"
           >
             {brandText(b.cta)}
           </Link>

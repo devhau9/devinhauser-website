@@ -48,7 +48,7 @@ const COPY: Record<
   }
 > = {
   de: {
-    eyebrow: "Galerie",
+    eyebrow: "Momente",
     heading: "GALERIE",
     lead: "Momente aus Wettkämpfen, Trainingslagern und Shootings. In der Galerie sind die Bilder gesammelt – die laufende Geschichte dahinter teile ich über Social Media.",
     leadSecond:
@@ -64,7 +64,7 @@ const COPY: Record<
     coverAlt: (title) => `${title} — Titelbild des Albums`,
   },
   en: {
-    eyebrow: "Gallery",
+    eyebrow: "Moments",
     heading: "GALLERY",
     lead: "Moments from competitions, training camps and shoots. The gallery brings the images together, while the ongoing story is shared through social media.",
     leadSecond:

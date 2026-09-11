@@ -29,7 +29,7 @@ const COPY: Record<
   }
 > = {
   de: {
-    eyebrow: "Über mich",
+    eyebrow: "Athlet",
     heading: "ÜBER MICH",
     paragraphs: [
       "Ich bin Devin Hauser, iQFOiL- und Wingfoil-Racer aus der Schweiz. Mit sieben Jahren stand ich zum ersten Mal auf einem Windsurfbrett. Seitdem zieht es mich so oft wie möglich aufs Wasser. Ob iQFOiL, Wingfoil, Windsurfen, Pumpfoil, Kitesurfen oder Parawing: Ich probiere alles aus, was fliegt, gleitet und mich schneller macht.",
@@ -52,7 +52,7 @@ const COPY: Record<
     ],
   },
   en: {
-    eyebrow: "About",
+    eyebrow: "Athlete",
     heading: "ABOUT ME",
     paragraphs: [
       "I\u2019m Devin Hauser, an iQFOiL and Wingfoil racer from Switzerland. I first stepped onto a windsurf board at the age of seven. Since then, I have wanted to spend as much time on the water as possible. Whether it is iQFOiL, Wingfoil, windsurfing, pump foiling, kitesurfing or parawinging, I enjoy everything that flies, glides and helps me become faster.",

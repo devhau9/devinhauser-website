@@ -68,6 +68,24 @@ const COPY: Record<
  * deshalb stehen beide Ebenen jetzt auf 12px. Die Rangfolge tragen die drei
  * verbleibenden Mittel weiterhin deutlich genug — ein Unterschied von einem
  * Pixel hat sie ohnehin nie hergestellt.
+ *
+ * NACHTRAG 07.09.2026 (Sichtpruefung Devin, Desktop und Telefon): Die zweite
+ * Ebene wirkte wie eine Bildunterschrift statt wie ein Einstieg. Sie steht
+ * jetzt auf 14px in mittlerer Staerke und in `paper/80` statt `slate-light`.
+ * Damit ist die Schriftgroesse endgueltig KEIN Rangmerkmal mehr — die Knoepfe
+ * bleiben bei 12px, tragen ihren Vorrang aber ueber Flaeche, Rahmen und den
+ * einen gefuellten roten Knopf, und das sind die staerkeren Signale. Die
+ * vertikale Innenpolsterung (`py-1`) hebt die Trefferflaeche auf 28px; sie
+ * erzeugt keine sichtbare Knopfflaeche.
+ *
+ * WARUM DIE SPERRUNG HIER 0.16em IST UND NICHT `tracking-widest2` (0.25em):
+ * Bei 14px und 0.25em brauchen „SOCIAL MEDIA" und „GALERIE ANSEHEN" zusammen
+ * 350px. Auf einem 390px-Geraet stehen 342px zur Verfuegung — die Zeile brach
+ * also um, und die zweite Zeile landete unter dem Cookie-Banner. Mit 0.16em
+ * sind es 316px: eine Zeile, in beiden Sprachen, bis hinunter zu 375px. Die
+ * englischen Beschriftungen sind kuerzer und waren nie das Problem; die
+ * Sperrung ist trotzdem in beiden Sprachen gleich, damit sie nicht bei der
+ * naechsten Textaenderung auseinanderlaeuft.
  */
 export default function Hero({ lang }: { lang: Lang }) {
   const c = COPY[lang];
@@ -132,8 +150,25 @@ export default function Hero({ lang }: { lang: Lang }) {
 
           {/* Segelnummer und Standort teilen sich eine Zeile: beides sind kurze
               Kennzahlen, und drei einzelne Zeilen unter dem Namen wuerden den
-              Hero auf dem Telefon nach unten schieben. */}
-          <p className="mt-3 animate-fade-in-up font-mono text-xs uppercase tracking-[0.3em] text-slate-light [animation-delay:200ms] sm:text-sm">
+              Hero auf dem Telefon nach unten schieben.
+
+              07.09.2026: War 12/14px in `slate-light` bei 0.3em Sperrung und
+              damit auf beiden Geraeten zu schwach. Jetzt 14px in mittlerer
+              Staerke, `paper/75` und 0.16em — heller, kompakter, schneller
+              erfassbar.
+
+              Die Sperrung ist kein Geschmack, sondern gemessen: Bei 0.22em
+              brauchte die englische Fassung „SUI-134 · ZURICH, SWITZERLAND"
+              333px, auf einem 375px-Geraet stehen aber nur 327px zur
+              Verfuegung — die Zeile brach um. 0.16em passt in beiden Sprachen
+              auf eine Zeile.
+
+              BEWUSST OHNE `sm:text-base`: Mit 16px stand die Zeile auf dem
+              Desktop exakt so gross wie der Untertitel darueber und war durch
+              die mittlere Staerke sogar schwerer — die Rangfolge kippte. Den
+              Vorrang traegt jetzt allein die Deckkraft (100% gegen 75%), und
+              das nur, weil beide Zeilen reiner Text ohne Flaeche sind. */}
+          <p className="mt-3 animate-fade-in-up font-mono text-sm font-medium uppercase tracking-[0.16em] text-paper/75 [animation-delay:200ms]">
             SUI-134 · {c.location}
           </p>
 
@@ -160,13 +195,13 @@ export default function Hero({ lang }: { lang: Lang }) {
           >
             <Link
               href={sectionHref(lang, SECTION_ID.social)}
-              className="rounded-sm font-mono text-xs uppercase tracking-widest2 text-slate-light underline decoration-slate-light/40 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
+              className="rounded-sm py-1 font-mono text-sm font-medium uppercase tracking-[0.16em] text-paper/80 underline decoration-paper/40 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
             >
               {c.social}
             </Link>
             <Link
               href={localizedPath("/media", lang)}
-              className="rounded-sm font-mono text-xs uppercase tracking-widest2 text-slate-light underline decoration-slate-light/40 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-red"
+              className="rounded-sm py-1 font-mono text-sm font-medium uppercase tracking-[0.16em] text-paper/80 underline decoration-paper/40 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-paper focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
             >
               {c.gallery}
             </Link>

@@ -26,7 +26,7 @@ const COPY: Record<
   }
 > = {
   de: {
-    eyebrow: "Disziplinen",
+    eyebrow: "Sport",
     heading: "DISZIPLINEN",
     iqfoil: {
       title: "iQFOiL Racing",
@@ -47,7 +47,7 @@ const COPY: Record<
     },
   },
   en: {
-    eyebrow: "Disciplines",
+    eyebrow: "Sport",
     heading: "DISCIPLINES",
     iqfoil: {
       title: "iQFOiL Racing",
