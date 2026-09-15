@@ -9,11 +9,16 @@ type Partner = {
   href: string | null;
   imgPadding?: string;
   imgObjectPosition?: string;
+  /** Kurzer Zusatz unter dem Logo, wenn die Unterstützung über Dritte läuft. */
+  note?: Record<Lang, string>;
 };
 
-// Jeder Partner mit offizieller Website. URLs recherchiert und bestätigt
-// (Stand 19.07.2026, Arnold/Drei Plus ergänzt am 20.07.2026). Alle zehn
-// Partner sind aktuell vollständig verlinkt.
+// Reihenfolge und Namen wie im Sponsoring-Dossier 2027, Seite „Partner,
+// Organisationen & Unterstützer" (Stand 15.09.2026). Alle Websites am
+// 15.09.2026 aufgerufen und bestätigt. Einzige Ausnahme ohne eigenen Link:
+// McDonald's Dielsdorf — die Unterstützung läuft als Patenschaft über die
+// Schweizer Sporthilfe, deshalb der Zusatz „via Sporthilfe" statt eines
+// Verweises auf die Filiale.
 const PARTNERS: Partner[] = [
   {
     src: "/logos/swiss-sailing-team.png",
@@ -31,28 +36,22 @@ const PARTNERS: Partner[] = [
     imgObjectPosition: "object-[50%_78%]",
   },
   {
+    src: "/logos/rvzs.png",
+    alt: "Swiss Sailing Regionalverband Zentralschweiz (RVZS) logo",
+    name: "RVZS",
+    href: "https://www.rvzs.ch",
+  },
+  {
+    src: "/logos/drcs.png",
+    alt: "DRCS logo",
+    name: "DRCS",
+    href: "https://drcs-sailing.com",
+  },
+  {
     src: "/logos/sporthilfe.png",
     alt: "Stiftung Schweizer Sporthilfe logo",
     name: "Schweizer Sporthilfe",
     href: "https://sporthilfe.ch",
-  },
-  {
-    src: "/logos/ensis.png",
-    alt: "ENSIS Watersports logo",
-    name: "ENSIS",
-    href: "https://ensis.surf",
-  },
-  {
-    src: "/logos/fanagus-removebg-preview.png",
-    alt: "fanagus ag logo",
-    name: "Fanagus",
-    href: "https://www.fanagus.ch",
-  },
-  {
-    src: "/logos/dreiplus.png",
-    alt: "Drei Plus logo",
-    name: "Drei Plus",
-    href: "https://www.dreiplus.ch",
   },
   {
     src: "/logos/united-school-of-sports.png",
@@ -61,29 +60,60 @@ const PARTNERS: Partner[] = [
     href: "https://unitedschool.ch",
   },
   {
+    src: "/logos/ensis.png",
+    alt: "ENSIS Watersports logo",
+    name: "ENSIS",
+    href: "https://ensis.surf",
+  },
+  {
+    src: "/logos/dreiplus.png",
+    alt: "Drei Plus logo",
+    name: "Drei Plus",
+    href: "https://www.dreiplus.ch",
+  },
+  {
     src: "/logos/arnold.png",
     alt: "Arnold logo",
     name: "Arnold",
     href: "https://www.arnold-coag.ch",
   },
   {
-    src: "/logos/pm-consulting.svg",
-    alt: "PMC Zürich logo",
-    name: "PMC Zürich",
-    href: "https://pmc.zuerich",
+    src: "/logos/fanagus-removebg-preview.png",
+    alt: "fanagus ag logo",
+    name: "Fanagus",
+    href: "https://www.fanagus.ch",
   },
   {
-    // Schreibweise "Weidli" gemaess kanonischem Entscheid F6 = B (04.08.2026).
-    // Logo-Dateiname und Domain (weideli) bewusst unveraendert gelassen —
-    // die Domain ist der real verlinkte Auftritt; falls der Betrieb sich dort
-    // selbst "Weideli" schreibt, bitte F6 mit Devin erneut pruefen.
+    // Schreibweise seit 15.09.2026 „Weideli": So schreibt sich der Betrieb auf
+    // seiner eigenen Website, und so steht es im aktuellen Dossier. Damit ist
+    // die offene Rückfrage zum früheren Entscheid F6 (04.08.2026, „Weidli")
+    // beantwortet.
     src: "/logos/kinesiologie-weideli-removebg-preview.png",
-    alt: "Kinesiologie Weidli logo",
-    name: "Kinesiologie Weidli",
+    alt: "Kinesiologie Weideli logo",
+    name: "Kinesiologie Weideli",
     href: "https://www.kinesiologie-weideli.ch",
     // Wirkte im Vergleich zu den anderen Logos zu klein — minimale
     // weitere Vergrösserung (Nachjustierung 21.07., 3. Feinschliff).
     imgPadding: "p-1",
+  },
+  {
+    src: "/logos/fitnesspark-migros.png",
+    alt: "Fitnesspark Migros logo",
+    name: "Fitnesspark Migros",
+    href: "https://www.fitnesspark.ch",
+  },
+  {
+    src: "/logos/mcdonalds-dielsdorf.png",
+    alt: "McDonald's Dielsdorf logo",
+    name: "McDonald's Dielsdorf",
+    href: null,
+    note: { de: "via Sporthilfe", en: "via Sporthilfe" },
+  },
+  {
+    src: "/logos/pm-consulting.svg",
+    alt: "PM Consulting logo",
+    name: "PM Consulting",
+    href: "https://pmc.zuerich",
   },
 ];
 
@@ -129,6 +159,18 @@ const COPY: Record<
   },
 };
 
+// Karten mit Zusatz geben unten Platz für eine Textzeile frei; das Logo
+// bleibt dadurch in derselben Kartenhöhe wie alle anderen.
+const NOTE_PADDING = "px-4 pb-8 pt-3";
+
+function PartnerNote({ text }: { text: string }) {
+  return (
+    <span className="absolute inset-x-2 bottom-2 text-center font-mono text-[10px] leading-none text-graphite">
+      {text}
+    </span>
+  );
+}
+
 export default function Partners({ lang }: { lang: Lang }) {
   const c = COPY[lang];
   const t = UI[lang];
@@ -161,9 +203,10 @@ export default function Partners({ lang }: { lang: Lang }) {
                   fill
                   sizes="160px"
                   className={`object-contain transition-transform duration-200 ease-out group-hover:scale-[1.04] ${
-                    partner.imgPadding ?? "p-4"
+                    partner.note ? NOTE_PADDING : (partner.imgPadding ?? "p-4")
                   } ${partner.imgObjectPosition ?? ""}`}
                 />
+                {partner.note ? <PartnerNote text={partner.note[lang]} /> : null}
               </a>
             ) : (
               <div
@@ -175,8 +218,9 @@ export default function Partners({ lang }: { lang: Lang }) {
                   alt={partner.alt}
                   fill
                   sizes="160px"
-                  className="object-contain p-4"
+                  className={`object-contain ${partner.note ? NOTE_PADDING : (partner.imgPadding ?? "p-4")}`}
                 />
+                {partner.note ? <PartnerNote text={partner.note[lang]} /> : null}
               </div>
             )
           )}
