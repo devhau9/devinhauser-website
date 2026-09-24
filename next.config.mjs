@@ -18,6 +18,39 @@ const hostRedirect = (host) => ({
   permanent: true,
 });
 
+/**
+ * Sicherheitsheader für jede Antwort.
+ *
+ * Gemessen am 24.09.2026 lieferte die Produktion nur `strict-transport-security`
+ * (von Vercel gesetzt, max-age 63072000). Die drei folgenden Header fehlten.
+ * Sie sind bewusst die risikoarme Auswahl:
+ *
+ *   • `X-Content-Type-Options: nosniff` — der Browser hält sich an den
+ *     gesendeten Content-Type und rät nicht. Betrifft nur Fälle, in denen ein
+ *     falscher Typ ausgeliefert würde; für korrekt getypte Antworten folgenlos.
+ *
+ *   • `Referrer-Policy: strict-origin-when-cross-origin` — beim Klick auf einen
+ *     Partnerlink erfährt die Zielseite nur noch die Herkunftsdomain, nicht den
+ *     vollen Pfad. Das ist ohnehin Chromes Standard; hier steht es verbindlich
+ *     und gilt damit auch in Browsern mit anderer Vorgabe.
+ *
+ *   • `X-Frame-Options: SAMEORIGIN` — die Seite darf nicht in einen fremden
+ *     Rahmen gesetzt werden (Clickjacking). Die Website bindet nichts von sich
+ *     selbst in fremde Seiten ein; eine Einbettung wäre heute immer fremd.
+ *
+ * BEWUSST OHNE Content-Security-Policy: Eine CSP müsste Google Analytics
+ * (googletagmanager.com, nur nach Zustimmung geladen), das Web3Forms-Ziel des
+ * Partnerformulars und Next.js' Inline-Skripte abdecken. Eine zu enge Regel
+ * bricht genau diese drei Funktionen — und zwar erst in der Produktion. Eine
+ * CSP gehört deshalb in einen eigenen Schritt mit eigener Messung, nicht
+ * nebenbei in diese Ergänzung.
+ */
+const SECURITY_HEADERS = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+];
+
 const nextConfig = {
   reactStrictMode: true,
 
@@ -39,6 +72,12 @@ const nextConfig = {
   // Kein X-Powered-By-Header. Kein Sicherheitsgewinn im engeren Sinn, aber
   // auch kein Grund, die eingesetzte Technik ungefragt mitzuliefern.
   poweredByHeader: false,
+
+  async headers() {
+    // `/:path*` trifft jede Route, auch statische Dateien aus /public und die
+    // von next/image erzeugten Bildantworten.
+    return [{ source: "/:path*", headers: SECURITY_HEADERS }];
+  },
 
   async redirects() {
     return [
