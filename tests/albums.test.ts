@@ -465,8 +465,9 @@ describe("Ausgelieferte Alben", () => {
     for (const slug of geladen) assert.ok(!slug.startsWith("."), slug);
   });
 
-  test("alle vierzehn Eventalben werden geladen, mit exakter Bildzahl", () => {
+  test("alle fünfzehn Eventalben werden geladen, mit exakter Bildzahl", () => {
     const erwartet: Record<string, number> = {
+      "silvaplana-sm-2026": 18,
       "cremia-2026": 16,
       "portimao-2026": 18,
       "cadiz-2026": 18,
@@ -488,8 +489,8 @@ describe("Ausgelieferte Alben", () => {
     }
     assert.equal(
       albums.reduce((n, a) => n + a.images.length, 0),
-      205,
-      "205 Bilder insgesamt"
+      223,
+      "223 Bilder insgesamt"
     );
   });
 
@@ -547,15 +548,27 @@ describe("Ausgelieferte Alben", () => {
     // Seit der Freigabe steht `noindex` ueberall auf false. Die Downloadsperre
     // haengt NICHT daran: sie kommt aus `DOWNLOADS_ENABLED` und aus
     // `downloadAllowed` an Album und Bild. Beide bleiben unabhaengig davon zu.
+    // Ausnahme, ausdruecklich benannt: Alben, die gebaut, aber noch NICHT
+    // freigegeben sind, weil die Nutzungsrechte offen sind. Sie bleiben
+    // `noindex` und `restricted`, bis der Rechteinhaber zugesagt hat — und
+    // sie stehen hier mit Namen, damit kein Album still in diesem Zustand
+    // verbleibt. Stand 27.09.2026: SM Silvaplana 2026 (Swiss Windsurfing,
+    // Anfrage vorbereitet, nicht gesendet).
+    const IN_VORBEREITUNG = new Set(["silvaplana-sm-2026"]);
     for (const album of albums) {
-      assert.equal(album.noindex ?? false, false, `${album.slug} ist noch noindex`);
+      if (IN_VORBEREITUNG.has(album.slug)) {
+        assert.equal(album.noindex, true, `${album.slug} ist in Vorbereitung und muss noindex sein`);
+        assert.equal(album.rights, "restricted", `${album.slug} ohne Freigabe muss restricted sein`);
+      } else {
+        assert.equal(album.noindex ?? false, false, `${album.slug} ist noch noindex`);
+      }
       assert.equal(album.downloadAllowed, false, `${album.slug}`);
       assert.equal(albumHasDownloads(album), false, `${album.slug}`);
     }
     assert.equal(
       getPublicAlbums().length,
-      albums.length,
-      "jedes Album muss oeffentlich gelistet sein"
+      albums.length - IN_VORBEREITUNG.size,
+      "jedes freigegebene Album muss oeffentlich gelistet sein"
     );
   });
 
@@ -575,6 +588,8 @@ describe("Ausgelieferte Alben", () => {
     // Zwoelf Sailing-Energy-Alben sind eine Agentur; Tobias Meier und
     // Marc Weiler sind natuerliche Personen.
     const erwartet: Record<string, "Person" | "Organization"> = {
+      // Swiss Windsurfing ist ein Verband; die beiden Fotografen stehen je Bild.
+      "silvaplana-sm-2026": "Organization",
       "portimao-2026": "Organization",
       "sferracavallo-2025": "Organization",
       "silvaplana-2025": "Organization",
@@ -606,6 +621,7 @@ describe("Ausgelieferte Alben", () => {
     // denselben Text zeigen, wurde irgendwo vereinheitlicht — genau das ist
     // untersagt.
     const erwartet: Record<string, string> = {
+      "silvaplana-sm-2026": "© Swiss Windsurfing",
       "portimao-2026": "Sailing Energy",
       "sferracavallo-2025": "Sailing Energy",
       "silvaplana-2025": "© Sailing Energy",
@@ -626,8 +642,21 @@ describe("Ausgelieferte Alben", () => {
       for (const img of album.images) {
         // Der Wortlaut steht zusätzlich am Bild, damit eine spätere Änderung
         // am Album-Credit die Einzelbilder nicht still überschreibt.
+        // Gemischtes Eventalbum (zwei Fotografen, ein Rechteinhaber): Der
+        // Bild-Credit nennt die Person und den Verband; er muss zum
+        // `photographer` des Bildes passen.
+        const bildCredit = imageCredit(album, img, "de");
+        if (album.slug === "silvaplana-sm-2026") {
+          assert.ok(img.photographer, `${album.slug} ${img.src}: kein Fotograf`);
+          assert.equal(
+            bildCredit,
+            `Photo: ${img.photographer} / Swiss Windsurfing`,
+            `${album.slug} ${img.src}`
+          );
+          continue;
+        }
         assert.equal(
-          imageCredit(album, img, "de"),
+          bildCredit,
           erwartet[album.slug],
           `${album.slug} ${img.src}`
         );
@@ -650,7 +679,7 @@ describe("Ausgelieferte Alben", () => {
       .trim()
       .split("\n")
       .slice(1);
-    assert.equal(zeilen.length, 205, "Manifest deckt 205 Dateien ab");
+    assert.equal(zeilen.length, 223, "Manifest deckt 223 Dateien ab");
     const manifest = new Map(
       zeilen.map((z) => z.trim().split(",") as [string, string])
     );
