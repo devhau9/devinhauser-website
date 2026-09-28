@@ -493,7 +493,7 @@ const RIGHTS_NOTICE: Record<Lang, Record<RightsClass | "own-nodownload", string>
     "licensed-use":
       "Veröffentlicht mit Erlaubnis des Fotografen. Bitte diese Bilder nicht weiterverwenden oder erneut veröffentlichen — dafür zuerst den Fotografen fragen.",
     restricted:
-      "Eventmaterial, gezeigt mit Erlaubnis. Bitte diese Bilder nicht weiterverwenden oder erneut veröffentlichen — dafür zuerst den Rechteinhaber fragen.",
+      "Eventmaterial eines Rechteinhabers. Bitte diese Bilder nicht weiterverwenden oder erneut veröffentlichen — dafür zuerst den Rechteinhaber fragen.",
   },
   en: {
     own: "Photos by Devin Hauser. Free to download and share for personal use — please credit Devin Hauser. For commercial use, get in touch first.",
@@ -502,7 +502,7 @@ const RIGHTS_NOTICE: Record<Lang, Record<RightsClass | "own-nodownload", string>
     "licensed-use":
       "Published with the photographer's permission. Please don't reuse or republish these images — ask the photographer first.",
     restricted:
-      "Event media shown with permission. Please don't reuse or republish these images — ask the rights holder first.",
+      "Event media owned by a rights holder. Please don't reuse or republish these images — ask the rights holder first.",
   },
 };
 
