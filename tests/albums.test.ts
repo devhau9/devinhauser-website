@@ -467,7 +467,7 @@ describe("Ausgelieferte Alben", () => {
 
   test("alle fünfzehn Eventalben werden geladen, mit exakter Bildzahl", () => {
     const erwartet: Record<string, number> = {
-      "silvaplana-sm-2026": 14,
+      "silvaplana-sm-2026": 15,
       "cremia-2026": 16,
       "portimao-2026": 18,
       "cadiz-2026": 18,
@@ -489,8 +489,8 @@ describe("Ausgelieferte Alben", () => {
     }
     assert.equal(
       albums.reduce((n, a) => n + a.images.length, 0),
-      219,
-      "219 Bilder insgesamt"
+      220,
+      "220 Bilder insgesamt"
     );
   });
 
@@ -679,7 +679,7 @@ describe("Ausgelieferte Alben", () => {
       .trim()
       .split("\n")
       .slice(1);
-    assert.equal(zeilen.length, 219, "Manifest deckt 219 Dateien ab");
+    assert.equal(zeilen.length, 220, "Manifest deckt 220 Dateien ab");
     const manifest = new Map(
       zeilen.map((z) => z.trim().split(",") as [string, string])
     );

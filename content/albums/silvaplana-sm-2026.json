@@ -96,8 +96,8 @@
     {
       "src": "/media/silvaplana-sm-2026/2026-08-29_silvaplana_iqfoil_006.jpg",
       "alt": {
-        "de": "Devin Hauser (SUI 134) an der Bahnmarke, im Hintergrund St. Moritz",
-        "en": "Devin Hauser (SUI 134) at the mark, St. Moritz in the background"
+        "de": "Devin Hauser (SUI 134) an der Bahnmarke, im Hintergrund ein Dorf am Hang und Berge",
+        "en": "Devin Hauser (SUI 134) at the mark, a hillside village and mountains behind"
       },
       "width": 2000,
       "height": 1333,
@@ -161,8 +161,8 @@
     {
       "src": "/media/silvaplana-sm-2026/2026-08-29_silvaplana_iqfoil_011.jpg",
       "alt": {
-        "de": "SUI 134 in der Halse mitten im Feld, rechts SUI 165",
-        "en": "SUI 134 gybing in the middle of the fleet, SUI 165 on the right"
+        "de": "SUI 134 auf dem Foil mitten im Feld, rechts SUI 165",
+        "en": "SUI 134 on the foil in the middle of the fleet, SUI 165 on the right"
       },
       "width": 2000,
       "height": 1333,
@@ -174,8 +174,8 @@
     {
       "src": "/media/silvaplana-sm-2026/2026-08-29_silvaplana_iqfoil_012.jpg",
       "alt": {
-        "de": "Devin Hauser (SUI 134) auf dem Foil vor Wiesen mit Kites und dem Dorf Silvaplana",
-        "en": "Devin Hauser (SUI 134) on the foil in front of meadows with kites and Silvaplana village"
+        "de": "Devin Hauser (SUI 134) auf dem Foil vor Wiesen mit Kites und einem Dorf am Ufer",
+        "en": "Devin Hauser (SUI 134) on the foil in front of meadows with kites and a village on the shore"
       },
       "width": 2000,
       "height": 1333,
@@ -199,6 +199,19 @@
     },
     {
       "src": "/media/silvaplana-sm-2026/2026-08-29_silvaplana_iqfoil_014.jpg",
+      "alt": {
+        "de": "Devin Hauser (SUI 134) auf dem Foil vor der Uferstrasse und den Felsen",
+        "en": "Devin Hauser (SUI 134) on the foil in front of the lakeside road and rocks"
+      },
+      "width": 2000,
+      "height": 1333,
+      "photographer": "Luca Fumagalli",
+      "credit": "Photo: Luca Fumagalli / Swiss Windsurfing",
+      "rights": "restricted",
+      "downloadAllowed": false
+    },
+    {
+      "src": "/media/silvaplana-sm-2026/2026-08-29_silvaplana_iqfoil_015.jpg",
       "alt": {
         "de": "Devin Hauser (SUI 134) führt eine Gruppe von fünf Fahrern an, Wald im Hintergrund",
         "en": "Devin Hauser (SUI 134) leading a group of five sailors, forest behind"
