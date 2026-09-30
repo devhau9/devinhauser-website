@@ -454,12 +454,34 @@ describe("Ausgelieferte Alben", () => {
     const eintraege = fs.readdirSync(path.join(process.cwd(), "content/albums"));
     const sidecars = eintraege.filter((f) => f.startsWith("._"));
     const geladen = getAllAlbums().map((a) => a.slug);
+    // Verglichen wird mit dem Namen der Begleitdatei SAMT „._"-Praefix. Das
+    // Praefix darf hier nicht abgeschnitten werden: Sonst ergibt
+    // `._silvaplana-sm-2026.json` den Slug des echten Albums daneben, und der
+    // Test meldet einen Fehler, sobald macOS auf exFAT eine Begleitdatei
+    // anlegt — also nach jedem Schreiben einer Album-Datei.
     for (const sidecar of sidecars) {
       assert.ok(
-        !geladen.includes(sidecar.replace(/^\._|\.json$/g, "")),
+        !geladen.includes(sidecar.replace(/\.json$/, "")),
         `${sidecar} wurde als Album geladen`
       );
     }
+    // Und der eigentliche Zweck des Filters: Der Loader oeffnet eine
+    // Begleitdatei gar nicht erst. Oeffnete er sie, scheiterte JSON.parse an
+    // den Binaerdaten und er meldete „Übersprungen (nicht lesbar): ._…" —
+    // genau diese Meldung wird hier abgefangen.
+    const meldungen: string[] = [];
+    const warn = console.warn;
+    const error = console.error;
+    console.warn = (...args: unknown[]) => void meldungen.push(String(args[0]));
+    console.error = (...args: unknown[]) => void meldungen.push(String(args[0]));
+    try {
+      getAllAlbums();
+    } finally {
+      console.warn = warn;
+      console.error = error;
+    }
+    const zuSidecars = meldungen.filter((m) => m.includes("._"));
+    assert.deepEqual(zuSidecars, [], "Loader hat eine Begleitdatei geoeffnet");
     // Unabhaengig davon, ob gerade Sidecars existieren: Kein Slug faengt mit
     // einem Punkt an.
     for (const slug of geladen) assert.ok(!slug.startsWith("."), slug);
