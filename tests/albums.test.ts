@@ -491,7 +491,7 @@ describe("Ausgelieferte Alben", () => {
 
   test("alle fünfzehn Eventalben werden geladen, mit exakter Bildzahl", () => {
     const erwartet: Record<string, number> = {
-      "silvaplana-sm-2026": 15,
+      "silvaplana-sm-2026": 17,
       "cremia-2026": 16,
       "portimao-2026": 18,
       "cadiz-2026": 18,
@@ -513,8 +513,8 @@ describe("Ausgelieferte Alben", () => {
     }
     assert.equal(
       albums.reduce((n, a) => n + a.images.length, 0),
-      220,
-      "220 Bilder insgesamt"
+      222,
+      "222 Bilder insgesamt"
     );
   });
 
@@ -651,7 +651,7 @@ describe("Ausgelieferte Alben", () => {
     assert.equal(personen.length, 3, "drei Alben nennen natuerliche Personen");
   });
 
-  test("SM Silvaplana 2026: 9 × Luca Fumagalli, 6 × Chloé Huguenin, Credit unter jeder Kachel", () => {
+  test("SM Silvaplana 2026: 11 × Luca Fumagalli, 6 × Chloé Huguenin, Credit unter jeder Kachel", () => {
     // Freigabe laut Devin am 01.10.2026: Bilder dürfen gezeigt werden, wenn
     // Luca Fumagalli und Chloé Huguenin als Fotografen genannt werden.
     const sm = albums.find((a) => a.slug === "silvaplana-sm-2026");
@@ -664,7 +664,7 @@ describe("Ausgelieferte Alben", () => {
       assert.equal(canDownload(sm, img), false, img.src);
       zaehlung[img.photographer ?? "—"] = (zaehlung[img.photographer ?? "—"] ?? 0) + 1;
     }
-    assert.deepEqual(zaehlung, { "Luca Fumagalli": 9, "Chloé Huguenin": 6 });
+    assert.deepEqual(zaehlung, { "Luca Fumagalli": 11, "Chloé Huguenin": 6 });
     // Hinweistext: für dieses Album neutral (zwei Urheber), für alle anderen
     // licensed-use-Alben unverändert „des Fotografen".
     assert.match(rightsNotice(sm, "de"), /Wer welches Bild fotografiert hat, steht unter dem Bild/);
@@ -682,6 +682,26 @@ describe("Ausgelieferte Alben", () => {
           album.slug === "silvaplana-sm-2026",
           `${album.slug} ${lang}`
         );
+      }
+    }
+  });
+
+  test("SM Silvaplana 2026: Best-of 001–015 unverändert vorn, zwei Podestfotos am Ende", () => {
+    // Ergänzung vom 01.10.2026 auf Devins Wunsch: DSCF2133 (Podeststufe 2) und
+    // DSCF2176 (Platz 3, belegt durch das Folgebild DSCF2183), beide von Luca
+    // Fumagalli. Welche Wertung die jeweilige Siegerehrung war, ist nicht
+    // belegt — deshalb nennen die Alt-Texte keine Kategorie.
+    const sm = albums.find((a) => a.slug === "silvaplana-sm-2026");
+    assert.ok(sm, "Album fehlt");
+    assert.deepEqual(
+      sm.images.map((img) => img.src.slice(-7, -4)),
+      Array.from({ length: 17 }, (_, i) => String(i + 1).padStart(3, "0"))
+    );
+    for (const img of sm.images.slice(15)) {
+      assert.equal(img.photographer, "Luca Fumagalli", img.src);
+      assert.equal(img.credit, "Photo: Luca Fumagalli", img.src);
+      for (const lang of ["de", "en"] as const) {
+        assert.doesNotMatch(img.alt[lang], /iQFOiL|Overall|Herren|\bmen\b|Wertung|ranking|Vize|\bchampion\b/i, `${img.src} ${lang}`);
       }
     }
   });
@@ -744,7 +764,7 @@ describe("Ausgelieferte Alben", () => {
       .trim()
       .split("\n")
       .slice(1);
-    assert.equal(zeilen.length, 220, "Manifest deckt 220 Dateien ab");
+    assert.equal(zeilen.length, 222, "Manifest deckt 222 Dateien ab");
     const manifest = new Map(
       zeilen.map((z) => z.trim().split(",") as [string, string])
     );
