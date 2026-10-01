@@ -27,6 +27,7 @@ import { describe, test } from "node:test";
 
 import {
   albumAuthorJsonLd,
+  albumHasMixedCredits,
   albumHasDownloads,
   albumProblem,
   canDownload,
@@ -36,6 +37,7 @@ import {
   getListedAlbums,
   getPublicAlbums,
   imageCredit,
+  rightsNotice,
   rightsClassesInAlbum,
 } from "../src/lib/albums.ts";
 import type { Album, AlbumImage } from "../src/lib/album-types.ts";
@@ -454,19 +456,42 @@ describe("Ausgelieferte Alben", () => {
     const eintraege = fs.readdirSync(path.join(process.cwd(), "content/albums"));
     const sidecars = eintraege.filter((f) => f.startsWith("._"));
     const geladen = getAllAlbums().map((a) => a.slug);
+    // Verglichen wird mit dem Namen der Begleitdatei SAMT „._"-Praefix. Das
+    // Praefix darf hier nicht abgeschnitten werden: Sonst ergibt
+    // `._silvaplana-sm-2026.json` den Slug des echten Albums daneben, und der
+    // Test meldet einen Fehler, sobald macOS auf exFAT eine Begleitdatei
+    // anlegt — also nach jedem Schreiben einer Album-Datei.
     for (const sidecar of sidecars) {
       assert.ok(
-        !geladen.includes(sidecar.replace(/^\._|\.json$/g, "")),
+        !geladen.includes(sidecar.replace(/\.json$/, "")),
         `${sidecar} wurde als Album geladen`
       );
     }
+    // Und der eigentliche Zweck des Filters: Der Loader oeffnet eine
+    // Begleitdatei gar nicht erst. Oeffnete er sie, scheiterte JSON.parse an
+    // den Binaerdaten und er meldete „Übersprungen (nicht lesbar): ._…" —
+    // genau diese Meldung wird hier abgefangen.
+    const meldungen: string[] = [];
+    const warn = console.warn;
+    const error = console.error;
+    console.warn = (...args: unknown[]) => void meldungen.push(String(args[0]));
+    console.error = (...args: unknown[]) => void meldungen.push(String(args[0]));
+    try {
+      getAllAlbums();
+    } finally {
+      console.warn = warn;
+      console.error = error;
+    }
+    const zuSidecars = meldungen.filter((m) => m.includes("._"));
+    assert.deepEqual(zuSidecars, [], "Loader hat eine Begleitdatei geoeffnet");
     // Unabhaengig davon, ob gerade Sidecars existieren: Kein Slug faengt mit
     // einem Punkt an.
     for (const slug of geladen) assert.ok(!slug.startsWith("."), slug);
   });
 
-  test("alle vierzehn Eventalben werden geladen, mit exakter Bildzahl", () => {
+  test("alle fünfzehn Eventalben werden geladen, mit exakter Bildzahl", () => {
     const erwartet: Record<string, number> = {
+      "silvaplana-sm-2026": 15,
       "cremia-2026": 16,
       "portimao-2026": 18,
       "cadiz-2026": 18,
@@ -488,8 +513,8 @@ describe("Ausgelieferte Alben", () => {
     }
     assert.equal(
       albums.reduce((n, a) => n + a.images.length, 0),
-      205,
-      "205 Bilder insgesamt"
+      220,
+      "220 Bilder insgesamt"
     );
   });
 
@@ -547,15 +572,27 @@ describe("Ausgelieferte Alben", () => {
     // Seit der Freigabe steht `noindex` ueberall auf false. Die Downloadsperre
     // haengt NICHT daran: sie kommt aus `DOWNLOADS_ENABLED` und aus
     // `downloadAllowed` an Album und Bild. Beide bleiben unabhaengig davon zu.
+    // Ausnahme, ausdruecklich benannt: Alben, die gebaut, aber noch NICHT
+    // freigegeben sind, weil die Nutzungsrechte offen sind. Sie bleiben
+    // `noindex` und `restricted`, bis der Rechteinhaber zugesagt hat — und
+    // sie stehen hier mit Namen, damit kein Album still in diesem Zustand
+    // verbleibt. Seit 01.10.2026 leer: SM Silvaplana 2026 ist freigegeben
+    // (Devins Angabe vom 01.10.2026, siehe Album-JSON und Vault).
+    const IN_VORBEREITUNG = new Set<string>();
     for (const album of albums) {
-      assert.equal(album.noindex ?? false, false, `${album.slug} ist noch noindex`);
+      if (IN_VORBEREITUNG.has(album.slug)) {
+        assert.equal(album.noindex, true, `${album.slug} ist in Vorbereitung und muss noindex sein`);
+        assert.equal(album.rights, "restricted", `${album.slug} ohne Freigabe muss restricted sein`);
+      } else {
+        assert.equal(album.noindex ?? false, false, `${album.slug} ist noch noindex`);
+      }
       assert.equal(album.downloadAllowed, false, `${album.slug}`);
       assert.equal(albumHasDownloads(album), false, `${album.slug}`);
     }
     assert.equal(
       getPublicAlbums().length,
-      albums.length,
-      "jedes Album muss oeffentlich gelistet sein"
+      albums.length - IN_VORBEREITUNG.size,
+      "jedes freigegebene Album muss oeffentlich gelistet sein"
     );
   });
 
@@ -573,7 +610,11 @@ describe("Ausgelieferte Alben", () => {
 
   test("die Urheberangabe ist für alle Alben ausdrücklich typisiert", () => {
     // Zwoelf Sailing-Energy-Alben sind eine Agentur; Tobias Meier und
-    // Marc Weiler sind natuerliche Personen.
+    // Marc Weiler sind natuerliche Personen. SM Silvaplana 2026 nennt zwei
+    // Personen — je eine eigene Angabe, nie ein Eintrag mit zwei Namen.
+    const zweiPersonen: Record<string, string[]> = {
+      "silvaplana-sm-2026": ["Luca Fumagalli", "Chloé Huguenin"],
+    };
     const erwartet: Record<string, "Person" | "Organization"> = {
       "portimao-2026": "Organization",
       "sferracavallo-2025": "Organization",
@@ -593,12 +634,56 @@ describe("Ausgelieferte Alben", () => {
     for (const album of albums) {
       const author = albumAuthorJsonLd(album);
       assert.ok(author, `${album.slug}: kein Author`);
+      if (Array.isArray(author)) {
+        assert.deepEqual(
+          author,
+          (zweiPersonen[album.slug] ?? []).map((name) => ({ "@type": "Person", name })),
+          `${album.slug}`
+        );
+        continue;
+      }
       assert.equal(author["@type"], erwartet[album.slug], `${album.slug}`);
     }
-    const personen = albums.filter(
-      (a) => albumAuthorJsonLd(a)?.["@type"] === "Person"
-    );
-    assert.equal(personen.length, 2, "zwei Alben nennen eine natuerliche Person");
+    const personen = albums.filter((a) => {
+      const author = albumAuthorJsonLd(a);
+      return Array.isArray(author) || author?.["@type"] === "Person";
+    });
+    assert.equal(personen.length, 3, "drei Alben nennen natuerliche Personen");
+  });
+
+  test("SM Silvaplana 2026: 9 × Luca Fumagalli, 6 × Chloé Huguenin, Credit unter jeder Kachel", () => {
+    // Freigabe laut Devin am 01.10.2026: Bilder dürfen gezeigt werden, wenn
+    // Luca Fumagalli und Chloé Huguenin als Fotografen genannt werden.
+    const sm = albums.find((a) => a.slug === "silvaplana-sm-2026");
+    assert.ok(sm, "Album fehlt");
+    assert.equal(sm.rights, "licensed-use");
+    assert.equal(sm.noindex ?? false, false);
+    const zaehlung: Record<string, number> = {};
+    for (const img of sm.images) {
+      assert.equal(img.rights ?? sm.rights, "licensed-use", img.src);
+      assert.equal(canDownload(sm, img), false, img.src);
+      zaehlung[img.photographer ?? "—"] = (zaehlung[img.photographer ?? "—"] ?? 0) + 1;
+    }
+    assert.deepEqual(zaehlung, { "Luca Fumagalli": 9, "Chloé Huguenin": 6 });
+    // Hinweistext: für dieses Album neutral (zwei Urheber), für alle anderen
+    // licensed-use-Alben unverändert „des Fotografen".
+    assert.match(rightsNotice(sm, "de"), /Wer welches Bild fotografiert hat, steht unter dem Bild/);
+    assert.match(rightsNotice(sm, "en"), /credited below it/);
+    for (const album of albums) {
+      if (album.slug === "silvaplana-sm-2026" || album.rights !== "licensed-use") continue;
+      assert.match(rightsNotice(album, "de"), /^Veröffentlicht mit Erlaubnis des Fotografen\./, album.slug);
+    }
+    // Kachel-Credits nur dort, wo die Bilder verschiedene Urheber haben —
+    // alle anderen Alben bleiben unverändert.
+    for (const album of albums) {
+      for (const lang of ["de", "en"] as const) {
+        assert.equal(
+          albumHasMixedCredits(album, lang),
+          album.slug === "silvaplana-sm-2026",
+          `${album.slug} ${lang}`
+        );
+      }
+    }
   });
 
   test("die Credit-Wortlaute bleiben verschieden", () => {
@@ -606,6 +691,7 @@ describe("Ausgelieferte Alben", () => {
     // denselben Text zeigen, wurde irgendwo vereinheitlicht — genau das ist
     // untersagt.
     const erwartet: Record<string, string> = {
+      "silvaplana-sm-2026": "Photos: Luca Fumagalli & Chloé Huguenin",
       "portimao-2026": "Sailing Energy",
       "sferracavallo-2025": "Sailing Energy",
       "silvaplana-2025": "© Sailing Energy",
@@ -626,8 +712,16 @@ describe("Ausgelieferte Alben", () => {
       for (const img of album.images) {
         // Der Wortlaut steht zusätzlich am Bild, damit eine spätere Änderung
         // am Album-Credit die Einzelbilder nicht still überschreibt.
+        // Album mit zwei Fotografen: Der Bild-Credit nennt die Person, die
+        // dieses Bild gemacht hat, und muss zum `photographer` passen.
+        const bildCredit = imageCredit(album, img, "de");
+        if (album.slug === "silvaplana-sm-2026") {
+          assert.ok(img.photographer, `${album.slug} ${img.src}: kein Fotograf`);
+          assert.equal(bildCredit, `Photo: ${img.photographer}`, `${album.slug} ${img.src}`);
+          continue;
+        }
         assert.equal(
-          imageCredit(album, img, "de"),
+          bildCredit,
           erwartet[album.slug],
           `${album.slug} ${img.src}`
         );
@@ -650,7 +744,7 @@ describe("Ausgelieferte Alben", () => {
       .trim()
       .split("\n")
       .slice(1);
-    assert.equal(zeilen.length, 205, "Manifest deckt 205 Dateien ab");
+    assert.equal(zeilen.length, 220, "Manifest deckt 220 Dateien ab");
     const manifest = new Map(
       zeilen.map((z) => z.trim().split(",") as [string, string])
     );

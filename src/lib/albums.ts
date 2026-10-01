@@ -351,17 +351,54 @@ export type AlbumAuthorJsonLd = {
   name: string;
 };
 
-export function albumAuthorJsonLd(album: Album): AlbumAuthorJsonLd | null {
+export function albumAuthorJsonLd(
+  album: Album
+): AlbumAuthorJsonLd | AlbumAuthorJsonLd[] | null {
   const name = album.photographer.trim();
   if (name.length === 0) return null;
   switch (album.photographerKind) {
-    case "person":
+    case "person": {
+      // Mehrere Fotografinnen und Fotografen in EINEM Album (z. B. SM 2026:
+      // Luca Fumagalli und Chloé Huguenin): je Person ein eigener Eintrag,
+      // die Namen kommen aus dem `photographer` der Bilder. Ein einziger
+      // Person-Eintrag mit zwei Namen wäre eine falsche Tatsachenbehauptung.
+      const names = imagePhotographers(album);
+      if (names.length > 1) {
+        return names.map((n) => ({ "@type": "Person" as const, name: n }));
+      }
       return { "@type": "Person", name };
+    }
     case "organization":
       return { "@type": "Organization", name };
     default:
       return null;
   }
+}
+
+/** Die verschiedenen `photographer`-Angaben der Bilder, in Reihenfolge des ersten Auftretens. */
+function imagePhotographers(album: Album): string[] {
+  const names: string[] = [];
+  for (const image of album.images) {
+    const n = image.photographer?.trim();
+    if (n && !names.includes(n)) names.push(n);
+  }
+  return names;
+}
+
+/**
+ * Tragen die Bilder dieses Albums unterschiedliche Credits?
+ *
+ * Dann reicht die eine Credit-Zeile oben im Album nicht, um zu sagen, wer
+ * welches Bild gemacht hat — die Galerie zeigt den Credit zusätzlich unter
+ * jeder Kachel. Alben mit einem einzigen Credit bleiben unverändert.
+ */
+export function albumHasMixedCredits(album: Album, lang: Lang): boolean {
+  const credits = new Set(
+    album.images
+      .map((image) => imageCredit(album, image, lang))
+      .filter((c): c is string => c !== null)
+  );
+  return credits.size > 1;
 }
 
 export function getAlbumBySlug(slug: string): Album | undefined {
@@ -485,15 +522,18 @@ export function imageCredit(
  * angebotene Downloads, Sharing-Vorschaubilder und die Anmeldung der Dateien
  * bei der Bildersuche.
  */
-const RIGHTS_NOTICE: Record<Lang, Record<RightsClass | "own-nodownload", string>> = {
+const RIGHTS_NOTICE: Record<Lang, Record<RightsClass | "own-nodownload" | "licensed-use-mixed", string>> = {
   de: {
     own: "Fotos von Devin Hauser. Für den privaten Gebrauch frei zum Herunterladen und Teilen — bitte Devin Hauser nennen. Für kommerzielle Nutzung vorher kurz melden.",
     "own-nodownload":
       "Fotos aus dem Archiv von Devin Hauser. Hier zum Anschauen gezeigt — bitte vor jeder Verwendung kurz anfragen.",
     "licensed-use":
       "Veröffentlicht mit Erlaubnis des Fotografen. Bitte diese Bilder nicht weiterverwenden oder erneut veröffentlichen — dafür zuerst den Fotografen fragen.",
+    // Mehrere Urheber in einem Album: kein „des Fotografen" im Singular.
+    "licensed-use-mixed":
+      "Veröffentlicht mit Erlaubnis. Wer welches Bild fotografiert hat, steht unter dem Bild. Bitte diese Bilder nicht weiterverwenden oder erneut veröffentlichen — dafür zuerst die genannte Person fragen.",
     restricted:
-      "Eventmaterial, gezeigt mit Erlaubnis. Bitte diese Bilder nicht weiterverwenden oder erneut veröffentlichen — dafür zuerst den Rechteinhaber fragen.",
+      "Eventmaterial eines Rechteinhabers. Bitte diese Bilder nicht weiterverwenden oder erneut veröffentlichen — dafür zuerst den Rechteinhaber fragen.",
   },
   en: {
     own: "Photos by Devin Hauser. Free to download and share for personal use — please credit Devin Hauser. For commercial use, get in touch first.",
@@ -501,8 +541,10 @@ const RIGHTS_NOTICE: Record<Lang, Record<RightsClass | "own-nodownload", string>
       "Photos from Devin Hauser's archive. Shown here for viewing — please get in touch before using any of these images.",
     "licensed-use":
       "Published with the photographer's permission. Please don't reuse or republish these images — ask the photographer first.",
+    "licensed-use-mixed":
+      "Published with permission. The photographer of each image is credited below it. Please don't reuse or republish these images — ask the credited photographer first.",
     restricted:
-      "Event media shown with permission. Please don't reuse or republish these images — ask the rights holder first.",
+      "Event media owned by a rights holder. Please don't reuse or republish these images — ask the rights holder first.",
   },
 };
 
@@ -511,6 +553,9 @@ export function rightsNotice(album: Album, lang: Lang, image?: AlbumImage): stri
   const effective = effectiveRights(album, image);
   if (effective === "own") {
     return canDownload(album, image) ? table.own : table["own-nodownload"];
+  }
+  if (effective === "licensed-use" && !image && albumHasMixedCredits(album, lang)) {
+    return table["licensed-use-mixed"];
   }
   return table[effective];
 }

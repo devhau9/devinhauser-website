@@ -54,6 +54,12 @@ type Props = {
    */
   /** `null` = fuer dieses Bild darf keine Credit-Zeile stehen. */
   imageCredits: (string | null)[];
+  /**
+   * Credit zusätzlich unter jeder Kachel zeigen. Nur gesetzt, wenn die Bilder
+   * des Albums verschiedene Urheber haben (`albumHasMixedCredits`); sonst
+   * steht der eine Credit oben im Album und die Kacheln bleiben ohne Zeile.
+   */
+  showTileCredits?: boolean;
   lang: Lang;
 };
 
@@ -73,6 +79,7 @@ export default function AlbumGallery({
   downloadHrefs,
   albumTitle,
   imageCredits,
+  showTileCredits = false,
   lang,
 }: Props) {
   const c = COPY[lang];
@@ -168,6 +175,11 @@ export default function AlbumGallery({
                 className="object-cover transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
               />
             </button>
+            {showTileCredits && imageCredits[index] ? (
+              <p className="mt-1.5 break-words font-mono text-[11px] uppercase leading-snug tracking-normal text-graphite sm:tracking-widest2">
+                {imageCredits[index]}
+              </p>
+            ) : null}
           </li>
         ))}
       </ul>

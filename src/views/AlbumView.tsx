@@ -6,6 +6,7 @@ import {
   canDownload,
   displayCredit,
   downloadHref,
+  albumHasMixedCredits,
   imageCredit,
   localized,
   rightsClassesInAlbum,
@@ -243,6 +244,7 @@ export default function AlbumView({ album, lang }: { album: Album; lang: Lang })
           downloadHrefs={downloadHrefs}
           albumTitle={localized(album.title, lang)}
           imageCredits={imageCredits}
+          showTileCredits={albumHasMixedCredits(album, lang)}
           lang={lang}
         />
 
