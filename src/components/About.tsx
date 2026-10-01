@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { SECTION_ID, type Lang } from "@/lib/i18n";
+import Link from "next/link";
+import { SECTION_ID, localizedPath, type Lang } from "@/lib/i18n";
+import { PUMPFOIL_PATH } from "@/lib/pumpfoil";
 
 /**
  * Über mich.
@@ -26,6 +28,7 @@ const COPY: Record<
     portraitAlt: string;
     profile: string;
     facts: Fact[];
+    pumpfoilLink: string;
   }
 > = {
   de: {
@@ -39,6 +42,7 @@ const COPY: Record<
     ],
     portraitAlt: "Porträt von Devin Hauser",
     profile: "Steckbrief",
+    pumpfoilLink: "Pumpfoil lernen: So gelingt der Einstieg",
     facts: [
       { label: "Nationalität", value: "Schweiz" },
       { label: "Jahrgang", value: "2007" },
@@ -62,6 +66,7 @@ const COPY: Record<
     ],
     portraitAlt: "Portrait of Devin Hauser",
     profile: "Profile",
+    pumpfoilLink: "Learn to pump foil: how to get started",
     facts: [
       { label: "Nationality", value: "Swiss" },
       { label: "Born", value: "2007" },
@@ -103,6 +108,19 @@ export default function About({ lang }: { lang: Lang }) {
                 {text}
               </p>
             ))}
+
+            {/* Seit 02.10.2026: der eine interne Einstieg in die Pumpfoil-
+                Lernseite. Bewusst als eigene Zeile unter dem Text und nicht als
+                Link im Fliesstext — derselbe Grundsatz wie bei der iQFOiL-
+                Brücke in HomeView. */}
+            <p className="mt-6 max-w-lg">
+              <Link
+                href={localizedPath(PUMPFOIL_PATH, lang)}
+                className="font-mono text-xs uppercase tracking-widest2 text-ink underline underline-offset-4 transition-colors hover:text-red"
+              >
+                {c.pumpfoilLink} →
+              </Link>
+            </p>
 
             <div className="relative mt-10 aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl">
               <Image

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { getPublicAlbums } from "@/lib/albums";
 import { LANGS, localizedPath } from "@/lib/i18n";
+import { PUMPFOIL_PATH, PUMPFOIL_UPDATED } from "@/lib/pumpfoil";
 
 /**
  * Sitemap — beide Sprachen, mit gegenseitigen `alternate`-Verweisen.
@@ -42,15 +43,18 @@ type Entry = {
 };
 
 // Die Daten sind aus `git log -1 -- <Quelldateien der Route>` abgeleitet und
-// werden bei inhaltlichen Aenderungen von Hand nachgefuehrt (12.09.2026):
-//   /               fe90a08  Startseiten-Feinschliff           2026-09-11
-//   /iqfoil         e0884d3  Erklaerseite neu aufgebaut        2026-08-29
+// werden bei inhaltlichen Aenderungen von Hand nachgefuehrt (12.09.2026,
+// zuletzt 02.10.2026):
+//   /               prep/pumpfoil  Link auf /pumpfoil unter „Über mich"   2026-10-02
+//   /iqfoil         prep/pumpfoil  Querverweis auf /pumpfoil           2026-10-02
+//   /pumpfoil       prep/pumpfoil  Lernseite neu (PUMPFOIL_UPDATED)    2026-10-02
 //   /privacy-policy d4b5fc1  finale DE/EN-Copy                 2026-08-28
 //   /imprint        d4b5fc1  finale DE/EN-Copy                 2026-08-28
 //   /copyright      a63dd0d  Launch-Grundlage                  2026-08-22
 const STATIC_ENTRIES: Entry[] = [
-  { path: "/", lastModified: "2026-09-11", changeFrequency: "monthly", priority: 1 },
-  { path: "/iqfoil", lastModified: "2026-08-29", changeFrequency: "monthly", priority: 0.8 },
+  { path: "/", lastModified: "2026-10-02", changeFrequency: "monthly", priority: 1 },
+  { path: "/iqfoil", lastModified: "2026-10-02", changeFrequency: "monthly", priority: 0.8 },
+  { path: PUMPFOIL_PATH, lastModified: PUMPFOIL_UPDATED, changeFrequency: "monthly", priority: 0.8 },
   { path: "/privacy-policy", lastModified: "2026-08-28", changeFrequency: "yearly", priority: 0.3 },
   { path: "/imprint", lastModified: "2026-08-28", changeFrequency: "yearly", priority: 0.3 },
   { path: "/copyright", lastModified: "2026-08-22", changeFrequency: "yearly", priority: 0.3 },

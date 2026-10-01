@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SOCIAL_PROFILES } from "@/lib/site";
 import { localizedPath } from "@/lib/i18n";
+import { PUMPFOIL_PATH } from "@/lib/pumpfoil";
 import FoilDiagram from "@/components/iqfoil/FoilDiagram";
 import CourseDiagram from "@/components/iqfoil/CourseDiagram";
 
@@ -369,6 +370,17 @@ export default function IqfoilEn() {
               Images from the last few seasons of racing are in the gallery, the
               current placings under results. How a partnership can work is on
               the partnership section.
+            </p>
+            <p className={P}>
+              Want to get on a foil yourself, with no wind at all? How to get
+              started is explained in{" "}
+              <Link
+                href={localizedPath(PUMPFOIL_PATH, "en")}
+                className="text-ink underline underline-offset-4 hover:text-red"
+              >
+                Learn to pump foil
+              </Link>
+              .
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">

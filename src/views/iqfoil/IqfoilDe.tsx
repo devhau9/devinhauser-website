@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SOCIAL_PROFILES } from "@/lib/site";
 import { localizedPath } from "@/lib/i18n";
+import { PUMPFOIL_PATH } from "@/lib/pumpfoil";
 import FoilDiagram from "@/components/iqfoil/FoilDiagram";
 import CourseDiagram from "@/components/iqfoil/CourseDiagram";
 
@@ -404,6 +405,17 @@ export default function IqfoilDe() {
               Bilder aus den Regatten der letzten Saisons liegen in der Galerie,
               die aktuellen Platzierungen bei den Resultaten. Wie eine
               Zusammenarbeit aussehen kann, steht bei der Partnerschaft.
+            </p>
+            <p className={P}>
+              Selbst aufs Foil, ganz ohne Wind? Wie der Einstieg gelingt, steht
+              bei{" "}
+              <Link
+                href={localizedPath(PUMPFOIL_PATH, "de")}
+                className="text-ink underline underline-offset-4 hover:text-red"
+              >
+                Pumpfoil lernen
+              </Link>
+              .
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">

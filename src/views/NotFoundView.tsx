@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SECTION_ID, localizedPath, sectionHref, type Lang } from "@/lib/i18n";
+import { PUMPFOIL_PATH } from "@/lib/pumpfoil";
 
 const COPY: Record<
   Lang,
@@ -9,13 +10,13 @@ const COPY: Record<
     eyebrow: "404",
     heading: "SEITE NICHT GEFUNDEN",
     text: "Diese Seite gibt es nicht — sie wurde vielleicht verschoben, oder der Link ist veraltet. Hier geht es weiter.",
-    links: ["Startseite", "Was ist iQFOiL", "Ergebnisse", "Galerie", "Kontakt"],
+    links: ["Startseite", "Was ist iQFOiL", "Pumpfoil lernen", "Ergebnisse", "Galerie", "Kontakt"],
   },
   en: {
     eyebrow: "404",
     heading: "PAGE NOT FOUND",
     text: "That page doesn’t exist — it may have been moved or the link may be out of date. Here is where to go instead.",
-    links: ["Home", "What is iQFOiL", "Results", "Gallery", "Contact"],
+    links: ["Home", "What is iQFOiL", "Learn to pump foil", "Results", "Gallery", "Contact"],
   },
 };
 
@@ -25,6 +26,7 @@ export default function NotFoundView({ lang }: { lang: Lang }) {
   const targets = [
     localizedPath("/", lang),
     localizedPath("/iqfoil", lang),
+    localizedPath(PUMPFOIL_PATH, lang),
     sectionHref(lang, SECTION_ID.results),
     localizedPath("/media", lang),
     sectionHref(lang, SECTION_ID.contact),
