@@ -69,6 +69,21 @@ import { brandText } from "@/components/BrandText";
 // Masterliste übernommen — es kommt kein einziges neues oder gerundetes
 // Resultat hinzu.
 
+// ─────────────────────────────────────────────────────────────────────────────
+// ERGAENZUNG 04.10.2026 — U23-WELTMEISTERSCHAFT PUCK 2026
+// ─────────────────────────────────────────────────────────────────────────────
+// Eine Zeile neu, direkt an der offiziellen Ergebnisseite des Veranstalters
+// geprueft (sailti, «U23 iQFOiL World Championships 2026 - Poland», Reiter
+// «IQ FOIL Men», idsc2r=31603, letzte Aktualisierung 03.10.2026 13:59:33):
+//   SUI 134 Devin HAUSER auf Rang 64; die Rangliste fuehrt 108 Plaetze,
+//   lueckenlos 1–108. Endstand nach Qualifikation, Finalserie und Medal
+//   Series (Sieger Tomasini, von der Klasse am 04.10. so gemeldet).
+// FELDGROESSE 108, NICHT 112 UND NICHT 155: 112 war der Meldestand vom
+// 24.09., 155 die Summe aus Maennern und Frauen. Es zaehlt die Rangliste.
+// KATEGORIE «Men» exakt wie die Rangliste. Die Spalte CAT fuehrt u19/u23;
+// eine eigene U23-Rangliste gibt es dort nicht — deshalb kein U23-Rang.
+// Kein Titel, keine Fleet-Angabe, keine Teilnahmezahl.
+
 type SelectedResult = {
   placement: string;
   suffix?: string;
@@ -91,6 +106,7 @@ const COPY: Record<
     intro: "SEIT MEHREREN JAHREN FAHRE ICH INTERNATIONALE REGATTEN",
     selectedHeading: "Ausgewählte Resultate",
     results: [
+      { placement: "64.", suffix: "von 108", event: "U23-Weltmeisterschaft Puck 2026", context: "iQFOiL · Men" },
       { placement: "2.", suffix: "von 27", event: "Schweizermeisterschaft Silvaplana 2026", context: "iQFOiL" },
       { placement: "3.", suffix: "von 45", event: "Schweizermeisterschaft Silvaplana 2026", context: "Overall" },
       { placement: "5.", suffix: "von 13", event: "iQFOiL International Games", context: "Silvaplana 2025 · Senior" },
@@ -106,6 +122,7 @@ const COPY: Record<
     intro: "I HAVE BEEN COMPETING INTERNATIONALLY FOR SEVERAL YEARS",
     selectedHeading: "Selected Results",
     results: [
+      { placement: "64th", suffix: "of 108", event: "iQFOiL U23 World Championships Puck 2026", context: "iQFOiL · Men" },
       { placement: "2nd", suffix: "of 27", event: "Swiss Championship Silvaplana 2026", context: "iQFOiL" },
       { placement: "3rd", suffix: "of 45", event: "Swiss Championship Silvaplana 2026", context: "Overall" },
       { placement: "5th", suffix: "of 13", event: "iQFOiL International Games", context: "Silvaplana 2025 · Senior" },

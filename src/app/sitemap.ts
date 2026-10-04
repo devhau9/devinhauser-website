@@ -48,6 +48,7 @@ type Entry = {
 //   /               prep/pumpfoil  Link auf /pumpfoil unter „Über mich"   2026-10-02
 //   /               partner/baer   Partnerkarte Heinz Bär AG            2026-10-08
 //   /               prep/partner   Trockentech AG, GHB Ground-Engineering AG  2026-10-12
+//   /               prep/puck      Resultat U23-WM Puck (64. von 108)  2026-10-04
 //   /iqfoil         prep/pumpfoil  Querverweis auf /pumpfoil           2026-10-02
 //   /pumpfoil       prep/pumpfoil  Lernseite neu (PUMPFOIL_UPDATED)    2026-10-02
 //   /privacy-policy d4b5fc1  finale DE/EN-Copy                 2026-08-28
