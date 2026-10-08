@@ -110,6 +110,22 @@ const PARTNERS: Partner[] = [
     note: { de: "via Sporthilfe", en: "via Sporthilfe" },
   },
   {
+    // Seit 08.10.2026 (Devins Freigabe vom 08.10.): finanzieller Unterstützer
+    // für die Saison 2027 — Betrag bewusst nicht auf der Website. Firmenname,
+    // Logo und Website-Link aus den Mails der Firma (Logo am 08.10.2026 als
+    // «ElektroBaer_Logo.pdf», Vektor; Beleg im Vault, Website-Arbeitsdatei
+    // vom 08.10.2026). Zuschnitt: Zeichen und Schriftzug wie
+    // in der Mail-Signatur der Firma, ohne Stecker, Adresse und Telefon —
+    // sonst wäre der Name auf der Karte unlesbar klein.
+    src: "/logos/heinz-baer-ag.png",
+    alt: "Heinz Bär AG logo",
+    name: "Heinz Bär AG",
+    href: "https://www.baerelektro.ch",
+    // Breites Logo (ca. 4,7 : 1): weniger seitlicher Rand, damit der Name
+    // auf der schmalen Handykarte gross genug bleibt.
+    imgPadding: "px-2 py-4",
+  },
+  {
     src: "/logos/pm-consulting.svg",
     alt: "PM Consulting logo",
     name: "PM Consulting",

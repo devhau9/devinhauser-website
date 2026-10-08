@@ -46,13 +46,14 @@ type Entry = {
 // werden bei inhaltlichen Aenderungen von Hand nachgefuehrt (12.09.2026,
 // zuletzt 02.10.2026):
 //   /               prep/pumpfoil  Link auf /pumpfoil unter „Über mich"   2026-10-02
+//   /               partner/baer   Partnerkarte Heinz Bär AG            2026-10-08
 //   /iqfoil         prep/pumpfoil  Querverweis auf /pumpfoil           2026-10-02
 //   /pumpfoil       prep/pumpfoil  Lernseite neu (PUMPFOIL_UPDATED)    2026-10-02
 //   /privacy-policy d4b5fc1  finale DE/EN-Copy                 2026-08-28
 //   /imprint        d4b5fc1  finale DE/EN-Copy                 2026-08-28
 //   /copyright      a63dd0d  Launch-Grundlage                  2026-08-22
 const STATIC_ENTRIES: Entry[] = [
-  { path: "/", lastModified: "2026-10-02", changeFrequency: "monthly", priority: 1 },
+  { path: "/", lastModified: "2026-10-08", changeFrequency: "monthly", priority: 1 },
   { path: "/iqfoil", lastModified: "2026-10-02", changeFrequency: "monthly", priority: 0.8 },
   { path: PUMPFOIL_PATH, lastModified: PUMPFOIL_UPDATED, changeFrequency: "monthly", priority: 0.8 },
   { path: "/privacy-policy", lastModified: "2026-08-28", changeFrequency: "yearly", priority: 0.3 },
