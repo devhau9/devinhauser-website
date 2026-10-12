@@ -39,9 +39,9 @@ describe("Partnergruppen", () => {
   });
 
   test("Einordnung nach tatsächlicher Leistung", () => {
-    assert.equal(cards().length, 19);
-    assert.deepEqual(byGroup("sponsors"), ["McDonald's Dielsdorf", "Heinz Bär AG", "Trockentech AG", "GHB Ground-Engineering AG", "Micco Fugen- und Bauabdichtungen GmbH", "PM Consulting"]);
-    assert.deepEqual(byGroup("equipment"), ["ENSIS", "Drei Plus", "Arnold", "Fanagus", "Kinesiologie Weideli", "Fitnesspark Migros", "Arctic Plunge"]);
+    assert.equal(cards().length, 17);
+    assert.deepEqual(byGroup("sponsors"), ["McDonald's Dielsdorf", "Heinz Bär AG", "Trockentech AG", "GHB Ground-Engineering AG", "Micco Fugen- und Bauabdichtungen GmbH", "Kinesiologie Weideli", "PM Consulting"]);
+    assert.deepEqual(byGroup("equipment"), ["ENSIS", "Fanagus", "Fitnesspark Migros", "Arctic Plunge"]);
     assert.deepEqual(byGroup("network"), ["Swiss Sailing Team", "Swiss Sailing", "RVZS", "DRCS", "Schweizer Sporthilfe", "United School of Sports"]);
   });
 
@@ -51,12 +51,17 @@ describe("Partnergruppen", () => {
     }
   });
 
-  test("Zusätze: Teamkleidung, via Sporthilfe — sonst keine", () => {
+  test("Zusätze: nur «via Sporthilfe» bei McDonald's", () => {
     const notes = Object.fromEntries(cards().map((c) => [c.name, c.note]));
-    assert.equal(notes["Drei Plus"], "Teamkleidung");
-    assert.equal(notes["Arnold"], "Teamkleidung");
     assert.equal(notes["McDonald's Dielsdorf"], "via Sporthilfe");
-    assert.equal(Object.values(notes).filter(Boolean).length, 3);
+    assert.equal(Object.values(notes).filter(Boolean).length, 1);
+  });
+
+  test("Drei Plus und Arnold entfernt (Teamkleidung lief über den Verein)", () => {
+    const names = cards().map((c) => c.name);
+    assert.ok(!names.includes("Drei Plus"));
+    assert.ok(!names.includes("Arnold"));
+    assert.doesNotMatch(CODE, /dreiplus|arnold-coag|Teamkleidung|Team clothing/i);
   });
 
   test("keine Klassen, keine Beträge, keine offenen Partner", () => {

@@ -5,7 +5,7 @@ import { SECTION_ID, UI, localizedPath, type Lang } from "@/lib/i18n";
 /**
  * Drei Gruppen nach tatsächlicher Leistung (Devins Wunsch vom 12.10.2026):
  *   sponsors  — «Sponsoren & Gönner»: Firmen und Gönner mit Geldbeitrag
- *   equipment — «Ausrüstung & Services»: Material, Leistungen, Teamkleidung
+ *   equipment — «Ausrüstung & Services»: Material und Leistungen
  *   network   — «Sportliches Netzwerk»: Verbände, Vereine, Schule, Förderstiftung
  * Keine Organisation erscheint als zahlender Sponsor; keine Beträge, keine
  * Klassen (Gold/Silber/Bronze).
@@ -31,19 +31,22 @@ type Partner = {
 //   Sponsoren & Gönner — McDonald's Dielsdorf (Patenschaft, Zusatz «via
 //     Sporthilfe»), Heinz Bär AG (live seit 08.10.), Trockentech AG, GHB
 //     Ground-Engineering AG und Micco Fugen- und Bauabdichtungen GmbH
-//     (Zusagen per Mail), PM Consulting (laut Devins
+//     (Zusagen per Mail), Kinesiologie Weideli (jährlicher Gönnerbeitrag,
+//     laut Devin 12.10.2026), PM Consulting (laut Devins
 //     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
 //     nicht behauptet — Einordnung von Devin zu bestätigen)
 //   Ausrüstung & Services — ENSIS, Fanagus (Material), Fitnesspark Migros
-//     (Training), Kinesiologie Weideli (Behandlung), Drei Plus und Arnold
-//     (Teamkleidung über den Verein), Arctic Plunge (Eisbad-Leihe, Vertrag
-//     unterschrieben 12.10.2026)
+//     (Training), Arctic Plunge (Eisbad-Leihe, Vertrag unterschrieben
+//     12.10.2026)
 //   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
 //     (Devin bezahlt dort selbst), United School of Sports, Schweizer
 //     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten)
 // Bewusst NICHT hier (Stand 12.10.2026): Komeo (Post-Umfang noch nicht
 // bestätigt), BSgroup, KID, Meuli (Logo bzw. Nennung fehlt), Steinauer
 // (ausdrücklich ohne Gegenleistung — nur mit Einverständnis).
+// Entfernt am 12.10.2026 auf Devins Wunsch: Drei Plus und Arnold — sie haben
+// die Teamkleidung des Vereins (DRCS/RVZS) mitfinanziert und sind damit
+// Partner des Vereins, nicht Devins persönliche Partner.
 // Alle Websites am 15.09.2026 bzw. bei Aufnahme aufgerufen und bestätigt.
 // McDonald's Dielsdorf ohne eigenen Link: die Unterstützung läuft als
 // Patenschaft über die Schweizer Sporthilfe.
@@ -102,43 +105,10 @@ const PARTNERS: Partner[] = [
   },
   {
     group: "equipment",
-    src: "/logos/dreiplus.png",
-    alt: "Drei Plus logo",
-    name: "Drei Plus",
-    href: "https://www.dreiplus.ch",
-    // Devin 08.10.2026: Drei Plus und Arnold haben dem Verein (DRCS oder
-    // RVZS — welcher, ist offen) die Teamkleidung mitfinanziert. Deshalb
-    // «Teamkleidung» ohne Vereinsnamen.
-    note: { de: "Teamkleidung", en: "Team clothing" },
-  },
-  {
-    group: "equipment",
-    src: "/logos/arnold.png",
-    alt: "Arnold logo",
-    name: "Arnold",
-    href: "https://www.arnold-coag.ch",
-    note: { de: "Teamkleidung", en: "Team clothing" },
-  },
-  {
-    group: "equipment",
     src: "/logos/fanagus-removebg-preview.png",
     alt: "fanagus ag logo",
     name: "Fanagus",
     href: "https://www.fanagus.ch",
-  },
-  {
-    // Schreibweise seit 15.09.2026 „Weideli": So schreibt sich der Betrieb auf
-    // seiner eigenen Website, und so steht es im aktuellen Dossier. Damit ist
-    // die offene Rückfrage zum früheren Entscheid F6 (04.08.2026, „Weidli")
-    // beantwortet.
-    group: "equipment",
-    src: "/logos/kinesiologie-weideli-removebg-preview.png",
-    alt: "Kinesiologie Weideli logo",
-    name: "Kinesiologie Weideli",
-    href: "https://www.kinesiologie-weideli.ch",
-    // Wirkte im Vergleich zu den anderen Logos zu klein — minimale
-    // weitere Vergrösserung (Nachjustierung 21.07., 3. Feinschliff).
-    imgPadding: "p-1",
   },
   {
     group: "equipment",
@@ -227,6 +197,22 @@ const PARTNERS: Partner[] = [
     name: "Micco Fugen- und Bauabdichtungen GmbH",
     href: "https://www.micco-fugen.ch",
     imgPadding: "px-2 py-3",
+  },
+  {
+    // Schreibweise seit 15.09.2026 „Weideli": So schreibt sich der Betrieb auf
+    // seiner eigenen Website, und so steht es im aktuellen Dossier. Damit ist
+    // die offene Rückfrage zum früheren Entscheid F6 (04.08.2026, „Weidli")
+    // beantwortet.
+    // Devin 12.10.2026: unterstützt mit einem jährlichen Gönnerbeitrag
+    // (Betrag nicht öffentlich) — deshalb «Sponsoren & Gönner».
+    group: "sponsors",
+    src: "/logos/kinesiologie-weideli-removebg-preview.png",
+    alt: "Kinesiologie Weideli logo",
+    name: "Kinesiologie Weideli",
+    href: "https://www.kinesiologie-weideli.ch",
+    // Wirkte im Vergleich zu den anderen Logos zu klein — minimale
+    // weitere Vergrösserung (Nachjustierung 21.07., 3. Feinschliff).
+    imgPadding: "p-1",
   },
   {
     group: "sponsors",
