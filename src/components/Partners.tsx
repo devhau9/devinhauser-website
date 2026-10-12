@@ -2,7 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { SECTION_ID, UI, localizedPath, type Lang } from "@/lib/i18n";
 
+/**
+ * Drei Gruppen nach tatsächlicher Leistung (Devins Wunsch vom 12.10.2026):
+ *   sponsors  — «Sponsoren & Gönner»: Firmen und Gönner mit Geldbeitrag
+ *   equipment — «Ausrüstung & Services»: Material, Leistungen, Teamkleidung
+ *   network   — «Sportliches Netzwerk»: Verbände, Vereine, Schule, Förderstiftung
+ * Keine Organisation erscheint als zahlender Sponsor; keine Beträge, keine
+ * Klassen (Gold/Silber/Bronze).
+ */
+type Group = "sponsors" | "equipment" | "network";
+
+const GROUP_ORDER: Group[] = ["sponsors", "equipment", "network"];
+
 type Partner = {
+  group: Group;
   src: string;
   alt: string;
   name: string;
@@ -13,20 +26,35 @@ type Partner = {
   note?: Record<Lang, string>;
 };
 
-// Reihenfolge und Namen wie im Sponsoring-Dossier 2027, Seite „Partner,
-// Organisationen & Unterstützer" (Stand 15.09.2026). Alle Websites am
-// 15.09.2026 aufgerufen und bestätigt. Einzige Ausnahme ohne eigenen Link:
-// McDonald's Dielsdorf — die Unterstützung läuft als Patenschaft über die
-// Schweizer Sporthilfe, deshalb der Zusatz „via Sporthilfe" statt eines
-// Verweises auf die Filiale.
+// Namen wie im Sponsoring-Dossier 2027 (Stand 15.09.2026); innerhalb jeder
+// Gruppe gilt die Dossier-Reihenfolge. Einordnung (12.10.2026):
+//   Sponsoren & Gönner — McDonald's Dielsdorf (Patenschaft, Zusatz «via
+//     Sporthilfe»), Heinz Bär AG (live seit 08.10.), Trockentech AG und GHB
+//     Ground-Engineering AG (Zusagen per Mail), PM Consulting (laut Devins
+//     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
+//     nicht behauptet — Einordnung von Devin zu bestätigen)
+//   Ausrüstung & Services — ENSIS, Fanagus (Material), Fitnesspark Migros
+//     (Training), Kinesiologie Weideli (Behandlung), Drei Plus und Arnold
+//     (Teamkleidung über den Verein)
+//   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
+//     (Devin bezahlt dort selbst), United School of Sports, Schweizer
+//     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten)
+// Bewusst NICHT hier: Arctic Plunge (Vertrag nicht unterschrieben), Komeo
+// (keine Einigung), BSgroup, KID, Meuli, Micco (Logo/Nennung fehlt),
+// Steinauer (ausdrücklich ohne Gegenleistung).
+// Alle Websites am 15.09.2026 bzw. bei Aufnahme aufgerufen und bestätigt.
+// McDonald's Dielsdorf ohne eigenen Link: die Unterstützung läuft als
+// Patenschaft über die Schweizer Sporthilfe.
 const PARTNERS: Partner[] = [
   {
+    group: "network",
     src: "/logos/swiss-sailing-team.png",
     alt: "Swiss Sailing Team logo",
     name: "Swiss Sailing Team",
     href: "https://www.swiss-sailing-team.ch",
   },
   {
+    group: "network",
     src: "/logos/sui-sailing.png",
     alt: "Swiss Sailing logo",
     name: "Swiss Sailing",
@@ -36,48 +64,61 @@ const PARTNERS: Partner[] = [
     imgObjectPosition: "object-[50%_78%]",
   },
   {
+    group: "network",
     src: "/logos/rvzs.png",
     alt: "Swiss Sailing Regionalverband Zentralschweiz (RVZS) logo",
     name: "RVZS",
     href: "https://www.rvzs.ch",
   },
   {
+    group: "network",
     src: "/logos/drcs.png",
     alt: "DRCS logo",
     name: "DRCS",
     href: "https://drcs-sailing.com",
   },
   {
+    group: "network",
     src: "/logos/sporthilfe.png",
     alt: "Stiftung Schweizer Sporthilfe logo",
     name: "Schweizer Sporthilfe",
     href: "https://sporthilfe.ch",
   },
   {
+    group: "network",
     src: "/logos/united-school-of-sports.png",
     alt: "United School of Sports logo",
     name: "United School of Sports",
     href: "https://unitedschool.ch",
   },
   {
+    group: "equipment",
     src: "/logos/ensis.png",
     alt: "ENSIS Watersports logo",
     name: "ENSIS",
     href: "https://ensis.surf",
   },
   {
+    group: "equipment",
     src: "/logos/dreiplus.png",
     alt: "Drei Plus logo",
     name: "Drei Plus",
     href: "https://www.dreiplus.ch",
+    // Devin 08.10.2026: Drei Plus und Arnold haben dem Verein (DRCS oder
+    // RVZS — welcher, ist offen) die Teamkleidung mitfinanziert. Deshalb
+    // «Teamkleidung» ohne Vereinsnamen.
+    note: { de: "Teamkleidung", en: "Team clothing" },
   },
   {
+    group: "equipment",
     src: "/logos/arnold.png",
     alt: "Arnold logo",
     name: "Arnold",
     href: "https://www.arnold-coag.ch",
+    note: { de: "Teamkleidung", en: "Team clothing" },
   },
   {
+    group: "equipment",
     src: "/logos/fanagus-removebg-preview.png",
     alt: "fanagus ag logo",
     name: "Fanagus",
@@ -88,6 +129,7 @@ const PARTNERS: Partner[] = [
     // seiner eigenen Website, und so steht es im aktuellen Dossier. Damit ist
     // die offene Rückfrage zum früheren Entscheid F6 (04.08.2026, „Weidli")
     // beantwortet.
+    group: "equipment",
     src: "/logos/kinesiologie-weideli-removebg-preview.png",
     alt: "Kinesiologie Weideli logo",
     name: "Kinesiologie Weideli",
@@ -97,12 +139,14 @@ const PARTNERS: Partner[] = [
     imgPadding: "p-1",
   },
   {
+    group: "equipment",
     src: "/logos/fitnesspark-migros.png",
     alt: "Fitnesspark Migros logo",
     name: "Fitnesspark Migros",
     href: "https://www.fitnesspark.ch",
   },
   {
+    group: "sponsors",
     src: "/logos/mcdonalds-dielsdorf.png",
     alt: "McDonald's Dielsdorf logo",
     name: "McDonald's Dielsdorf",
@@ -110,6 +154,7 @@ const PARTNERS: Partner[] = [
     note: { de: "via Sporthilfe", en: "via Sporthilfe" },
   },
   {
+    group: "sponsors",
     // Seit 08.10.2026 (Devins Freigabe vom 08.10.): finanzieller Unterstützer
     // für die Saison 2027 — Betrag bewusst nicht auf der Website. Firmenname,
     // Logo und Website-Link aus den Mails der Firma (Logo am 08.10.2026 als
@@ -126,21 +171,24 @@ const PARTNERS: Partner[] = [
     imgPadding: "px-2 py-4",
   },
   {
+    group: "sponsors",
     // VORBEREITET 12.10.2026, nicht veröffentlicht: finanzieller Unterstützer
     // Saison 2027 (Zusage per Mail; Betrag und Zahlungsstand nicht öffentlich).
     // Logo und ausdrücklicher Wunsch «Logo mit Link auf Website und im
     // Partnerschaftsdossier»: Mail der Firma vom 12.10.2026, Datei «Logo mit
-    // Adresse.png». Zuschnitt ohne die Adressspalte, Weiss transparent —
-    // grauer Block und Schriftzug unverändert. Link aus der Mail-Signatur.
+    // Adresse.png». Zuschnitt aus dem Original (12.10.2026): ohne Adressspalte
+    // und ohne das oberste Siebtel des grauen Blocks, Weiss transparent —
+    // nichts neu gezeichnet. Seitenverhältnis 1,65 : 1, damit der Schriftzug
+    // auf der Handykarte die volle Breite nutzt. Link aus der Mail-Signatur.
     src: "/logos/trockentech.png",
     alt: "Trockentech AG logo",
     name: "Trockentech AG",
     href: "https://www.trockentech.ch",
-    // Logo im Querformat ~1,4 : 1 mit grossem grauem Block: kleiner Rand,
-    // damit der Schriftzug auf der Handykarte lesbar bleibt.
+    // Kleiner Rand, damit der Schriftzug auf der Handykarte gross bleibt.
     imgPadding: "p-1",
   },
   {
+    group: "sponsors",
     // VORBEREITET 12.10.2026, nicht veröffentlicht: finanzieller Unterstützer
     // Saison 2027 (Zusage per Mail; Betrag nicht öffentlich). Logo von der
     // Firma am 11.10.2026 als Antwort auf das Angebot «Logo mit Link auf
@@ -155,6 +203,7 @@ const PARTNERS: Partner[] = [
     imgPadding: "px-2 py-4",
   },
   {
+    group: "sponsors",
     src: "/logos/pm-consulting.svg",
     alt: "PM Consulting logo",
     name: "PM Consulting",
@@ -173,11 +222,12 @@ const COPY: Record<
     officialSite: string;
     footerQuestion: string;
     footerLink: string;
+    groups: Record<Group, string>;
   }
 > = {
   de: {
     eyebrow: "Netzwerk",
-    heading: "PARTNER",
+    heading: "PARTNER & UNTERSTÜTZER",
     // Kanonische Sprachregel aus dem Vault: die BESTEHENDEN Logos heissen
     // „Partner, Organisationen und Unterstützer" — nie „Sponsoren", und es
     // wird keine Zahl behauptet. Auf dieser Seite werden Logos gezeigt, keine
@@ -191,16 +241,26 @@ const COPY: Record<
     officialSite: "offizielle Website",
     footerQuestion: "Sponsor oder Medien?",
     footerLink: "Zugang über das Partner-Portal anfragen",
+    groups: {
+      sponsors: "Sponsoren & Gönner",
+      equipment: "Ausrüstung & Services",
+      network: "Sportliches Netzwerk",
+    },
   },
   en: {
     eyebrow: "Network",
-    heading: "PARTNERS",
+    heading: "PARTNERS & SUPPORTERS",
     lead: "I work with partners, organisations and supporters who contribute to my journey in international racing.",
     thanks: "A big thank you to everyone who supports me on and off the water.",
     openTo: "I am open to new sponsors, supporters and long-term partnerships.",
     officialSite: "official website",
     footerQuestion: "Sponsor or media?",
     footerLink: "Request access through the Partner Portal",
+    groups: {
+      sponsors: "Sponsors & patrons",
+      equipment: "Equipment & services",
+      network: "Sporting network",
+    },
   },
 };
 
@@ -216,9 +276,40 @@ function PartnerNote({ text }: { text: string }) {
   );
 }
 
+function PartnerCard({ partner, lang }: { partner: Partner; lang: Lang }) {
+  const padding = partner.note ? NOTE_PADDING : (partner.imgPadding ?? "p-4");
+
+  if (!partner.href) {
+    return (
+      <div className="card-surface relative flex h-24 items-center justify-center">
+        <Image src={partner.src} alt={partner.alt} fill sizes="160px" className={`object-contain ${padding}`} />
+        {partner.note ? <PartnerNote text={partner.note[lang]} /> : null}
+      </div>
+    );
+  }
+
+  return (
+    <a
+      href={partner.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${partner.name} — ${COPY[lang].officialSite} (${UI[lang].newTab})`}
+      className="card-surface group relative flex h-24 items-center justify-center transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_1px_2px_rgba(10,14,20,0.06),0_28px_60px_-28px_rgba(10,14,20,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
+    >
+      <Image
+        src={partner.src}
+        alt={partner.alt}
+        fill
+        sizes="160px"
+        className={`object-contain transition-transform duration-200 ease-out group-hover:scale-[1.04] ${padding} ${partner.imgObjectPosition ?? ""}`}
+      />
+      {partner.note ? <PartnerNote text={partner.note[lang]} /> : null}
+    </a>
+  );
+}
+
 export default function Partners({ lang }: { lang: Lang }) {
   const c = COPY[lang];
-  const t = UI[lang];
 
   return (
     <section id={SECTION_ID.partners} className="section-pad bg-mist">
@@ -231,44 +322,19 @@ export default function Partners({ lang }: { lang: Lang }) {
         <p className="mt-3 max-w-xl leading-relaxed text-graphite">{c.thanks}</p>
         <p className="mt-3 max-w-xl leading-relaxed text-graphite">{c.openTo}</p>
 
-        <div className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-5">
-          {PARTNERS.map((partner) =>
-            partner.href ? (
-              <a
-                key={partner.src}
-                href={partner.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${partner.name} — ${c.officialSite} (${t.newTab})`}
-                className="card-surface group relative flex h-24 items-center justify-center transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_1px_2px_rgba(10,14,20,0.06),0_28px_60px_-28px_rgba(10,14,20,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
-              >
-                <Image
-                  src={partner.src}
-                  alt={partner.alt}
-                  fill
-                  sizes="160px"
-                  className={`object-contain transition-transform duration-200 ease-out group-hover:scale-[1.04] ${
-                    partner.note ? NOTE_PADDING : (partner.imgPadding ?? "p-4")
-                  } ${partner.imgObjectPosition ?? ""}`}
-                />
-                {partner.note ? <PartnerNote text={partner.note[lang]} /> : null}
-              </a>
-            ) : (
-              <div
-                key={partner.src}
-                className="card-surface relative flex h-24 items-center justify-center"
-              >
-                <Image
-                  src={partner.src}
-                  alt={partner.alt}
-                  fill
-                  sizes="160px"
-                  className={`object-contain ${partner.note ? NOTE_PADDING : (partner.imgPadding ?? "p-4")}`}
-                />
-                {partner.note ? <PartnerNote text={partner.note[lang]} /> : null}
+        <div className="mt-14 space-y-10">
+          {GROUP_ORDER.map((group) => (
+            <div key={group}>
+              <h3 className="font-mono text-xs uppercase tracking-widest2 text-graphite">
+                {c.groups[group]}
+              </h3>
+              <div className="mt-4 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-5">
+                {PARTNERS.filter((partner) => partner.group === group).map((partner) => (
+                  <PartnerCard key={partner.src} partner={partner} lang={lang} />
+                ))}
               </div>
-            )
-          )}
+            </div>
+          ))}
         </div>
 
         <p className="mt-12 text-sm text-graphite">
