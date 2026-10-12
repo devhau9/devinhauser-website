@@ -126,6 +126,35 @@ const PARTNERS: Partner[] = [
     imgPadding: "px-2 py-4",
   },
   {
+    // VORBEREITET 12.10.2026, nicht veröffentlicht: finanzieller Unterstützer
+    // Saison 2027 (Zusage per Mail; Betrag und Zahlungsstand nicht öffentlich).
+    // Logo und ausdrücklicher Wunsch «Logo mit Link auf Website und im
+    // Partnerschaftsdossier»: Mail der Firma vom 12.10.2026, Datei «Logo mit
+    // Adresse.png». Zuschnitt ohne die Adressspalte, Weiss transparent —
+    // grauer Block und Schriftzug unverändert. Link aus der Mail-Signatur.
+    src: "/logos/trockentech.png",
+    alt: "Trockentech AG logo",
+    name: "Trockentech AG",
+    href: "https://www.trockentech.ch",
+    // Logo im Querformat ~1,4 : 1 mit grossem grauem Block: kleiner Rand,
+    // damit der Schriftzug auf der Handykarte lesbar bleibt.
+    imgPadding: "p-1",
+  },
+  {
+    // VORBEREITET 12.10.2026, nicht veröffentlicht: finanzieller Unterstützer
+    // Saison 2027 (Zusage per Mail; Betrag nicht öffentlich). Logo von der
+    // Firma am 11.10.2026 als Antwort auf das Angebot «Logo mit Link auf
+    // Website und im Dossier» geschickt («ohne Hintergrund.png»).
+    // LINK: www.ghb.swiss wie in der Signatur sichtbar. Der dort hinterlegte
+    // Verweis auf georges-bovier.com führt heute auf eine fremde
+    // Casino-Seite (geprüft 12.10.2026) — nie verwenden.
+    src: "/logos/ghb-ground-engineering.png",
+    alt: "GHB Ground-Engineering AG logo",
+    name: "GHB Ground-Engineering AG",
+    href: "https://www.ghb.swiss",
+    imgPadding: "px-2 py-4",
+  },
+  {
     src: "/logos/pm-consulting.svg",
     alt: "PM Consulting logo",
     name: "PM Consulting",
