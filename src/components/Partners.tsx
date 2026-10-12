@@ -29,19 +29,21 @@ type Partner = {
 // Namen wie im Sponsoring-Dossier 2027 (Stand 15.09.2026); innerhalb jeder
 // Gruppe gilt die Dossier-Reihenfolge. Einordnung (12.10.2026):
 //   Sponsoren & Gönner — McDonald's Dielsdorf (Patenschaft, Zusatz «via
-//     Sporthilfe»), Heinz Bär AG (live seit 08.10.), Trockentech AG und GHB
-//     Ground-Engineering AG (Zusagen per Mail), PM Consulting (laut Devins
+//     Sporthilfe»), Heinz Bär AG (live seit 08.10.), Trockentech AG, GHB
+//     Ground-Engineering AG und Micco Fugen- und Bauabdichtungen GmbH
+//     (Zusagen per Mail), PM Consulting (laut Devins
 //     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
 //     nicht behauptet — Einordnung von Devin zu bestätigen)
 //   Ausrüstung & Services — ENSIS, Fanagus (Material), Fitnesspark Migros
 //     (Training), Kinesiologie Weideli (Behandlung), Drei Plus und Arnold
-//     (Teamkleidung über den Verein)
+//     (Teamkleidung über den Verein), Arctic Plunge (Eisbad-Leihe, Vertrag
+//     unterschrieben 12.10.2026)
 //   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
 //     (Devin bezahlt dort selbst), United School of Sports, Schweizer
 //     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten)
-// Bewusst NICHT hier: Arctic Plunge (Vertrag nicht unterschrieben), Komeo
-// (keine Einigung), BSgroup, KID, Meuli, Micco (Logo/Nennung fehlt),
-// Steinauer (ausdrücklich ohne Gegenleistung).
+// Bewusst NICHT hier (Stand 12.10.2026): Komeo (Post-Umfang noch nicht
+// bestätigt), BSgroup, KID, Meuli (Logo bzw. Nennung fehlt), Steinauer
+// (ausdrücklich ohne Gegenleistung — nur mit Einverständnis).
 // Alle Websites am 15.09.2026 bzw. bei Aufnahme aufgerufen und bestätigt.
 // McDonald's Dielsdorf ohne eigenen Link: die Unterstützung läuft als
 // Patenschaft über die Schweizer Sporthilfe.
@@ -146,6 +148,18 @@ const PARTNERS: Partner[] = [
     href: "https://www.fitnesspark.ch",
   },
   {
+    // Eisbad-Leihe bis 31.10.2027; Vertrag mit den bestätigten Anpassungen
+    // von Devin unterschrieben und am 12.10.2026 geschickt. Die Nennung auf
+    // der Website DE/EN gehört zur vereinbarten Gegenleistung. Logo von
+    // Arctic Plunge (09.10.2026, SVG «mit Bär»; ohne Skript, ohne externe
+    // Verweise).
+    group: "equipment",
+    src: "/logos/arctic-plunge.svg",
+    alt: "Arctic Plunge logo",
+    name: "Arctic Plunge",
+    href: "https://www.arcticplunge.ch",
+  },
+  {
     group: "sponsors",
     src: "/logos/mcdonalds-dielsdorf.png",
     alt: "McDonald's Dielsdorf logo",
@@ -201,6 +215,18 @@ const PARTNERS: Partner[] = [
     name: "GHB Ground-Engineering AG",
     href: "https://www.ghb.swiss",
     imgPadding: "px-2 py-4",
+  },
+  {
+    // Gönnerbeitrag Saison 2027 (Zusage per Mail 09.10.2026; Betrag nicht
+    // öffentlich). Logo von der Firma am 12.10.2026 geschickt («neu
+    // 400PngdpiLogo.png», transparent), auf den Inhalt zugeschnitten.
+    // Name und Link wie auf der eigenen Website der Firma.
+    group: "sponsors",
+    src: "/logos/micco-fugen.png",
+    alt: "Micco Fugen- und Bauabdichtungen GmbH logo",
+    name: "Micco Fugen- und Bauabdichtungen GmbH",
+    href: "https://www.micco-fugen.ch",
+    imgPadding: "px-2 py-3",
   },
   {
     group: "sponsors",

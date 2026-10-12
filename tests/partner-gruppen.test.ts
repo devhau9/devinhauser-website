@@ -39,9 +39,9 @@ describe("Partnergruppen", () => {
   });
 
   test("Einordnung nach tatsächlicher Leistung", () => {
-    assert.equal(cards().length, 17);
-    assert.deepEqual(byGroup("sponsors"), ["McDonald's Dielsdorf", "Heinz Bär AG", "Trockentech AG", "GHB Ground-Engineering AG", "PM Consulting"]);
-    assert.deepEqual(byGroup("equipment"), ["ENSIS", "Drei Plus", "Arnold", "Fanagus", "Kinesiologie Weideli", "Fitnesspark Migros"]);
+    assert.equal(cards().length, 19);
+    assert.deepEqual(byGroup("sponsors"), ["McDonald's Dielsdorf", "Heinz Bär AG", "Trockentech AG", "GHB Ground-Engineering AG", "Micco Fugen- und Bauabdichtungen GmbH", "PM Consulting"]);
+    assert.deepEqual(byGroup("equipment"), ["ENSIS", "Drei Plus", "Arnold", "Fanagus", "Kinesiologie Weideli", "Fitnesspark Migros", "Arctic Plunge"]);
     assert.deepEqual(byGroup("network"), ["Swiss Sailing Team", "Swiss Sailing", "RVZS", "DRCS", "Schweizer Sporthilfe", "United School of Sports"]);
   });
 
@@ -62,6 +62,6 @@ describe("Partnergruppen", () => {
   test("keine Klassen, keine Beträge, keine offenen Partner", () => {
     const data = CODE.slice(CODE.indexOf("const PARTNERS"), CODE.indexOf("const NOTE_PADDING"));
     assert.doesNotMatch(data, /Gold|Silber|Silver|Bronze|Premium|Haupt/i);
-    assert.doesNotMatch(CODE, /Arctic|Komeo|BSgroup|BS Group|Micco|KID Sanit|Meuli|Steinauer|KA-EX|KEEN/i);
+    assert.doesNotMatch(CODE, /Komeo|BSgroup|BS Group|business\|solution|KID Sanit|Meuli|Schmidli|Steinauer|KA-EX|KEEN/i);
   });
 });

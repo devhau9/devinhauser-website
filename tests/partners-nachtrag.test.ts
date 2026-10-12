@@ -47,12 +47,24 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(CODE, /name: "[^"]*Sponsor/i);
   });
 
-  test("noch nicht freigegeben: Micco, KID, Meuli, Steinauer, Komeo fehlen bewusst", () => {
-    assert.doesNotMatch(CODE, /Micco|KID Sanit|Meuli|Steinauer|Komeo/i);
+  test("noch nicht freigegeben: KID, Meuli, Steinauer, Komeo, BSgroup fehlen bewusst", () => {
+    assert.doesNotMatch(CODE, /KID Sanit|Meuli|Steinauer|Komeo|BSgroup/i);
+  });
+
+  test("Micco und Arctic Plunge: eigenes Logo, offizieller Link, Alt-Text", () => {
+    const micco = entry("Micco Fugen- und Bauabdichtungen GmbH");
+    assert.match(micco, /src: "\/logos\/micco-fugen\.png"/);
+    assert.match(micco, /href: "https:\/\/www\.micco-fugen\.ch"/);
+    assert.match(micco, /alt: "Micco Fugen- und Bauabdichtungen GmbH logo"/);
+    const arctic = entry("Arctic Plunge");
+    assert.match(arctic, /src: "\/logos\/arctic-plunge\.svg"/);
+    assert.match(arctic, /href: "https:\/\/www\.arcticplunge\.ch"/);
+    const svg = fs.readFileSync(path.join(ROOT, "public/logos/arctic-plunge.svg"), "utf8");
+    assert.doesNotMatch(svg, /<script|\son\w+=|foreignObject|href="http/i);
   });
 
   test("Logodateien existieren und tragen keine EXIF-Daten", () => {
-    for (const file of ["trockentech.png", "ghb-ground-engineering.png"]) {
+    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png"]) {
       const bytes = fs.readFileSync(path.join(ROOT, "public/logos", file));
       assert.ok(bytes.length > 1000, file);
       assert.equal(bytes.includes(Buffer.from("Exif")), false, `${file}: EXIF`);
