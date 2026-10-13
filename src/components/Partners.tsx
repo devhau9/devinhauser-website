@@ -17,6 +17,8 @@ const GROUP_ORDER: Group[] = ["sponsors", "equipment", "network"];
 type Partner = {
   group: Group;
   name: string;
+  /** Nur für Textkarten: Name mit weichem Trennstrich (\u00AD) an der richtigen Stelle. */
+  displayName?: string;
   href: string | null;
   imgPadding?: string;
   imgObjectPosition?: string;
@@ -37,18 +39,20 @@ type Partner = {
 //     laut Devin 12.10.2026), R. Meuli Elektro AG (Zusage 12.10.2026, Logo
 //     der Firma vom 13.10.2026 — genannt wird die Firma, nicht die Person),
 //     Steinauer Immobilien AG (Nennung als Unterstützer am 13.10.2026
-//     ausdrücklich gewünscht; noch ohne Logo, deshalb als Textkarte),
+//     ausdrücklich gewünscht), Business Solution Group AG (BSGroup), KID
+//     Sanitär & Heizung GmbH und Unternehmensberatung Gradmann (Zusagen per
+//     Mail) — die vier ohne Logodatei vorerst als Textkarten,
 //     PM Consulting (laut Devins
 //     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
 //     nicht behauptet — Einordnung von Devin zu bestätigen)
 //   Ausrüstung & Services — ENSIS, Fanagus (Material), Fitnesspark Migros
 //     (Training), Arctic Plunge (Eisbad-Leihe, Vertrag unterschrieben
-//     12.10.2026)
+//     12.10.2026), Künzle Druck AG (Autogrammkarten; Textkarte)
 //   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
 //     (Devin bezahlt dort selbst), United School of Sports, Schweizer
 //     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten)
-// Bewusst NICHT hier (Stand 13.10.2026): Komeo (Post-Umfang noch nicht
-// bestätigt), BSgroup, KID und Gradmann (Logo bzw. Nennungsform fehlt).
+// Bewusst NICHT hier (Stand 13.10.2026): Komeo (Gegenleistung — Anzahl
+// Posts — noch nicht bestätigt) und Firmen ohne Zusage.
 // Entfernt am 12.10.2026 auf Devins Wunsch: Drei Plus und Arnold — sie haben
 // die Teamkleidung des Vereins (DRCS/RVZS) mitfinanziert und sind damit
 // Partner des Vereins, nicht Devins persönliche Partner.
@@ -133,6 +137,15 @@ const PARTNERS: Partner[] = [
     alt: "Arctic Plunge logo",
     name: "Arctic Plunge",
     href: "https://www.arcticplunge.ch",
+  },
+  {
+    // Druckt Devins Autogrammkarten (Zusage Okt. 2026, Druckvorlage am
+    // 13.10.2026 bestätigt). Name und Website wie in der Mailsignatur. Noch
+    // kein Logo — Textkarte.
+    group: "equipment",
+    src: null,
+    name: "Künzle Druck AG",
+    href: "https://www.kuenzledruck.ch",
   },
   {
     group: "sponsors",
@@ -239,6 +252,25 @@ const PARTNERS: Partner[] = [
     href: "https://pmc.zuerich",
   },
   {
+    // Zusage 12.10.2026 (Teams-Call; Zusammenfassung von Devin am selben Abend:
+    // Logo auf den Segeln, Link auf der Website). Name laut Impressum von
+    // bsgroup.ch («Business Solution Group AG», Marke BSGroup). Logo als Vektor
+    // und gewünschte Zieladresse am 12.10. angefragt — bis dahin Textkarte mit
+    // der Startseite.
+    group: "sponsors",
+    src: null,
+    name: "Business Solution Group AG",
+    href: "https://www.bsgroup.ch",
+  },
+  {
+    // Zusage 12.10.2026 (Qamil Dulla); Nennung auf Website und im Dossier war
+    // Teil der Anfrage. Name wie in der Mailsignatur der Firma. Noch kein Logo.
+    group: "sponsors",
+    src: null,
+    name: "KID Sanitär & Heizung GmbH",
+    href: "https://www.kid-sanitaer.ch",
+  },
+  {
     // Unterstützt ohne Gegenleistung; am 13.10.2026 per Mail ausdrücklich
     // gewünscht, als Unterstützer aufgeführt zu werden. Noch keine
     // Logodatei — bis dahin Textkarte mit offiziellem Link.
@@ -246,6 +278,16 @@ const PARTNERS: Partner[] = [
     src: null,
     name: "Steinauer Immobilien AG",
     href: "https://www.steinauer-immo.ch",
+  },
+  {
+    // Zusage 13.10.2026 (Philipp Gradmann). Schreibweise wie auf gradmann.ch:
+    // «Unternehmensberatung Gradmann» (Einzelfirma). Logo angefragt, bis dahin
+    // Textkarte.
+    group: "sponsors",
+    src: null,
+    name: "Unternehmensberatung Gradmann",
+    displayName: "Unternehmens\u00ADberatung Gradmann",
+    href: "https://www.gradmann.ch",
   },
 ];
 
@@ -319,9 +361,10 @@ function PartnerMark({ partner, className }: { partner: Partner; className: stri
   if (partner.src === null) {
     return (
       <span
-        className={`px-3 text-center text-sm font-semibold leading-snug text-ink [text-wrap:balance] sm:text-base ${className}`}
+        lang="de"
+        className={`hyphens-manual break-words px-3 text-center text-sm font-semibold leading-snug text-ink [text-wrap:balance] sm:text-base ${className}`}
       >
-        {partner.name}
+        {partner.displayName ?? partner.name}
       </span>
     );
   }

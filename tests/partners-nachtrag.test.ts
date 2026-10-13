@@ -47,8 +47,24 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(CODE, /name: "[^"]*Sponsor/i);
   });
 
-  test("noch nicht freigegeben: KID, Komeo, BSgroup, Gradmann fehlen bewusst", () => {
-    assert.doesNotMatch(CODE, /KID Sanit|Komeo|BSgroup|Gradmann/i);
+  test("noch nicht freigegeben: Komeo fehlt bewusst (Gegenleistung offen)", () => {
+    assert.doesNotMatch(CODE, /Komeo/i);
+  });
+
+  test("Textkarten 13.10.2026: geprüfter Name, offizieller Link, kein Logo", () => {
+    const expected: [string, string, string][] = [
+      ["Business Solution Group AG", "sponsors", "https://www.bsgroup.ch"],
+      ["KID Sanitär & Heizung GmbH", "sponsors", "https://www.kid-sanitaer.ch"],
+      ["Unternehmensberatung Gradmann", "sponsors", "https://www.gradmann.ch"],
+      ["Künzle Druck AG", "equipment", "https://www.kuenzledruck.ch"],
+    ];
+    for (const [name, group, href] of expected) {
+      const e = entry(name);
+      assert.match(e, /src: null/, name);
+      assert.ok(e.includes(`group: "${group}"`), name);
+      assert.ok(e.includes(`href: "${href}"`), name);
+      assert.doesNotMatch(e, /alt:/, name);
+    }
   });
 
   test("R. Meuli Elektro AG: Firmenlogo und Firmenlink, keine Person genannt", () => {
