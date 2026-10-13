@@ -16,15 +16,17 @@ const GROUP_ORDER: Group[] = ["sponsors", "equipment", "network"];
 
 type Partner = {
   group: Group;
-  src: string;
-  alt: string;
   name: string;
   href: string | null;
   imgPadding?: string;
   imgObjectPosition?: string;
   /** Kurzer Zusatz unter dem Logo, wenn die Unterstützung über Dritte läuft. */
   note?: Record<Lang, string>;
-};
+} & (
+  | { src: string; alt: string }
+  /** Noch keine Logodatei: die Karte zeigt den Firmennamen als Text. */
+  | { src: null; alt?: never }
+);
 
 // Namen wie im Sponsoring-Dossier 2027 (Stand 15.09.2026); innerhalb jeder
 // Gruppe gilt die Dossier-Reihenfolge. Einordnung (12.10.2026):
@@ -32,7 +34,11 @@ type Partner = {
 //     Sporthilfe»), Heinz Bär AG (live seit 08.10.), Trockentech AG, GHB
 //     Ground-Engineering AG und Micco Fugen- und Bauabdichtungen GmbH
 //     (Zusagen per Mail), Kinesiologie Weideli (jährlicher Gönnerbeitrag,
-//     laut Devin 12.10.2026), PM Consulting (laut Devins
+//     laut Devin 12.10.2026), R. Meuli Elektro AG (Zusage 12.10.2026, Logo
+//     der Firma vom 13.10.2026 — genannt wird die Firma, nicht die Person),
+//     Steinauer Immobilien AG (Nennung als Unterstützer am 13.10.2026
+//     ausdrücklich gewünscht; noch ohne Logo, deshalb als Textkarte),
+//     PM Consulting (laut Devins
 //     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
 //     nicht behauptet — Einordnung von Devin zu bestätigen)
 //   Ausrüstung & Services — ENSIS, Fanagus (Material), Fitnesspark Migros
@@ -41,9 +47,8 @@ type Partner = {
 //   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
 //     (Devin bezahlt dort selbst), United School of Sports, Schweizer
 //     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten)
-// Bewusst NICHT hier (Stand 12.10.2026): Komeo (Post-Umfang noch nicht
-// bestätigt), BSgroup, KID, Meuli (Logo bzw. Nennung fehlt), Steinauer
-// (ausdrücklich ohne Gegenleistung — nur mit Einverständnis).
+// Bewusst NICHT hier (Stand 13.10.2026): Komeo (Post-Umfang noch nicht
+// bestätigt), BSgroup, KID und Gradmann (Logo bzw. Nennungsform fehlt).
 // Entfernt am 12.10.2026 auf Devins Wunsch: Drei Plus und Arnold — sie haben
 // die Teamkleidung des Vereins (DRCS/RVZS) mitfinanziert und sind damit
 // Partner des Vereins, nicht Devins persönliche Partner.
@@ -215,11 +220,32 @@ const PARTNERS: Partner[] = [
     imgPadding: "p-1",
   },
   {
+    // Zusage 12.10.2026 (Herr Schmidli für die Firma). Logo von der Firma am
+    // 13.10.2026 als JPEG geschickt («Meuli Briefkopf, Messerli.jpeg»):
+    // Briefkopf ohne Adressspalte zugeschnitten, Weiss → transparent; Zeichen
+    // und Schriftzug unverändert.
+    group: "sponsors",
+    src: "/logos/meuli-elektro.png",
+    alt: "R. Meuli Elektro AG logo",
+    name: "R. Meuli Elektro AG",
+    href: "https://www.meulielektro.ch",
+    imgPadding: "px-1 py-2",
+  },
+  {
     group: "sponsors",
     src: "/logos/pm-consulting.svg",
     alt: "PM Consulting logo",
     name: "PM Consulting",
     href: "https://pmc.zuerich",
+  },
+  {
+    // Unterstützt ohne Gegenleistung; am 13.10.2026 per Mail ausdrücklich
+    // gewünscht, als Unterstützer aufgeführt zu werden. Noch keine
+    // Logodatei — bis dahin Textkarte mit offiziellem Link.
+    group: "sponsors",
+    src: null,
+    name: "Steinauer Immobilien AG",
+    href: "https://www.steinauer-immo.ch",
   },
 ];
 
@@ -288,13 +314,27 @@ function PartnerNote({ text }: { text: string }) {
   );
 }
 
+/** Logo — oder, solange keine Logodatei vorliegt, der Firmenname als Text. */
+function PartnerMark({ partner, className }: { partner: Partner; className: string }) {
+  if (partner.src === null) {
+    return (
+      <span
+        className={`px-3 text-center text-sm font-semibold leading-snug text-ink [text-wrap:balance] sm:text-base ${className}`}
+      >
+        {partner.name}
+      </span>
+    );
+  }
+  return <Image src={partner.src} alt={partner.alt} fill sizes="160px" className={`object-contain ${className}`} />;
+}
+
 function PartnerCard({ partner, lang }: { partner: Partner; lang: Lang }) {
   const padding = partner.note ? NOTE_PADDING : (partner.imgPadding ?? "p-4");
 
   if (!partner.href) {
     return (
       <div className="card-surface relative flex h-24 items-center justify-center">
-        <Image src={partner.src} alt={partner.alt} fill sizes="160px" className={`object-contain ${padding}`} />
+        <PartnerMark partner={partner} className={padding} />
         {partner.note ? <PartnerNote text={partner.note[lang]} /> : null}
       </div>
     );
@@ -308,12 +348,9 @@ function PartnerCard({ partner, lang }: { partner: Partner; lang: Lang }) {
       aria-label={`${partner.name} — ${COPY[lang].officialSite} (${UI[lang].newTab})`}
       className="card-surface group relative flex h-24 items-center justify-center transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_1px_2px_rgba(10,14,20,0.06),0_28px_60px_-28px_rgba(10,14,20,0.28)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
     >
-      <Image
-        src={partner.src}
-        alt={partner.alt}
-        fill
-        sizes="160px"
-        className={`object-contain transition-transform duration-200 ease-out group-hover:scale-[1.04] ${padding} ${partner.imgObjectPosition ?? ""}`}
+      <PartnerMark
+        partner={partner}
+        className={`transition-transform duration-200 ease-out group-hover:scale-[1.04] ${partner.src === null ? "" : padding} ${partner.imgObjectPosition ?? ""}`}
       />
       {partner.note ? <PartnerNote text={partner.note[lang]} /> : null}
     </a>
@@ -342,7 +379,7 @@ export default function Partners({ lang }: { lang: Lang }) {
               </h3>
               <div className="mt-4 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-5">
                 {PARTNERS.filter((partner) => partner.group === group).map((partner) => (
-                  <PartnerCard key={partner.src} partner={partner} lang={lang} />
+                  <PartnerCard key={partner.name} partner={partner} lang={lang} />
                 ))}
               </div>
             </div>

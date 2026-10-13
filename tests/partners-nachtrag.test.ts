@@ -47,8 +47,24 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(CODE, /name: "[^"]*Sponsor/i);
   });
 
-  test("noch nicht freigegeben: KID, Meuli, Steinauer, Komeo, BSgroup fehlen bewusst", () => {
-    assert.doesNotMatch(CODE, /KID Sanit|Meuli|Steinauer|Komeo|BSgroup/i);
+  test("noch nicht freigegeben: KID, Komeo, BSgroup, Gradmann fehlen bewusst", () => {
+    assert.doesNotMatch(CODE, /KID Sanit|Komeo|BSgroup|Gradmann/i);
+  });
+
+  test("R. Meuli Elektro AG: Firmenlogo und Firmenlink, keine Person genannt", () => {
+    const e = entry("R. Meuli Elektro AG");
+    assert.match(e, /src: "\/logos\/meuli-elektro\.png"/);
+    assert.match(e, /href: "https:\/\/www\.meulielektro\.ch"/);
+    assert.match(e, /alt: "R\. Meuli Elektro AG logo"/);
+    assert.doesNotMatch(CODE, /Schmidli|Siegrist/);
+  });
+
+  test("Steinauer Immobilien AG: Textkarte ohne Logo, offizieller Link", () => {
+    const e = entry("Steinauer Immobilien AG");
+    assert.match(e, /src: null/);
+    assert.match(e, /group: "sponsors"/);
+    assert.match(e, /href: "https:\/\/www\.steinauer-immo\.ch"/);
+    assert.doesNotMatch(e, /alt:/);
   });
 
   test("Micco und Arctic Plunge: eigenes Logo, offizieller Link, Alt-Text", () => {
@@ -64,7 +80,7 @@ describe("Partner-Nachtrag 12.10.2026", () => {
   });
 
   test("Logodateien existieren und tragen keine EXIF-Daten", () => {
-    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png"]) {
+    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png"]) {
       const bytes = fs.readFileSync(path.join(ROOT, "public/logos", file));
       assert.ok(bytes.length > 1000, file);
       assert.equal(bytes.includes(Buffer.from("Exif")), false, `${file}: EXIF`);
