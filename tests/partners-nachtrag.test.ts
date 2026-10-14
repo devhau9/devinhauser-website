@@ -47,15 +47,26 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(CODE, /name: "[^"]*Sponsor/i);
   });
 
-  test("noch nicht freigegeben: Komeo fehlt bewusst (Gegenleistung offen)", () => {
-    assert.doesNotMatch(CODE, /Komeo/i);
+  test("Beeler wünscht keine Nennung — nirgends im Code", () => {
+    assert.doesNotMatch(SOURCE, /Beeler/i);
+  });
+
+  test("Gradmann und Komeo: Original-Logo, offizieller Link, Alt-Text (14.10.2026)", () => {
+    const gradmann = entry("Unternehmensberatung Gradmann");
+    assert.match(gradmann, /src: "\/logos\/gradmann\.png"/);
+    assert.match(gradmann, /href: "https:\/\/www\.gradmann\.ch"/);
+    assert.match(gradmann, /alt: "Unternehmensberatung Gradmann logo"/);
+    const komeo = entry("Komeo AG");
+    assert.match(komeo, /group: "equipment"/);
+    assert.match(komeo, /src: "\/logos\/komeo\.png"/);
+    assert.match(komeo, /href: "https:\/\/www\.komeo\.ch"/);
+    assert.match(komeo, /alt: "Komeo AG logo"/);
   });
 
   test("Textkarten 13.10.2026: geprüfter Name, offizieller Link, kein Logo", () => {
     const expected: [string, string, string][] = [
       ["Business Solution Group AG", "sponsors", "https://www.bsgroup.ch"],
       ["KID Sanitär & Heizung GmbH", "sponsors", "https://www.kid-sanitaer.ch"],
-      ["Unternehmensberatung Gradmann", "sponsors", "https://www.gradmann.ch"],
       ["Künzle Druck AG", "equipment", "https://www.kuenzledruck.ch"],
     ];
     for (const [name, group, href] of expected) {
@@ -96,7 +107,7 @@ describe("Partner-Nachtrag 12.10.2026", () => {
   });
 
   test("Logodateien existieren und tragen keine EXIF-Daten", () => {
-    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png"]) {
+    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png"]) {
       const bytes = fs.readFileSync(path.join(ROOT, "public/logos", file));
       assert.ok(bytes.length > 1000, file);
       assert.equal(bytes.includes(Buffer.from("Exif")), false, `${file}: EXIF`);

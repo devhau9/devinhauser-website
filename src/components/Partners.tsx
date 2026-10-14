@@ -41,18 +41,21 @@ type Partner = {
 //     Steinauer Immobilien AG (Nennung als Unterstützer am 13.10.2026
 //     ausdrücklich gewünscht), Business Solution Group AG (BSGroup), KID
 //     Sanitär & Heizung GmbH und Unternehmensberatung Gradmann (Zusagen per
-//     Mail) — die vier ohne Logodatei vorerst als Textkarten,
+//     Mail) — BSGroup, KID und Steinauer ohne Logodatei vorerst als
+//     Textkarten; Gradmann mit Logo seit 14.10.2026,
 //     PM Consulting (laut Devins
 //     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
 //     nicht behauptet — Einordnung von Devin zu bestätigen)
 //   Ausrüstung & Services — ENSIS, Fanagus (Material), Fitnesspark Migros
 //     (Training), Arctic Plunge (Eisbad-Leihe, Vertrag unterschrieben
-//     12.10.2026), Künzle Druck AG (Autogrammkarten; Textkarte)
+//     12.10.2026), Komeo AG (Getränke; Einigung 14.10.2026), Künzle Druck AG
+//     (Autogrammkarten; Textkarte)
 //   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
 //     (Devin bezahlt dort selbst), United School of Sports, Schweizer
 //     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten)
-// Bewusst NICHT hier (Stand 13.10.2026): Komeo (Gegenleistung — Anzahl
-// Posts — noch nicht bestätigt) und Firmen ohne Zusage.
+// Bewusst NICHT hier (Stand 14.10.2026): Unterstützer, die ausdrücklich keine
+// Nennung wünschen (auch nicht in diesem öffentlichen Code), und Interessenten
+// ohne Zusage (auch angefragte Unterkünfte für Ibiza).
 // Entfernt am 12.10.2026 auf Devins Wunsch: Drei Plus und Arnold — sie haben
 // die Teamkleidung des Vereins (DRCS/RVZS) mitfinanziert und sind damit
 // Partner des Vereins, nicht Devins persönliche Partner.
@@ -137,6 +140,19 @@ const PARTNERS: Partner[] = [
     alt: "Arctic Plunge logo",
     name: "Arctic Plunge",
     href: "https://www.arcticplunge.ch",
+  },
+  {
+    // Getränke: 96 Dosen für 2027; Gegenleistung höchstens acht Posts/Storys
+    // in der Saison 2027 — von Komeo am 14.10.2026 ausdrücklich bestätigt
+    // («Das passt für mich absolut so»). Logo von Komeo am 09.10.2026
+    // («Komeo-Logo-Schwarz-2024_CMYK.pdf», Vektor) als PNG ausgegeben, auf den
+    // Inhalt zugeschnitten; die CMYK-Farbe «Schwarz» als reines Schwarz.
+    group: "equipment",
+    src: "/logos/komeo.png",
+    alt: "Komeo AG logo",
+    name: "Komeo AG",
+    href: "https://www.komeo.ch",
+    imgPadding: "px-6 py-6",
   },
   {
     // Druckt Devins Autogrammkarten (Zusage Okt. 2026, Druckvorlage am
@@ -252,6 +268,18 @@ const PARTNERS: Partner[] = [
     href: "https://pmc.zuerich",
   },
   {
+    // Zusage 13.10.2026 (Philipp Gradmann). Schreibweise wie auf gradmann.ch:
+    // «Unternehmensberatung Gradmann» (Einzelfirma). Logo von Gradmann am
+    // 14.10.2026 als PNG geschickt («UbG www.png»); nur der weisse Hintergrund
+    // ist transparent gemacht, Zeichen und Schrift unverändert.
+    group: "sponsors",
+    src: "/logos/gradmann.png",
+    alt: "Unternehmensberatung Gradmann logo",
+    name: "Unternehmensberatung Gradmann",
+    href: "https://www.gradmann.ch",
+    imgPadding: "px-2 py-3",
+  },
+  {
     // Zusage 12.10.2026 (Teams-Call; Zusammenfassung von Devin am selben Abend:
     // Logo auf den Segeln, Link auf der Website). Name laut Impressum von
     // bsgroup.ch («Business Solution Group AG», Marke BSGroup). Logo als Vektor
@@ -278,16 +306,6 @@ const PARTNERS: Partner[] = [
     src: null,
     name: "Steinauer Immobilien AG",
     href: "https://www.steinauer-immo.ch",
-  },
-  {
-    // Zusage 13.10.2026 (Philipp Gradmann). Schreibweise wie auf gradmann.ch:
-    // «Unternehmensberatung Gradmann» (Einzelfirma). Logo angefragt, bis dahin
-    // Textkarte.
-    group: "sponsors",
-    src: null,
-    name: "Unternehmensberatung Gradmann",
-    displayName: "Unternehmens\u00ADberatung Gradmann",
-    href: "https://www.gradmann.ch",
   },
 ];
 
