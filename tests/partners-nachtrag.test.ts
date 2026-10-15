@@ -8,6 +8,7 @@
  */
 
 import assert from "node:assert/strict";
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, test } from "node:test";
@@ -15,6 +16,26 @@ import { describe, test } from "node:test";
 const ROOT = process.cwd();
 const SOURCE = fs.readFileSync(path.join(ROOT, "src/components/Partners.tsx"), "utf8");
 const CODE = SOURCE.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+
+// Wer ausdrücklich nicht genannt werden möchte, steht auch in diesem öffentlichen
+// Test nicht im Klartext: Geprüft wird jedes Wort gegen den SHA-256 des
+// kleingeschriebenen Namens.
+const OHNE_NENNUNG = new Set(["8195f0dd302f467e2eaf10359028cebe55908db00b67f017e40c040192d4466c"]);
+
+function nennungen(text: string): string[] {
+  return text
+    .toLowerCase()
+    .split(/[^\p{L}\p{N}-]+/u)
+    .filter((w) => OHNE_NENNUNG.has(crypto.createHash("sha256").update(w).digest("hex")));
+}
+
+function quelltexte(dir: string): string[] {
+  return fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true }).flatMap((d) => {
+    const rel = path.join(dir, d.name);
+    if (d.isDirectory()) return quelltexte(rel);
+    return /\.(tsx?|mjs|js|json|md|css)$/.test(d.name) ? [rel] : [];
+  });
+}
 
 function entry(name: string): string {
   const start = CODE.indexOf(`name: "${name}"`);
@@ -47,8 +68,10 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(CODE, /name: "[^"]*Sponsor/i);
   });
 
-  test("Beeler wünscht keine Nennung — nirgends im Code", () => {
-    assert.doesNotMatch(SOURCE, /Beeler/i);
+  test("Unterstützer ohne Nennungswunsch: nirgends in src/ und tests/, auch nicht in Kommentaren", () => {
+    for (const file of quelltexte("src").concat(quelltexte("tests"))) {
+      assert.deepEqual(nennungen(fs.readFileSync(path.join(ROOT, file), "utf8")), [], file);
+    }
   });
 
   test("Gradmann und Komeo: Original-Logo, offizieller Link, Alt-Text (14.10.2026)", () => {

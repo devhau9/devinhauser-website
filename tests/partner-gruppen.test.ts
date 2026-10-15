@@ -67,6 +67,6 @@ describe("Partnergruppen", () => {
   test("keine Klassen, keine Beträge, keine offenen Partner", () => {
     const data = CODE.slice(CODE.indexOf("const PARTNERS"), CODE.indexOf("const NOTE_PADDING"));
     assert.doesNotMatch(data, /Gold|Silber|Silver|Bronze|Premium|Haupt/i);
-    assert.doesNotMatch(CODE, /Beeler|Schmidli|KA-EX|KEEN|Hotel/i);
+    assert.doesNotMatch(CODE, /Schmidli|KA-EX|KEEN|Hotel/i);
   });
 });
