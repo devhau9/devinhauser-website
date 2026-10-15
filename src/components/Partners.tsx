@@ -41,8 +41,8 @@ type Partner = {
 //     Steinauer Immobilien AG (Nennung als Unterstützer am 13.10.2026
 //     ausdrücklich gewünscht), Business Solution Group AG (BSGroup), KID
 //     Sanitär & Heizung GmbH und Unternehmensberatung Gradmann (Zusagen per
-//     Mail) — BSGroup, KID und Steinauer ohne Logodatei vorerst als
-//     Textkarten; Gradmann mit Logo seit 14.10.2026,
+//     Mail) — BSGroup und KID ohne Logodatei vorerst als Textkarten;
+//     Gradmann mit Logo seit 14.10.2026, Steinauer seit 15.10.2026,
 //     PM Consulting (laut Devins
 //     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
 //     nicht behauptet — Einordnung von Devin zu bestätigen)
@@ -280,6 +280,18 @@ const PARTNERS: Partner[] = [
     imgPadding: "px-2 py-3",
   },
   {
+    // Unterstützt ohne Gegenleistung; am 13.10.2026 per Mail ausdrücklich
+    // gewünscht, als Unterstützer aufgeführt zu werden. Logo von Steinauer am
+    // 15.10.2026 als PNG geschickt («04_Steinauer-Logo_rgb_150dpi.png»);
+    // Bildpunkte unverändert, nur die eingebetteten Metadaten entfernt.
+    group: "sponsors",
+    src: "/logos/steinauer-immobilien.png",
+    alt: "Steinauer Immobilien AG logo",
+    name: "Steinauer Immobilien AG",
+    href: "https://www.steinauer-immo.ch",
+    imgPadding: "px-2 py-3",
+  },
+  {
     // Zusage 12.10.2026 (Teams-Call; Zusammenfassung von Devin am selben Abend:
     // Logo auf den Segeln, Link auf der Website). Name laut Impressum von
     // bsgroup.ch («Business Solution Group AG», Marke BSGroup). Logo als Vektor
@@ -297,15 +309,6 @@ const PARTNERS: Partner[] = [
     src: null,
     name: "KID Sanitär & Heizung GmbH",
     href: "https://www.kid-sanitaer.ch",
-  },
-  {
-    // Unterstützt ohne Gegenleistung; am 13.10.2026 per Mail ausdrücklich
-    // gewünscht, als Unterstützer aufgeführt zu werden. Noch keine
-    // Logodatei — bis dahin Textkarte mit offiziellem Link.
-    group: "sponsors",
-    src: null,
-    name: "Steinauer Immobilien AG",
-    href: "https://www.steinauer-immo.ch",
   },
 ];
 

@@ -86,12 +86,12 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(CODE, /Schmidli|Siegrist/);
   });
 
-  test("Steinauer Immobilien AG: Textkarte ohne Logo, offizieller Link", () => {
+  test("Steinauer Immobilien AG: Logo vom 15.10.2026, offizieller Link, Alt-Text", () => {
     const e = entry("Steinauer Immobilien AG");
-    assert.match(e, /src: null/);
+    assert.match(e, /src: "\/logos\/steinauer-immobilien\.png"/);
     assert.match(e, /group: "sponsors"/);
     assert.match(e, /href: "https:\/\/www\.steinauer-immo\.ch"/);
-    assert.doesNotMatch(e, /alt:/);
+    assert.match(e, /alt: "Steinauer Immobilien AG logo"/);
   });
 
   test("Micco und Arctic Plunge: eigenes Logo, offizieller Link, Alt-Text", () => {
@@ -107,7 +107,7 @@ describe("Partner-Nachtrag 12.10.2026", () => {
   });
 
   test("Logodateien existieren und tragen keine EXIF-Daten", () => {
-    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png"]) {
+    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png", "steinauer-immobilien.png"]) {
       const bytes = fs.readFileSync(path.join(ROOT, "public/logos", file));
       assert.ok(bytes.length > 1000, file);
       assert.equal(bytes.includes(Buffer.from("Exif")), false, `${file}: EXIF`);
