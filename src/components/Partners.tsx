@@ -84,6 +84,14 @@ const PARTNERS: Partner[] = [
     imgObjectPosition: "object-[50%_78%]",
   },
   {
+    // Auf Devins Wunsch vom 17.10.2026. Die offizielle Website führt Devin
+    // als Team Rider; Netzwerk-Eintrag, keine Sponsoringbehauptung.
+    group: "network",
+    src: null,
+    name: "Swiss Foiling Federation",
+    href: "https://www.swiss-foiling.ch/",
+  },
+  {
     group: "network",
     src: "/logos/rvzs.png",
     alt: "Swiss Sailing Regionalverband Zentralschweiz (RVZS) logo",

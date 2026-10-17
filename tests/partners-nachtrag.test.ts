@@ -92,6 +92,7 @@ describe("Partner-Nachtrag 12.10.2026", () => {
       ["KID Sanitär & Heizung GmbH", "sponsors", "https://www.kid-sanitaer.ch"],
       ["Künzle Druck AG", "equipment", "https://www.kuenzledruck.ch"],
       ["Swiss Olympic – Talent Card", "network", "https://www.swissolympic.ch/"],
+      ["Swiss Foiling Federation", "network", "https://www.swiss-foiling.ch/"],
     ];
     for (const [name, group, href] of expected) {
       const e = entry(name);
