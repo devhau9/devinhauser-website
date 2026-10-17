@@ -46,13 +46,16 @@ type Partner = {
 //     PM Consulting (laut Devins
 //     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
 //     nicht behauptet — Einordnung von Devin zu bestätigen)
-//   Ausrüstung & Services — ENSIS, Fanagus (Material), Fitnesspark Migros
-//     (Training), Arctic Plunge (Eisbad-Leihe, Vertrag unterschrieben
-//     12.10.2026), Komeo AG (Getränke; Einigung 14.10.2026), Künzle Druck AG
-//     (Autogrammkarten; Textkarte)
+//   Ausrüstung & Services — ENSIS, Fanagus (Material), Arctic Plunge
+//     (Eisbad-Leihe, Vertrag unterschrieben 12.10.2026), Komeo AG (Getränke;
+//     Einigung 14.10.2026), Künzle Druck AG (Autogrammkarten; Textkarte)
 //   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
 //     (Devin bezahlt dort selbst), United School of Sports, Schweizer
-//     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten)
+//     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten),
+//     Swiss Olympic – Talent Card (Textkarte, seit 17.10.2026)
+// Fitnesspark Migros am 17.10.2026 auf Devins Wunsch entfernt: keine eigene
+// Sponsoringvereinbarung; das vergünstigte Abo läuft über das Angebot der
+// Talent Card.
 // Bewusst NICHT hier (Stand 14.10.2026): Unterstützer, die ausdrücklich keine
 // Nennung wünschen (auch nicht in diesem öffentlichen Code), und Interessenten
 // ohne Zusage (auch angefragte Unterkünfte für Ibiza).
@@ -109,6 +112,17 @@ const PARTNERS: Partner[] = [
     href: "https://unitedschool.ch",
   },
   {
+    // Devins Swiss Olympic Talent Card. Kein Sponsor, kein Geldbeitrag, keine
+    // Abo-Preise. Text und Link auf Devins Wunsch vom 17.10.2026; noch kein
+    // freigegebenes Logo — deshalb Textkarte.
+    group: "network",
+    src: null,
+    name: "Swiss Olympic – Talent Card",
+    // Geschütztes Leerzeichen vor dem Strich: Umbruch nach «–», nicht davor.
+    displayName: "Swiss Olympic\u00A0– Talent Card",
+    href: "https://www.swissolympic.ch/",
+  },
+  {
     group: "equipment",
     src: "/logos/ensis.png",
     alt: "ENSIS Watersports logo",
@@ -121,13 +135,6 @@ const PARTNERS: Partner[] = [
     alt: "fanagus ag logo",
     name: "Fanagus",
     href: "https://www.fanagus.ch",
-  },
-  {
-    group: "equipment",
-    src: "/logos/fitnesspark-migros.png",
-    alt: "Fitnesspark Migros logo",
-    name: "Fitnesspark Migros",
-    href: "https://www.fitnesspark.ch",
   },
   {
     // Eisbad-Leihe bis 31.10.2027; Vertrag mit den bestätigten Anpassungen

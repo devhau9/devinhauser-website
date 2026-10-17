@@ -91,6 +91,7 @@ describe("Partner-Nachtrag 12.10.2026", () => {
       ["Business Solution Group AG", "sponsors", "https://www.bsgroup.ch"],
       ["KID Sanitär & Heizung GmbH", "sponsors", "https://www.kid-sanitaer.ch"],
       ["Künzle Druck AG", "equipment", "https://www.kuenzledruck.ch"],
+      ["Swiss Olympic – Talent Card", "network", "https://www.swissolympic.ch/"],
     ];
     for (const [name, group, href] of expected) {
       const e = entry(name);
@@ -99,6 +100,17 @@ describe("Partner-Nachtrag 12.10.2026", () => {
       assert.ok(e.includes(`href: "${href}"`), name);
       assert.doesNotMatch(e, /alt:/, name);
     }
+  });
+
+  test("Fitnesspark nicht als Partner (Devin 17.10.2026), Logodatei entfernt", () => {
+    assert.doesNotMatch(CODE, /Fitnesspark|fitnesspark/);
+    assert.equal(fs.existsSync(path.join(ROOT, "public/logos/fitnesspark-migros.png")), false);
+  });
+
+  test("Swiss Olympic – Talent Card: Netzwerk, kein Sponsor, kein Preis", () => {
+    const e = entry("Swiss Olympic – Talent Card");
+    assert.match(e, /group: "network"/);
+    assert.doesNotMatch(e, /CHF|Fr\.|Abo|Sponsor/);
   });
 
   test("R. Meuli Elektro AG: Firmenlogo und Firmenlink, keine Person genannt", () => {
