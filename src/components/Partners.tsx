@@ -52,7 +52,7 @@ type Partner = {
 //   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
 //     (Devin bezahlt dort selbst), United School of Sports, Schweizer
 //     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten),
-//     Swiss Olympic – Talent Card (Textkarte, seit 17.10.2026)
+//     Swiss Olympic – Talent Card (Original-Logo, seit 17.10.2026)
 // Fitnesspark Migros am 17.10.2026 auf Devins Wunsch entfernt: keine eigene
 // Sponsoringvereinbarung; das vergünstigte Abo läuft über das Angebot der
 // Talent Card.
@@ -120,15 +120,14 @@ const PARTNERS: Partner[] = [
     href: "https://unitedschool.ch",
   },
   {
-    // Devins Swiss Olympic Talent Card. Kein Sponsor, kein Geldbeitrag, keine
-    // Abo-Preise. Text und Link auf Devins Wunsch vom 17.10.2026; noch kein
-    // freigegebenes Logo — deshalb Textkarte.
+    // Devins Swiss Olympic Talent Card. Original-Logo auf Devins Wunsch
+    // vom 17.10.2026, unverändert von swissolympic.ch; Netzwerk-Eintrag.
     group: "network",
-    src: null,
+    src: "/logos/swiss-olympic.svg",
+    alt: "Swiss Olympic logo",
     name: "Swiss Olympic – Talent Card",
-    // Geschütztes Leerzeichen vor dem Strich: Umbruch nach «–», nicht davor.
-    displayName: "Swiss Olympic\u00A0– Talent Card",
     href: "https://www.swissolympic.ch/",
+    note: { de: "Talent Card", en: "Talent Card" },
   },
   {
     group: "equipment",

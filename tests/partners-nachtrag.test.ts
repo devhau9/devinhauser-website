@@ -91,7 +91,6 @@ describe("Partner-Nachtrag 12.10.2026", () => {
       ["Business Solution Group AG", "sponsors", "https://www.bsgroup.ch"],
       ["KID Sanitär & Heizung GmbH", "sponsors", "https://www.kid-sanitaer.ch"],
       ["Künzle Druck AG", "equipment", "https://www.kuenzledruck.ch"],
-      ["Swiss Olympic – Talent Card", "network", "https://www.swissolympic.ch/"],
       ["Swiss Foiling Federation", "network", "https://www.swiss-foiling.ch/"],
     ];
     for (const [name, group, href] of expected) {
@@ -111,7 +110,12 @@ describe("Partner-Nachtrag 12.10.2026", () => {
   test("Swiss Olympic – Talent Card: Netzwerk, kein Sponsor, kein Preis", () => {
     const e = entry("Swiss Olympic – Talent Card");
     assert.match(e, /group: "network"/);
+    assert.match(e, /src: "\/logos\/swiss-olympic\.svg"/);
+    assert.match(e, /alt: "Swiss Olympic logo"/);
+    assert.match(e, /note: \{ de: "Talent Card", en: "Talent Card" \}/);
     assert.doesNotMatch(e, /CHF|Fr\.|Abo|Sponsor/);
+    const svg = fs.readFileSync(path.join(ROOT, "public/logos/swiss-olympic.svg"), "utf8");
+    assert.doesNotMatch(svg, /<script|\son\w+=|foreignObject|href="http/i);
   });
 
   test("R. Meuli Elektro AG: Firmenlogo und Firmenlink, keine Person genannt", () => {

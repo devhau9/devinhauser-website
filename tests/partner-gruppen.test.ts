@@ -51,10 +51,11 @@ describe("Partnergruppen", () => {
     }
   });
 
-  test("Zusätze: nur «via Sporthilfe» bei McDonald's", () => {
+  test("Zusätze: Patenschaft und Swiss Olympic Talent Card", () => {
     const notes = Object.fromEntries(cards().map((c) => [c.name, c.note]));
     assert.equal(notes["McDonald's Dielsdorf"], "via Sporthilfe");
-    assert.equal(Object.values(notes).filter(Boolean).length, 1);
+    assert.equal(notes["Swiss Olympic – Talent Card"], "Talent Card");
+    assert.equal(Object.values(notes).filter(Boolean).length, 2);
   });
 
   test("Drei Plus und Arnold entfernt (Teamkleidung lief über den Verein)", () => {
