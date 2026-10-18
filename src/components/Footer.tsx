@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { SVGProps } from "react";
 import { UI, localizedPath, type Lang } from "@/lib/i18n";
 import { brandText } from "@/components/BrandText";
+import { LINKEDIN_PROFILE } from "@/lib/site";
 
 // Marken-Icons: identisch zu src/components/SocialMedia.tsx übernommen,
 // damit Footer und Media-&-Content-Section exakt dieselbe Bildsprache
@@ -50,6 +51,19 @@ function YouTubeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+// Nur hier im Footer: LinkedIn ist das berufliche Profil, kein Content-Kanal,
+// und erscheint deshalb nicht in der Kanal-Sektion (SocialMedia.tsx).
+function LinkedInIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" {...props}>
+      <path
+        fill="#0A66C2"
+        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+      />
+    </svg>
+  );
+}
+
 const SOCIAL_LINKS = [
   {
     name: "Instagram",
@@ -65,6 +79,15 @@ const SOCIAL_LINKS = [
     name: "YouTube",
     href: "https://www.youtube.com/@devin.hauser",
     Icon: YouTubeIcon,
+  },
+  {
+    name: "LinkedIn",
+    label: {
+      de: "LinkedIn – berufliches Profil",
+      en: "LinkedIn – professional profile",
+    },
+    href: LINKEDIN_PROFILE,
+    Icon: LinkedInIcon,
   },
 ];
 
@@ -166,7 +189,7 @@ export default function Footer({ lang }: { lang: Lang }) {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${social.name} (${t.newTab})`}
+                  aria-label={`${social.label?.[lang] ?? social.name} (${t.newTab})`}
                   className="-m-2 inline-flex min-h-[44px] min-w-[44px] items-center justify-center transition-transform duration-200 ease-out hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
                 >
                   <social.Icon className="h-8 w-8" />

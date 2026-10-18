@@ -1,29 +1,42 @@
 import Image from "next/image";
-import { SECTION_ID, type Lang } from "@/lib/i18n";
+import { SECTION_ID, UI, type Lang } from "@/lib/i18n";
+import { LINKEDIN_PROFILE } from "@/lib/site";
 
 const CONTACT_EMAIL = "devinhauser9@gmail.com";
 const INSTAGRAM_HANDLE = "@devin.hauser_";
 
 const COPY: Record<
   Lang,
-  { eyebrow: string; heading: string; lead: string; portraitAlt: string }
+  {
+    eyebrow: string;
+    heading: string;
+    lead: string;
+    linkedin: string;
+    linkedinLabel: string;
+    portraitAlt: string;
+  }
 > = {
   de: {
     eyebrow: "Kontakt",
     heading: "LASS UNS REDEN",
     lead: "Für Sponsoring-, Medien- oder Partnerschaftsanfragen bin ich per E-Mail oder auf Instagram erreichbar. Ich freue mich über jede ernst gemeinte Anfrage und ein persönliches Gespräch.",
+    linkedin: "LinkedIn-Profil",
+    linkedinLabel: "LinkedIn – berufliches Profil von Devin Hauser",
     portraitAlt: "Devin Hauser, Schwarzweiss-Porträt",
   },
   en: {
     eyebrow: "Contact",
     heading: "LET'S TALK",
     lead: "For sponsorship, media or partnership enquiries, you can reach me by email or on Instagram. I welcome every serious enquiry and the opportunity for a personal conversation.",
+    linkedin: "LinkedIn profile",
+    linkedinLabel: "LinkedIn – Devin Hauser's professional profile",
     portraitAlt: "Devin Hauser, black and white portrait",
   },
 };
 
 export default function Contact({ lang }: { lang: Lang }) {
   const c = COPY[lang];
+  const t = UI[lang];
 
   return (
     <section id={SECTION_ID.contact} className="section-pad bg-white">
@@ -49,6 +62,15 @@ export default function Contact({ lang }: { lang: Lang }) {
               className="rounded-sm border border-ink/15 px-7 py-3.5 font-mono text-xs uppercase tracking-widest2 text-ink transition-colors hover:border-red hover:text-red"
             >
               {INSTAGRAM_HANDLE}
+            </a>
+            <a
+              href={LINKEDIN_PROFILE}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${c.linkedinLabel} (${t.newTab})`}
+              className="rounded-sm border border-ink/15 px-7 py-3.5 font-mono text-xs uppercase tracking-widest2 text-ink transition-colors hover:border-red hover:text-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red"
+            >
+              {c.linkedin}
             </a>
           </div>
         </div>

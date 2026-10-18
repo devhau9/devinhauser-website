@@ -73,6 +73,13 @@ export const SOCIAL_PROFILES = [
   "https://www.youtube.com/@devin.hauser",
 ];
 
+/**
+ * Persönliches berufliches Profil (seit 17.10.2026) — kein Content-Kanal und
+ * kein Partner. Bewusst NICHT in `SOCIAL_PROFILES`: Die iQFOiL-Seiten
+ * beschriften jene Liste als Instagram/TikTok/YouTube.
+ */
+export const LINKEDIN_PROFILE = "https://www.linkedin.com/in/devin-h-8155662bb/";
+
 export const CONTACT_EMAIL = "devinhauser9@gmail.com";
 
 /** Standard-Sharing-Bild. Absolute URL, weil einige Plattformen relative Pfade ignorieren. */
@@ -178,7 +185,7 @@ export function personJsonLd(lang: Lang) {
     "Sailing",
     "Hydrofoiling",
   ],
-  sameAs: SOCIAL_PROFILES,
+  sameAs: [...SOCIAL_PROFILES, LINKEDIN_PROFILE],
   };
 }
 
