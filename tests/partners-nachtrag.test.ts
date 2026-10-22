@@ -146,8 +146,19 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(svg, /<script|\son\w+=|foreignObject|href="http/i);
   });
 
+  test("P. Müller Consulting: Original-Logo vom 21.10.2026 statt Website-Zeichen", () => {
+    const e = entry("P. Müller Consulting");
+    assert.match(e, /src: "\/logos\/pmc-zuerich\.png"/);
+    assert.match(e, /group: "sponsors"/);
+    assert.match(e, /href: "https:\/\/pmc\.zuerich"/);
+    assert.match(e, /alt: "P\. Müller Consulting \(PMC Zürich\) logo"/);
+    assert.equal(fs.existsSync(path.join(ROOT, "public/logos/pm-consulting.svg")), false);
+    const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, "public/logos/pmc-zuerich.png"))).digest("hex");
+    assert.equal(hash, "dac203c1d43f99aaee642b6547a257512f8cbdc23c6f45efc4ce4681c8416b1a");
+  });
+
   test("Logodateien existieren und tragen keine EXIF-Daten", () => {
-    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png", "steinauer-immobilien.png"]) {
+    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png", "steinauer-immobilien.png", "pmc-zuerich.png"]) {
       const bytes = fs.readFileSync(path.join(ROOT, "public/logos", file));
       assert.ok(bytes.length > 1000, file);
       assert.equal(bytes.includes(Buffer.from("Exif")), false, `${file}: EXIF`);

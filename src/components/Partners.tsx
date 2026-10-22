@@ -43,9 +43,8 @@ type Partner = {
 //     Sanitär & Heizung GmbH und Unternehmensberatung Gradmann (Zusagen per
 //     Mail) — BSGroup und KID ohne Logodatei vorerst als Textkarten;
 //     Gradmann mit Logo seit 14.10.2026, Steinauer seit 15.10.2026,
-//     PM Consulting (laut Devins
-//     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
-//     nicht behauptet — Einordnung von Devin zu bestätigen)
+//     P. Müller Consulting (laut Devins Kerndaten «commercial partner»;
+//     Original-Logo seit 22.10.2026 vorbereitet)
 //   Ausrüstung & Services — ENSIS, Fanagus (Material), Arctic Plunge
 //     (Eisbad-Leihe, Vertrag unterschrieben 12.10.2026), Komeo AG (Getränke;
 //     Einigung 14.10.2026), Künzle Druck AG (Autogrammkarten; Textkarte)
@@ -275,11 +274,17 @@ const PARTNERS: Partner[] = [
     imgPadding: "px-1 py-2",
   },
   {
+    // Original-Logo von P. Müller Consulting (PMC Zürich), am 21.10.2026 als
+    // «2025FINAL-PMCZUERICH.pdf» (Illustrator, Vektor) erhalten: als PNG mit
+    // transparentem Hintergrund ausgegeben, auf den Inhalt zugeschnitten,
+    // nichts neu gezeichnet. Ersetzt das runde Zeichen ohne Schriftzug von der
+    // Website. Name wie im Impressum von pmc.zuerich.
     group: "sponsors",
-    src: "/logos/pm-consulting.svg",
-    alt: "PM Consulting logo",
-    name: "PM Consulting",
+    src: "/logos/pmc-zuerich.png",
+    alt: "P. Müller Consulting (PMC Zürich) logo",
+    name: "P. Müller Consulting",
     href: "https://pmc.zuerich",
+    imgPadding: "px-2 py-3",
   },
   {
     // Zusage 13.10.2026 (Philipp Gradmann). Schreibweise wie auf gradmann.ch:
