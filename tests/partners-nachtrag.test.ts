@@ -90,7 +90,6 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     const expected: [string, string, string][] = [
       ["Business Solution Group AG", "sponsors", "https://www.bsgroup.ch"],
       ["KID Sanitär & Heizung GmbH", "sponsors", "https://www.kid-sanitaer.ch"],
-      ["Künzle Druck AG", "equipment", "https://www.kuenzledruck.ch"],
       ["Swiss Foiling Federation", "network", "https://www.swiss-foiling.ch/"],
     ];
     for (const [name, group, href] of expected) {
@@ -144,6 +143,17 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.match(arctic, /href: "https:\/\/www\.arcticplunge\.ch"/);
     const svg = fs.readFileSync(path.join(ROOT, "public/logos/arctic-plunge.svg"), "utf8");
     assert.doesNotMatch(svg, /<script|\son\w+=|foreignObject|href="http/i);
+  });
+
+  test("Künzle Druck AG: Original-SVG vom 23.10.2026, unverändert, ohne Skript", () => {
+    const e = entry("Künzle Druck AG");
+    assert.match(e, /src: "\/logos\/kuenzle-druck\.svg"/);
+    assert.match(e, /group: "equipment"/);
+    assert.match(e, /href: "https:\/\/www\.kuenzledruck\.ch"/);
+    assert.match(e, /alt: "Künzle Druck AG logo"/);
+    const bytes = fs.readFileSync(path.join(ROOT, "public/logos/kuenzle-druck.svg"));
+    assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), "edd324b4ec311980313461ecd544f54ca3c064d1187b170cbacc00c2d3cd1357");
+    assert.doesNotMatch(bytes.toString("utf8"), /<script|\son\w+=|foreignObject|href=/i);
   });
 
   test("Logodateien existieren und tragen keine EXIF-Daten", () => {

@@ -48,7 +48,8 @@ type Partner = {
 //     nicht behauptet — Einordnung von Devin zu bestätigen)
 //   Ausrüstung & Services — ENSIS, Fanagus (Material), Arctic Plunge
 //     (Eisbad-Leihe, Vertrag unterschrieben 12.10.2026), Komeo AG (Getränke;
-//     Einigung 14.10.2026), Künzle Druck AG (Autogrammkarten; Textkarte)
+//     Einigung 14.10.2026), Künzle Druck AG (Autogrammkarten; Logo seit
+//     23.10.2026)
 //   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
 //     (Devin bezahlt dort selbst), United School of Sports, Schweizer
 //     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten),
@@ -170,12 +171,17 @@ const PARTNERS: Partner[] = [
   },
   {
     // Druckt Devins Autogrammkarten (Zusage Okt. 2026, Druckvorlage am
-    // 13.10.2026 bestätigt). Name und Website wie in der Mailsignatur. Noch
-    // kein Logo — Textkarte.
+    // 13.10.2026 bestätigt). Name und Website wie in der Mailsignatur. Logo
+    // von Künzle Druck am 23.10.2026 als «kuenzledruck-logo.svg» geschickt
+    // (Illustrator-Export, ohne Skript und ohne externe Verweise), Datei
+    // unverändert; nicht das Signaturbild aus derselben Mail.
     group: "equipment",
-    src: null,
+    src: "/logos/kuenzle-druck.svg",
+    alt: "Künzle Druck AG logo",
     name: "Künzle Druck AG",
     href: "https://www.kuenzledruck.ch",
+    // Die SVG hat viel Weissraum um das Zeichen — kleiner Rand.
+    imgPadding: "p-1",
   },
   {
     group: "sponsors",
