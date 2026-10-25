@@ -164,7 +164,7 @@ export function personJsonLd(lang: Lang) {
   jobTitle: PERSON_JOB_TITLE[lang],
   description: PERSON_DESCRIPTION[lang],
   nationality: { "@type": "Country", name: "Switzerland" },
-  height: { "@type": "QuantitativeValue", value: 178, unitCode: "CMT" },
+  height: { "@type": "QuantitativeValue", value: 177, unitCode: "CMT" },
   // Öffentliche Ortsangabe seit 19.08.2026 bewusst auf Stadt-/Regionsebene
   // (Entscheid Devin: keine Wohngemeinde, keine Privatadresse auf der Website).
   homeLocation: {
