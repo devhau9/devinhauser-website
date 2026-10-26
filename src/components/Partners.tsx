@@ -325,19 +325,22 @@ const PARTNERS: Partner[] = [
     href: "https://www.kid-sanitaer.ch",
   },
   {
-    // VORBEREITET 26.10.2026, nicht veröffentlichen: Unterstützung Saison 2027
-    // (Zusage nach Treffen 22.10.2026; Betrag nicht öffentlich). Vereinbart
-    // per Mail 25./26.10.2026: Logo auf der Website und im Dossier, Dank auf
-    // Social Media. Logo von Amore Mio am 26.10.2026 als «Amore Mio
-    // Gelato.pdf» (Illustrator, Vektor) geschickt: als PNG mit transparentem
-    // Hintergrund ausgegeben, auf den Inhalt zugeschnitten, nichts neu
-    // gezeichnet. Name und Link wie in der Mailsignatur.
+    // Von Devin am 26.10.2026 als Sponsor der Saison 2027 bestätigt (Zusage
+    // nach Treffen 22.10.2026; Betrag und Zahlungsstand nicht öffentlich).
+    // Vereinbart per Mail 25./26.10.2026: Logo auf der Website und im
+    // Dossier, Dank auf Social Media. Logo von Amore Mio am 26.10.2026 als
+    // «Amore Mio Gelato.pdf» (Illustrator, Vektor) geschickt: als PNG mit
+    // transparentem Hintergrund ausgegeben, auf den Inhalt zugeschnitten,
+    // nichts neu gezeichnet. Name, Adresse und Domain wie in der Mailsignatur
+    // und auf amoremio.ch (Grabenackerstrasse 24, Oberhasli).
     group: "sponsors",
     src: "/logos/amore-mio.png",
     alt: "Amore Mio GmbH logo",
     name: "Amore Mio GmbH",
     href: "https://www.amoremio.ch",
-    imgPadding: "px-4 py-2",
+    // Rundes Logo wie Kinesiologie Weideli: kleiner Rand, damit es optisch
+    // gleich gross wirkt wie die breiten Logos.
+    imgPadding: "p-1",
   },
 ];
 
