@@ -335,6 +335,21 @@ const PARTNERS: Partner[] = [
     name: "KID Sanitär & Heizung GmbH",
     href: "https://www.kid-sanitaer.ch",
   },
+  {
+    // VORBEREITET 26.10.2026, nicht veröffentlichen: Unterstützung Saison 2027
+    // (Zusage nach Treffen 22.10.2026; Betrag nicht öffentlich). Vereinbart
+    // per Mail 25./26.10.2026: Logo auf der Website und im Dossier, Dank auf
+    // Social Media. Logo von Amore Mio am 26.10.2026 als «Amore Mio
+    // Gelato.pdf» (Illustrator, Vektor) geschickt: als PNG mit transparentem
+    // Hintergrund ausgegeben, auf den Inhalt zugeschnitten, nichts neu
+    // gezeichnet. Name und Link wie in der Mailsignatur.
+    group: "sponsors",
+    src: "/logos/amore-mio.png",
+    alt: "Amore Mio GmbH logo",
+    name: "Amore Mio GmbH",
+    href: "https://www.amoremio.ch",
+    imgPadding: "px-4 py-2",
+  },
 ];
 
 const COPY: Record<
