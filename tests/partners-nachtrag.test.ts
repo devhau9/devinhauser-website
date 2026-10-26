@@ -146,8 +146,18 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(svg, /<script|\son\w+=|foreignObject|href="http/i);
   });
 
+  test("Amore Mio GmbH: Original-Logo vom 26.10.2026, Sponsoren & Gönner, kein Betrag", () => {
+    const e = entry("Amore Mio GmbH");
+    assert.match(e, /src: "\/logos\/amore-mio\.png"/);
+    assert.match(e, /group: "sponsors"/);
+    assert.match(e, /href: "https:\/\/www\.amoremio\.ch"/);
+    assert.match(e, /alt: "Amore Mio GmbH logo"/);
+    const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, "public/logos/amore-mio.png"))).digest("hex");
+    assert.equal(hash, "7f0643a4b3aae9fbab1be5c29ea52e0fb5de3f421ff08e799463a9505a677409");
+  });
+
   test("Logodateien existieren und tragen keine EXIF-Daten", () => {
-    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png", "steinauer-immobilien.png"]) {
+    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png", "steinauer-immobilien.png", "amore-mio.png"]) {
       const bytes = fs.readFileSync(path.join(ROOT, "public/logos", file));
       assert.ok(bytes.length > 1000, file);
       assert.equal(bytes.includes(Buffer.from("Exif")), false, `${file}: EXIF`);
