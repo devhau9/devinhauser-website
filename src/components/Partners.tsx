@@ -353,6 +353,22 @@ const PARTNERS: Partner[] = [
     // gleich gross wirkt wie die breiten Logos.
     imgPadding: "p-1",
   },
+  {
+    // Sponsoringbeitrag Saison 2027 (Zusage der Geschäftsleitung per Mail
+    // 26.10.2026; Betrag und Zahlungsstand nicht öffentlich). Angebot «Logo
+    // mit Link auf Website und im Dossier» aus der Anfrage vom 08.10.2026.
+    // Logo von der Firma am 29.10.2026 geschickt («Betschart-neu.ai», Vektor):
+    // als PNG mit transparentem Hintergrund ausgegeben, ohne den Block mit
+    // Adresse, Telefon und Webadresse unter der Trennlinie — Zeichen,
+    // Schriftzug und Leistungszeile unverändert, nichts neu gezeichnet.
+    // Link wie in der Mailsignatur; betschartspenglerei.ch leitet dorthin.
+    group: "sponsors",
+    src: "/logos/betschart-ag.png",
+    alt: "Betschart AG logo",
+    name: "Betschart AG",
+    href: "https://www.spenglereibetschart.ch",
+    imgPadding: "px-2 py-3",
+  },
 ];
 
 const COPY: Record<
