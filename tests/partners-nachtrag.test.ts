@@ -146,8 +146,18 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(svg, /<script|\son\w+=|foreignObject|href="http/i);
   });
 
+  test("Betschart AG: Original-Logo vom 29.10.2026 ohne Adressblock, Link wie Mailsignatur", () => {
+    const e = entry("Betschart AG");
+    assert.match(e, /src: "\/logos\/betschart-ag\.png"/);
+    assert.match(e, /group: "sponsors"/);
+    assert.match(e, /href: "https:\/\/www\.spenglereibetschart\.ch"/);
+    assert.match(e, /alt: "Betschart AG logo"/);
+    const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, "public/logos/betschart-ag.png"))).digest("hex");
+    assert.equal(hash, "1608a5abd3cbd6e946d103aa92fa3461e034f8b09e4f4569994e51fc2636bae7");
+  });
+
   test("Logodateien existieren und tragen keine EXIF-Daten", () => {
-    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png", "steinauer-immobilien.png"]) {
+    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png", "steinauer-immobilien.png", "betschart-ag.png"]) {
       const bytes = fs.readFileSync(path.join(ROOT, "public/logos", file));
       assert.ok(bytes.length > 1000, file);
       assert.equal(bytes.includes(Buffer.from("Exif")), false, `${file}: EXIF`);
