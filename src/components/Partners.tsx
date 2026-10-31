@@ -43,12 +43,12 @@ type Partner = {
 //     Sanitär & Heizung GmbH und Unternehmensberatung Gradmann (Zusagen per
 //     Mail) — BSGroup und KID ohne Logodatei vorerst als Textkarten;
 //     Gradmann mit Logo seit 14.10.2026, Steinauer seit 15.10.2026,
-//     PM Consulting (laut Devins
-//     Kerndaten «commercial partner»; ein Bezug zu einer Privatperson wird
-//     nicht behauptet — Einordnung von Devin zu bestätigen)
+//     P. Müller Consulting (laut Devins Kerndaten «commercial partner»;
+//     Original-Logo seit 22.10.2026 vorbereitet)
 //   Ausrüstung & Services — ENSIS, Fanagus (Material), Arctic Plunge
 //     (Eisbad-Leihe, Vertrag unterschrieben 12.10.2026), Komeo AG (Getränke;
-//     Einigung 14.10.2026), Künzle Druck AG (Autogrammkarten; Textkarte)
+//     Einigung 14.10.2026), Künzle Druck AG (Autogrammkarten; Logo seit
+//     23.10.2026)
 //   Sportliches Netzwerk — Swiss Sailing Team, Swiss Sailing, RVZS, DRCS
 //     (Devin bezahlt dort selbst), United School of Sports, Schweizer
 //     Sporthilfe (Förderstiftung; das Geld der Patenschaft stammt vom Paten),
@@ -170,12 +170,17 @@ const PARTNERS: Partner[] = [
   },
   {
     // Druckt Devins Autogrammkarten (Zusage Okt. 2026, Druckvorlage am
-    // 13.10.2026 bestätigt). Name und Website wie in der Mailsignatur. Noch
-    // kein Logo — Textkarte.
+    // 13.10.2026 bestätigt). Name und Website wie in der Mailsignatur. Logo
+    // von Künzle Druck am 23.10.2026 als «kuenzledruck-logo.svg» geschickt
+    // (Illustrator-Export, ohne Skript und ohne externe Verweise), Datei
+    // unverändert; nicht das Signaturbild aus derselben Mail.
     group: "equipment",
-    src: null,
+    src: "/logos/kuenzle-druck.svg",
+    alt: "Künzle Druck AG logo",
     name: "Künzle Druck AG",
     href: "https://www.kuenzledruck.ch",
+    // Die SVG hat viel Weissraum um das Zeichen — kleiner Rand.
+    imgPadding: "p-1",
   },
   {
     group: "sponsors",
@@ -275,11 +280,17 @@ const PARTNERS: Partner[] = [
     imgPadding: "px-1 py-2",
   },
   {
+    // Original-Logo von P. Müller Consulting (PMC Zürich), am 21.10.2026 als
+    // «2025FINAL-PMCZUERICH.pdf» (Illustrator, Vektor) erhalten: als PNG mit
+    // transparentem Hintergrund ausgegeben, auf den Inhalt zugeschnitten,
+    // nichts neu gezeichnet. Ersetzt das runde Zeichen ohne Schriftzug von der
+    // Website. Name wie im Impressum von pmc.zuerich.
     group: "sponsors",
-    src: "/logos/pm-consulting.svg",
-    alt: "PM Consulting logo",
-    name: "PM Consulting",
+    src: "/logos/pmc-zuerich.png",
+    alt: "P. Müller Consulting (PMC Zürich) logo",
+    name: "P. Müller Consulting",
     href: "https://pmc.zuerich",
+    imgPadding: "px-2 py-3",
   },
   {
     // Zusage 13.10.2026 (Philipp Gradmann). Schreibweise wie auf gradmann.ch:
@@ -323,6 +334,40 @@ const PARTNERS: Partner[] = [
     src: null,
     name: "KID Sanitär & Heizung GmbH",
     href: "https://www.kid-sanitaer.ch",
+  },
+  {
+    // Von Devin am 26.10.2026 als Sponsor der Saison 2027 bestätigt (Zusage
+    // nach Treffen 22.10.2026; Betrag und Zahlungsstand nicht öffentlich).
+    // Vereinbart per Mail 25./26.10.2026: Logo auf der Website und im
+    // Dossier, Dank auf Social Media. Logo von Amore Mio am 26.10.2026 als
+    // «Amore Mio Gelato.pdf» (Illustrator, Vektor) geschickt: als PNG mit
+    // transparentem Hintergrund ausgegeben, auf den Inhalt zugeschnitten,
+    // nichts neu gezeichnet. Name, Adresse und Domain wie in der Mailsignatur
+    // und auf amoremio.ch (Grabenackerstrasse 24, Oberhasli).
+    group: "sponsors",
+    src: "/logos/amore-mio.png",
+    alt: "Amore Mio GmbH logo",
+    name: "Amore Mio GmbH",
+    href: "https://www.amoremio.ch",
+    // Rundes Logo wie Kinesiologie Weideli: kleiner Rand, damit es optisch
+    // gleich gross wirkt wie die breiten Logos.
+    imgPadding: "p-1",
+  },
+  {
+    // Sponsoringbeitrag Saison 2027 (Zusage der Geschäftsleitung per Mail
+    // 26.10.2026; Betrag und Zahlungsstand nicht öffentlich). Angebot «Logo
+    // mit Link auf Website und im Dossier» aus der Anfrage vom 08.10.2026.
+    // Logo von der Firma am 29.10.2026 geschickt («Betschart-neu.ai», Vektor):
+    // als PNG mit transparentem Hintergrund ausgegeben, ohne den Block mit
+    // Adresse, Telefon und Webadresse unter der Trennlinie — Zeichen,
+    // Schriftzug und Leistungszeile unverändert, nichts neu gezeichnet.
+    // Link wie in der Mailsignatur; betschartspenglerei.ch leitet dorthin.
+    group: "sponsors",
+    src: "/logos/betschart-ag.png",
+    alt: "Betschart AG logo",
+    name: "Betschart AG",
+    href: "https://www.spenglereibetschart.ch",
+    imgPadding: "px-2 py-3",
   },
 ];
 
@@ -440,7 +485,7 @@ export default function Partners({ lang }: { lang: Lang }) {
 
   return (
     <section id={SECTION_ID.partners} className="section-pad bg-mist">
-      <div className="mx-auto max-w-content">
+      <div className="reveal mx-auto max-w-content">
         <p className="eyebrow mb-5">{c.eyebrow}</p>
         <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
           {c.heading}

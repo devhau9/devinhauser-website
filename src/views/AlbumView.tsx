@@ -84,7 +84,13 @@ const COPY: Record<
  * eigene Standardbild.
  */
 export function albumMetadata(album: Album, lang: Lang): Metadata {
-  const title = `${localized(album.title, lang)} — ${formatDate(album.date, lang)}`;
+  // Steht das Jahr schon im Albumnamen (bei allen Alben am 31.10.2026), bleibt
+  // das Datum im Seitentitel weg: Es machte die Titel bis 80 Zeichen lang, und
+  // Google schnitt sie ab. Auf der Albumseite selbst steht das Datum weiterhin.
+  const name = localized(album.title, lang);
+  const title = /\b(19|20)\d{2}\b/.test(name)
+    ? name
+    : `${name} — ${formatDate(album.date, lang)}`;
   const shareImage =
     album.rights === "own" ? album.coverImage : SHARE_FALLBACK_IMAGE;
 

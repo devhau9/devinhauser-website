@@ -100,6 +100,88 @@
     }
   }
 
+  /*
+   * PLATZRESERVE FÜR DAS BANNER IM ERSTEN BILD (31.10.2026)
+   *
+   * Das Banner erscheint erst nach der Hydration; bis dahin war
+   * `--cookie-banner-offset` 0 und der Hero-Text sprang danach nach oben
+   * (PageSpeed mobil: CLS 0,205, alles im Hero). Solange keine Entscheidung
+   * gespeichert ist (`data-consent` fehlt, gesetzt in RootShell.tsx), gilt
+   * deshalb schon im ersten Bild ein Schätzwert = gemessene Bannerhöhe + 96px.
+   * Das Banner misst danach exakt nach (Inline-Wert gewinnt); übrig bleibt
+   * höchstens die Abweichung von wenigen Pixeln.
+   * Gemessene Bannerhöhen 31.10.2026 (DE / EN): unter 360px 184/164,
+   * 360–479px 164/164 bzw. ab 390 EN 145, 480–639px 145 (EN ab 540: 126),
+   * 640–899px 140 (EN ab 700: 118), 900–1023px 118 (EN 95), ab 1024px 95.
+   */
+  html:not([data-consent]) {
+    --cookie-banner-offset: 280px;
+  }
+
+  @media (min-width: 360px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 260px;
+    }
+  }
+
+  @media (min-width: 480px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 241px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 236px;
+    }
+  }
+
+  @media (min-width: 900px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 214px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 191px;
+    }
+  }
+
+  html[lang="en"]:not([data-consent]) {
+    --cookie-banner-offset: 260px;
+  }
+
+  @media (min-width: 390px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 241px;
+    }
+  }
+
+  @media (min-width: 540px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 222px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 236px;
+    }
+  }
+
+  @media (min-width: 700px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 214px;
+    }
+  }
+
+  @media (min-width: 900px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 191px;
+    }
+  }
+
   .eyebrow {
     @apply font-mono text-xs uppercase tracking-widest2;
     color: #E10600;
@@ -114,6 +196,67 @@
   .card-surface {
     @apply rounded-2xl shadow-[0_1px_2px_rgba(10,14,20,0.04),0_20px_48px_-28px_rgba(10,14,20,0.18)];
     background-color: #F7F6F3;
+  }
+}
+
+/*
+ * ─────────────────────────────────────────────────────────────────────────────
+ * BEWEGUNG (31.10.2026) — zwei dezente Effekte, beide ohne JavaScript
+ * ─────────────────────────────────────────────────────────────────────────────
+ * 1. `.reveal`: Abschnitte blenden beim Hineinscrollen weich ein.
+ * 2. `.field-dot`: Der Punkt der Resultatskala gleitet an seinen Rang.
+ *
+ * Beide hängen an der Scroll-Position (`animation-timeline: view()`), nicht an
+ * einer Uhr: Es wird nichts blockiert, nichts verzögert und der Scroll nicht
+ * übernommen. Drei Sicherungen, damit Inhalt NIE unsichtbar bleibt:
+ *   • Ohne Unterstützung (`@supports`) gilt gar keine Regel — Inhalt steht da.
+ *   • Bei «Bewegung reduzieren» gilt gar keine Regel.
+ *   • Was beim Laden schon im Bild ist, liegt hinter dem Animationsbereich und
+ *     erscheint sofort vollständig.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+
+    .field-dot {
+      animation: field-dot-in linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 35%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* `left` bleibt die belegte Position (Inline-Stil); animiert wird nur der
+   Weg dorthin, als Verschiebung vom Skalenanfang. */
+@keyframes field-dot-in {
+  from {
+    left: 0;
+    opacity: 0.3;
+  }
+}
+
+/* Einheitlicher, gut sichtbarer Tastaturfokus. Nur `:focus-visible` — wer mit
+   der Maus klickt, sieht keinen Ring. Komponenten mit eigenem Fokusstil
+   überschreiben diese Regel. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid #e10600;
+    outline-offset: 3px;
   }
 }
 

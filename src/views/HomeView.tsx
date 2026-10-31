@@ -9,11 +9,10 @@ import GalleryTeaser from "@/components/GalleryTeaser";
 import Sponsoring from "@/components/Sponsoring";
 import Partners from "@/components/Partners";
 import Contact from "@/components/Contact";
-// Newsletter wieder aktiv (Entscheidung 03.08.2026) — aber als reine
-// Coming-soon-Section OHNE Formular, Eingabefelder oder Subscribe-Button.
-// Es werden weiterhin keine Daten erfasst und kein Anmelde-Erfolg
-// vorgetäuscht; siehe src/components/Newsletter.tsx.
-import Newsletter from "@/components/Newsletter";
+// Die Newsletter-Ankündigung («Coming soon», ohne Formular) ist seit
+// 31.10.2026 entfernt: Es gibt keinen Newsletter, und eine Ankündigung ohne
+// Termin versprach etwas, das niemand einlösen musste.
+import FeaturedVideo from "@/components/FeaturedVideo";
 import { SITE_URL, CONTENT_UPDATED, jsonLdHtml } from "@/lib/site";
 import { localizedPath, type Lang } from "@/lib/i18n";
 import { brandText } from "@/components/BrandText";
@@ -48,6 +47,13 @@ const BRIDGE: Record<
  * hintereinander ist der Unterschied auf einen Blick sichtbar: hier die
  * laufenden Kanäle, dort die kuratierten Alben.
  */
+/**
+ * Letzte inhaltliche Änderung der Startseite (Partner werden, Video, Puck,
+ * ohne Newsletter). Getrennt von CONTENT_UPDATED, das auch die iQFOiL-Seite
+ * datiert — die hat sich nicht geändert.
+ */
+const HOME_UPDATED = "2026-10-31";
+
 export default function HomeView({ lang }: { lang: Lang }) {
   const b = BRIDGE[lang];
   const home = `${SITE_URL}${localizedPath("/", lang)}`;
@@ -64,7 +70,7 @@ export default function HomeView({ lang }: { lang: Lang }) {
     isPartOf: { "@id": `${SITE_URL}/#website` },
     mainEntity: { "@id": `${SITE_URL}/#person` },
     dateCreated: CONTENT_UPDATED,
-    dateModified: CONTENT_UPDATED,
+    dateModified: HOME_UPDATED,
     inLanguage: lang,
   };
 
@@ -101,11 +107,11 @@ export default function HomeView({ lang }: { lang: Lang }) {
       <Goals lang={lang} />
       <Highlights lang={lang} />
       <SocialMedia lang={lang} />
+      <FeaturedVideo lang={lang} />
       <GalleryTeaser lang={lang} />
       <Sponsoring lang={lang} />
       <Partners lang={lang} />
       <Contact lang={lang} />
-      <Newsletter lang={lang} />
     </main>
   );
 }

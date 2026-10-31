@@ -7,6 +7,12 @@ import HtmlLang from "@/components/HtmlLang";
 import { fontClassNames } from "@/lib/fonts";
 import { jsonLdHtml, personJsonLd, websiteJsonLd } from "@/lib/site";
 import { UI, type Lang } from "@/lib/i18n";
+import { CONSENT_STORAGE_KEY } from "@/lib/cookie-consent";
+
+/** Gleiche Regel wie `getStoredConsent()`: nur «accepted»/«declined» zählen. */
+const CONSENT_FLAG_SCRIPT = `try{var v=localStorage.getItem(${JSON.stringify(
+  CONSENT_STORAGE_KEY
+)});if(v==="accepted"||v==="declined")document.documentElement.setAttribute("data-consent","set")}catch(e){}`;
 
 /**
  * Das gemeinsame Dokumentgeruest beider Sprachen.
@@ -36,7 +42,22 @@ export default function RootShell({
   const t = UI[lang];
 
   return (
-    <html lang={lang} className={fontClassNames}>
+    // suppressHydrationWarning: Das Skript unten setzt `data-consent` am <html>
+    // vor der Hydration; React soll diese eine Abweichung nicht melden.
+    <html lang={lang} className={fontClassNames} suppressHydrationWarning>
+      {/* Im App Router ist <head> im Root-Layout der vorgesehene Weg;
+          `next/head` gilt nur für den Pages Router. */}
+      {/* eslint-disable-next-line @next/next/no-head-element */}
+      <head>
+        {/* Gegen den Layoutsprung im Hero (CLS 0,205 in PageSpeed, 31.10.2026):
+            Liegt bereits eine Cookie-Entscheidung vor, wird das VOR dem ersten
+            Bild markiert. Ohne Entscheidung reserviert globals.css den Platz
+            für das Banner schon im ersten Bild statt erst nach der Hydration. */}
+        <script dangerouslySetInnerHTML={{ __html: CONSENT_FLAG_SCRIPT }} />
+        <noscript>
+          <style>{"html{--cookie-banner-offset:0px!important}"}</style>
+        </noscript>
+      </head>
       <body className="min-h-screen bg-ink font-body text-paper antialiased">
         {/* Person und WebSite als getrennte, verknüpfte Entitäten (@id).
             Das hilft Suchmaschinen, die Seite als offizielle Website einer

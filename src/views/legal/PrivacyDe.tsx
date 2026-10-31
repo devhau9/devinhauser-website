@@ -48,7 +48,7 @@ export default function PrivacyDe() {
             DATENSCHUTZ&shy;ERKLÄRUNG
           </h1>
           <p className="mt-6 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
-            Zuletzt aktualisiert: 3. August 2026
+            Zuletzt aktualisiert: 31. Oktober 2026
           </p>
 
           <p className={BODY_TEXT}>
@@ -195,24 +195,33 @@ export default function PrivacyDe() {
             </p>
           </div>
 
-          {/* 5. Newsletter */}
+          {/* 5. YouTube Videos (vorher: Newsletter-Ankündigung, entfernt 31.10.2026) */}
           <div className={SECTION_WRAPPER}>
-            <h2 className={SECTION_HEADING}>Newsletter</h2>
+            <h2 className={SECTION_HEADING}>YouTube-Videos</h2>
             <p className={BODY_TEXT}>
-              Auf der Website wird derzeit eine Newsletter-Ankündigung
-              angezeigt, aber{" "}
-              <strong>es ist kein Anmeldeformular aktiv</strong>. Zurzeit
-              werden keine Newsletter-Daten erhoben, gespeichert oder
-              übermittelt.
+              Auf der Startseite ist ein Video von Devin Hauser auf YouTube
+              verlinkt. Zunächst wird nur ein Vorschaubild angezeigt, das von
+              dieser Website selbst stammt; dabei wird keine Verbindung zu
+              YouTube hergestellt. Erst wenn Sie auf „Video abspielen“ klicken,
+              wird der Player von YouTube im erweiterten Datenschutzmodus
+              (youtube-nocookie.com) geladen. Ab diesem Moment erhalten YouTube
+              bzw. Google Ireland Limited und Google LLC (USA) technische Daten
+              wie Ihre IP-Adresse und Angaben zu Browser und Gerät und können
+              Cookies oder ähnliche Technologien einsetzen. Einzelheiten finden
+              Sie in der Datenschutzerklärung von Google unter 
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ink underline underline-offset-2 transition-colors hover:text-red"
+              >
+                policies.google.com/privacy
+              </a>
+              .
             </p>
             <p className={BODY_TEXT}>
-              Falls später Newsletter-Anmeldungen eingeführt werden, wird diese
-              Datenschutzerklärung aktualisiert, bevor Anmeldungen
-              entgegengenommen werden — einschliesslich des Namens des
-              Anbieters, des Serverstandorts und eines Links auf dessen eigene
-              Datenschutzerklärung. Eine künftige Anmeldung erfolgt im
-              Double-Opt-in-Verfahren, mit einem Abmeldelink in jeder
-              Newsletter-E-Mail.
+              Auf dieser Website wird kein Newsletter angeboten; es werden
+              keine Newsletter-Daten erhoben, gespeichert oder übermittelt.
             </p>
           </div>
 
@@ -272,13 +281,10 @@ export default function PrivacyDe() {
                 oben beschrieben von Google Analytics 4 bearbeitet.
               </li>
               <li>
-                Es wird eine Newsletter-Ankündigung angezeigt, aber{" "}
-                <strong>es ist kein Anmeldeformular aktiv</strong>, also{" "}
-                <strong>
-                  werden keine Newsletter-Daten erhoben, gespeichert oder
-                  übermittelt
-                </strong>{" "}
-                (siehe „Newsletter“ oben).
+                Ein YouTube-Video wird erst nach Ihrem Klick auf „Video
+                abspielen“ geladen; davor wird nichts an YouTube übermittelt
+                (siehe „YouTube-Videos“ oben). Ein Newsletter wird nicht
+                angeboten.
               </li>
               <li>
                 Anfragen über das Partner Portal werden wie oben beschrieben
@@ -356,8 +362,8 @@ export default function PrivacyDe() {
               Diese Website wird über HTTPS ausgeliefert. Übermittlungen aus
               dem Partner Portal werden über eine verschlüsselte Verbindung an
               Web3Forms gesendet und wie oben beschrieben per E-Mail an Devin
-              Hauser weitergeleitet. Auf dieser Website ist derzeit kein
-              Newsletter-Formular aktiv, es wird also nichts über ein solches
+              Hauser weitergeleitet. Auf dieser Website gibt es kein
+              Newsletter-Formular, es wird also nichts über ein solches
               übermittelt. E-Mails, die Sie direkt senden, und Nachrichten, die
               Sie über Instagram senden, werden von den jeweiligen Diensten
               nach deren eigenen Bedingungen übermittelt und gespeichert. Wo

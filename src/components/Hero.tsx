@@ -100,6 +100,9 @@ export default function Hero({ lang }: { lang: Lang }) {
         alt={c.imageAlt}
         fill
         priority
+        // Das Hero-Bild ist das LCP-Element: zusätzlich zur Vorladung höchste
+        // Ladepriorität, damit es nicht hinter Schriften und Skripten wartet.
+        fetchPriority="high"
         sizes="100vw"
         className="object-cover object-center filter brightness-[1.1] contrast-[1.05] saturate-[1.15]"
       />

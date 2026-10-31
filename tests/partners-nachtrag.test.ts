@@ -90,7 +90,6 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     const expected: [string, string, string][] = [
       ["Business Solution Group AG", "sponsors", "https://www.bsgroup.ch"],
       ["KID Sanitär & Heizung GmbH", "sponsors", "https://www.kid-sanitaer.ch"],
-      ["Künzle Druck AG", "equipment", "https://www.kuenzledruck.ch"],
       ["Swiss Foiling Federation", "network", "https://www.swiss-foiling.ch/"],
     ];
     for (const [name, group, href] of expected) {
@@ -146,8 +145,50 @@ describe("Partner-Nachtrag 12.10.2026", () => {
     assert.doesNotMatch(svg, /<script|\son\w+=|foreignObject|href="http/i);
   });
 
+  test("Künzle Druck AG: Original-SVG vom 23.10.2026, unverändert, ohne Skript", () => {
+    const e = entry("Künzle Druck AG");
+    assert.match(e, /src: "\/logos\/kuenzle-druck\.svg"/);
+    assert.match(e, /group: "equipment"/);
+    assert.match(e, /href: "https:\/\/www\.kuenzledruck\.ch"/);
+    assert.match(e, /alt: "Künzle Druck AG logo"/);
+    const bytes = fs.readFileSync(path.join(ROOT, "public/logos/kuenzle-druck.svg"));
+    assert.equal(crypto.createHash("sha256").update(bytes).digest("hex"), "edd324b4ec311980313461ecd544f54ca3c064d1187b170cbacc00c2d3cd1357");
+    assert.doesNotMatch(bytes.toString("utf8"), /<script|\son\w+=|foreignObject|href=/i);
+  });
+
+  test("P. Müller Consulting: Original-Logo vom 21.10.2026 statt Website-Zeichen", () => {
+    const e = entry("P. Müller Consulting");
+    assert.match(e, /src: "\/logos\/pmc-zuerich\.png"/);
+    assert.match(e, /group: "sponsors"/);
+    assert.match(e, /href: "https:\/\/pmc\.zuerich"/);
+    assert.match(e, /alt: "P\. Müller Consulting \(PMC Zürich\) logo"/);
+    assert.equal(fs.existsSync(path.join(ROOT, "public/logos/pm-consulting.svg")), false);
+    const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, "public/logos/pmc-zuerich.png"))).digest("hex");
+    assert.equal(hash, "dac203c1d43f99aaee642b6547a257512f8cbdc23c6f45efc4ce4681c8416b1a");
+  });
+
+  test("Amore Mio GmbH: Original-Logo vom 26.10.2026, Sponsoren & Gönner, kein Betrag", () => {
+    const e = entry("Amore Mio GmbH");
+    assert.match(e, /src: "\/logos\/amore-mio\.png"/);
+    assert.match(e, /group: "sponsors"/);
+    assert.match(e, /href: "https:\/\/www\.amoremio\.ch"/);
+    assert.match(e, /alt: "Amore Mio GmbH logo"/);
+    const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, "public/logos/amore-mio.png"))).digest("hex");
+    assert.equal(hash, "7f0643a4b3aae9fbab1be5c29ea52e0fb5de3f421ff08e799463a9505a677409");
+  });
+
+  test("Betschart AG: Original-Logo vom 29.10.2026 ohne Adressblock, Link wie Mailsignatur", () => {
+    const e = entry("Betschart AG");
+    assert.match(e, /src: "\/logos\/betschart-ag\.png"/);
+    assert.match(e, /group: "sponsors"/);
+    assert.match(e, /href: "https:\/\/www\.spenglereibetschart\.ch"/);
+    assert.match(e, /alt: "Betschart AG logo"/);
+    const hash = crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, "public/logos/betschart-ag.png"))).digest("hex");
+    assert.equal(hash, "1608a5abd3cbd6e946d103aa92fa3461e034f8b09e4f4569994e51fc2636bae7");
+  });
+
   test("Logodateien existieren und tragen keine EXIF-Daten", () => {
-    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png", "steinauer-immobilien.png"]) {
+    for (const file of ["trockentech.png", "ghb-ground-engineering.png", "micco-fugen.png", "meuli-elektro.png", "gradmann.png", "komeo.png", "steinauer-immobilien.png", "pmc-zuerich.png", "amore-mio.png", "betschart-ag.png"]) {
       const bytes = fs.readFileSync(path.join(ROOT, "public/logos", file));
       assert.ok(bytes.length > 1000, file);
       assert.equal(bytes.includes(Buffer.from("Exif")), false, `${file}: EXIF`);

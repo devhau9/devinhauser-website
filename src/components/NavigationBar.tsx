@@ -136,7 +136,10 @@ export default function NavigationBar({ lang, links, homeHref }: Props) {
             ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-4">
+        {/* Unter 640 px etwas engere Abstände (gap-3, Knopf px-3): Bei 360 px
+            Bildschirmbreite lief die Kopfzeile sonst 4 px über den Rand und
+            die ganze Seite liess sich seitlich verschieben (11.10.2026). */}
+        <div className="flex shrink-0 items-center gap-3 sm:gap-4">
           <LanguageSwitch lang={lang} />
 
           {links
@@ -161,7 +164,7 @@ export default function NavigationBar({ lang, links, homeHref }: Props) {
             aria-expanded={open}
             aria-controls={panelId}
             aria-label={open ? t.closeMenu : t.openMenu}
-            className={`${LINK_BASE} -my-[3px] flex min-h-[44px] items-center gap-2 rounded-sm border border-ink-line px-4 py-2.5 text-paper hover:border-paper lg:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper`}
+            className={`${LINK_BASE} -my-[3px] flex min-h-[44px] items-center gap-2 rounded-sm border border-ink-line px-3 py-2.5 text-paper sm:px-4 hover:border-paper lg:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper`}
           >
             <span aria-hidden className="flex w-4 flex-col gap-[3px]">
               <span className="h-px w-full bg-paper" />

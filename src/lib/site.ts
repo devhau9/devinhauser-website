@@ -36,8 +36,10 @@ export const SITE_TITLE: Record<Lang, string> = {
 };
 
 export const SITE_DESCRIPTION: Record<Lang, string> = {
-  de: "Devin Hauser ist iQFOiL- und Wingfoil-Racer aus der Schweiz. Er startet international in der U23- und Senior-Kategorie, mit dem langfristigen Ziel, die Schweiz an den Olympischen Spielen zu vertreten.",
-  en: "Devin Hauser is an iQFOiL and Wingfoil racer from Switzerland. He competes internationally in the U23 and senior fleets, working towards the long-term goal of representing Switzerland at the Olympic Games.",
+  // Höchstens 160 Zeichen (31.10.2026; vorher 200/205): Google schnitt die
+  // Beschreibung der Startseite ab. Gleicher Inhalt, knapper formuliert.
+  de: "Devin Hauser ist iQFOiL- und Wingfoil-Racer aus der Schweiz. Er startet international in der U23- und Senior-Kategorie – langfristiges Ziel: Olympische Spiele.",
+  en: "Devin Hauser is an iQFOiL and Wingfoil racer from Switzerland, racing internationally in the U23 and senior fleets with the Olympic Games as his long-term goal.",
 };
 
 /** Schluesselwoerter je Sprache — bewusst kurz und ohne Wiederholungen. */
@@ -164,7 +166,7 @@ export function personJsonLd(lang: Lang) {
   jobTitle: PERSON_JOB_TITLE[lang],
   description: PERSON_DESCRIPTION[lang],
   nationality: { "@type": "Country", name: "Switzerland" },
-  height: { "@type": "QuantitativeValue", value: 178, unitCode: "CMT" },
+  height: { "@type": "QuantitativeValue", value: 177, unitCode: "CMT" },
   // Öffentliche Ortsangabe seit 19.08.2026 bewusst auf Stadt-/Regionsebene
   // (Entscheid Devin: keine Wohngemeinde, keine Privatadresse auf der Website).
   homeLocation: {

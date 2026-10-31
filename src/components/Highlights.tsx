@@ -69,6 +69,21 @@ import { brandText } from "@/components/BrandText";
 // Masterliste übernommen — es kommt kein einziges neues oder gerundetes
 // Resultat hinzu.
 
+// ─────────────────────────────────────────────────────────────────────────────
+// ERGAENZUNG 04.10.2026 — U23-WELTMEISTERSCHAFT PUCK 2026
+// ─────────────────────────────────────────────────────────────────────────────
+// Eine Zeile neu, direkt an der offiziellen Ergebnisseite des Veranstalters
+// geprueft (sailti, «U23 iQFOiL World Championships 2026 - Poland», Reiter
+// «IQ FOIL Men», idsc2r=31603, letzte Aktualisierung 03.10.2026 13:59:33):
+//   SUI 134 Devin HAUSER auf Rang 64; die Rangliste fuehrt 108 Plaetze,
+//   lueckenlos 1–108. Endstand nach Qualifikation, Finalserie und Medal
+//   Series (Sieger Tomasini, von der Klasse am 04.10. so gemeldet).
+// FELDGROESSE 108, NICHT 112 UND NICHT 155: 112 war der Meldestand vom
+// 24.09., 155 die Summe aus Maennern und Frauen. Es zaehlt die Rangliste.
+// KATEGORIE «Men» exakt wie die Rangliste. Die Spalte CAT fuehrt u19/u23;
+// eine eigene U23-Rangliste gibt es dort nicht — deshalb kein U23-Rang.
+// Kein Titel, keine Fleet-Angabe, keine Teilnahmezahl.
+
 type SelectedResult = {
   placement: string;
   suffix?: string;
@@ -91,6 +106,7 @@ const COPY: Record<
     intro: "SEIT MEHREREN JAHREN FAHRE ICH INTERNATIONALE REGATTEN",
     selectedHeading: "Ausgewählte Resultate",
     results: [
+      { placement: "64.", suffix: "von 108", event: "U23-Weltmeisterschaft Puck 2026", context: "iQFOiL · Men" },
       { placement: "2.", suffix: "von 27", event: "Schweizermeisterschaft Silvaplana 2026", context: "iQFOiL" },
       { placement: "3.", suffix: "von 45", event: "Schweizermeisterschaft Silvaplana 2026", context: "Overall" },
       { placement: "5.", suffix: "von 13", event: "iQFOiL International Games", context: "Silvaplana 2025 · Senior" },
@@ -106,6 +122,7 @@ const COPY: Record<
     intro: "I HAVE BEEN COMPETING INTERNATIONALLY FOR SEVERAL YEARS",
     selectedHeading: "Selected Results",
     results: [
+      { placement: "64th", suffix: "of 108", event: "iQFOiL U23 World Championships Puck 2026", context: "iQFOiL · Men" },
       { placement: "2nd", suffix: "of 27", event: "Swiss Championship Silvaplana 2026", context: "iQFOiL" },
       { placement: "3rd", suffix: "of 45", event: "Swiss Championship Silvaplana 2026", context: "Overall" },
       { placement: "5th", suffix: "of 13", event: "iQFOiL International Games", context: "Silvaplana 2025 · Senior" },
@@ -118,12 +135,41 @@ const COPY: Record<
   },
 };
 
+/**
+ * Rang im Feld als Skala von 1 bis Feldgrösse (seit 31.10.2026).
+ *
+ * Zeigt ausschliesslich die zwei belegten Zahlen der Zeile, gelesen aus
+ * `placement` und `suffix` — keine Prozentzahl, kein «besser als X %». Der
+ * Punkt gleitet beim ersten Sichtbarwerden an seine Stelle (globals.css,
+ * `.field-dot`); ohne Animation steht er sofort dort. Für Screenreader
+ * unsichtbar: Der Text daneben sagt bereits «64. von 108».
+ */
+function FieldScale({ placement, suffix }: { placement: string; suffix?: string }) {
+  const rank = parseInt(placement, 10);
+  const field = parseInt(suffix?.match(/\d+/)?.[0] ?? "", 10);
+  if (!Number.isFinite(rank) || !Number.isFinite(field) || field < 2 || rank > field) return null;
+  const position = ((rank - 1) / (field - 1)) * 100;
+
+  return (
+    <span aria-hidden="true" className="mt-3 flex max-w-xs items-center gap-2 font-mono text-[10px] text-graphite/60">
+      <span>1</span>
+      <span className="relative h-px flex-1 bg-ink/15">
+        <span
+          className="field-dot absolute top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red"
+          style={{ left: `${position}%` }}
+        />
+      </span>
+      <span>{field}</span>
+    </span>
+  );
+}
+
 export default function Highlights({ lang }: { lang: Lang }) {
   const c = COPY[lang];
 
   return (
     <section id={SECTION_ID.results} className="section-pad bg-white">
-      <div className="mx-auto max-w-content">
+      <div className="reveal mx-auto max-w-content">
         <p className="eyebrow mb-5">{c.eyebrow}</p>
         <h2 className="max-w-3xl font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl lg:text-6xl">
           {c.intro}
@@ -180,6 +226,7 @@ export default function Highlights({ lang }: { lang: Lang }) {
                     <span className="mt-0.5 block font-mono text-xs uppercase tracking-widest2 text-graphite/60">
                       {brandText(r.context)}
                     </span>
+                    <FieldScale placement={r.placement} suffix={r.suffix} />
                   </span>
                 </div>
               ))}

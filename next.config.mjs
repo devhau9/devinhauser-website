@@ -67,6 +67,13 @@ const nextConfig = {
     // der nie schaerfer sein kann als der erste. Die Liste endet deshalb bei
     // 2048, der ersten Stufe oberhalb der Quellaufloesung.
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+
+    // Gemessen 31.10.2026: Live kamen die optimierten Bilder mit
+    // `Cache-Control: max-age=0, must-revalidate` — jeder wiederholte Besuch
+    // fragte jedes Bild erneut nach. Die Quelldateien ändern sich praktisch nie
+    // (neue Fotos bekommen neue Dateinamen); 31 Tage Browser-Cache sind daher
+    // gefahrlos und sparen Anfragen und Datenvolumen.
+    minimumCacheTTL: 2678400,
   },
 
   // Kein X-Powered-By-Header. Kein Sicherheitsgewinn im engeren Sinn, aber
