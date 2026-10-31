@@ -90,7 +90,7 @@ describe("Startseite und Partner-Weg", () => {
 
   test("Partner werden: Resultate nur aus der belegten Liste", () => {
     const highlights = read("src/components/Highlights.tsx");
-    for (const [rank, field] of [["64", "108"], ["2", "27"], ["3", "45"], ["5", "13"]]) {
+    for (const [rank, field] of [["2", "27"], ["3", "45"], ["5", "13"]]) {
       assert.match(sponsoring, new RegExp(`${rank}\\. von ${field}`));
       assert.match(highlights, new RegExp(`placement: "${rank}\\.", suffix: "von ${field}"`));
     }

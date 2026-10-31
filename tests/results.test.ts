@@ -29,26 +29,15 @@ function rows(lang: "de" | "en"): string[] {
 describe("Ausgewählte Resultate", () => {
   test("DE und EN fuehren dieselbe Anzahl Zeilen", () => {
     assert.equal(rows("de").length, rows("en").length);
-    assert.equal(rows("de").length, 8);
+    assert.equal(rows("de").length, 7);
   });
 
-  test("Puck 2026: 64. von 108, Wertung Men, an erster Stelle", () => {
-    assert.equal(
-      rows("de")[0],
-      '{ placement: "64.", suffix: "von 108", event: "U23-Weltmeisterschaft Puck 2026", context: "iQFOiL · Men" }'
-    );
-    assert.equal(
-      rows("en")[0],
-      '{ placement: "64th", suffix: "of 108", event: "iQFOiL U23 World Championships Puck 2026", context: "iQFOiL · Men" }'
-    );
+  test("Puck-WM-Resultat auf Wunsch von Devin nicht öffentlich ausgewählt", () => {
+    assert.doesNotMatch(code, /Puck|64th|von 108|of 108/);
   });
 
   test("keine Meldezahl und keine Gesamtzahl als Feldgroesse", () => {
     assert.doesNotMatch(code, /(von|of) (112|155)\b/);
   });
 
-  test("kein Titel und keine Fleet-Angabe fuer Puck", () => {
-    const puck = [rows("de")[0], rows("en")[0]].join("\n");
-    assert.doesNotMatch(puck, /Weltmeister(?!schaft)|Champion\b|Vize|Medal|Gold|Silver|Fleet|U23-Rang|u23 rank/i);
-  });
 });

@@ -106,7 +106,6 @@ const COPY: Record<
     intro: "SEIT MEHREREN JAHREN FAHRE ICH INTERNATIONALE REGATTEN",
     selectedHeading: "Ausgewählte Resultate",
     results: [
-      { placement: "64.", suffix: "von 108", event: "U23-Weltmeisterschaft Puck 2026", context: "iQFOiL · Men" },
       { placement: "2.", suffix: "von 27", event: "Schweizermeisterschaft Silvaplana 2026", context: "iQFOiL" },
       { placement: "3.", suffix: "von 45", event: "Schweizermeisterschaft Silvaplana 2026", context: "Overall" },
       { placement: "5.", suffix: "von 13", event: "iQFOiL International Games", context: "Silvaplana 2025 · Senior" },
@@ -122,7 +121,6 @@ const COPY: Record<
     intro: "I HAVE BEEN COMPETING INTERNATIONALLY FOR SEVERAL YEARS",
     selectedHeading: "Selected Results",
     results: [
-      { placement: "64th", suffix: "of 108", event: "iQFOiL U23 World Championships Puck 2026", context: "iQFOiL · Men" },
       { placement: "2nd", suffix: "of 27", event: "Swiss Championship Silvaplana 2026", context: "iQFOiL" },
       { placement: "3rd", suffix: "of 45", event: "Swiss Championship Silvaplana 2026", context: "Overall" },
       { placement: "5th", suffix: "of 13", event: "iQFOiL International Games", context: "Silvaplana 2025 · Senior" },
@@ -142,7 +140,7 @@ const COPY: Record<
  * `placement` und `suffix` — keine Prozentzahl, kein «besser als X %». Der
  * Punkt gleitet beim ersten Sichtbarwerden an seine Stelle (globals.css,
  * `.field-dot`); ohne Animation steht er sofort dort. Für Screenreader
- * unsichtbar: Der Text daneben sagt bereits «64. von 108».
+ * unsichtbar: Der Text daneben sagt bereits «2. von 27».
  */
 function FieldScale({ placement, suffix }: { placement: string; suffix?: string }) {
   const rank = parseInt(placement, 10);

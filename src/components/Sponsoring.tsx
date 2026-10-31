@@ -47,7 +47,6 @@ const COPY: Record<
       title: "Wer ich bin",
       text: "iQFOiL- und Wingfoil-Racer aus der Schweiz. Ich starte international in der U23- und Senior-Kategorie.",
       results: [
-        "U23-Weltmeisterschaft Puck 2026 — 64. von 108",
         "Schweizermeisterschaft Silvaplana 2026 — 2. von 27 (iQFOiL), 3. von 45 (Overall)",
         "iQFOiL International Games Silvaplana 2025 — 5. von 13 (Senior)",
       ],
@@ -102,7 +101,6 @@ const COPY: Record<
       title: "Who I am",
       text: "iQFOiL and Wingfoil racer from Switzerland, racing internationally in the U23 and senior fleets.",
       results: [
-        "iQFOiL U23 World Championships Puck 2026 — 64th of 108",
         "Swiss Championship Silvaplana 2026 — 2nd of 27 (iQFOiL), 3rd of 45 (overall)",
         "iQFOiL International Games Silvaplana 2025 — 5th of 13 (senior)",
       ],
