@@ -120,6 +120,12 @@ export default function CookieConsent({ lang }: { lang: Lang }) {
       root.style.removeProperty("--cookie-banner-offset");
     };
 
+    // Entscheidung bekannt: die Platzreserve aus globals.css abschalten
+    // (siehe CONSENT_FLAG_SCRIPT in RootShell.tsx).
+    if (consent === "accepted" || consent === "declined") {
+      root.setAttribute("data-consent", "set");
+    }
+
     const el = bannerRef.current;
     if (!shouldShowBanner || !el) {
       clear();

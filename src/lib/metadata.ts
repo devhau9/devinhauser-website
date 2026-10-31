@@ -52,6 +52,29 @@ type PageMetadataArgs = {
  * og:url-Tag landen — der klassische Weg, wie ein Preview-Deployment im Index
  * mit der Produktionsseite konkurriert.
  */
+/**
+ * Meta-Beschreibung auf höchstens `max` Zeichen kürzen.
+ *
+ * Google zeigt in den Ergebnissen rund 150–160 Zeichen; was darüber liegt,
+ * wird mitten im Wort abgeschnitten (gemessen 31.10.2026: Albumtexte bis 336
+ * Zeichen, Startseite 200). Gekürzt wird nur die Meta-Angabe, der Text auf der
+ * Seite bleibt vollständig. Bevorzugt an Satzende, sonst an einer Wortgrenze
+ * mit «…».
+ */
+export function metaDescription(text: string, max = 160): string {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= max) return clean;
+  const sentences = clean.match(/[^.!?]+[.!?]+(\s|$)/g) ?? [];
+  let out = "";
+  for (const s of sentences) {
+    if ((out + s).trim().length > max) break;
+    out += s;
+  }
+  if (out.trim().length >= 70) return out.trim();
+  const cut = clean.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[\s,;:—–-]+$/, "")}…`;
+}
+
 export function pageMetadata({
   lang,
   path,
@@ -64,6 +87,7 @@ export function pageMetadata({
   absoluteTitle = false,
 }: PageMetadataArgs): Metadata {
   const url = `${SITE_URL}${localizedPath(path, lang)}`;
+  description = metaDescription(description);
 
   return {
     title: absoluteTitle ? { absolute: title } : title,

@@ -100,6 +100,88 @@
     }
   }
 
+  /*
+   * PLATZRESERVE FÜR DAS BANNER IM ERSTEN BILD (31.10.2026)
+   *
+   * Das Banner erscheint erst nach der Hydration; bis dahin war
+   * `--cookie-banner-offset` 0 und der Hero-Text sprang danach nach oben
+   * (PageSpeed mobil: CLS 0,205, alles im Hero). Solange keine Entscheidung
+   * gespeichert ist (`data-consent` fehlt, gesetzt in RootShell.tsx), gilt
+   * deshalb schon im ersten Bild ein Schätzwert = gemessene Bannerhöhe + 96px.
+   * Das Banner misst danach exakt nach (Inline-Wert gewinnt); übrig bleibt
+   * höchstens die Abweichung von wenigen Pixeln.
+   * Gemessene Bannerhöhen 31.10.2026 (DE / EN): unter 360px 184/164,
+   * 360–479px 164/164 bzw. ab 390 EN 145, 480–639px 145 (EN ab 540: 126),
+   * 640–899px 140 (EN ab 700: 118), 900–1023px 118 (EN 95), ab 1024px 95.
+   */
+  html:not([data-consent]) {
+    --cookie-banner-offset: 280px;
+  }
+
+  @media (min-width: 360px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 260px;
+    }
+  }
+
+  @media (min-width: 480px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 241px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 236px;
+    }
+  }
+
+  @media (min-width: 900px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 214px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    html:not([data-consent]) {
+      --cookie-banner-offset: 191px;
+    }
+  }
+
+  html[lang="en"]:not([data-consent]) {
+    --cookie-banner-offset: 260px;
+  }
+
+  @media (min-width: 390px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 241px;
+    }
+  }
+
+  @media (min-width: 540px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 222px;
+    }
+  }
+
+  @media (min-width: 640px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 236px;
+    }
+  }
+
+  @media (min-width: 700px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 214px;
+    }
+  }
+
+  @media (min-width: 900px) {
+    html[lang="en"]:not([data-consent]) {
+      --cookie-banner-offset: 191px;
+    }
+  }
+
   .eyebrow {
     @apply font-mono text-xs uppercase tracking-widest2;
     color: #E10600;

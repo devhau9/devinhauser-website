@@ -5,7 +5,7 @@
 
 export type CookieConsentValue = "accepted" | "declined";
 
-const CONSENT_STORAGE_KEY = "cookie-consent";
+export const CONSENT_STORAGE_KEY = "cookie-consent";
 
 // Wird gefeuert, sobald sich die Zustimmung ändert (Klick auf "Akzeptieren"
 // oder "Ablehnen"). Der native "storage"-Event von localStorage feuert nur
