@@ -1,0 +1,34 @@
+{
+  "slug": "ort-jahr",
+  "status": "draft",
+  "kind": "regatta",
+  "updated": "JJJJ-MM-TT",
+  "startDate": "JJJJ-MM-TT",
+  "endDate": "JJJJ-MM-TT",
+  "discipline": { "de": "iQFOiL", "en": "iQFOiL" },
+  "event": { "de": "Name des Events", "en": "Event name" },
+  "location": { "de": "Ort, Land", "en": "Place, country" },
+  "title": { "de": "Kurzer Titel", "en": "Short title" },
+  "summary": { "de": "Ein bis zwei Sätze.", "en": "One or two sentences." },
+  "goal": { "de": "Was wollte ich erreichen?", "en": "What did I want to achieve?" },
+  "challenge": { "de": "Was war schwierig?", "en": "What was difficult?" },
+  "course": { "de": "Wie ist es gelaufen?", "en": "How did it go?" },
+  "result": {
+    "placement": 0,
+    "field": 0,
+    "scoring": { "de": "Wertung, z. B. iQFOiL Men", "en": "Scoring, e.g. iQFOiL Men" },
+    "sourceUrl": "https://… offizielle Ergebnisliste",
+    "sourceLabel": "Name der Quelle"
+  },
+  "images": [
+    {
+      "src": "/media/<album>/<datei>.jpg",
+      "width": 2000,
+      "height": 1333,
+      "alt": { "de": "Bildbeschreibung", "en": "Image description" },
+      "credit": "Fotograf/in — nur mit geklärten Rechten"
+    }
+  ],
+  "video": { "youtubeId": "xxxxxxxxxxx", "title": "Titel wie auf YouTube" },
+  "notes": "Interne Belege. Wird nie angezeigt."
+}

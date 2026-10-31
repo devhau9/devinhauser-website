@@ -199,6 +199,67 @@
   }
 }
 
+/*
+ * ─────────────────────────────────────────────────────────────────────────────
+ * BEWEGUNG (31.10.2026) — zwei dezente Effekte, beide ohne JavaScript
+ * ─────────────────────────────────────────────────────────────────────────────
+ * 1. `.reveal`: Abschnitte blenden beim Hineinscrollen weich ein.
+ * 2. `.field-dot`: Der Punkt der Resultatskala gleitet an seinen Rang.
+ *
+ * Beide hängen an der Scroll-Position (`animation-timeline: view()`), nicht an
+ * einer Uhr: Es wird nichts blockiert, nichts verzögert und der Scroll nicht
+ * übernommen. Drei Sicherungen, damit Inhalt NIE unsichtbar bleibt:
+ *   • Ohne Unterstützung (`@supports`) gilt gar keine Regel — Inhalt steht da.
+ *   • Bei «Bewegung reduzieren» gilt gar keine Regel.
+ *   • Was beim Laden schon im Bild ist, liegt hinter dem Animationsbereich und
+ *     erscheint sofort vollständig.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+
+    .field-dot {
+      animation: field-dot-in linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 35%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* `left` bleibt die belegte Position (Inline-Stil); animiert wird nur der
+   Weg dorthin, als Verschiebung vom Skalenanfang. */
+@keyframes field-dot-in {
+  from {
+    left: 0;
+    opacity: 0.3;
+  }
+}
+
+/* Einheitlicher, gut sichtbarer Tastaturfokus. Nur `:focus-visible` — wer mit
+   der Maus klickt, sieht keinen Ring. Komponenten mit eigenem Fokusstil
+   überschreiben diese Regel. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid #e10600;
+    outline-offset: 3px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -11,11 +11,9 @@ export const PRIVACY_EN_DESCRIPTION =
 // Hinweis für Devin: Alle Angaben unten (Google Analytics, Cookie-Consent,
 // Newsletter, Contact, Partner Portal) spiegeln den tatsächlichen aktuellen
 // Stand des Codes wider — Stand 03.08.2026, nach der Konsistenzkorrektur:
-// Die Newsletter-Section ist auf der Homepage wieder sichtbar, aber als
-// reine Coming-soon-Ankündigung ohne Formular, ohne Eingabefelder, ohne
-// Subscribe-Button und ohne integrierten Anbieter — es werden also keine
-// Newsletter-Daten erhoben, gespeichert oder übermittelt, und der Abschnitt
-// unten beschreibt hier genau das; Partner Portal ist über Web3Forms live
+// Die Newsletter-Ankündigung ist seit 31.10.2026 von der Startseite entfernt
+// (Abschnitt 5 beschreibt jetzt das YouTube-Video, das erst nach Klick
+// lädt); Partner Portal ist über Web3Forms live
 // und wird durchgehend so beschrieben; die Impressumsadresse ist bestätigt
 // und auf der Imprint-Seite eingesetzt.
 //
@@ -50,7 +48,7 @@ export default function PrivacyEn() {
             PRIVACY POLICY
           </h1>
           <p className="mt-6 font-mono text-xs uppercase tracking-widest2 text-graphite/70">
-            Last updated: 3 August 2026
+            Last updated: 31 October 2026
           </p>
 
           <p className={BODY_TEXT}>
@@ -186,22 +184,32 @@ export default function PrivacyEn() {
             </p>
           </div>
 
-          {/* 5. Newsletter */}
+          {/* 5. YouTube Videos (previously: newsletter announcement, removed 31.10.2026) */}
           <div className={SECTION_WRAPPER}>
-            <h2 className={SECTION_HEADING}>Newsletter</h2>
+            <h2 className={SECTION_HEADING}>YouTube Videos</h2>
             <p className={BODY_TEXT}>
-              A newsletter announcement is currently displayed on the
-              website, but{" "}
-              <strong>no sign-up form is active</strong>. No newsletter
-              data is collected, stored or transmitted at this time.
+              The home page links to a video by Devin Hauser on YouTube. At
+              first only a preview image served by this website is shown; no
+              connection to YouTube is made. Only when you click &ldquo;Play
+              video&rdquo; is the YouTube player loaded in privacy-enhanced
+              mode (youtube-nocookie.com). From that moment, YouTube, i.e.
+              Google Ireland Limited and Google LLC (USA), receives technical
+              data such as your IP address and browser and device details and
+              may use cookies or similar technologies. For details, see
+              Google&rsquo;s privacy policy at 
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ink underline underline-offset-2 transition-colors hover:text-red"
+              >
+                policies.google.com/privacy
+              </a>
+              .
             </p>
             <p className={BODY_TEXT}>
-              If newsletter subscriptions are introduced later, this
-              Privacy Policy will be updated before any registrations are
-              accepted — including the provider&rsquo;s name, server
-              location and a link to its own privacy policy. Any future
-              sign-up will use a double opt-in process, with an
-              unsubscribe link in every newsletter email.
+              This website does not offer a newsletter; no newsletter data is
+              collected, stored or transmitted.
             </p>
           </div>
 
@@ -257,12 +265,10 @@ export default function PrivacyEn() {
                 by Google Analytics 4 as described above.
               </li>
               <li>
-                A newsletter announcement is displayed, but{" "}
-                <strong>no sign-up form is active</strong>, so{" "}
-                <strong>
-                  no newsletter data is collected, stored or transmitted
-                </strong>{" "}
-                (see &ldquo;Newsletter&rdquo; above).
+                A YouTube video is only loaded after you click &ldquo;Play
+                video&rdquo;; nothing is sent to YouTube before that (see
+                &ldquo;YouTube Videos&rdquo; above). No newsletter is
+                offered.
               </li>
               <li>
                 Partner Portal requests are sent to Devin Hauser by email
@@ -329,8 +335,8 @@ export default function PrivacyEn() {
               This website is served over HTTPS. Partner Portal
               submissions are transmitted over an encrypted connection to
               Web3Forms and delivered onward to Devin Hauser by email, as
-              described above. No newsletter form is currently active on
-              this website, so nothing is submitted through one. Emails
+              described above. There is no newsletter form on this
+              website, so nothing is submitted through one. Emails
               you send directly and messages you send via Instagram are
               transmitted and stored by those respective services under
               their own terms. Where a third-party service processes data

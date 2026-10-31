@@ -1,0 +1,43 @@
+{
+  "slug": "ibiza-2026",
+  "status": "draft",
+  "kind": "regatta",
+  "updated": "2026-10-31",
+  "startDate": "2026-11-04",
+  "endDate": "2026-11-08",
+  "discipline": {
+    "de": "Wingfoil",
+    "en": "Wingfoil"
+  },
+  "event": {
+    "de": "X-15 World Championships 2026",
+    "en": "X-15 World Championships 2026"
+  },
+  "location": {
+    "de": "Ibiza, Spanien",
+    "en": "Ibiza, Spain"
+  },
+  "title": {
+    "de": "Ibiza: die erste X-15-Weltmeisterschaft",
+    "en": "Ibiza: the first X-15 World Championships"
+  },
+  "summary": {
+    "de": "Anfang November fahre ich auf Ibiza die erste Weltmeisterschaft der X-15-Klasse. Gefahren wird Wingfoil auf Einheitsmaterial, das der Veranstalter stellt.",
+    "en": "In early November I race the first world championships of the X-15 class in Ibiza. It is wingfoil racing on one-design equipment supplied by the organisers."
+  },
+  "goal": {
+    "de": "[FEHLT NOCH] Devins Ziel für Ibiza, in eigenen Worten.",
+    "en": "[FEHLT NOCH] Devin's goal for Ibiza, in Devin's own words."
+  },
+  "challenge": {
+    "de": "Alle fahren dasselbe Material, das der Veranstalter stellt. Ein eigenes Setup gibt es nicht — entscheidend sind Start, Taktik und Speed.",
+    "en": "Everyone races the same equipment, supplied by the organisers. There is no personal setup — what counts is the start, tactics and speed."
+  },
+  "course": {
+    "de": "[FEHLT NOCH] Verlauf der Renntage — erst nach dem Event schreiben.",
+    "en": "[FEHLT NOCH] How the race days went — write only after the event."
+  },
+  "result": null,
+  "images": [],
+  "notes": "Belegt: x-15class.org (Eventseite, gelesen 24.09.2026): «the inaugural X-15 World Championships», 4.–8.11.2026, Ibiza, Wingfoil auf Einheitsmaterial; Anmeldung bestätigt 27.08.2026; Trainingstage 1.–3.11.; Basis Port Nàutic Ibiza. Nicht als iQFOiL-WM oder World-Sailing-WM bezeichnen. Kein Resultat vor dem offiziellen Endstand."
+}

@@ -485,7 +485,7 @@ export default function Partners({ lang }: { lang: Lang }) {
 
   return (
     <section id={SECTION_ID.partners} className="section-pad bg-mist">
-      <div className="mx-auto max-w-content">
+      <div className="reveal mx-auto max-w-content">
         <p className="eyebrow mb-5">{c.eyebrow}</p>
         <h2 className="font-display text-4xl leading-[0.95] tracking-wide text-ink sm:text-5xl">
           {c.heading}

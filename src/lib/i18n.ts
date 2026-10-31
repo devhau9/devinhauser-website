@@ -167,7 +167,7 @@ export const SECTION_ID = {
   sponsoring: "sponsoring",
   partners: "partner",
   contact: "kontakt",
-  newsletter: "newsletter",
+  video: "video",
 } as const;
 
 export type NavLink = {

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { getPublicAlbums } from "@/lib/albums";
+import { getPublishedStories, storyPath } from "@/lib/stories";
 import { LANGS, localizedPath } from "@/lib/i18n";
 import { PUMPFOIL_PATH, PUMPFOIL_UPDATED } from "@/lib/pumpfoil";
 
@@ -49,16 +50,17 @@ type Entry = {
 //   /               partner/baer   Partnerkarte Heinz Bär AG            2026-10-08
 //   /               prep/partner   Trockentech AG, GHB Ground-Engineering AG  2026-10-12
 //   /               prep/puck      Resultat U23-WM Puck (64. von 108)  2026-10-04
+//   /               prep/inhalt    Partner werden, Video, ohne Newsletter  2026-10-31
 //   /iqfoil         prep/pumpfoil  Querverweis auf /pumpfoil           2026-10-02
 //   /pumpfoil       prep/pumpfoil  Lernseite neu (PUMPFOIL_UPDATED)    2026-10-02
-//   /privacy-policy d4b5fc1  finale DE/EN-Copy                 2026-08-28
+//   /privacy-policy prep/inhalt  YouTube statt Newsletter-Ankündigung 2026-10-31
 //   /imprint        d4b5fc1  finale DE/EN-Copy                 2026-08-28
 //   /copyright      a63dd0d  Launch-Grundlage                  2026-08-22
 const STATIC_ENTRIES: Entry[] = [
-  { path: "/", lastModified: "2026-10-12", changeFrequency: "monthly", priority: 1 },
+  { path: "/", lastModified: "2026-10-31", changeFrequency: "monthly", priority: 1 },
   { path: "/iqfoil", lastModified: "2026-10-02", changeFrequency: "monthly", priority: 0.8 },
   { path: PUMPFOIL_PATH, lastModified: PUMPFOIL_UPDATED, changeFrequency: "monthly", priority: 0.8 },
-  { path: "/privacy-policy", lastModified: "2026-08-28", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/privacy-policy", lastModified: "2026-10-31", changeFrequency: "yearly", priority: 0.3 },
   { path: "/imprint", lastModified: "2026-08-28", changeFrequency: "yearly", priority: 0.3 },
   { path: "/copyright", lastModified: "2026-08-22", changeFrequency: "yearly", priority: 0.3 },
 ];
@@ -108,6 +110,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         })
       );
     }
+  }
+
+  // Geschichten: ausschliesslich veröffentlichte. Entwürfe stehen nie hier —
+  // auch nicht, wenn die lokale Vorschau (STORY_PREVIEW=1) läuft.
+  for (const story of getPublishedStories()) {
+    entries.push(
+      ...expand({
+        path: storyPath(story.slug),
+        lastModified: story.updated,
+        changeFrequency: "yearly",
+        priority: 0.6,
+      })
+    );
   }
 
   return entries;
