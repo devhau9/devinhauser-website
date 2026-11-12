@@ -17,7 +17,8 @@ import { absoluteUrl, jsonLdHtml } from "@/lib/site";
 // Vorschaubild: Thumbnail A v03 aus dem eigenen Projekt «07-How-a-Foil-Flies»
 // (T7, PB_How_a_Foil_Flies_THUMB_A_v03_4K.jpg), auf 1600×900 verkleinert, ohne
 // Metadaten — kein Abruf von YouTube-Servern. Das Bild stammt aus den eigenen
-// Aufnahmen; die Freigabe der Kameraperson ist im Projekt noch offen.
+// Aufnahmen. Öffentliche Verwendung von Devin am 12.11.2026, 23:45, im Chat
+// ausdrücklich bestätigt («ja darf verwendet werden»).
 //
 // Das frühere Video (Parawing Urnersee, qtws3inEID0) ist damit nicht mehr auf
 // der Startseite; sein Poster /images/video/parawing-urnersee-2026.jpg bleibt
