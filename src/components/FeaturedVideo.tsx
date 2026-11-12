@@ -2,40 +2,50 @@ import YouTubeFacade from "@/components/YouTubeFacade";
 import { SECTION_ID, type Lang } from "@/lib/i18n";
 import { absoluteUrl, jsonLdHtml } from "@/lib/site";
 
-// Hauptvideo der Startseite (seit 31.10.2026).
+// Hauptvideo der Startseite (seit 31.10.2026; ersetzt am 13.11.2026).
 //
-// BELEGT (oEmbed-Abfrage 31.10.2026 und Social-Check 20.10.2026): öffentlich
-// auf dem Kanal @devin.hauser, Titel «PARAWING RAW UNCUT LAKE URI
-// SWITZERLAND», 16:06, veröffentlicht 18.10.2026. Der Titel wird exakt so
-// übernommen, wie er auf YouTube steht; ändert Devin ihn dort, hier nachziehen.
+// BELEGT (geprüft 12.11.2026, ca. 23:40 Zürich):
+// - oEmbed (youtube.com/oembed, url=youtu.be/BU6nU6cB2lo): öffentlich auf dem
+//   Kanal @devin.hauser, Titel exakt «How Does a Windsurf Foil Board Fly Above
+//   Water?». Ändert Devin den Titel auf YouTube, hier nachziehen.
+// - Videoseite: isPrivate false, isUnlisted false; uploadDate/datePublished
+//   2026-11-12T14:34:07-08:00 (= 12.11.2026, 23:34 Zürich).
+// - Dauer: approxDurationMs 315 320 (5:15,32), lengthSeconds 315; der Player
+//   zeigt 5:15. Die Metaangabe der Seite rundet auf PT5M16S — hier bewusst
+//   PT5M15S wie die tatsächliche Länge und der Master (5:15,32).
 //
-// Vorschaubild: Einzelbild aus dem eigenen Video (Kandidat 3 aus
-// «Thumbnail-Kandidaten-parawing-2026-10-19»), also eigenes Material — kein
-// Abruf von YouTube-Servern.
+// Vorschaubild: Thumbnail A v03 aus dem eigenen Projekt «07-How-a-Foil-Flies»
+// (T7, PB_How_a_Foil_Flies_THUMB_A_v03_4K.jpg), auf 1600×900 verkleinert, ohne
+// Metadaten — kein Abruf von YouTube-Servern. Das Bild stammt aus den eigenen
+// Aufnahmen; die Freigabe der Kameraperson ist im Projekt noch offen.
 //
-// BEWUSST NICHT im Text: Ausrüstung, Windstärke, «ungeschnitten». Nichts davon
-// ist für dieses Video belegt.
+// Das frühere Video (Parawing Urnersee, qtws3inEID0) ist damit nicht mehr auf
+// der Startseite; sein Poster /images/video/parawing-urnersee-2026.jpg bleibt
+// bewusst im Repo.
+//
+// BEWUSST NICHT im Text: Ausrüstung, Geschwindigkeit, Aufrufzahlen. Nichts
+// davon ist für dieses Video belegt.
 const VIDEO = {
-  id: "qtws3inEID0",
-  title: "PARAWING RAW UNCUT LAKE URI SWITZERLAND",
-  duration: "16:06",
-  isoDuration: "PT16M6S",
-  uploadDate: "2026-10-18",
-  poster: { src: "/images/video/parawing-urnersee-2026.jpg", width: 1600, height: 900 },
+  id: "BU6nU6cB2lo",
+  title: "How Does a Windsurf Foil Board Fly Above Water?",
+  duration: "5:15",
+  isoDuration: "PT5M15S",
+  uploadDate: "2026-11-12T14:34:07-08:00",
+  poster: { src: "/images/video/how-a-foil-flies-2026.jpg", width: 1600, height: 900 },
 };
 
 const COPY: Record<Lang, { eyebrow: string; heading: string; lead: string; description: string }> = {
   de: {
     eyebrow: "Video",
-    heading: "EINE SESSION AM URNERSEE",
-    lead: "Neben iQFOiL und Wingfoil fahre ich auch Parawing. Hier eine ganze Session auf dem Urnersee, aus meiner eigenen Perspektive gefilmt.",
-    description: "Parawing-Session auf dem Urnersee, gefilmt von Devin Hauser.",
+    heading: "WIE FLIEGT EIN FOILBOARD?",
+    lead: "Warum hebt mein Windsurf-Board über dem Wasser ab? In diesem Video nehme ich das Wasser kurz weg: Mast, Frontflügel, Stabilisator, der Moment des Abhebens und eine ganze Halse, Schritt für Schritt.",
+    description: "Erklärvideo von Devin Hauser: wie ein Windsurf-Foilboard über dem Wasser fliegt.",
   },
   en: {
     eyebrow: "Video",
-    heading: "A SESSION ON LAKE URI",
-    lead: "Alongside iQFOiL and Wingfoil, I also ride a parawing. Here is a full session on Lake Uri, filmed from my own perspective.",
-    description: "Parawing session on Lake Uri, Switzerland, filmed by Devin Hauser.",
+    heading: "HOW DOES A FOIL BOARD FLY?",
+    lead: "Why does my windsurf board lift off the water? In this video I take the water away for a moment: mast, front wing, stabilizer, the moment of takeoff and one full jibe, step by step.",
+    description: "Explainer by Devin Hauser: how a windsurf foil board flies above the water.",
   },
 };
 
