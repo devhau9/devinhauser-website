@@ -14,7 +14,7 @@ import path from "node:path";
 import { describe, test } from "node:test";
 
 const ROOT = process.cwd();
-const PROFIL = "https://www.linkedin.com/in/devin-h-8155662bb/";
+const PROFIL = "https://www.linkedin.com/in/devin-hauser-8155662bb/";
 
 function code(file: string): string {
   return fs
